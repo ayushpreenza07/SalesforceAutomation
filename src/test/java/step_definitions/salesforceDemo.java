@@ -76,4 +76,10 @@ public class salesforceDemo {
 
         OppurtunitiesUtil.verifyProduct("verify product");
     }
+
+    @When("^verify if document generated$")
+    public void verify_doc_generated() throws Exception{
+
+        OppurtunitiesUtil.verifyDocumentGenerated("verify document generated");
+    }
 }
