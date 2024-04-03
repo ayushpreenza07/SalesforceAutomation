@@ -159,6 +159,14 @@ public class OppurtunitiesUtil extends GlobalUtil {
         }
     }
 
+    public static void verifyDocumentGenerated(String logStep){
+        try{
+            KeywordUtil.waitForVisible(OppurtunitiesObject.verifyDocument);
+        }catch (Exception e){
+            Assert.fail("product not added");
+        }
+    }
+
     public static void goToAccount(String logStep){
         KeywordUtil.waitForVisible(OppurtunitiesObject.getBackToAccount);
         KeywordUtil.click(OppurtunitiesObject.getBackToAccount,logStep);

@@ -11,6 +11,7 @@ Feature: salesforce demo
     And create new quote and add product
     Then Generate document
     Then verify if product added
+    And verify if document generated
     Examples:
       | TestData |
       | TestData1 |

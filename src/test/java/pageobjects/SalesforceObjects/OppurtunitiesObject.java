@@ -30,4 +30,6 @@ public class OppurtunitiesObject {
     public static By amountField = By.xpath("//input[@name='Amount']");
 
     public static By verifyProduct = By.xpath("(//SPAN[@title='(1)'][text()='(1)'])[2]");
+
+    public static By verifyDocument = By.xpath("(//SPAN[@lwc-bbqdsgjtbq=''][text()='(1)'])[2]");
 }
