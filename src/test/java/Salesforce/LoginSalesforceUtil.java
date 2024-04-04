@@ -1,4 +1,4 @@
-package utilities.Salesforce;
+package Salesforce;
 
 import pageobjects.SalesforceObjects.AccountObject;
 import pageobjects.SalesforceObjects.ContactObject;

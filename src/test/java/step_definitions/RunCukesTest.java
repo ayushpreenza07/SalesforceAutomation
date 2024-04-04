@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Date;
 
 @CucumberOptions(features = "classpath:features", plugin = {"pretty", "html:target/cucumber-html-report.html",
-		"json:target/cucumber.json"}, tags = "@salesforce", monochrome = true
+		"json:target/cucumber.json"}, tags = "@Leads", monochrome = true
 
 // @Amazon, @APItests,MobileTest,MobileTest4
 // MobileTest1

@@ -32,16 +32,12 @@ public class salesforceDemo {
 
     @When("^navigate to salesforce$")
     public void navigate_to_the_url() throws Exception {
-
-        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
-
+        KeywordUtil.navigateToUrl(ConfigReader.getValue("BASE_URL"));
     }
 
     @When("^login to salesforce$")
     public void login_Salesforce() throws Exception{
-
         LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
-
     }
 
     @When("^create new account$")

@@ -1,4 +1,4 @@
-package utilities.Salesforce;
+package Salesforce;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
