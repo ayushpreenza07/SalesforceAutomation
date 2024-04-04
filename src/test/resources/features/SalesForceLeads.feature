@@ -4,7 +4,7 @@
 Feature: SalesForce_Leads
 
     @salesforce @Leads
-    Scenario: salesforce creating Leads
+    Scenario : salesforce creating Leads
         Given navigate to salesforce
         And login to salesforce
         When Click on Hamburger Menu
