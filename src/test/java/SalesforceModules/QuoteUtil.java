@@ -227,8 +227,8 @@ public class QuoteUtil {
         WebElement select = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#plSelect')");
         executor.executeScript("arguments[0].click();",select);
 
-        KeywordUtil.delay(5000);
-        WebElement save = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").shadowRoot.querySelector(\"#content > sb-line-editor\").shadowRoot.querySelector(\"#actions > sb-custom-action:nth-child(13)\").shadowRoot.querySelector(\"#mainButton\")");
+        KeywordUtil.delay(8000);
+        WebElement save = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(13)').shadowRoot.querySelector('#mainButton')");
         executor.executeScript("arguments[0].click();",save);
 
         KeywordUtil.getDriver().switchTo().parentFrame();
@@ -246,6 +246,37 @@ public class QuoteUtil {
             executor.executeScript("arguments[0].click();", oppor);
 
         }
+    }
+
+    public static void changeStatus(String type, String logStep){
+        boolean flag = false;
+        KeywordUtil.waitForVisible(QuoteObject.statusButton);
+        KeywordUtil.click(QuoteObject.statusButton,logStep);
+        String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+type+"')]";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
+
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such status present");
+        }else {
+            KeywordUtil.click(By.xpath(xpath), "status selected");
+        }
+    }
+
+    public static void changeQuoteStatus(String logStep){
+        KeywordUtil.waitForVisible(QuoteObject.quoteConnected);
+        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.quoteConnected);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", quote);
+
+        KeywordUtil.waitForVisible(QuoteObject.editButton);
+        KeywordUtil.click(QuoteObject.editButton, "Edit button clicked");
+
+        changeStatus("Approved", logStep);
+
+        clickSaveButton("save button clocked");
     }
 
 

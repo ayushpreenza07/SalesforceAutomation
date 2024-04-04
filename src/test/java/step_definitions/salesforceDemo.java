@@ -2,7 +2,9 @@ package step_definitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.testng.Assert;
+import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
@@ -19,7 +21,7 @@ public class salesforceDemo {
     public void read_the_test_data_from_Excel(String arg1) {
         try {
             KeywordUtil.cucumberTagName = "Web";
-            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceModules", arg1);
+            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", arg1);
         } catch (Throwable e) {
             GlobalUtil.e = e;
             GlobalUtil.errorMsg = e.getMessage();
@@ -30,23 +32,27 @@ public class salesforceDemo {
 
     @When("^navigate to salesforce$")
     public void navigate_to_the_url() throws Exception {
-        KeywordUtil.navigateToUrl(ConfigReader.getValue("BASE_URL"));
+
+        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
+
     }
 
     @When("^login to salesforce$")
     public void login_Salesforce() throws Exception{
+
         LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
+
     }
 
     @When("^create new account$")
     public void create_new_account() throws Exception{
 
-        AccountUtil.createNewAccount("TX_demoAccount","400378643", "9717254678");
+        AccountUtil.createNewAccount("TX_demoAccountRun","400378643", "9717254678");
     }
 
     @When("^create contact$")
     public void create_contact() throws Exception{
-        ContactUtil.createContact("Mr","Ayush","google@sdf.com","9717254678");
+        ContactUtil.createContact("Mr","rahul","google234@sdf.com","971725345");
     }
 
     @When("^create opportunity and change its status$")
@@ -75,5 +81,11 @@ public class salesforceDemo {
     public void verify_doc_generated() throws Exception{
 
         OppurtunitiesUtil.verifyDocumentGenerated("verify document generated");
+    }
+
+    @When("^Go to quote and change its status to approve$")
+    public void change_quote_status() throws Exception{
+
+        QuoteUtil.changeQuoteStatus("Quote status changed to approved");
     }
 }
