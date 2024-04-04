@@ -9,7 +9,7 @@ import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
-import utilities.Salesforce.*;
+import Salesforce.*;
 
 import java.util.HashMap;
 
