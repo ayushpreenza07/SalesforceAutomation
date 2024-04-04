@@ -1,9 +1,8 @@
-package Salesforce;
+package SalesforceModules;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import pageobjects.SalesforceObjects.AccountObject;
-import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 
