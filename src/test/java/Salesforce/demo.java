@@ -1,4 +1,4 @@
-package utilities.Salesforce;
+package Salesforce;
 
 import java.math.BigDecimal;
 
