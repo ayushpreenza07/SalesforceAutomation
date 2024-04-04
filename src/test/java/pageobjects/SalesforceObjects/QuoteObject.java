@@ -27,4 +27,10 @@ public class QuoteObject {
 
     public static By saveDocument = By.xpath("//button[@class='sbBtn'][@ng-click='onSave()']");
 
+    public static By editButton = By.xpath("(//button[@class='slds-button slds-button_neutral' and text()='Edit'])[1]");
+
+    public static By quoteConnected = By.xpath("(//a[@class='flex-wrap-ie11 slds-truncate'])[3]");
+
+    public static By statusButton = By.xpath("//button[@class='slds-combobox__input slds-input_faux fix-slds-input_faux slds-combobox__input-value' and span[text()='Draft']]");
+
 }
