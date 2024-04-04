@@ -1,10 +1,9 @@
-package Salesforce;
+package SalesforceModules;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.AccountObject;
 import pageobjects.SalesforceObjects.ContactObject;
 import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import utilities.GlobalUtil;
@@ -12,7 +11,6 @@ import utilities.KeywordUtil;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 public class OppurtunitiesUtil extends GlobalUtil {
 

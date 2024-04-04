@@ -1,9 +1,6 @@
-package Salesforce;
+package SalesforceModules;
 
-import pageobjects.SalesforceObjects.AccountObject;
-import pageobjects.SalesforceObjects.ContactObject;
 import pageobjects.SalesforceObjects.LoginObject;
-import utilities.ConfigReader;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 

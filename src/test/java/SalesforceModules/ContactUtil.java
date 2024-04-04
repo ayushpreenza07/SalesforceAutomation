@@ -1,14 +1,12 @@
-package Salesforce;
+package SalesforceModules;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.AccountObject;
 import pageobjects.SalesforceObjects.ContactObject;
 import utilities.KeywordUtil;
 
-import java.security.Key;
 import java.util.HashMap;
 
 public class ContactUtil {

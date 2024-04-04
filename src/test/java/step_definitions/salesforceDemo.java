@@ -2,14 +2,12 @@ package step_definitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
-import Salesforce.*;
+import SalesforceModules.*;
 
 import java.util.HashMap;
 
@@ -21,7 +19,7 @@ public class salesforceDemo {
     public void read_the_test_data_from_Excel(String arg1) {
         try {
             KeywordUtil.cucumberTagName = "Web";
-            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", arg1);
+            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceModules", arg1);
         } catch (Throwable e) {
             GlobalUtil.e = e;
             GlobalUtil.errorMsg = e.getMessage();
