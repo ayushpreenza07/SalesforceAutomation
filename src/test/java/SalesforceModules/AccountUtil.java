@@ -102,14 +102,14 @@ public class AccountUtil extends GlobalUtil {
     }
 
 
-    public static void createNewAccount(String name, String accountNumber, String phone) throws InterruptedException {
+    public static void createNewAccount(String name, String phone) throws InterruptedException {
         clickSlideShowButton("Clicked menu button");
         clickCpqButton("Navigated to Salesforce cpq");
         clickAccountsTab("Navigated to accounts");
         clickNewButton("Clicked new button for accounts");
         enterAccountName(name,name+" entered name");
         enterPhoneNumber(phone, phone+" entered phone");
-        accountNumberField(accountNumber,accountNumber+" account number entered");
+//        accountNumberField(accountNumber,accountNumber+" account number entered");
         clickSaveButton("clicked save button");
     }
 

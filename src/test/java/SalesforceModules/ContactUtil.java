@@ -98,11 +98,13 @@ public class ContactUtil {
             executor.executeScript("arguments[0].click();", element);
         }
     }
-    public static void setSalutation(String salutation, String logStep){
+    public static void setSalutation(String salutation, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(ContactObject.salutationButton);
         KeywordUtil.click(ContactObject.salutationButton,logStep);
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+salutation+"')]";
+        KeywordUtil.delay(2000);
+        System.out.println(xpath);
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
         }catch (Exception e){}
