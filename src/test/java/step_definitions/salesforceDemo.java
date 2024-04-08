@@ -51,13 +51,13 @@ public class salesforceDemo {
     public void navigate_to_the_url() throws Exception {
 
 //        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
-        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceLogin", "TestData1");
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
 
     @When("^login to salesforce$")
     public void login_Salesforce() throws Exception{
-        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceLogin", "TestData1");
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
 //        LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
 

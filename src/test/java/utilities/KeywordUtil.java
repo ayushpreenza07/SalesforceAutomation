@@ -1443,6 +1443,12 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
+    /**
+     * Error handling.
+     *
+     * @param
+     */
+
     public static void catchAssertError(Throwable e) {
         GlobalUtil.e = e;
         GlobalUtil.errorMsg = e.getMessage();
