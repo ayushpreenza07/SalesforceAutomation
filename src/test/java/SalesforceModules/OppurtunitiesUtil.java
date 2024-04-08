@@ -3,6 +3,7 @@ package SalesforceModules;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pageobjects.SalesforceObjects.ContactObject;
 import pageobjects.SalesforceObjects.OppurtunitiesObject;
@@ -176,6 +177,22 @@ public class OppurtunitiesUtil extends GlobalUtil {
         setMarkAsStage("stage marked");
         goToAccount("Navigated back to account");
     }
+
+    public static void selectClosedStatus(String logStep){
+        KeywordUtil.waitForClickable(OppurtunitiesObject.closedStatus);
+        KeywordUtil.click(OppurtunitiesObject.closedStatus,logStep);
+        KeywordUtil.waitForClickable(OppurtunitiesObject.selectClosedStage);
+        KeywordUtil.click(OppurtunitiesObject.selectClosedStage,logStep);
+
+        KeywordUtil.waitForVisible(OppurtunitiesObject.selectClosedStageDropdown);
+        Select dropdown = new Select(KeywordUtil.getDriver().findElement(OppurtunitiesObject.selectClosedStageDropdown));
+        dropdown.selectByValue("Closed Won");
+
+        KeywordUtil.waitForVisible(OppurtunitiesObject.saveClosedWon);
+        KeywordUtil.click(OppurtunitiesObject.saveClosedWon,logStep);
+    }
+
+
 
     public static void createOppurtunity(String name,String amount,String stage) throws InterruptedException {
         clickOpportunityButton("Opportunity button clicked");

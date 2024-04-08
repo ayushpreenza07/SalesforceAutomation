@@ -2,9 +2,11 @@ package step_definitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
@@ -123,5 +125,11 @@ public class salesforceDemo {
         } catch (Exception e) {
             KeywordUtil.catchAssertError(e);
         }
+    }
+
+    @Then("Change Opportunity Status to Close Won after Quote Approve")
+    public void changeOpportunityStatusToCloseWonAfterQuoteApprove() {
+
+        OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
     }
 }

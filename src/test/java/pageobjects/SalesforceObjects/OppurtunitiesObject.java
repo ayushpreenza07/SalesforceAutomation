@@ -32,4 +32,12 @@ public class OppurtunitiesObject {
     public static By verifyProduct = By.xpath("(//SPAN[@title='(1)'][text()='(1)'])[2]");
 
     public static By verifyDocument = By.xpath("(//SPAN[@lwc-bbqdsgjtbq=''][text()='(1)'])[2]");
+
+    public static By closedStatus = By.xpath("//SPAN[@class='title slds-path__title'][text()='Closed']");
+
+    public static By selectClosedStage = By.xpath("(//BUTTON[@aria-live='off'])[4]");
+
+    public static By selectClosedStageDropdown = By.xpath("//select[@class='stepAction required-field select']");
+
+    public static By saveClosedWon = By.xpath("//button[@title='Save']");
 }
