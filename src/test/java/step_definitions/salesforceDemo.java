@@ -1,5 +1,6 @@
 package step_definitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -10,6 +11,9 @@ import utilities.KeywordUtil;
 import SalesforceModules.*;
 
 import java.util.HashMap;
+
+import static utilities.KeywordUtil.catchAssertError;
+import static utilities.KeywordUtil.takeScreenshotAndAttachInReport;
 
 public class salesforceDemo {
 
@@ -30,50 +34,64 @@ public class salesforceDemo {
 
     @When("^navigate to salesforce$")
     public void navigate_to_the_url() throws Exception {
-        KeywordUtil.navigateToUrl(ConfigReader.getValue("BASE_URL"));
+        KeywordUtil.navigateToUrl(ConfigReader.getValue("Forecast_URL"));
+//        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceLogin", "TestData1");
+//        KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
 
     @When("^login to salesforce$")
-    public void login_Salesforce() throws Exception{
-        LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
+    public void login_Salesforce() throws Exception {
+//        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceLogin", "TestData1");
+//        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
+        LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername1"), ConfigReader.getValue("salesforcePassword1"));
     }
 
     @When("^create new account$")
-    public void create_new_account() throws Exception{
+    public void create_new_account() throws Exception {
 
-        AccountUtil.createNewAccount("TX_demoAccount","400378643", "9717254678");
+        AccountUtil.createNewAccount("TX_demoAccount", "400378643", "9717254678");
     }
 
     @When("^create contact$")
-    public void create_contact() throws Exception{
-        ContactUtil.createContact("Mr","Ayush","google@sdf.com","9717254678");
+    public void create_contact() throws Exception {
+        ContactUtil.createContact("Mr", "Ayush", "google@sdf.com", "9717254678");
     }
 
     @When("^create opportunity and change its status$")
-    public void create_opportunity() throws Exception{
-        OppurtunitiesUtil.createOppurtunity("DemoOpportunity","34545", "Prospecting");
+    public void create_opportunity() throws Exception {
+        OppurtunitiesUtil.createOppurtunity("DemoOpportunity", "34545", "Prospecting");
 
     }
 
     @When("^create new quote and add product$")
-    public void create_new_quote() throws Exception{
+    public void create_new_quote() throws Exception {
         QuoteUtil.createNewQuote("TX_demoAccount", "DemoOpportunity", "Quote");
     }
 
     @When("^Generate document$")
-    public void generateDocument() throws Exception{
+    public void generateDocument() throws Exception {
         QuoteUtil.clickGenerateDocument("generated document");
     }
 
     @When("^verify if product added$")
-    public void verify_product_added() throws Exception{
+    public void verify_product_added() throws Exception {
 
         OppurtunitiesUtil.verifyProduct("verify product");
     }
 
     @When("^verify if document generated$")
-    public void verify_doc_generated() throws Exception{
+    public void verify_doc_generated() throws Exception {
 
         OppurtunitiesUtil.verifyDocumentGenerated("verify document generated");
+    }
+
+    @And("navigate to setup screen")
+    public void navigateToSetupScreen() {
+        try {
+            takeScreenshotAndAttachInReport();
+            ForecastingModule.clickOnSetup("Setup page is opened");
+        } catch (Exception e) {
+            KeywordUtil.catchAssertError(e);
+        }
     }
 }
