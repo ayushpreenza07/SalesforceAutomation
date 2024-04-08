@@ -13,11 +13,6 @@ import java.util.HashMap;
 
 public class QuoteUtil {
 
-    @FindBy(xpath = "(//iframe[contains(@name,'vfFrameId')][@height='100%'])[3]")
-    private static WebElement editQuoteIFrame;
-
-//    static By editQuoteIFrame = By.xpath("//iframe[contains(@name,'vfFrameId')][@height='100%']");
-
     static HashMap<String, String> map = new HashMap<>();
 
     /**
@@ -50,6 +45,13 @@ public class QuoteUtil {
         KeywordUtil.waitForVisible(QuoteObject.searchOpportunities);
         KeywordUtil.inputText(QuoteObject.searchOpportunities, opportunityname,logStep);
     }
+
+    /**
+     * Select the opportunity field for new quote.
+     *
+     * @param logStep the log
+     * @param oppurt the opportunity name
+     */
 
     public static void selectOpportunity(String oppurt, String logStep) throws InterruptedException {
         boolean flag = false;
@@ -179,62 +181,71 @@ public class QuoteUtil {
             System.out.println(KeywordUtil.getDriver().switchTo().parentFrame().getTitle());
         }
 
-        goToOppor("navigated to opporunity");
+        goToOpportunity("navigated to opportunity");
     }
 
     public static void enterDiscount(String discount,String product,String logStep) throws InterruptedException {
         KeywordUtil.delay(10000);
 
+        //switching to iframe to click on JS path buttons
         KeywordUtil.switchToIFrame(3,"Edit Quote IFrame");
         KeywordUtil.delay(5000);
-        WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#pricebookDialog').shadowRoot.querySelector('#dialog > paper-button > sb-i18n')");
 
+        // click on edit lines button using JS path
+        WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#pricebookDialog').shadowRoot.querySelector('#dialog > paper-button > sb-i18n')");
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", saveOnEditLines);
         KeywordUtil.delay(2000);
 
+        //add discount using JS path
         WebElement addDiscount = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#quoteInformation > div > sb-field-set-table').shadowRoot.querySelector('#firstColumn').shadowRoot.querySelector('#g > div > sb-field-set-table-item:nth-child(2)').shadowRoot.querySelector('#field').shadowRoot.querySelector('#f > sb-input').shadowRoot.querySelector('#myinput')");
-
         JavascriptExecutor js = (JavascriptExecutor)KeywordUtil.getDriver();
         js.executeScript("arguments[0].value='"+discount+"';", addDiscount);
-
         KeywordUtil.delay(2000);
+
+        //click on quick save button using JS path
         WebElement quickSave = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(9)').shadowRoot.querySelector('#mainButton');");
         executor.executeScript("arguments[0].click();", quickSave);
-
         KeywordUtil.delay(2000);
+
+        //click on add product button using JS path
         WebElement addProducts = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(1)').shadowRoot.querySelector('#mainButton')");
         executor.executeScript("arguments[0].click();", addProducts);
-
         KeywordUtil.delay(2000);
+
+        //click on search and enter your product using JS path
         WebElement searchProduct = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#headersearch').shadowRoot.querySelector('#typeahead').shadowRoot.querySelector('#itemLabel')");
         executor.executeScript("arguments[0].value='"+product+"';", searchProduct);
         executor.executeScript("arguments[0].click();", searchProduct);
         KeywordUtil.delay(2000);
         Actions action = new Actions(KeywordUtil.getDriver());
         action.sendKeys(Keys.ENTER).build().perform();
-
         KeywordUtil.delay(5000);
+
+        //click on search icon button using JS path
         WebElement searchIcon = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").shadowRoot.querySelector(\"#content > sb-product-lookup\").shadowRoot.querySelector(\"#headersearch\").shadowRoot.querySelector(\"#search\")");
         executor.executeScript("arguments[0].click();", searchIcon);
-
-
         KeywordUtil.delay(5000);
+
+        //check first checkbox after searching using JS path
         WebElement checkBox = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#lookupLayout').shadowRoot.querySelector('#tableRow').shadowRoot.querySelector('#selection').shadowRoot.querySelector('#g > div > sb-table-cell-select').shadowRoot.querySelector('#checkbox').shadowRoot.querySelector('#checkboxContainer')");
         executor.executeScript("arguments[0].click();", checkBox);
-
         KeywordUtil.delay(5000);
+
+        //select product using JS path
         WebElement select = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#plSelect')");
         executor.executeScript("arguments[0].click();",select);
-
         KeywordUtil.delay(8000);
+
+        //clicking save button using JS path
         WebElement save = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(13)').shadowRoot.querySelector('#mainButton')");
         executor.executeScript("arguments[0].click();",save);
 
+        //switching back to parent frame
         KeywordUtil.getDriver().switchTo().parentFrame();
     }
 
-    public static void goToOppor(String logStep){
+    public static void goToOpportunity(String logStep){
         try {
             KeywordUtil.delay(5000);
             KeywordUtil.waitForVisible(QuoteObject.joinedOpportunity);
@@ -265,7 +276,7 @@ public class QuoteUtil {
         }
     }
 
-    public static void changeQuoteStatus(String logStep){
+    public static void changeQuoteStatusAndGoToOpportunity(String logStep) throws InterruptedException {
         KeywordUtil.waitForVisible(QuoteObject.quoteConnected);
         WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.quoteConnected);
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
@@ -277,6 +288,11 @@ public class QuoteUtil {
         changeStatus("Approved", logStep);
 
         clickSaveButton("save button clocked");
+
+        KeywordUtil.delay(2000);
+        KeywordUtil.waitForVisible(QuoteObject.opportunityAfterQuote);
+        WebElement Opportunity = KeywordUtil.getDriver().findElement(QuoteObject.opportunityAfterQuote);
+        executor.executeScript("arguments[0].click();", Opportunity);
     }
 
 

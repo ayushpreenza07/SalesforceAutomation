@@ -10,12 +10,28 @@ import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 import SalesforceModules.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import java.util.HashMap;
 
 public class salesforceDemo {
 
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
+
+    public static void main(String[] args) {
+
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+
+        for (Map.Entry<String, String> entry : dataMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+        }
+    }
 
     @Given("^Read the test data  \"([^\"]*)\" from Excel$")
     public void read_the_test_data_from_Excel(String arg1) {
@@ -47,23 +63,24 @@ public class salesforceDemo {
     @When("^create new account$")
     public void create_new_account() throws Exception{
 
-        AccountUtil.createNewAccount("TX_demoAccountRun","400378643", "9717254678");
+
+        AccountUtil.createNewAccount(dataMap.get("AccountName"), dataMap.get("Phone"));
     }
 
     @When("^create contact$")
     public void create_contact() throws Exception{
-        ContactUtil.createContact("Mr","rahul","google234@sdf.com","971725345");
+        ContactUtil.createContact(dataMap.get("Salutation"), dataMap.get("ContactLastName"),dataMap.get("ContactEmail"),dataMap.get("Phone"));
     }
 
     @When("^create opportunity and change its status$")
     public void create_opportunity() throws Exception{
-        OppurtunitiesUtil.createOppurtunity("DemoOpportunity","34545", "Prospecting");
+        OppurtunitiesUtil.createOppurtunity(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
 
     }
 
     @When("^create new quote and add product$")
     public void create_new_quote() throws Exception{
-        QuoteUtil.createNewQuote("TX_demoAccount", "DemoOpportunity", "Quote");
+        QuoteUtil.createNewQuote(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
     }
 
     @When("^Generate document$")
@@ -86,6 +103,12 @@ public class salesforceDemo {
     @When("^Go to quote and change its status to approve$")
     public void change_quote_status() throws Exception{
 
-        QuoteUtil.changeQuoteStatus("Quote status changed to approved");
+        QuoteUtil.changeQuoteStatusAndGoToOpportunity("Quote status changed to approved and navigated back to opportunity");
+    }
+
+    @When("^create new contract$")
+    public void create_new_contract() throws Exception{
+
+        ContractUtil.createContract(dataMap.get("AccountName"));
     }
 }
