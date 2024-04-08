@@ -102,12 +102,19 @@ public class ExcelDataUtil {
                 if (row.getCell(columnToLookTestCaseID).getStringCellValue().equalsIgnoreCase(testCaseID)) {
                     found = true;
                     for (int i = 0; i < row.getLastCellNum(); i++) {
-                        String cellValue = row.getCell(i).getStringCellValue();
-                        if (cellValue == null) {
-                            cellValue = "";
+                        try {
+                            String cellValue = row.getCell(i).getStringCellValue();
+                            if (cellValue == null) {
+                                cellValue = "";
+                            }
+                            cellValue = getUniqueString(cellValue);
+                            currentRowData.put(firstrow.getCell(i).getStringCellValue(), cellValue);
+                        }catch (Exception e){
+                            double cellValue = row.getCell(i).getNumericCellValue();
+                            int intValue = (int) cellValue;
+                            String stringValue = ""+intValue;
+                            currentRowData.put(firstrow.getCell(i).getStringCellValue(), stringValue);
                         }
-                        cellValue = getUniqueString(cellValue);
-                        currentRowData.put(firstrow.getCell(i).getStringCellValue(), cellValue);
                     }
                     break;
                 }
