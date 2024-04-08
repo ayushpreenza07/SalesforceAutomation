@@ -32,7 +32,7 @@ public class ForecastingModule {
     }
 
     public static void clickOnEditOption() throws InterruptedException {
-        GlobalUtil.getDriver().switchTo().frame((WebElement) GlobalUtil.getDriver().findElement(By.xpath("//iframe[@title='All Users ~ Salesforce - Developer Edition']")));
+        KeywordUtil.switchToIFrame(0,"All Users ~ Salesforce - Developer Edition");
         takeScreenshotAndAttachInReport();
         KeywordUtil.isWebElementVisible(ForecastingPage.loggedInUser, "Logged in user is visible.");
         KeywordUtil.click(ForecastingPage.loggedInUser, "Click on Logged in user");
@@ -41,9 +41,8 @@ public class ForecastingModule {
 
     public static void scrollToAllowForecast() throws InterruptedException {
         KeywordUtil.waitForVisible(ForecastingPage.userGeneralInfo);
-        GlobalUtil.getDriver().switchTo().frame((WebElement) GlobalUtil.getDriver().findElement(By.xpath("//iframe[@title='User Edit: Sukanya Jagtap ~ Salesforce - Developer Edition']")));
+        KeywordUtil.switchToIFrame(0,"User Edit: Sukanya Jagtap ~ Salesforce - Developer Edition");
         KeywordUtil.scrollingToElementofAPage(ForecastingPage.allowForecasting, "Scroll to Allow forecasting option.");
-        takeScreenshotAndAttachInReport();
         KeywordUtil.waitForVisible(ForecastingPage.allowForecasting);
         if (GlobalUtil.getDriver().findElement(By.xpath("//*[@name='forecast_enabled']")).getAttribute("checked") == null) {
             KeywordUtil.click(ForecastingPage.allowForecastingCheckbox, "Click on allow Forecasting Checkbox.");
