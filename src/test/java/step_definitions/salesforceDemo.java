@@ -1,5 +1,6 @@
 package step_definitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -49,14 +50,16 @@ public class salesforceDemo {
     @When("^navigate to salesforce$")
     public void navigate_to_the_url() throws Exception {
 
-        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
-
+//        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceLogin", "TestData1");
+        KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
 
     @When("^login to salesforce$")
     public void login_Salesforce() throws Exception{
-
-        LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("SalesforceLogin", "TestData1");
+        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
+//        LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
 
     }
 
@@ -110,5 +113,15 @@ public class salesforceDemo {
     public void create_new_contract() throws Exception{
 
         ContractUtil.createContract(dataMap.get("AccountName"));
+    }
+
+    @And("navigate to setup screen")
+    public void navigateToSetupScreen() {
+        try {
+            KeywordUtil.takeScreenshotAndAttachInReport();
+            ForecastingModule.clickOnSetup("Setup page is opened");
+        } catch (Exception e) {
+            KeywordUtil.catchAssertError(e);
+        }
     }
 }
