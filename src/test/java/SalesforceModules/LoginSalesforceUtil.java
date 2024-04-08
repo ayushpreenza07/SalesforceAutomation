@@ -34,6 +34,7 @@ public class LoginSalesforceUtil extends GlobalUtil {
     public static void loginToSalesforce(String username, String password){
         enterUsername(username,username+" - username entered");
         enterPassword(password,password+" - password entered");
+        KeywordUtil.takeScreenshotAndAttachInReport();
         clickLogin("login button clicked");
     }
 

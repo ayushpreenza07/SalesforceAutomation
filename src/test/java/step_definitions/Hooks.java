@@ -28,7 +28,7 @@ public class Hooks {
     String imagePath;
     String pathForLogger;
 
-    @Before("@Web or @salesforce or @Leads")  //@Amazon
+    @Before("@Web")  //@Amazon
     public void beforeMethodAmazon(Scenario scenario) {
 
         if (scenario.getName().contains("_"))
