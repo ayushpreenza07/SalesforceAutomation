@@ -95,12 +95,7 @@ public class ForecastingModule {
             KeywordUtil.switchToIFrame(0, "Understanding Roles ~ Salesforce - Developer Edition");
             KeywordUtil.waitForVisible(ForecastingPage.sampleRoleHierarchy);
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.sampleRoleHierarchy, "Click on Sample Role Hierarchy dropdown.");
-            WebElement dropdownElement = getDriver().findElement(ForecastingPage.sampleRoleHierarchy);
-            WebElement option = dropdownElement.findElements(By.tagName("option")).get(2);
-            option.click();
-            option.click();
-            takeScreenshotAndAttachInReport();
+            KeywordUtil.selectOptionFromDropdown(ForecastingPage.sampleRoleHierarchy, 2, "Click and select value from Sample Role Hierarchy dropdown.");
             KeywordUtil.scrollingToElementofAPage(ForecastingPage.setupRoles, "Scroll to set up roles button.");
             KeywordUtil.click(ForecastingPage.setupRoles, "Click on set up roles button.");
             GlobalUtil.getDriver().switchTo().defaultContent();
@@ -115,7 +110,7 @@ public class ForecastingModule {
         try {
             KeywordUtil.switchToIFrame(0, "Creating the Role Hierarchy ~ Salesforce - Developer Edition");
             KeywordUtil.isWebElementVisible(ForecastingPage.usersPage, "Role Hierarchy page is visible.");
-            KeywordUtil.click(ForecastingPage.expandALlRoles, "Expand aLl roles list.");
+            KeywordUtil.click(ForecastingPage.expandAllRoles, "Expand aLl roles list.");
             KeywordUtil.isWebElementVisible(ForecastingPage.assignOption(roleValue, actionValue), "Role options are visible");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.assignOption(roleValue, actionValue), "Click on " + actionValue + " option.");
@@ -131,10 +126,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.usersPage, "Role Hierarchy detail page is visible.");
             if (KeywordUtil.isWebElementVisible(ForecastingPage.emptyUsersBox, "")) {
-                KeywordUtil.click(ForecastingPage.selectUser, "Click on Available Users list.");
-                WebElement dropdownElement1 = getDriver().findElement(ForecastingPage.selectUser);
-                WebElement option1 = dropdownElement1.findElements(By.tagName("option")).get(1);
-                option1.click();
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.selectUser, 1, "Click and select Available Users list.");
                 takeScreenshotAndAttachInReport();
                 KeywordUtil.click(ForecastingPage.addUser, "Click on add user button.");
                 takeScreenshotAndAttachInReport();

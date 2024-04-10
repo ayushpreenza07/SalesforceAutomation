@@ -22,7 +22,7 @@ public class ForecastingPage {
     public static By emptyUsersBox = By.xpath("//*[@id=\"duel_select_1\"]/option[text()='--None--']");
     public static By selectUser = By.xpath("//*[@id=\"duel_select_0\"]");
     public static By addUser = By.xpath("//img[@title=\"Add\"]");
-    public static By expandALlRoles = By.xpath("//*[text()=\"Expand All\"]");
+    public static By expandAllRoles = By.xpath("//*[text()=\"Expand All\"]");
 
 
 
