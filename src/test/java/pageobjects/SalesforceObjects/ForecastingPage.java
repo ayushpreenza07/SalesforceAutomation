@@ -17,10 +17,23 @@ public class ForecastingPage {
     public static By userGeneralInfo = By.xpath("//*[text()=\"General Information\"]");
     public static By closeButton = By.xpath("//*[@name=\"cancel\"]");
     public static By saveButton = By.xpath("//*[@name=\"save\"]");
+    public static By sampleRoleHierarchy = By.xpath("//select[@name=\"samples\"]");
+    public static By setupRoles = By.xpath("//input[@title=\"Set Up Roles\"]");
+    public static By emptyUsersBox = By.xpath("//*[@id=\"duel_select_1\"]/option[text()='--None--']");
+    public static By selectUser = By.xpath("//*[@id=\"duel_select_0\"]");
+    public static By addUser = By.xpath("//img[@title=\"Add\"]");
+    public static By expandALlRoles = By.xpath("//*[text()=\"Expand All\"]");
+
 
 
     public static By searchSetupOption(String searchValue) {
         return By.xpath("//li[@aria-level=\"2\" and @aria-label='" + searchValue + "']");
+    }
+    public static By userOption(String searchValue) {
+        return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark");
+    }
+    public static By assignOption(String roleValue, String actionValue) {
+        return By.xpath("//span//a[text()='" + roleValue + "']/parent::span/following-sibling::span//a[text()='" + actionValue + "']");
     }
 
 }
