@@ -1,8 +1,7 @@
 package step_definitions;
 
 import SalesforceModules.AccountUtil;
-import SalesforceModules.Compaignutil;
-import SalesforceModules.ContactUtil;
+import SalesforceModules.CampaignUtil;
 import SalesforceModules.LoginSalesforceUtil;
 import com.relevantcodes.extentreports.LogStatus;
 import io.cucumber.java.en.And;
@@ -10,8 +9,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.AccountObject;
-import pageobjects.SalesforceObjects.Comapign_object;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
@@ -54,57 +51,58 @@ public class SalesForceMarketing {
 
     @And("user selects the {string}")
     public void select_option(String option) {
-        KeywordUtil.click(Comapign_object.select_option(option), "user has succesfully selected the " +option);
-        KeywordUtil.takeScreenshotAndAttachInReport();
+      CampaignUtil.selectOption(option);
     }
 
-    @Then("user clicks on Compaigns Tab")
-    public void clicks_comapigns() throws InterruptedException {
-      Compaignutil.clickComapignTab("click on the compaign tab");
+    @Then("user clicks on Campaigns Tab")
+    public void clicks_Campaigns() throws InterruptedException {
+      CampaignUtil.clickCampaignTab("click on the compaign tab");
     }
 
-    @Then("user create new compiagn")
-    public void create_new_compaign(){
-
+    @Then("user create new Campaign")
+    public void create_New_Compaign(){
         try{
-            Compaignutil.createcompaign(dataMap.get("ComapaignName"));
+            CampaignUtil.createCampaign(dataMap.get("ComapaignName"));
+            CampaignUtil.verificationMessage();
+            KeywordUtil.takeScreenshotAndAttachInReport();
         }catch (Exception e){
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user has got the message  : " +e.getMessage()));
-
         }
 
     }
 
-    @And("user selects the parent compaign")
-    public void Select_aprent_compaign() throws InterruptedException {
-        Compaignutil.addparentcomapign();
-       Compaignutil.verificationmessage();
-        KeywordUtil.takeScreenshotAndAttachInReport();
+    @And("user selects the parent Campaign")
+    public void Select_Parent_Compaign() throws InterruptedException {
+        CampaignUtil.addParentCampaign(dataMap.get("CamapaignName"),dataMap.get("ParentCampaign"));
+
     }
 
-    @Then("user create contact in comapign")
-    public void create_contact() throws InterruptedException {
-        Compaignutil.addContactInComapign(dataMap.get("Salutation"), dataMap.get("ContactLastName"),Compaignutil.generateRandomString(5)+"@gmail.com",dataMap.get("Phone"));
-        Compaignutil.verificationmessage();
+    @Then("user create contact in Campaign")
+    public void create_Contact() throws InterruptedException {
+        CampaignUtil.addContactInCampaign(dataMap.get("Salutation"), dataMap.get("ContactLastName"),KeywordUtil.generateRandomString(4)+"@gmail.com",dataMap.get("Phone"));
+        CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user selects the edit button")
-    public void compaign_edit() throws InterruptedException {
-
-           Compaignutil.editcompaignname(dataMap.get("ComapaignName"),dataMap.get("EditCompaignName"));
-
-           Compaignutil.verificationmessage();
+    public void compaign_Edit() throws InterruptedException {
+        CampaignUtil.editCampaignName(dataMap.get("CamapaignName"),dataMap.get("EditCampaignName"));
+        CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
 @Then("user selects the Delete button")
-    public void comapign_delete() throws InterruptedException {
-    Compaignutil.deletecompaign(dataMap.get("EditCompaignName"));
-    Compaignutil.verificationmessage();
+    public void Campaign_Delete() throws InterruptedException {
+    CampaignUtil.deleteCampaign(dataMap.get("EditCompaignName"));
+    CampaignUtil.verificationMessage();
     KeywordUtil.takeScreenshotAndAttachInReport();
 }
 
+@Then("user selects the parent comapaign")
+    public void select_ParentCampaign() throws InterruptedException {
+         System.out.println(dataMap.get("ParentCampaign"));
+        CampaignUtil.addParentCampaign(dataMap.get("CamapaignName"),dataMap.get("ParentCampaign"));
+}
 
 
 }
