@@ -1435,6 +1435,19 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
+    public static String generateRandomString(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder result = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length()); // Generate a random index
+            result.append(characters.charAt(index)); // Append the character at the random index
+        }
+
+        return result.toString();
+    }
+
     public static void markTestAsPassedInBrowserStackWeb(String testStatus) {
         JavascriptExecutor jse = (JavascriptExecutor) GlobalUtil.getDriver();
         jse.executeScript(String.format(
@@ -1509,6 +1522,8 @@ class TestStepFailedException extends Exception {
         JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
+
+
 
 
 }
