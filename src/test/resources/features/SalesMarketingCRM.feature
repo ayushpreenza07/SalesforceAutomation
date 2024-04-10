@@ -10,12 +10,12 @@ Feature: Salesforce Marketing CRM
     And user clicks on the App launcher button
     And user selects the "Marketing CRM Classic"
     Then user clicks on Campaigns Tab
-#    Then user create new Campaign
-#    Then user clicks on Campaigns Tab
-#    Then user selects the edit button
-#    Then user selects the Delete button
-#    Then user create new Campaign
-#    Then user clicks on Campaigns Tab
+    Then user create new Campaign
+    Then user clicks on Campaigns Tab
+    Then user selects the edit button
+    Then user selects the Delete button
+    Then user create new Campaign
+    Then user clicks on Campaigns Tab
     Then user selects the parent Campaign
     Examples:
       | TestData  | SheetName  |
