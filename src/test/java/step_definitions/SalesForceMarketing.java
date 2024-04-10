@@ -92,7 +92,7 @@ public class SalesForceMarketing {
     }
 
 @Then("user selects the Delete button")
-    public void Campaign_Delete() throws InterruptedException {
+    public void campaign_Delete() throws InterruptedException {
     CampaignUtil.deleteCampaign(dataMap.get("EditCompaignName"));
     CampaignUtil.verificationMessage();
     KeywordUtil.takeScreenshotAndAttachInReport();

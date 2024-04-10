@@ -22,30 +22,30 @@ public class CampaignUtil {
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public static void enterCampaignName(String Campaignname, String logstep) {
+    public static void entercampaignName(String campaignName, String logstep) {
         KeywordUtil.waitForVisible(CampaignObject.CampaignName);
-        KeywordUtil.inputText(CampaignObject.CampaignName, Campaignname, logstep);
+        KeywordUtil.inputText(CampaignObject.CampaignName, campaignName, logstep);
         KeywordUtil.click(CampaignObject.CampaignName, "click on the Campaign name filed");
     }
 
 
-    public static void clickParentClick(String Campaignname) throws InterruptedException {
+    public static void clickParentClick(String campaignName) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.clickParentLink(Campaignname));
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.clickParentLink(Campaignname));
+        KeywordUtil.waitForVisible(CampaignObject.clickParentLink(campaignName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.clickParentLink(campaignName));
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public static void enterCampaignInParentSearchBox(String Campaignname,String logstep){
+    public static void enterCampaignInParentSearchBox(String campaignName,String logstep){
         KeywordUtil.waitForVisible(CampaignObject.parentLinkSearchCompaign);
-        KeywordUtil.inputText(CampaignObject.parentLinkSearchCompaign, Campaignname, logstep);
+        KeywordUtil.inputText(CampaignObject.parentLinkSearchCompaign, campaignName, logstep);
     }
 
     public static void selectParentCampaign(String campaignName) {
-        List<WebElement> CampaignName=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the parent Campaigns list");
-        for(int i =0;i<CampaignName.size();i++){
-            if(CampaignName.get(i).getText()==campaignName){
+        List<WebElement> campaignNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the parent Campaigns list");
+        for(int i =0;i<campaignNames.size();i++){
+            if(campaignNames.get(i).getText()==campaignName){
                 KeywordUtil.click(CampaignObject.listOfParentComapign,"clicked on the parent comapign");
             }
         }
@@ -63,9 +63,9 @@ public class CampaignUtil {
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
-    public static void createCampaign(String Campaignname) throws InterruptedException {
+    public static void createCampaign(String campaignName) throws InterruptedException {
         AccountUtil.clickNewButton("user has clicked on the new button");
-        enterCampaignName(Campaignname, "user has succesffully entered the " + Campaignname);
+        entercampaignName(campaignName, "user has succesffully entered the " + campaignName);
         clickSaveButton("user has successfully click on the  save button");
        clickSaveButton("user has successfully click on the  save button");
     }
@@ -75,9 +75,9 @@ public class CampaignUtil {
         KeywordUtil.click(CampaignObject.newContactButton, "click on the new contact button");
     }
 
-    public static void addParentCampaign(String Campaignname,String ParentCompaign) throws InterruptedException {
-        clickParentClick(Campaignname);
-        enterCampaignInParentSearchBox(Campaignname,"entered the " +Campaignname+ " in the search box");
+    public static void addParentCampaign(String campaignName,String ParentCompaign) throws InterruptedException {
+        clickParentClick(campaignName);
+        enterCampaignInParentSearchBox(campaignName,"entered the " +campaignName+ " in the search box");
         selectParentCampaign(ParentCompaign);
     }
 
@@ -120,10 +120,10 @@ public class CampaignUtil {
     }
 
 
-    public static void clickOnShowActions(String Campaignname,String logstep) throws InterruptedException {
+    public static void clickOnShowActions(String campaignName,String logstep) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.showActions(Campaignname));
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.showActions(Campaignname));
+        KeywordUtil.waitForVisible(CampaignObject.showActions(campaignName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.showActions(campaignName));
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -151,16 +151,16 @@ public class CampaignUtil {
         enterPhoneContact(phoneNumber, phoneNumber + " phone number entered");
         clickSaveButton("save button clicked");
     }
-    public static void editCampaignName(String Campaignname,String editCampaignname) throws InterruptedException {
-        clickOnShowActions(Campaignname,"user successfully click on the show Actions buttons");
+    public static void editCampaignName(String campaignName,String editcampaignName) throws InterruptedException {
+        clickOnShowActions(campaignName,"user successfully click on the show Actions buttons");
         clickOnShowActionsEditButton();
-        enterCampaignName(editCampaignname,"enter the Campaign name");
+        entercampaignName(editcampaignName,"enter the Campaign name");
         clickSaveButton("user has successfully click on the  save button");
         clickSaveButton("user has successfully click on the  save button");
 
     }
-    public static void deleteCampaign(String Campaignname) throws InterruptedException {
-        clickOnShowActions(Campaignname,"user successfully click on the show Actions buttons");
+    public static void deleteCampaign(String campaignName) throws InterruptedException {
+        clickOnShowActions(campaignName,"user successfully click on the show Actions buttons");
        clickOnShowActionsDeleteButton();
        clickOnCampaignDelete();
     }
