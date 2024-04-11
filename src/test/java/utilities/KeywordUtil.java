@@ -1212,6 +1212,18 @@ public class KeywordUtil extends GlobalUtil {
         Thread.sleep(time);
     }
 
+    public static String getVisibleText(By locator) {
+        KeywordUtil.lastAction = "Get Element text: " + locator.toString();
+        LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
+        WebElement elm = waitForVisible(locator);
+        return elm.getText().trim();
+    }
+
+    public static void scrollup(By Element) {
+        JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
+        js.executeScript("window.scrollBy(10,0);", Element);
+    }
+
     /**
      * Verify current date input boolean.
      *
@@ -1509,6 +1521,5 @@ class TestStepFailedException extends Exception {
         JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
-
 
 }
