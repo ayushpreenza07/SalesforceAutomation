@@ -15,6 +15,7 @@ Feature: salesforce demo
     Then Go to quote and change its status to approve
     And create new contract
     Then Change Opportunity Status to Close Won after Quote Approve
+    And create an order and activate
     Examples:
       | TestData |
       | TestData1 |

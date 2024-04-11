@@ -40,42 +40,6 @@ public class ContractUtil {
         KeywordUtil.click(ContractObject.newContract,logStep);
     }
 
-    public static int setYear(int year){
-        if(1924>year || year>2124){
-            Assert.fail("invalid year entry");
-        }
-
-        return year;
-    }
-
-    public static int setMonth(int month){
-        if(month>12 || month<=0){
-            Assert.fail("invalid month entry");
-        }
-        return month;
-    }
-
-    public static int setDate(int date){
-        if(date>31 || date<=0){
-            Assert.fail("invalid date entry");
-        }
-        return date;
-    }
-
-    public static String closedDate(int year, int month, int day){
-
-        LocalDate specificDate = LocalDate.of(setYear(year),setMonth(month),setDate(day));
-        String date = specificDate.toString();
-
-        return changeDateFormat(date);
-    }
-
-    public static String changeDateFormat(String originalDateString) {
-        LocalDate originalDate = LocalDate.parse(originalDateString);
-        DateTimeFormatter newFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return originalDate.format(newFormat);
-    }
-
     /**
      * Enter start date for new contract.
      *
@@ -83,7 +47,7 @@ public class ContractUtil {
      */
     public static void enterStartDate(int year, int month, int day, String logStep){
         KeywordUtil.waitForVisible(ContractObject.startDate);
-        KeywordUtil.inputText(ContractObject.startDate, closedDate(year,month,day),logStep);
+        KeywordUtil.inputText(ContractObject.startDate, OppurtunitiesUtil.closedDate(year,month,day),logStep);
     }
 
     /**
@@ -117,6 +81,32 @@ public class ContractUtil {
         KeywordUtil.inputText(ContractObject.contractTerm, String.valueOf(term),logStep);
     }
 
+    /**
+     * Navigating back to opportunity after creating contract
+     *
+     *
+     * @param logStep the name
+     */
+    public static void navigateToOpportunity(String opportunity,String logStep) throws InterruptedException {
+        String xpath = "//a[@title='"+opportunity+"']";
+        System.out.println(xpath);
+        try {
+            KeywordUtil.waitForVisible(KeywordUtil.getDriver().findElement(By.xpath(xpath)));
+            KeywordUtil.click(KeywordUtil.getDriver().findElement(By.xpath(xpath)), logStep);
+        }catch (Exception e){
+            WebElement element = KeywordUtil.getDriver().findElement(By.xpath(xpath));
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        }
+        KeywordUtil.delay(5000);
+    }
+
+
+    /**
+     * Create contract
+     *
+     * @param account the log
+     */
     public static void createContract(String account) throws InterruptedException {
 
         ButtonContract("Navigated to contract page");
@@ -125,5 +115,6 @@ public class ContractUtil {
         enterContractTerm(2,"Entered contract term");
         QuoteUtil.selectAccount(account,"Account selected");
         QuoteUtil.clickSaveButton("Save button clicked for new contract");
+        KeywordUtil.delay(3000);
     }
 }

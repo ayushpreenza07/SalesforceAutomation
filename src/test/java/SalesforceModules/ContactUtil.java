@@ -58,6 +58,12 @@ public class ContactUtil {
         KeywordUtil.inputText(ContactObject.phoneField, phone,logStep);
     }
 
+    /**
+     * Enter email field for new contact.
+     *
+     * @param logStep the log
+     * @param email the contact name
+     */
     public static void enterEmail(String email, String logStep){
         KeywordUtil.waitForVisible(ContactObject.emailField);
         if(email.contains("@") && email.contains(".")) {
@@ -77,6 +83,11 @@ public class ContactUtil {
         KeywordUtil.click(ContactObject.saveButton,logStep);
     }
 
+    /**
+     * click Contact button.
+     *
+     * @param logStep the log
+     */
     public static void clickContactButton(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ContactObject.contactButton);
@@ -85,6 +96,11 @@ public class ContactUtil {
         executor.executeScript("arguments[0].click();", element);
     }
 
+    /**
+     * Go to backToAccount
+     *
+     * @param logStep the log
+     */
     public static void backToAccount(String logStep) throws InterruptedException {
         try {
             KeywordUtil.delay(5000);
@@ -98,6 +114,13 @@ public class ContactUtil {
             executor.executeScript("arguments[0].click();", element);
         }
     }
+
+    /**
+     * Go to setSalutation
+     *
+     * @param salutation the salutation
+     * @param logStep the log
+     */
     public static void setSalutation(String salutation, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(ContactObject.salutationButton);
@@ -116,6 +139,14 @@ public class ContactUtil {
         }
     }
 
+    /**
+     * Create contact
+     *
+     * @param salutation the salutation
+     * @param lastname the lastname
+     * @param email the email
+     * @param phoneNumber the phoneNumber
+     */
     public static void createContact(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
         clickContactButton("Navigated to Contacts");
         NewButtonContact("New contact button clicked");
