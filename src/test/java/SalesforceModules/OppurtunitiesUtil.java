@@ -302,8 +302,6 @@ public class OppurtunitiesUtil extends GlobalUtil {
 
         //select closed won value from dropdown
         KeywordUtil.waitForVisible(OppurtunitiesObject.selectClosedStageDropdown);
-//        Select dropdown = new Select(KeywordUtil.getDriver().findElement(OppurtunitiesObject.selectClosedStageDropdown));
-//        dropdown.selectByValue("Closed Won");
         KeywordUtil.selectByValue(OppurtunitiesObject.selectClosedStageDropdown, "Closed Won", "Closed won selected from dropdown");
 
         //save option

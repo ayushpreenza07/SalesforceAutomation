@@ -97,8 +97,6 @@ public class AccountUtil extends GlobalUtil {
         KeywordUtil.waitForVisible(AccountObject.saveButton);
         KeywordUtil.click(AccountObject.saveButton,logStep);
 
-//        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
-//        executor.executeScript("arguments[0].click();", KeywordUtil.getDriver().findElement(AccountObject.saveButton));
     }
 
     /**
