@@ -155,6 +155,5 @@ public class ContactUtil {
         enterEmail(email,email+" email entered");
         enterPhoneContact(phoneNumber,phoneNumber+" phone number entered");
         clickSaveButton("save button clicked");
-        backToAccount("Navigated back to account");
     }
 }

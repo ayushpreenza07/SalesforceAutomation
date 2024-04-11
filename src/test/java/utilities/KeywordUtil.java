@@ -1435,6 +1435,19 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
+    public static String generateRandomString(int length) {
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        StringBuilder result = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(characters.length()); // Generate a random index
+            result.append(characters.charAt(index)); // Append the character at the random index
+        }
+
+        return result.toString();
+    }
+
     public static void markTestAsPassedInBrowserStackWeb(String testStatus) {
         JavascriptExecutor jse = (JavascriptExecutor) GlobalUtil.getDriver();
         jse.executeScript(String.format(
@@ -1484,6 +1497,27 @@ public class KeywordUtil extends GlobalUtil {
         }
     }
 
+
+    /**
+     * Select value from drop down.
+     *
+     * @param
+     */
+    public static void selectOptionFromDropdown(By dropdownLocator, int optionIndex,String logStep) {
+        try {
+            KeywordUtil.click(dropdownLocator, "Click on dropdown.");
+            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownLocator));
+            WebElement dropdownElement = getDriver().findElement(dropdownLocator);
+            WebElement option = dropdownElement.findElements(By.tagName("option")).get(optionIndex);
+            option.click();
+            takeScreenshotAndAttachInReport();
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }// End class
 
 /**
@@ -1509,6 +1543,8 @@ class TestStepFailedException extends Exception {
         JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
+
+
 
 
 }

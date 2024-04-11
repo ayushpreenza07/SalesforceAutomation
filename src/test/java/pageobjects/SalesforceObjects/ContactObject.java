@@ -16,5 +16,6 @@ public class ContactObject {
     public static By saveButton = By.xpath("//BUTTON[@class='slds-button slds-button_brand'][text()='Save']");
     public static By salutationButton = By.xpath("//BUTTON[@name='salutation']");
 
+
     public static By emailField = By.xpath("//input[@name='Email']");
 }
