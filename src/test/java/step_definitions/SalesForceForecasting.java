@@ -25,7 +25,7 @@ public class SalesForceForecasting {
     public void assignARoleToTheForecastUser() {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Roles");
-            ForecastingModule.selectValueFromDropDown();
+            ForecastingModule.selectValueFromSampleRoleHierarchies();
             ForecastingModule.selectRolesFromHierarchy("COO","Assign");
             ForecastingModule.assignRolesToUser();
         } catch (Exception e) {
