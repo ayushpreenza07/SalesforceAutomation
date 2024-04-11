@@ -26,9 +26,12 @@ public class QuoteUtil {
         KeywordUtil.click(QuoteObject.newQuoteButton,logStep);
     }
 
+    /**
+     * click Quote tab.
+     *
+     * @param logStep the log
+     */
     public static void clickQuoteTab(String logStep) throws InterruptedException {
-//        KeywordUtil.waitForVisible(QuoteObject.clickOnQuotes);
-//        KeywordUtil.click(QuoteObject.clickOnQuotes,logStep);
         KeywordUtil.delay(3000);
         WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.clickOnQuotes);
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
@@ -72,7 +75,7 @@ public class QuoteUtil {
     }
 
     /**
-     * Select the Account field for new quote.
+     * Enter account name field for new quote.
      *
      * @param logStep the log
      * @param name the account name
@@ -82,6 +85,12 @@ public class QuoteUtil {
         KeywordUtil.inputText(QuoteObject.searchAccounts, name,logStep);
     }
 
+    /**
+     * Select the Account field for new quote.
+     *
+     * @param logStep the log
+     * @param account the account name
+     */
     public static void selectAccount(String account, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.searchAccounts);
@@ -111,6 +120,12 @@ public class QuoteUtil {
         KeywordUtil.inputText(QuoteObject.selectTypes, Types,logStep);
     }
 
+    /**
+     * Select the Types field for new quote.
+     *
+     * @param logStep the log
+     * @param type the Types name
+     */
     public static void selectType(String type, String logStep){
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.selectTypes);
@@ -138,28 +153,57 @@ public class QuoteUtil {
         KeywordUtil.click(QuoteObject.saveButton,logStep);
     }
 
+    /**
+     * click Quote button.
+     *
+     * @param logStep the log
+     */
     public static void clickQuoteButton(String logStep){
         KeywordUtil.waitForVisible(QuoteObject.quoteBtn);
         KeywordUtil.click(QuoteObject.quoteBtn,logStep);
     }
 
+
+    /**
+     * Tick the primary checkbox.
+     *
+     * @param logStep the log
+     */
     public static void checkPrimary(String logStep) throws Exception {
-        try {
             KeywordUtil.waitForVisible(QuoteObject.primaryCheckbox);
-            KeywordUtil.click(QuoteObject.primaryCheckbox, logStep);
-        }catch(Exception e){
             WebElement check = KeywordUtil.getDriver().findElement(QuoteObject.primaryCheckbox);
             JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", check);
-        }
     }
 
+    /**
+     * Tick the ordered checkbox.
+     *
+     * @param logStep the log
+     */
+    public static void checkOrdered(String logStep) throws Exception {
+            KeywordUtil.waitForVisible(QuoteObject.orderedCheckbox);
+            WebElement check = KeywordUtil.getDriver().findElement(QuoteObject.orderedCheckbox);
+            JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", check);
+    }
+
+    /**
+     * Click EditLines
+     *
+     * @param logStep the log
+     */
     public static void clickEditLines(String logStep) throws InterruptedException {
         KeywordUtil.delay(10000);
-        KeywordUtil.waitForVisible(QuoteObject.editLines);
+        KeywordUtil.waitForClickable(QuoteObject.editLines);
         KeywordUtil.click(QuoteObject.editLines,logStep);
     }
 
+    /**
+     * Click Generate Document and save
+     *
+     * @param logStep the log
+     */
     public static void clickGenerateDocument(String logStep) throws InterruptedException {
         KeywordUtil.delay(5000);
         KeywordUtil.waitForVisible(QuoteObject.generateDocument);
@@ -184,6 +228,11 @@ public class QuoteUtil {
         goToOpportunity("navigated to opportunity");
     }
 
+    /**
+     * Enter discount and select product using JS paths
+     *
+     * @param discount,logStep,product the log
+     */
     public static void enterDiscount(String discount,String product,String logStep) throws InterruptedException {
         KeywordUtil.delay(10000);
 
@@ -245,6 +294,11 @@ public class QuoteUtil {
         KeywordUtil.getDriver().switchTo().parentFrame();
     }
 
+    /**
+     * Navigate to Opportunity
+     *
+     * @param logStep the log
+     */
     public static void goToOpportunity(String logStep){
         try {
             KeywordUtil.delay(5000);
@@ -259,6 +313,12 @@ public class QuoteUtil {
         }
     }
 
+    /**
+     * Change status of quote
+     *
+     * @param logStep the log
+     * @param type the type
+     */
     public static void changeStatus(String type, String logStep){
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.statusButton);
@@ -276,7 +336,13 @@ public class QuoteUtil {
         }
     }
 
-    public static void changeQuoteStatusAndGoToOpportunity(String logStep) throws InterruptedException {
+    /**
+     * Change status to approve and go to opportunity
+     *
+     * @param logStep the log
+     *
+     */
+    public static void changeQuoteStatusAndGoToOpportunity(String logStep) throws Exception {
         KeywordUtil.waitForVisible(QuoteObject.quoteConnected);
         WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.quoteConnected);
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
@@ -286,26 +352,79 @@ public class QuoteUtil {
         KeywordUtil.click(QuoteObject.editButton, "Edit button clicked");
 
         changeStatus("Approved", logStep);
-
+        checkOrdered("Ordered checkbox checked");
+        KeywordUtil.delay(2000);
         clickSaveButton("save button clocked");
 
-        KeywordUtil.delay(2000);
+        KeywordUtil.delay(5000);
         KeywordUtil.waitForVisible(QuoteObject.opportunityAfterQuote);
         WebElement Opportunity = KeywordUtil.getDriver().findElement(QuoteObject.opportunityAfterQuote);
         executor.executeScript("arguments[0].click();", Opportunity);
     }
 
+    /**
+     * Navigate to quote and create order
+     *
+     * @param logStep the log
+     *
+     */
+    public static void goToQuoteAndCreateOrder(String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(QuoteObject.quoteConnected);
+        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.quoteConnected);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", quote);
 
+        KeywordUtil.waitForVisible(QuoteObject.orders);
+        KeywordUtil.click(QuoteObject.orders, "Order button clicked");
+
+        KeywordUtil.delay(3000);
+
+        KeywordUtil.waitForClickable(QuoteObject.openOrder);
+        WebElement order = KeywordUtil.getDriver().findElement(QuoteObject.openOrder);
+        executor.executeScript("arguments[0].click();", order);
+    }
+
+    /**
+     * Activating order
+     *
+     */
+    public static void activateOrder() throws InterruptedException {
+
+        KeywordUtil.waitForVisible(QuoteObject.activatedTab);
+        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.activatedTab);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", quote);
+
+        try {
+            KeywordUtil.waitForVisible(QuoteObject.markCurrentStatus);
+            KeywordUtil.click(QuoteObject.markCurrentStatus, "Activated status Marked");
+        }catch (Exception e){
+            WebElement markStatus = KeywordUtil.getDriver().findElement(QuoteObject.markCurrentStatus);
+            executor.executeScript("arguments[0].click();", markStatus);
+        }
+    }
+
+
+    /**
+     * Click edit lines and add discount
+     *
+     */
     public static void addDiscountProduct() throws InterruptedException {
         clickEditLines("Edit Lines clicked");
         enterDiscount("5","2FAUSBKEY","Entered discount");
     }
 
-    public static void createNewQuote(String name, String opportunityname, String type) throws Exception {
+    /**
+     * Create new quote combining all methods
+     *
+     * @param name,opportunityName the log
+     *
+     */
+    public static void createNewQuote(String name, String opportunityName, String type) throws Exception {
         clickQuoteButton("Navigated to quote");
         NewButtonQuote("Clicked new button");
         checkPrimary("primary checkbox marked");
-        selectOpportunity(opportunityname,opportunityname+" entered opportunities name");
+        selectOpportunity(opportunityName,opportunityName+" entered opportunities name");
         selectAccount(name,name+" entered account name");
         selectType(type,"selected type");
         clickSaveButton("clicked save button");
