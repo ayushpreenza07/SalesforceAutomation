@@ -18,7 +18,7 @@ import static org.testng.Assert.assertEquals;
 public class Leads {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
 
-    public static void ClickOnHamburgerMenu(String logStep) throws InterruptedException {
+    public static void clickOnHamburgerMenu(String logStep) throws InterruptedException {
         KeywordUtil.delay(2000);
         try {
             KeywordUtil.waitForVisible(LeadsPage.hamburgerMenu);
@@ -29,7 +29,7 @@ public class Leads {
         }
     }
 
-    public static void EnterText(String text) throws InterruptedException {
+    public static void enterText(String text) throws InterruptedException {
         KeywordUtil.delay(1000);
         try {
             KeywordUtil.inputText(LeadsPage.searchText, ConfigReader.getValue("SearchText"), "User Entered Text");
@@ -87,7 +87,7 @@ public class Leads {
     }
     }
 
-    public static void clickOnCovertedTab () throws InterruptedException {
+    public static void clickOnConvertedTab () throws InterruptedException {
         try {
             KeywordUtil.delay(2000);
         KeywordUtil.scrollup(LeadsPage.converted);
@@ -102,7 +102,7 @@ public class Leads {
     executor.executeScript("arguments[0].click();", element);
         }
     }
-    public static void clickOnCovertedStatusButton () throws InterruptedException {
+    public static void clickOnConvertedStatusButton () throws InterruptedException {
         try {
             KeywordUtil.delay(2000);
             KeywordUtil.scrollup(LeadsPage.selectConvertedStatusButton);
@@ -117,7 +117,7 @@ public class Leads {
         executor.executeScript("arguments[0].click();", element);
         }
     }
-    public static void clickOnCovertedButton () throws InterruptedException {
+    public static void clickOnConvertedButton () throws InterruptedException {
 
         try {
             KeywordUtil.delay(2000);
@@ -131,19 +131,7 @@ public class Leads {
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
         }
-     /* String toastMessage=  KeywordUtil.getElementText(LeadsPage.verifyToastMessage);
-       boolean buttonDisplayed= KeywordUtil.isWebElementVisible(LeadsPage.convertButton,"verify Convert Button");
-        if(buttonDisplayed){
-       //   KeywordUtil.click(LeadsPage.convertButton,"Clicked on Convert Button");
-            WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.convertButton);
-            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-            executor.executeScript("arguments[0].click();", element);
-
-        }
-        else{
-            Assert.fail("Verify Account: "+toastMessage);
-        }*/
-        }
+      }
 
     public static void verifyConvertStatusMessage() throws InterruptedException {
         KeywordUtil.delay(1000);

@@ -12,7 +12,6 @@ import utilities.KeywordUtil;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static SalesforceModules.Leads.ClickOnHamburgerMenu;
 
 public class SalesForceLeads {
 
@@ -32,11 +31,11 @@ public class SalesForceLeads {
 
     @When("Click on Hamburger Menu")
     public void click_on_hamburger_menu() throws InterruptedException {
-        ClickOnHamburgerMenu("User Clicked on Hamburger Menu");
+       Leads.clickOnHamburgerMenu("User Clicked on Hamburger Menu");
     }
     @When("click on Search <{string}>")
     public void click_on_search(String string) throws InterruptedException {
-        Leads.EnterText("Leads");
+        Leads.enterText("Leads");
     }
     @Then("verify Leads Page")
     public void verify_leads_page()
@@ -63,15 +62,15 @@ public class SalesForceLeads {
     }
     @When("Click on Converted Tab")
     public void click_on_converted_tab() throws InterruptedException {
-        Leads.clickOnCovertedTab();
+        Leads.clickOnConvertedTab();
     }
     @When("Click on Select Convert Status")
     public void click_on_select_convert_status() throws InterruptedException {
-        Leads.clickOnCovertedStatusButton();
+        Leads.clickOnConvertedStatusButton();
     }
     @When("Click on Convert button")
     public void click_on_convert_button() throws IOException, InterruptedException {
-        Leads.clickOnCovertedButton();
+        Leads.clickOnConvertedButton();
     }
     @Then("verify Your lead has been converted")
     public void verify_your_lead_has_been_converted() throws InterruptedException {
