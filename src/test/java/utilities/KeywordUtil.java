@@ -18,6 +18,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import static utilities.GlobalUtil.getDriver;
+import static utilities.KeywordUtil.delay;
+import static utilities.KeywordUtil.waitForVisible;
+
 /**
  * The type Keyword util.
  *
@@ -28,7 +32,7 @@ public class KeywordUtil extends GlobalUtil {
      * The constant cucumberTagName.
      */
     public static String cucumberTagName;
-    private static final int DEFAULT_WAIT_SECONDS = 30;
+    private static final int DEFAULT_WAIT_SECONDS = 60;
     /**
      * The constant FAIL.
      */
@@ -115,7 +119,7 @@ public class KeywordUtil extends GlobalUtil {
      */
     public static byte[] takeScreenshot(String screenshotFilePath) {
         try {
-            byte[] screenshot = ((TakesScreenshot) GlobalUtil.getDriver()).getScreenshotAs(OutputType.BYTES);
+            byte[] screenshot = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
             FileOutputStream fileOuputStream = new FileOutputStream(screenshotFilePath);
             fileOuputStream.write(screenshot);
             fileOuputStream.close();
@@ -136,8 +140,8 @@ public class KeywordUtil extends GlobalUtil {
      */
     public static boolean scrollingToElementofAPage(By locator, String logStep) throws InterruptedException {
         Thread.sleep(5000);
-        WebElement element = GlobalUtil.getDriver().findElement(locator);
-        ((JavascriptExecutor) GlobalUtil.getDriver()).executeScript("arguments[0].scrollIntoView();", element);
+        WebElement element = getDriver().findElement(locator);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", element);
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
 
         return true;
@@ -461,7 +465,7 @@ public class KeywordUtil extends GlobalUtil {
             return false;
         } else {
 
-            ((JavascriptExecutor) GlobalUtil.getDriver()).executeScript("arguments[0].scrollIntoView();", elm);
+            ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView();", elm);
             elm.click();
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
 
@@ -478,7 +482,7 @@ public class KeywordUtil extends GlobalUtil {
      */
     public static boolean acceptAlert() {
 
-        Alert alert = GlobalUtil.getDriver().switchTo().alert();
+        Alert alert = getDriver().switchTo().alert();
         alert.accept();
         return true;
 
@@ -492,8 +496,8 @@ public class KeywordUtil extends GlobalUtil {
 // ......
     public static boolean switchToWindow() {
 
-        ArrayList<String> tabs2 = new ArrayList<String>(GlobalUtil.getDriver().getWindowHandles());
-        GlobalUtil.getDriver().switchTo().window(tabs2.get(1));
+        ArrayList<String> tabs2 = new ArrayList<String>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs2.get(1));
         return true;
 
     }
@@ -838,7 +842,7 @@ public class KeywordUtil extends GlobalUtil {
 
     public static WebElement excuteJavaScriptExecutorScripts(String script) {
         try {
-            JavascriptExecutor js = (JavascriptExecutor) KeywordUtil.getDriver();
+            JavascriptExecutor js = (JavascriptExecutor) getDriver();
             //code to enter value in the email textbox
             WebElement ele = (WebElement) js.executeScript(script);
 //			LogUtil.infoLog(CommonUtil.class, lastAction);
@@ -1220,8 +1224,14 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     public static void scrollup(By Element) {
-        JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(10,0);", Element);
+    }
+
+    public static void scrolldown(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
+        js.executeScript("window.scrollBy(0,600);", locator);
+
     }
 
     /**
@@ -1349,7 +1359,7 @@ public class KeywordUtil extends GlobalUtil {
 
         try {
 
-            KeywordUtil.getDriver().switchTo().frame(index);
+            getDriver().switchTo().frame(index);
             lastAction = "Switched to " + frameName + " successfully";
             LogUtil.infoLog(KeywordUtil.class, lastAction);
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(lastAction));
@@ -1461,7 +1471,7 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     public static void markTestAsPassedInBrowserStackWeb(String testStatus) {
-        JavascriptExecutor jse = (JavascriptExecutor) GlobalUtil.getDriver();
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript(String.format(
                 "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"%s\", \"reason\": \"<reason>\"}}",
                 testStatus));
@@ -1551,10 +1561,25 @@ class TestStepFailedException extends Exception {
      *
      * @param Element the element
      */
-    public static void scrolldown(WebElement Element) {
+    public static void scrolldown(By Element) {
         JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
 
+    public static boolean hoverOnElement(By by) throws InterruptedException {
+        WebElement element = getDriver().findElement(by);
+        waitForVisible(by);
+
+        Actions act = new Actions(getDriver());
+        try {
+            act.moveToElement(element).pause(2000).click().build().perform();
+        } catch (StaleElementReferenceException e) {
+            delay(2000);
+            act.moveToElement(element).pause(2000).click().build().perform();
+        }
+        delay(3000);
+
+        return true;
+    }
 
 }

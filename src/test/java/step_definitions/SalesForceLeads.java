@@ -78,7 +78,7 @@ public class SalesForceLeads {
         Leads.clickOnCovertedStatusButton();
       }
     @When("Click on Convert button")
-    public void click_on_convert_button() throws IOException {
+    public void click_on_convert_button() throws IOException, InterruptedException {
         Leads.clickOnCovertedButton();
        }
     @Then("verify Your lead has been converted")
@@ -86,4 +86,24 @@ public class SalesForceLeads {
         Leads.verifyConvertStatusMessage();
      }
 
+    @When("Click on Choose Existing Account Search")
+    public void click_on_choose_existing_account_search() {
+        Leads.clickOnExistingAccountRadioBtn();
+    }
+    @When("Click on Choose Existing Contact Search")
+    public void click_on_choose_existing_contact_search() throws InterruptedException {
+        Leads.clickOnExistingContactRadioBtn();
+    }
+    @When("Click on Choose Existing Opportunity Search")
+    public void click_on_choose_existing_opportunity_search() throws InterruptedException {
+        Leads.clickOnExistingOpportunityRadioBtn();
+    }
+    @When("Click on Opportunity Tab in converted popUp")
+    public void click_on_opportunity_tab_in_coverted_popup(){
+        Leads.clickOnOpportunityName();
+    }
+    @Then("verify the Opportunity AccountName")
+    public void verify_the_opportunity_accountName() throws InterruptedException {
+        Leads.verifyOpportunityAccountName();
+    }
 }
