@@ -1,5 +1,6 @@
 package SalesforceModules;
 
+import com.relevantcodes.extentreports.LogStatus;
 import mobileutil.MobileKeywords2;
 import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
@@ -11,8 +12,7 @@ import utilities.*;
 
 import static mobileutil.MobileKeywords2.click;
 import static utilities.GlobalUtil.getDriver;
-import static utilities.KeywordUtil.catchAssertError;
-import static utilities.KeywordUtil.takeScreenshotAndAttachInReport;
+import static utilities.KeywordUtil.*;
 
 
 public class ForecastingModule {
@@ -33,6 +33,9 @@ public class ForecastingModule {
 
     public static void clickAndEnterValue(String logStep, String searchValue) throws InterruptedException {
         try {
+            KeywordUtil.waitForVisible(ForecastingPage.setupSearch);
+            WebElement searchInput = getDriver().findElement(ForecastingPage.setupSearch);
+            searchInput.clear();
             KeywordUtil.inputText(ForecastingPage.setupSearch, searchValue, logStep);
             KeywordUtil.isWebElementVisible(ForecastingPage.searchSetupOption(searchValue), "Searched option is visible");
             takeScreenshotAndAttachInReport();
@@ -137,9 +140,48 @@ public class ForecastingModule {
             }
             KeywordUtil.isWebElementVisible(ForecastingPage.usersPage, "Role Hierarchy page is visible.");
             takeScreenshotAndAttachInReport();
+            GlobalUtil.getDriver().switchTo().defaultContent();
         } catch (Exception e) {
             catchAssertError(e);
         }
     }
 
+    public static void verifyRoleAssignToUSer() throws InterruptedException {
+        try {
+            KeywordUtil.switchToIFrame(0, "Forecasts Hierarchy ~ Salesforce - Developer Edition");
+            KeywordUtil.click(ForecastingPage.expandAllRoles, "Expand aLl Forecasts Hierarchy list.");
+            if (KeywordUtil.isWebElementVisible(ForecastingPage.forecastsRoleUser, "Verify Role is assign to user.")) {
+                KeywordUtil.isWebElementVisible(ForecastingPage.forecastsRoleUser, "Role is visible to user.");
+                takeScreenshotAndAttachInReport();
+                GlobalUtil.getDriver().switchTo().defaultContent();
+                Leads.clickOnHamburgerMenu("User Clicked on Hamburger Menu");
+                takeScreenshotAndAttachInReport();
+                Leads.enterText("Forecasts");
+                KeywordUtil.waitForVisible(ForecastingPage.ownerName);
+                takeScreenshotAndAttachInReport();
+                KeywordUtil.click(ForecastingPage.ownerNameDropdown, "Click on drop down option from forecats CPQ page.");
+                KeywordUtil.inputText(ForecastingPage.searchForOtherUser, "Sukanya", "User Entered Text");
+                Assert.assertEquals(getElementText(ForecastingPage.verifyOtherUser), "Sukanya");
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("User listed in Forecast CPQ"));
+                takeScreenshotAndAttachInReport();
+            } else {
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Role is not visible to the user, so checking if the user is visible on the Forecast CPQ page."));
+                takeScreenshotAndAttachInReport();
+                GlobalUtil.getDriver().switchTo().defaultContent();
+                Leads.clickOnHamburgerMenu("User Clicked on Hamburger Menu");
+                takeScreenshotAndAttachInReport();
+                Leads.enterText("Forecasts");
+                KeywordUtil.waitForVisible(ForecastingPage.ownerName);
+                takeScreenshotAndAttachInReport();
+                KeywordUtil.click(ForecastingPage.ownerNameDropdown, "Click on drop down option from forecats CPQ page.");
+                KeywordUtil.inputText(ForecastingPage.searchForOtherUser, "Sukanya", "User Entered Text");
+                Assert.assertEquals(getElementText(ForecastingPage.verifyOtherUser), "Sukanya");
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("User listed in Forecast CPQ"));
+                takeScreenshotAndAttachInReport();
+            }
+
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
 }

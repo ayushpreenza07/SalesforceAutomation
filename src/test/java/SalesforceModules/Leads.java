@@ -32,7 +32,7 @@ public class Leads {
     public static void enterText(String text) throws InterruptedException {
         KeywordUtil.delay(1000);
         try {
-            KeywordUtil.inputText(LeadsPage.searchText, ConfigReader.getValue("SearchText"), "User Entered Text");
+            KeywordUtil.inputText(LeadsPage.searchText, text, "User Entered Text");
             KeywordUtil.delay(2000);
             KeywordUtil.pressEnter(LeadsPage.searchText);
         }
