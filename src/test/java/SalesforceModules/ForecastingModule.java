@@ -1,5 +1,6 @@
 package SalesforceModules;
 
+import io.cucumber.java.en.Given;
 import mobileutil.MobileKeywords2;
 import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
@@ -9,6 +10,8 @@ import pageobjects.SalesforceObjects.*;
 import step_definitions.RunCukesTest;
 import utilities.*;
 
+import java.util.HashMap;
+
 import static mobileutil.MobileKeywords2.click;
 import static utilities.GlobalUtil.getDriver;
 import static utilities.KeywordUtil.catchAssertError;
@@ -16,6 +19,8 @@ import static utilities.KeywordUtil.takeScreenshotAndAttachInReport;
 
 
 public class ForecastingModule {
+
+
     public static void clickOnSetup(String logStep) throws InterruptedException {
         try {
             if (!KeywordUtil.isWebElementVisible(ForecastingPage.setupTitle, logStep)) {
@@ -141,5 +146,57 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
+    public static void clickUsers(String logstep) throws InterruptedException {
+        try {
+            KeywordUtil.isWebElementVisible(ForecastingPage.userOption, "Users Option is visible");
+            KeywordUtil.click(ForecastingPage.userOption, "Click on user options");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    public static void clickOnNewUser(String logStep)throws InterruptedException {
+        try {
+            KeywordUtil.switchToIFrame(0, "All Users ~ Salesforce - Developer Edition");
+            KeywordUtil.isWebElementVisible(ForecastingPage.NewUser, "New User is visible");
+            KeywordUtil.waitForVisible(ForecastingPage.NewUser);
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.NewUser, "Click on New User.");
+            GlobalUtil.getDriver().switchTo().defaultContent();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+        public static void enterNewUserDetails(HashMap<String, String> dataMap, String logStep) throws InterruptedException {
+            try {
+                KeywordUtil.switchToIFrame(0, "New User ~ Salesforce - Developer Edition");
+                KeywordUtil.isWebElementVisible(ForecastingPage.FirstName, "First Name field is present");
+                KeywordUtil.waitForVisible(ForecastingPage.FirstName);
+                KeywordUtil.inputText(ForecastingPage.FirstName,dataMap.get("FirstName"), "Enter First Name value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.LastName, "Last Name field is present");
+                KeywordUtil.inputText(ForecastingPage.LastName, dataMap.get("LastName"), "Enter Last Name value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.Alias, "Alias field is present");
+                KeywordUtil.inputText(ForecastingPage.Alias, dataMap.get("Alias"), "Enter Alias value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.Email, "Email field is present");
+                KeywordUtil.inputText(ForecastingPage.Email, dataMap.get("Email"), "Enter Email value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.Username, "UserName field is present");
+                KeywordUtil.inputText(ForecastingPage.Username,dataMap.get("n_username"), "Enter Username value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.Nickname, "Nickname field is present");
+                KeywordUtil.inputText(ForecastingPage.Nickname,dataMap.get("Nickname"), "Enter Nickname value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.CompanyName, "Company name field is present");
+                KeywordUtil.inputText(ForecastingPage.CompanyName,dataMap.get("CompanyName"), "Enter Company Name");
+                KeywordUtil.isWebElementPresent(ForecastingPage.Department, "Department field is present");
+                KeywordUtil.inputText(ForecastingPage.Department,dataMap.get("Department"), "Enter Department Name");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Role, 2, "Click and select value from Role dropdown.");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.UserLicense,6,"Click and select value from user license dropdown");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Profile,1,"Click and select value profile dropdown");
+                KeywordUtil.click(ForecastingPage.AllowForecasting,"Click on allow forecasting checkbox.");
+                KeywordUtil.isWebElementVisible(ForecastingPage.SaveButton, "Save button is present");
+                KeywordUtil.click(ForecastingPage.SaveButton,"Click on save button");
 
-}
+            } catch (Exception e) {
+                catchAssertError(e);
+            }
+        }
+
+        }
+
