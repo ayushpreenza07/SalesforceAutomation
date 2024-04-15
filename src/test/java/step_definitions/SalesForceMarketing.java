@@ -104,7 +104,7 @@ public class SalesForceMarketing {
 
     @And("user clicks on the Campaign")
     public void click_Camapign() throws InterruptedException {
-        CampaignUtil.clickCampaign(dataMap.get("CamapaignName"));
+        CampaignUtil.clickCampaign(dataMap.get("CampaignName"));
         KeywordUtil.delay(6000);
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
