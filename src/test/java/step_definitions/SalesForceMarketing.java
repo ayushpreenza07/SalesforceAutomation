@@ -63,7 +63,7 @@ public class SalesForceMarketing {
     @Then("user create new Campaign")
     public void create_New_Compaign() {
         try {
-            CampaignUtil.createCampaign(dataMap.get("CamapaignName"));
+            CampaignUtil.createCampaign(dataMap.get("CampaignName"));
             CampaignUtil.verificationMessage();
             KeywordUtil.takeScreenshotAndAttachInReport();
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class SalesForceMarketing {
 
     @And("user selects the parent Campaign")
     public void Select_Parent_Compaign() throws InterruptedException {
-        CampaignUtil.addParentCampaign(dataMap.get("CamapaignName"), dataMap.get("ParentCampaign"));
+        CampaignUtil.addParentCampaign(dataMap.get("CampaignName"), dataMap.get("ParentCampaign"));
         KeywordUtil.takeScreenshotAndAttachInReport();
         CampaignUtil.verificationMessage();
 
@@ -84,7 +84,7 @@ public class SalesForceMarketing {
 
     @Then("user selects the edit button")
     public void compaign_Edit() throws InterruptedException {
-        CampaignUtil.editCampaignName(dataMap.get("CamapaignName"), dataMap.get("EditCampaignName"));
+        CampaignUtil.editCampaignName(dataMap.get("CampaignName"), dataMap.get("EditCampaignName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
@@ -99,11 +99,11 @@ public class SalesForceMarketing {
     @Then("user selects the parent comapaign")
     public void select_ParentCampaign() throws InterruptedException {
         System.out.println(dataMap.get("ParentCampaign"));
-        CampaignUtil.addParentCampaign(dataMap.get("CamapaignName"), dataMap.get("ParentCampaign"));
+        CampaignUtil.addParentCampaign(dataMap.get("CampaignName"), dataMap.get("ParentCampaign"));
     }
 
     @And("user clicks on the Campaign")
-    public void click_Camapign() throws InterruptedException {
+    public void click_Campaign() throws InterruptedException {
         CampaignUtil.clickCampaign(dataMap.get("CampaignName"));
         KeywordUtil.delay(6000);
         KeywordUtil.takeScreenshotAndAttachInReport();
