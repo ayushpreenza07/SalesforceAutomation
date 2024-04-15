@@ -23,14 +23,22 @@ public class ForecastingPage {
     public static By selectUser = By.xpath("//*[@id=\"duel_select_0\"]");
     public static By addUser = By.xpath("//img[@title=\"Add\"]");
     public static By expandAllRoles = By.xpath("//*[text()=\"Expand All\"]");
+    public static By forecastsRoleUser = By.xpath("//span[@class=\"roleUser\"]");
+    public static By hamburgerMenu=By.xpath("//*[@class=\"slds-icon-waffle\"]");
 
+
+    public static By searchText= By.xpath("//input[@class='slds-input']");
+    public static By ownerNameDropdown= By.xpath("//h1/*[@class=\"slds-icon-utility-down slds-is-absolute downIcon slds-button__icon slds-icon_container forceIcon\"]");
+    public static By ownerName= By.xpath("//h1/*[@class=\"triggerLinkText\"]");
+    public static By searchForOtherUser = By.xpath("//*[@class=\" default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input\"]");
+    public static By verifyOtherUser = By.xpath("//a[@role='option']/mark");
 
 
     public static By searchSetupOption(String searchValue) {
-        return By.xpath("//li[@aria-level=\"2\" and @aria-label='" + searchValue + "']");
+        return By.xpath("//li[@aria-level=\"2\" and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
     }
     public static By userOption(String searchValue) {
-        return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark");
+        return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
     }
     public static By assignOption(String roleValue, String actionValue) {
         return By.xpath("//span//a[text()='" + roleValue + "']/parent::span/following-sibling::span//a[text()='" + actionValue + "']");

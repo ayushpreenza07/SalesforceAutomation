@@ -26,8 +26,18 @@ public class SalesForceForecasting {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Roles");
             ForecastingModule.selectValueFromSampleRoleHierarchies();
-            ForecastingModule.selectRolesFromHierarchy("COO","Assign");
+            ForecastingModule.selectRolesFromHierarchy("CEO","Assign");
             ForecastingModule.assignRolesToUser();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    @And("Check users shown in the Forecasts Hierarchy")
+    public void checkUsersShownInTheForecastsHierarchy() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Hierarchy");
+            ForecastingModule.verifyRoleAssignToUSer();
         } catch (Exception e) {
             catchAssertError(e);
         }
