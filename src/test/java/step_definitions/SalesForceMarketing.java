@@ -128,11 +128,7 @@ public class SalesForceMarketing {
 
     }
 
-    @Then("user edit the contact")
-    public void edit_Contact() throws InterruptedException {
-        CampaignUtil.editContact();
-    }
-
+    
 
 
 
