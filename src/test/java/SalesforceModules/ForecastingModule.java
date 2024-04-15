@@ -95,7 +95,7 @@ public class ForecastingModule {
         }
     }
 
-    public static void selectValueFromDropDown() throws InterruptedException {
+    public static void selectValueFromSampleRoleHierarchies() throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "Understanding Roles ~ Salesforce - Developer Edition");
             KeywordUtil.waitForVisible(ForecastingPage.sampleRoleHierarchy);

@@ -19,6 +19,8 @@ public class QuoteObject {
 
     //Change Owner
     public static By primaryCheckbox = By.xpath("//input[@name='SBQQ__Primary__c']");
+
+    public static By orderedCheckbox = By.xpath("(//input[@name='SBQQ__Ordered__c'])[2]");
     public static By editLines =By.xpath("//button[@class='slds-button slds-button_neutral' and text()='Edit Lines']");
 
     public static By joinedOpportunity = By.xpath("(//a[@class='flex-wrap-ie11'])[14]");
@@ -34,5 +36,13 @@ public class QuoteObject {
     public static By quoteConnected = By.xpath("(//a[@class='flex-wrap-ie11 slds-truncate'])[3]");
 
     public static By statusButton = By.xpath("//button[@class='slds-combobox__input slds-input_faux fix-slds-input_faux slds-combobox__input-value' and span[text()='Draft']]");
+
+    public static By orders = By.xpath("//span[@lwc-oj46kgc6r3=''][contains(text(),'Orders')]");
+
+    public static By openOrder = By.xpath("(//a[@class='flex-wrap-ie11 slds-truncate'])[5]");
+
+    public static By activatedTab = By.xpath("//span[@class='title slds-path__title'][contains(text(),'Activated')]");
+
+    public static By markCurrentStatus = By.xpath("//span[@class='uiOutputText'][contains(text(),'Mark as Current Status')]");
 
 }

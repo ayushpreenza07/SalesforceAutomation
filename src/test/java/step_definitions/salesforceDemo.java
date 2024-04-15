@@ -2,9 +2,11 @@ package step_definitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
@@ -50,16 +52,16 @@ public class salesforceDemo {
     @When("^navigate to salesforce$")
     public void navigate_to_the_url() throws Exception {
 
-//        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
-        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        KeywordUtil.navigateToUrl(dataMap.get("URL"));
+        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
+//        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+//        KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
 
     @When("^login to salesforce$")
     public void login_Salesforce() throws Exception{
-        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
-//        LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
+//        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+//        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
+        LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
 
     }
 
@@ -77,7 +79,7 @@ public class salesforceDemo {
 
     @When("^create opportunity and change its status$")
     public void create_opportunity() throws Exception{
-        OppurtunitiesUtil.createOppurtunity(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.createOpportunity(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
 
     }
 
@@ -123,5 +125,17 @@ public class salesforceDemo {
         } catch (Exception e) {
             KeywordUtil.catchAssertError(e);
         }
+    }
+
+    @Then("Change Opportunity Status to Close Won after Quote Approve")
+    public void changeOpportunityStatusToCloseWonAfterQuoteApprove() throws InterruptedException {
+        ContractUtil.navigateToOpportunity(dataMap.get("OpportunityName"), "Clicked on opportunity after creating contract");
+        OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
+    }
+
+    @And("create an order and activate")
+    public void createAnOrderAndActivate() throws InterruptedException {
+        QuoteUtil.goToQuoteAndCreateOrder("Order generated and activated");
+        QuoteUtil.activateOrder();
     }
 }
