@@ -18,6 +18,11 @@ import static utilities.KeywordUtil.*;
 
 
 public class ForecastingModule {
+
+    /**
+     * Click on setup menu
+     * @throws InterruptedException
+     */
     public static void clickOnSetup(String logStep) throws InterruptedException {
         try {
             if (!KeywordUtil.isWebElementVisible(ForecastingPage.setupTitle, logStep)) {
@@ -33,6 +38,10 @@ public class ForecastingModule {
 
     }
 
+    /**
+     * Click and insert value in text field
+     * @throws InterruptedException
+     */
     public static void clickAndEnterValue(String logStep, String searchValue) throws InterruptedException {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.setupSearch);
@@ -48,6 +57,11 @@ public class ForecastingModule {
         }
     }
 
+    /**
+     * switch to iframe
+     * click on logged in user option
+     * @throws InterruptedException
+     */
     public static void clickOnEditOption() throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "All Users ~ Salesforce - Developer Edition");
@@ -60,6 +74,12 @@ public class ForecastingModule {
         }
     }
 
+    /**
+     * switch to iframe
+     * scroll to element
+     * checked allow forecast
+     * @throws InterruptedException
+     */
     public static void scrollToAllowForecast() throws InterruptedException {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.userGeneralInfo);
@@ -82,6 +102,11 @@ public class ForecastingModule {
         }
     }
 
+    /**
+     * close The User General Info Page
+     *
+     * @throws InterruptedException
+     */
     public static void closeTheUserGeneralInfoPage() throws InterruptedException {
         try {
             KeywordUtil.scrollingToElementofAPage(ForecastingPage.closeButton, "Scroll to close option.");
@@ -95,6 +120,11 @@ public class ForecastingModule {
         }
     }
 
+    /**
+     * select Value From Sample Role Hierarchies
+     * click on set up role button
+     * @throws InterruptedException
+     */
     public static void selectValueFromSampleRoleHierarchies() throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "Understanding Roles ~ Salesforce - Developer Edition");
@@ -111,6 +141,11 @@ public class ForecastingModule {
         }
     }
 
+    /**
+     * select Roles From Hierarchy
+     *
+     * @throws InterruptedException
+     */
     public static void selectRolesFromHierarchy(String roleValue, String actionValue) throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "Creating the Role Hierarchy ~ Salesforce - Developer Edition");
@@ -125,6 +160,11 @@ public class ForecastingModule {
         }
     }
 
+    /**
+     * assign Roles To User from roles page
+     * check if user is added in list to assign or not.
+     * @throws InterruptedException
+     */
     public static void assignRolesToUser() throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "Roles: COO ~ Salesforce - Developer Edition");
@@ -148,6 +188,12 @@ public class ForecastingModule {
         }
     }
 
+    /**
+     * verify Role Assign To USer
+     * check if assigned role is to user
+     * and check same user in forecasts page from menu
+     * @throws InterruptedException
+     */
     public static void verifyRoleAssignToUSer() throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "Forecasts Hierarchy ~ Salesforce - Developer Edition");
@@ -237,4 +283,58 @@ public class ForecastingModule {
                 catchAssertError(e);
             }
         }
+
+    /**
+     * Creating a Forecast Type with opportunity and amount
+     *
+     * @throws InterruptedException
+     */
+    public static void createForecastTypeWithOpportunities() throws InterruptedException {
+        try {
+            KeywordUtil.scrollDown();
+            KeywordUtil.waitForVisible(ForecastingPage.createForcastTypeButton);
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.createForcastTypeButton,"Click on create a Forcast Type button");
+            KeywordUtil.waitForVisible(ForecastingPage.startButton);
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.startButton,"Click on start button on Create a Forecast Type form");
+            KeywordUtil.waitForVisible(ForecastingPage.pickAnObjectHeader);
+            KeywordUtil.selectOptionNameFromDropdown("Select an object... - Current Selection: Select an object...","Opportunity", "Click and select forecast type.");
+            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.waitForVisible(ForecastingPage.measurePage);
+            KeywordUtil.selectOptionNameFromDropdown("Select a measure... - Current Selection: Select a measure...", "Amount", "Click and select measure amount.");
+            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.waitForVisible(ForecastingPage.datetypePage);
+            KeywordUtil.selectOptionNameFromDropdown("Select a date type... - Current Selection: Select a date type...", "Close Date (Opportunity)", "Click and select date type option.");
+            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.waitForVisible(ForecastingPage.hierarchyPage);
+            KeywordUtil.selectOptionNameFromDropdown("Select a hierarchy... - Current Selection: Select a hierarchy...", "User role", "Click and select hierarchy option.");
+            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.waitForVisible(ForecastingPage.optionalFilterPage);
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on optional Filter Page");
+            KeywordUtil.waitForVisible(ForecastingPage.forecastTypeName);
+            String randomName = KeywordUtil.generateRandomName();
+            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, randomName, "");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on forecast Type Name Page.");
+            KeywordUtil.waitForVisible(ForecastingPage.forecastTypeSet);
+            KeywordUtil.isWebElementVisible(ForecastingPage.forecastTypeSet, "Verify you've set up your forecast type.");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.saveButton, "Click on save option.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.opportunityList, "Verify customize the opportunity list page is opened.");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on opportunity list page.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.forecastTypeCompletion, "Verify forecasts type with opportunity is created.");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.doneButton,"Click on done button.");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(randomName), "Verify created new forecast opportunity is visible in forecasts list.");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+
+
     }

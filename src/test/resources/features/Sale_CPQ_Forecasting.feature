@@ -1,8 +1,7 @@
-
 Feature: SalesForce_Forecasting
 
   @Web @salesforce @Forecast
-  Scenario: 2: Sale-CPQ-Forecasting
+  Scenario Outline: 2: Sale-CPQ-Forecasting
     Given navigate to salesforce
     And login to salesforce
     And navigate to setup screen
@@ -12,8 +11,9 @@ Feature: SalesForce_Forecasting
     And Check users shown in the Forecasts Hierarchy
     Then Check users shown in the Forecasts Hierarchy
     And Enable Forecast Settings for first-time user logging
+    And Create  Forecast Type with Opportunities
 
     Examples:
-      | TestData |
+      | TestData  |
       | TestData1 |
 
