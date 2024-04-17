@@ -1,9 +1,6 @@
 package step_definitions;
 
-import SalesforceModules.AccountUtil;
-import SalesforceModules.EditandDeleteUtil;
-import SalesforceModules.LoginSalesforceUtil;
-import SalesforceModules.ServiceSupportUtil;
+import SalesforceModules.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
@@ -37,4 +34,33 @@ public class SalesForceServiceSupportDemo {
         EditandDeleteUtil.deleteAccount("deleted the account");
     }
 
+    @When("^create contact for service support$")
+    public void create_contact() throws Exception{
+        ContactUtil.createContactforServiceSupport(dataMap.get("Salutation"), dataMap.get("ContactLastName"),dataMap.get("ContactEmail"),dataMap.get("Phone"));
+      //  ContactUtil.backToAccount("Navigated back to account");
+    }
+
+    @When("^Edit Contact Details for service support")
+    public void edit_contact_details() throws Exception{
+        dataMap= salesforceDemo.dataMap;
+        EditandDeleteUtil.editContactDetails("Anjali");
+    }
+
+    @When("^Filter Contact Details for service support")
+    public void filter_contact_details() throws Exception{
+        EditandDeleteUtil.clickContactTab_cnt();
+        EditandDeleteUtil.selectFilterInContacts_cnt("Name","Rahul");
+
+    }
+
+    @When("^Remove All Filters Contact Details for service support")
+    public void RemoveAll_filter_contact_details() throws Exception{
+        EditandDeleteUtil.removeFilter_cnt();
+
+    }
+
+    @When("^Delete Contact Details for service support")
+    public void Delete_contact_details() throws Exception {
+        EditandDeleteUtil.deleteContact("Deleted the contact");
+    }
 }
