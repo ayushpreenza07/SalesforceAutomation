@@ -2,6 +2,7 @@ package step_definitions;
 
 import SalesforceModules.ForecastingModule;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 import pageobjects.SalesforceObjects.LeadsPage;
@@ -54,7 +55,7 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
-    @And("Activate Forecast")
+    @Then("Activate Forecast")
     public void activateForecast() {
         try{
             ForecastingModule.clickOnShowActionsOfForecast("testAuto");
@@ -84,6 +85,25 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
-
+    @Then("Deactivate Forecast")
+    public void deactivateForecast() {
+        try{
+            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
+            ForecastingModule.selectDeactivateFromActions();
+        }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+    @And("Navigate to forecast settings page In New Window")
+    public void navigateToForecastSettingsPageInNewWindow() {
+        try {
+            KeywordUtil.switchToWindow();
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
 
 }

@@ -16,6 +16,9 @@ Feature: SalesForce_Forecasting
     And login to salesforce
     And navigate to setup screen
     And Navigate to forecast settings page
-    And Activate Forecast
+    Then Activate Forecast
     And Search For Forecasts application and Navigate To Forecasts page
     And Validate Activated Forecast Is Visible
+    And navigate to setup screen
+    And Navigate to forecast settings page In New Window
+    Then Deactivate Forecast

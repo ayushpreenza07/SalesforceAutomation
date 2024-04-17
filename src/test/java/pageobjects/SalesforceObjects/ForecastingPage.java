@@ -36,6 +36,10 @@ public class ForecastingPage {
     public static By appLauncherIcon = By.xpath("//div[@class='appLauncher slds-context-bar__icon-action']//button");
     public static By searchAppInput = By.xpath("//input[@class='slds-input']");
     public static By forecastAppOption = By.xpath("//a[.//b[text()='Forecasts']]");
+    public static By deactivateOption = By.xpath("//a[./span[text()='Deactivate']]");
+    public static By deactivateButton = By.xpath(("//button[text()='Deactivate']"));
+
+
 
     public static By searchSetupOption(String searchValue) {
         return By.xpath("//li[@role='treeitem' and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");

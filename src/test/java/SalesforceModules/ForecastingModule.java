@@ -197,7 +197,6 @@ public class ForecastingModule {
     {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.showActionsButton(forecastName), "Forecasts is available");
-            //KeywordUtil.scrollingToElementofAPage(ForecastingPage.showActionsButton(forecastName),"test");
             KeywordUtil.scrollElementIntoViewUsingActions(ForecastingPage.showActionsButton(forecastName));
             KeywordUtil.click(ForecastingPage.showActionsButton(forecastName), "Click on Show Actions button.");
 
@@ -243,6 +242,20 @@ public class ForecastingModule {
     public static void validateActivatedForecastIsAvailable(String forecastName) throws InterruptedException {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.forecastTitle(forecastName));
+        }
+        catch (Exception e){
+            catchAssertError(e);
+        }
+    }
+    public static void selectDeactivateFromActions(){
+        try {
+            KeywordUtil.isWebElementVisible(ForecastingPage.deactivateOption, "Deactivation option is available");
+            KeywordUtil.click(ForecastingPage.deactivateOption, "Click on Deactivate option.");
+            KeywordUtil.delay(2000);
+            KeywordUtil.waitForVisible(ForecastingPage.deactivateButton);
+            KeywordUtil.click(ForecastingPage.deactivateButton, "Click on Deactivate button.");
+            takeScreenshotAndAttachInReport();
+            CampaignUtil.verificationMessage();
         }
         catch (Exception e){
             catchAssertError(e);
