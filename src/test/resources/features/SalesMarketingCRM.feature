@@ -20,14 +20,16 @@ Feature: Salesforce Marketing CRM
 #    And user clicks on the Campaign
 #    Then user create contact in Campaign
 #    Then user Add the leads in campaign
-    Then user clicks on the Contact tab
-#    Then user selects the filter
+     Then user clicks on the Contact tab
+#   Then user selects the filter
 #    Then user edit the contact
 #    Then user Delete the contact
 #    Then user remove the filter
     Then user create new contact in Contact
-    Then user create new opportunity in Contact
-    Then user is able to see the opportunity
+#    Then user create new opportunity in Contact
+#    Then user is able to see the opportunity
+    Then user added Contact to campaign
+
 
 
 

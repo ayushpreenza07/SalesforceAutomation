@@ -105,7 +105,7 @@ public class SalesForceMarketing {
 
     @And("user clicks on the Campaign")
     public void click_Campaign() throws InterruptedException {
-        CampaignUtil.clickCampaign(dataMap.get("CampaignName"));
+        CampaignUtil.clickCampaignName(dataMap.get("CampaignName"));
         KeywordUtil.delay(6000);
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
@@ -132,21 +132,25 @@ public class SalesForceMarketing {
     @Then("user selects the filter")
     public void selectFilter() throws InterruptedException {
         CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"),dataMap.get("ContactLastName"));
+        KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user edit the contact")
     public void edit_Contact() throws InterruptedException {
         CampaignUtil.editContact(KeywordUtil.generateRandomString(4) + "@gmail.com",dataMap.get("ContactLastName"));
+        CampaignUtil.verificationMessage();
+        KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user Delete the contact")
     public void deleteContact() throws InterruptedException {
-CampaignUtil.deletecontact(dataMap.get("ContactLastName"));
+       CampaignUtil.deleteContact(dataMap.get("ContactLastName"));
+       KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user remove the filter")
     public void removeFilter() throws InterruptedException {
-   CampaignUtil.removeFilter();
+         CampaignUtil.removeFilter();
     }
 
     @Then("user create new contact in Contact")
@@ -165,10 +169,20 @@ CampaignUtil.deletecontact(dataMap.get("ContactLastName"));
     }
 
     @Then("user is able to see the opportunity")
-    public void seeOpportunity() throws InterruptedException {
+    public void seeOpportunityInContact() throws InterruptedException {
         CampaignUtil.seeOpportunityInContact();
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        GlobalUtil.getDriver().navigate().back();
 
     }
+
+    @Then("user added Contact to campaign")
+    public static void addContactToCampaign(){
+        CampaignUtil.addContactToCampaign(dataMap.get("ParentCampaign"));
+        KeywordUtil.takeScreenshotAndAttachInReport();
+    }
+
+
 
 
 
