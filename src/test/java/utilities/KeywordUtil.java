@@ -1540,6 +1540,33 @@ public class KeywordUtil extends GlobalUtil {
             e.printStackTrace();
         }
     }
+    /**
+     * Validate Page should be loaded with title
+     */
+    public static void validatePageShouldBeLoaded(String title) {
+        try{
+            String Pagetitle = getDriver().getTitle();
+            LogUtil.infoLog(KeywordUtil.class, Pagetitle);
+            Assert.assertEquals(Pagetitle.contains(title),true, title.concat(" page is not loaded"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    /**
+     * Scroll Element into view using Actions
+     */
+    public static void scrollElementIntoViewUsingActions(By element){
+        try {
+            // Actions class with moveToElement()
+            Actions a = new Actions(getDriver());
+            a.moveToElement(getDriver().findElement(element)).perform();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }// End class
 

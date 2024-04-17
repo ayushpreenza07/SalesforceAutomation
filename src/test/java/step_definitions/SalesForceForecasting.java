@@ -3,6 +3,9 @@ package step_definitions;
 import SalesforceModules.ForecastingModule;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
+import pageobjects.SalesforceObjects.LeadsPage;
+import utilities.KeywordUtil;
 
 import static utilities.KeywordUtil.catchAssertError;
 
@@ -42,4 +45,45 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
+    @And("Navigate to forecast settings page")
+    public void navigateToForecastSettingsPage() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @And("Activate Forecast")
+    public void activateForecast() {
+        try{
+            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
+            ForecastingModule.selectActivateFromActions();
+        }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+    @And("Search For Forecasts application and Navigate To Forecasts page")
+    public void searchForForForecastsApplicationAndNavigateToForecastsPage() {
+        try {
+            ForecastingModule.clickOnAppLauncherIconAndSerachForForecast();
+            ForecastingModule.validateForecastingPageIsLoaded();
+        }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+
+    @And("Validate Activated Forecast Is Visible")
+    public static void validateActivatedForecastIsVisible() {
+        try{
+        ForecastingModule.validateActivatedForecastIsAvailable("testAuto");
+    }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+
+
 }

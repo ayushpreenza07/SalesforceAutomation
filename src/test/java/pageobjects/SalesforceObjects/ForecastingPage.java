@@ -32,16 +32,26 @@ public class ForecastingPage {
     public static By ownerName= By.xpath("//h1/*[@class=\"triggerLinkText\"]");
     public static By searchForOtherUser = By.xpath("//*[@class=\" default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input\"]");
     public static By verifyOtherUser = By.xpath("//a[@role='option']/mark");
-
+    public static By activateOption = By.xpath("//a[./span[text()='Activate']]");
+    public static By appLauncherIcon = By.xpath("//div[@class='appLauncher slds-context-bar__icon-action']//button");
+    public static By searchAppInput = By.xpath("//input[@class='slds-input']");
+    public static By forecastAppOption = By.xpath("//a[.//b[text()='Forecasts']]");
 
     public static By searchSetupOption(String searchValue) {
-        return By.xpath("//li[@aria-level=\"2\" and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
+        return By.xpath("//li[@role='treeitem' and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
     }
     public static By userOption(String searchValue) {
-        return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
+        return By.xpath("//li[@role='treeitem']/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
     }
     public static By assignOption(String roleValue, String actionValue) {
         return By.xpath("//span//a[text()='" + roleValue + "']/parent::span/following-sibling::span//a[text()='" + actionValue + "']");
+    }
+    public static By showActionsButton(String forecastName){
+        return By.xpath("//tr[.//div[normalize-space()='"+ forecastName +"']]//button[./*[text()='Show actions']]");
+    }
+
+    public static By forecastTitle(String forecastName){
+        return By.xpath("//li[@title='"+ forecastName +"']");
     }
 
 }
