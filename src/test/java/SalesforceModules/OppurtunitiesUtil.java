@@ -10,6 +10,7 @@ import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 
+import java.security.Key;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -190,7 +191,8 @@ public class OppurtunitiesUtil extends GlobalUtil {
      *
      * @param logStep the log
      */
-    public static void openOpportunity(String logStep){
+    public static void openOpportunity(String logStep) throws InterruptedException {
+        KeywordUtil.delay(2000);
         KeywordUtil.waitForVisible(OppurtunitiesObject.selectOpportunity);
         KeywordUtil.click(OppurtunitiesObject.selectOpportunity,logStep);
     }
@@ -275,7 +277,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      *
      */
 
-    public static void markStage(){
+    public static void markStage() throws InterruptedException {
         openOpportunity("Created opportunity opened");
         selectStageProposalQuote("proposal stage selected");
         setMarkAsStage("stage marked");
@@ -305,8 +307,14 @@ public class OppurtunitiesUtil extends GlobalUtil {
         KeywordUtil.selectByValue(OppurtunitiesObject.selectClosedStageDropdown, "Closed Won", "Closed won selected from dropdown");
 
         //save option
-        KeywordUtil.waitForVisible(OppurtunitiesObject.saveClosedWon);
-        KeywordUtil.click(OppurtunitiesObject.saveClosedWon,logStep);
+        try {
+            KeywordUtil.waitForVisible(OppurtunitiesObject.saveClosedWon);
+            KeywordUtil.click(OppurtunitiesObject.saveClosedWon, logStep);
+        }catch(Exception e){
+            KeywordUtil.getDriver().navigate().refresh();
+            KeywordUtil.waitForVisible(OppurtunitiesObject.saveClosedWon);
+            KeywordUtil.click(OppurtunitiesObject.saveClosedWon, logStep);
+        }
     }
 
     /**
