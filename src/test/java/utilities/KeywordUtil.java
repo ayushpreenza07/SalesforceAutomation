@@ -1496,6 +1496,10 @@ public class KeywordUtil extends GlobalUtil {
         Assert.fail(e.getMessage());
     }
 
+    public static void BrowserRefresh(){
+        GlobalUtil.getDriver().navigate().refresh();
+    }
+
     /**
      * Take a Screenshot and attach in report.
      *
@@ -1576,5 +1580,7 @@ class TestStepFailedException extends Exception {
         WebElement elm = KeywordUtil.waitForVisible(locator);
         return elm.getText().trim();
     }
+
+
 
 }

@@ -3,6 +3,7 @@ package step_definitions;
 import SalesforceModules.AccountUtil;
 import SalesforceModules.CampaignUtil;
 import SalesforceModules.LoginSalesforceUtil;
+import SalesforceModules.OppurtunitiesUtil;
 import com.relevantcodes.extentreports.LogStatus;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -125,6 +126,47 @@ public class SalesForceMarketing {
     @Then("user clicks on the Contact tab")
     public void click_contactTab() throws InterruptedException {
         CampaignUtil.clickContactTab();
+
+    }
+
+    @Then("user selects the filter")
+    public void selectFilter() throws InterruptedException {
+        CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"),dataMap.get("ContactLastName"));
+    }
+
+    @Then("user edit the contact")
+    public void edit_Contact() throws InterruptedException {
+        CampaignUtil.editContact(KeywordUtil.generateRandomString(4) + "@gmail.com",dataMap.get("ContactLastName"));
+    }
+
+    @Then("user Delete the contact")
+    public void deleteContact() throws InterruptedException {
+CampaignUtil.deletecontact(dataMap.get("ContactLastName"));
+    }
+
+    @Then("user remove the filter")
+    public void removeFilter() throws InterruptedException {
+   CampaignUtil.removeFilter();
+    }
+
+    @Then("user create new contact in Contact")
+    public void createNewContact() throws InterruptedException {
+        CampaignUtil.createConatctInConatctTab( dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com");
+        CampaignUtil.verificationMessage();
+        KeywordUtil.takeScreenshotAndAttachInReport();
+    }
+
+    @Then("user create new opportunity in Contact")
+    public void createOpportunityInConatct() throws InterruptedException {
+         CampaignUtil.createOpportunityInConatct(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        CampaignUtil.verificationMessage();
+        KeywordUtil.takeScreenshotAndAttachInReport();
+
+    }
+
+    @Then("user is able to see the opportunity")
+    public void seeOpportunity() throws InterruptedException {
+        CampaignUtil.seeOpportunityInContact();
 
     }
 

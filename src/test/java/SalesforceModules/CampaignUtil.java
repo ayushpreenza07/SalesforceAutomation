@@ -1,13 +1,17 @@
 package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
+import org.apache.xmlbeans.impl.xb.xsdschema.All;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.SourceType;
 import org.testng.Assert;
 import pageobjects.SalesforceObjects.CampaignObject;
+import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import step_definitions.RunCukesTest;
+import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
@@ -48,9 +52,7 @@ public class CampaignUtil {
 
         List<WebElement> campaignNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the parent Campaigns list");
         for (WebElement campaign : campaignNames) {
-            System.out.println(campaign.getText());
-            System.out.println(campaign.getSize());
-            if (campaign.getText().equals(campaignName)) {
+            if (campaign.getText().equalsIgnoreCase(campaignName)) {
                 KeywordUtil.delay(9000);
                 campaign.click();
                 break;
@@ -95,6 +97,14 @@ public class CampaignUtil {
         selectParentCampaign(parentCompaign);
         parentClickSaveButton();
 
+    }
+
+    public static void clickEditContactSaveButton() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.saveEditContactButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.saveEditContactButton);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
     }
 
     public static void setSalutation(String salutation, String logStep) throws InterruptedException {
@@ -144,9 +154,20 @@ public class CampaignUtil {
         executor.executeScript("arguments[0].click();", element);
     }
 
-    public static void clickOnShowActionsEditButton(){
+    public static void clickOnShowActionsEditButton() throws InterruptedException {
+        KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(CampaignObject.ShowActionsEditButton);
-       KeywordUtil.click(CampaignObject.ShowActionsEditButton,"click on the edit button");
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.ShowActionsEditButton);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public static void clickOnContactShowActionsEditButton() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.EditContactsShowActions);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.EditContactsShowActions);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
     }
 
     public static void clickOnShowActionsDeleteButton() throws InterruptedException {
@@ -154,6 +175,12 @@ public class CampaignUtil {
         KeywordUtil.click(CampaignObject.ShowActionsDeletebutton,"click on the Delete button");
 
     }
+    public static void clickOnContactShowActionsDeleteButton() throws InterruptedException {
+        KeywordUtil.waitForVisible(CampaignObject.deleteContactsShowActions);
+        KeywordUtil.click(CampaignObject.deleteContactsShowActions,"click on the Delete button");
+
+    }
+
 
     public static void clickOnCampaignDelete(){
         KeywordUtil.waitForVisible(CampaignObject.campaignDeletebutton);
@@ -268,8 +295,185 @@ public class CampaignUtil {
         KeywordUtil.click(CampaignObject.clickFieldFilter,"click on Field filters dropdown");
     }
 
+    public static void enterValue(String matchingValue){
+        KeywordUtil.inputText(CampaignObject.enter_value,matchingValue,"enter the value in filed");
+
+    }
+
+    public static void clickDoneButton(){
+        KeywordUtil.waitForClickable(CampaignObject.doneButton);
+        KeywordUtil.click(CampaignObject.doneButton,"click on done button");
+    }
+
+    public static void saveFilter() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.saveFilterButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.saveFilterButton);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public static void selectNameFilter(String filedName) throws InterruptedException {
+
+        List<WebElement> getAllelements=KeywordUtil.getListElements(CampaignObject.allDropdownElements,"");
+        for(WebElement element:getAllelements){
+            if(element.getText().equalsIgnoreCase(filedName)){
+                KeywordUtil.delay(6000);
+                JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+                executor.executeScript("arguments[0].scrollIntoView(true);", element);
+                KeywordUtil.delay(6000);
+                element.click();
+            }
+        }
 
 
+    }
+
+    public static void clickCloseFilter() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.closeFilterButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.closeFilterButton);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public static void clickShowActiosnInContacs(String contactName) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.clickShowActionsInContacts(contactName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.clickShowActionsInContacts(contactName));
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public static void clickDeleteShowActiosnInContacs(String contactName) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.DeleteShowActionInContacts(contactName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.DeleteShowActionInContacts(contactName));
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+  public static void clickRemoveAllButton() throws InterruptedException {
+      KeywordUtil.delay(3000);
+      KeywordUtil.waitForVisible(CampaignObject.removeFiltersInContacts);
+      WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.removeFiltersInContacts);
+      JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+      executor.executeScript("arguments[0].click();", element);
+  }
+
+
+  public static void clickNewButtonInContactTab() throws InterruptedException {
+      KeywordUtil.delay(3000);
+      KeywordUtil.waitForVisible(CampaignObject.newButtonInContactTab);
+      WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.newButtonInContactTab);
+      JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+      executor.executeScript("arguments[0].click();", element);
+  }
+
+
+  public static void selectFilterInContacts(String fieldname,String matchingValue) throws InterruptedException {
+        clickShowFilter();
+        clickAddFilter();
+        clickFieldFilter();
+        selectNameFilter(fieldname);
+        enterValue(matchingValue);
+        clickDoneButton();
+        saveFilter();
+        clickCloseFilter();
+  }
+
+    public static void editContact(String email,String contact) throws InterruptedException {
+        clickShowActiosnInContacs(contact);
+        clickOnContactShowActionsEditButton();
+        enterEmail(email, " email entered");
+        KeywordUtil.delay(8000);
+        clickEditContactSaveButton();
+    }
+
+    public static void deletecontact(String contact) throws InterruptedException {
+      clickDeleteShowActiosnInContacs(contact);
+      clickOnShowActionsDeleteButton();
+        clickOnCampaignDelete();
+
+    }
+
+    public static void removeFilter() throws InterruptedException {
+        clickShowFilter();
+        clickRemoveAllButton();
+        saveFilter();
+       clickCloseFilter();
+
+    }
+
+    public static void createConatctInConatctTab( String lastname, String email ) throws InterruptedException {
+        clickNewButtonInContactTab();
+        enterLastContactName(lastname, lastname + " lastname set");
+        enterEmail(email, email + " email entered");
+        clickEditContactSaveButton();
+    }
+
+    public static void createOpportunityInConatct(String name, String amount, String stage) throws InterruptedException {
+        OppurtunitiesUtil.NewButtonOppurtunity("clicked new button for Opportunity");
+        OppurtunitiesUtil.enterOppurtunityName(name, name+" entered in Opportunity");
+        OppurtunitiesUtil.enterCloseDate(2024,1,2,"Close date entered");
+        OppurtunitiesUtil.enterAmount(amount, "Amount entered "+amount);
+        OppurtunitiesUtil.setStage(stage, "Stage selected - "+stage);
+        OppurtunitiesUtil.clickSaveButton("saved");
+
+    }
+
+
+    public static void clickViewAllButton() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.viewAll);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.viewAll);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    public static void getAllOpportunitiesName(){
+        List<WebElement> AllOpportunities=KeywordUtil.getListElements(CampaignObject.getOpportunitiesName,"getting all opportunities name");
+        for(WebElement opportunity: AllOpportunities){
+            String input = opportunity.getText();
+            String[] parts = input.split(" ");
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the opportunities is : " +parts[1]));
+
+        }
+
+
+
+
+
+    }
+
+    public static void getAllStages(){
+        List<WebElement> allStages=KeywordUtil.getListElements(CampaignObject.getAllStages,"getting all Stages  name");
+        for(WebElement stage: allStages){
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the stage is : " +stage.getText()));
+        }
+    }
+
+    public static void getAllmount(){
+        List<WebElement> allAmount=KeywordUtil.getListElements(CampaignObject.getAllAmount,"getting all Amount name");
+        for(WebElement Amount:allAmount){
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the Amount is : " +Amount.getText()));
+        }
+    }
+
+    public static void getClosedDate(){
+        List<WebElement> ClosedDate=KeywordUtil.getListElements(CampaignObject.getCloseDate,"getting the closed date");
+        for(WebElement Date:ClosedDate){
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the Closed date  is : " +Date.getText()));
+        }
+    }
+
+    public static void seeOpportunityInContact() throws InterruptedException {
+        clickViewAllButton();
+        getAllOpportunitiesName();
+        getAllStages();
+        getAllmount();
+        getClosedDate();
+    }
 
 }
 
