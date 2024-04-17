@@ -75,6 +75,7 @@ public class salesforceDemo {
     @When("^create contact$")
     public void create_contact() throws Exception{
         ContactUtil.createContact(dataMap.get("Salutation"), dataMap.get("ContactLastName"),dataMap.get("ContactEmail"),dataMap.get("Phone"));
+        ContactUtil.backToAccount("Navigated back to account");
     }
 
     @When("^create opportunity and change its status$")
