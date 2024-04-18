@@ -186,7 +186,10 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
-        public static void clickUsers(String logstep) throws InterruptedException {
+
+    /* Click on Users Options... */
+
+    public static void clickUsers(String logStep) throws InterruptedException {
             try {
                 KeywordUtil.isWebElementVisible(ForecastingPage.userOption, "Users Option is visible");
                 KeywordUtil.click(ForecastingPage.userOption, "Click on user options");
@@ -194,6 +197,8 @@ public class ForecastingModule {
                 catchAssertError(e);
             }
         }
+
+        /* Click on New users button...*/
         public static void clickOnNewUser(String logStep)throws InterruptedException {
             try {
                 KeywordUtil.switchToIFrame(0, "All Users ~ Salesforce - Developer Edition");
@@ -206,12 +211,14 @@ public class ForecastingModule {
                 catchAssertError(e);
             }
         }
+
+        /* Enter all New User details.....*/
         public static void enterNewUserDetails(HashMap<String, String> dataMap, String logStep) throws InterruptedException {
             try {
                 KeywordUtil.switchToIFrame(0, "New User ~ Salesforce - Developer Edition");
                 KeywordUtil.isWebElementVisible(ForecastingPage.FirstName, "First Name field is present");
                 KeywordUtil.waitForVisible(ForecastingPage.FirstName);
-                KeywordUtil.inputText(ForecastingPage.FirstName,dataMap.get("FirstName"), "Enter First Name value");
+                KeywordUtil.inputText(ForecastingPage.FirstName, dataMap.get("FirstName"), "Enter First Name value");
                 KeywordUtil.isWebElementPresent(ForecastingPage.LastName, "Last Name field is present");
                 KeywordUtil.inputText(ForecastingPage.LastName, dataMap.get("LastName"), "Enter Last Name value");
                 KeywordUtil.isWebElementPresent(ForecastingPage.Alias, "Alias field is present");
@@ -219,22 +226,49 @@ public class ForecastingModule {
                 KeywordUtil.isWebElementPresent(ForecastingPage.Email, "Email field is present");
                 KeywordUtil.inputText(ForecastingPage.Email, dataMap.get("Email"), "Enter Email value");
                 KeywordUtil.isWebElementPresent(ForecastingPage.Username, "UserName field is present");
-                KeywordUtil.inputText(ForecastingPage.Username,dataMap.get("n_username"), "Enter Username value");
+                KeywordUtil.inputText(ForecastingPage.Username, dataMap.get("n_username"), "Enter Username value");
                 KeywordUtil.isWebElementPresent(ForecastingPage.Nickname, "Nickname field is present");
-                KeywordUtil.inputText(ForecastingPage.Nickname,dataMap.get("Nickname"), "Enter Nickname value");
+                KeywordUtil.inputText(ForecastingPage.Nickname, dataMap.get("Nickname"), "Enter Nickname value");
                 KeywordUtil.isWebElementPresent(ForecastingPage.CompanyName, "Company name field is present");
-                KeywordUtil.inputText(ForecastingPage.CompanyName,dataMap.get("CompanyName"), "Enter Company Name");
+                KeywordUtil.inputText(ForecastingPage.CompanyName, dataMap.get("CompanyName"), "Enter Company Name");
                 KeywordUtil.isWebElementPresent(ForecastingPage.Department, "Department field is present");
-                KeywordUtil.inputText(ForecastingPage.Department,dataMap.get("Department"), "Enter Department Name");
+                KeywordUtil.inputText(ForecastingPage.Department, dataMap.get("Department"), "Enter Department Name");
                 KeywordUtil.selectOptionFromDropdown(ForecastingPage.Role, 2, "Click and select value from Role dropdown.");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.UserLicense,6,"Click and select value from user license dropdown");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Profile,1,"Click and select value profile dropdown");
-                KeywordUtil.click(ForecastingPage.AllowForecasting,"Click on allow forecasting checkbox.");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.UserLicense, 6, "Click and select value from user license dropdown");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Profile, 1, "Click and select value profile dropdown");
+                KeywordUtil.click(ForecastingPage.AllowForecasting, "Click on allow forecasting checkbox.");
                 KeywordUtil.isWebElementVisible(ForecastingPage.SaveButton, "Save button is present");
-                KeywordUtil.click(ForecastingPage.SaveButton,"Click on save button");
+                KeywordUtil.click(ForecastingPage.SaveButton, "Click on save button");
 
             } catch (Exception e) {
                 catchAssertError(e);
             }
         }
+
+        /* Click on Forecasts Settings option.... */
+    public static void forecastSettingsOption(String logstep) throws InterruptedException {
+        try {
+            KeywordUtil.isWebElementVisible(ForecastingPage.forecastsSettingsOption, "Forecasts settings Option is visible");
+            KeywordUtil.click(ForecastingPage.forecastsSettingsOption, "Click on Forecasts Settings options");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /* Click on Enable Forecasts Toggle button.... */
+            public static void enableForecasts(String logStep) throws InterruptedException
+            {
+                try{
+                    KeywordUtil.isWebElementVisible(ForecastingPage.enableForecastsToggleButton, "Forecasts toggle button is visible");
+
+                    KeywordUtil.click(ForecastingPage.enableForecastsToggleButton, "Click on forecasts toggle button");
+
+                }
+                catch (Exception e) {
+                    catchAssertError(e);
+                }
+
+        }
+
+
     }

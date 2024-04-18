@@ -2,7 +2,7 @@
 Feature: SalesForce_Forecasting
 
   @Web @salesforce @Forecast
-  Scenario: 2: Sale-CPQ-Forecasting
+  Scenario Outline: 2: Sale-CPQ-Forecasting
     Given navigate to salesforce
     And login to salesforce
     And navigate to setup screen

@@ -64,6 +64,10 @@ public class ForecastingPage {
     public static By AllowForecasting= By.id("forecast_enabled");
 
     public static By SaveButton= By.xpath("//input[@value=' Save ']");
+    public static By forecastsSettingsOption= By.xpath("//li[@aria-level=\"4\"]/child::div[@title=\"Forecasts Settings\"]//a");
+    public static By enableForecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//span[@part='indicator']");
+
+
 
 
 
