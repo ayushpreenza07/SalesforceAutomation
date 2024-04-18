@@ -11,7 +11,7 @@ Feature: SalesForce_Forecasting
     And Check users shown in the Forecasts Hierarchy
 
   @Web @salesforce @ForecastActivation
-  Scenario: Create ForecastOppurtunities
+  Scenario: Activate Created Forecast
     Given navigate to salesforce
     And login to salesforce
     And navigate to setup screen

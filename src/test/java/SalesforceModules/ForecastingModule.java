@@ -1,8 +1,6 @@
 package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
-import mobileutil.MobileKeywords2;
-import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -184,6 +182,9 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
+    /*
+    Validating 'Forecast Settings' page should be loaded
+     */
     public static void validateForecastSettingsPageShouldBeLoaded() throws InterruptedException {
         try {
             Thread.sleep(2000);
@@ -192,6 +193,9 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
+    /*
+    Clicking on 'Show Actions' Of specific Forecast, We need to pass the Forecast name
+     */
 
     public static void clickOnShowActionsOfForecast(String forecastName) throws InterruptedException
     {
@@ -204,6 +208,9 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
+    /*
+    Select 'Activate' From Actions of Forecast
+     */
     public static void selectActivateFromActions(){
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.activateOption, "Actuvation option is available");
@@ -215,7 +222,7 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
-    public static void clickOnAppLauncherIconAndSerachForForecast() throws InterruptedException {
+    public static void clickOnAppLauncherIconAndSearchForForecast() throws InterruptedException {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.appLauncherIcon);
             KeywordUtil.click(ForecastingPage.appLauncherIcon, "Click on App Launcher Icon.");
@@ -229,7 +236,9 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
-
+    /*
+    Validate Forecasting Page is loaded
+     */
     public static void validateForecastingPageIsLoaded() throws InterruptedException {
         try{
             Thread.sleep(6000);
@@ -238,7 +247,9 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
-
+    /*
+    Validate Activated Forecast is available in Forecast page
+     */
     public static void validateActivatedForecastIsAvailable(String forecastName) throws InterruptedException {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.forecastTitle(forecastName));
@@ -247,6 +258,9 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
+    /*
+    Select 'Deactivate' From Actions of Forecast
+     */
     public static void selectDeactivateFromActions(){
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.deactivateOption, "Deactivation option is available");

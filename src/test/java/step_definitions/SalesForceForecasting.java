@@ -4,8 +4,6 @@ import SalesforceModules.ForecastingModule;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
-import pageobjects.SalesforceObjects.LeadsPage;
 import utilities.KeywordUtil;
 
 import static utilities.KeywordUtil.catchAssertError;
@@ -68,7 +66,7 @@ public class SalesForceForecasting {
     @And("Search For Forecasts application and Navigate To Forecasts page")
     public void searchForForForecastsApplicationAndNavigateToForecastsPage() {
         try {
-            ForecastingModule.clickOnAppLauncherIconAndSerachForForecast();
+            ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
             ForecastingModule.validateForecastingPageIsLoaded();
         }
         catch(Exception e){
