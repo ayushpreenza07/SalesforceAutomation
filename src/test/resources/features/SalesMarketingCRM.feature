@@ -17,6 +17,23 @@ Feature: Salesforce Marketing CRM
     Then user create new Campaign
     Then user clicks on Campaigns Tab
     Then user selects the parent Campaign
+    And user clicks on the Campaign
+    Then user create contact in Campaign
+    Then user Add the leads in campaign
+    Then user clicks on the Contact tab
+    Then user selects the filter
+    Then user edit the contact
+    Then user Delete the contact
+    Then user remove the filter
+    Then user create new contact in Contact
+    Then user create new opportunity in Contact
+    Then user is able to see the opportunity
+    Then user added Contact to campaign
+
+
+
+
+
     Examples:
       | TestData  | SheetName  |
       | TestData1 | Salesforce |

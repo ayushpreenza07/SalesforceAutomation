@@ -23,10 +23,17 @@ public class ContractUtil {
      * @param logStep the log
      */
     public static void ButtonContract(String logStep) throws InterruptedException {
-        KeywordUtil.delay(5000);
-        ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
-        KeywordUtil.waitForVisible(ContractObject.contractBtn);
-        KeywordUtil.click(ContractObject.contractBtn,logStep);
+        try {
+            KeywordUtil.delay(5000);
+            ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
+            KeywordUtil.waitForVisible(ContractObject.contractBtn);
+            KeywordUtil.click(ContractObject.contractBtn, logStep);
+        }catch(Exception e){
+            KeywordUtil.getDriver().navigate().refresh();
+            ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
+            KeywordUtil.waitForVisible(ContractObject.contractBtn);
+            KeywordUtil.click(ContractObject.contractBtn, logStep);
+        }
     }
 
     /**
