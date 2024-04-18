@@ -6,6 +6,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.KeywordUtil;
 
@@ -321,8 +322,14 @@ public class QuoteUtil {
      */
     public static void changeStatus(String type, String logStep){
         boolean flag = false;
-        KeywordUtil.waitForVisible(QuoteObject.statusButton);
-        KeywordUtil.click(QuoteObject.statusButton,logStep);
+        try {
+            KeywordUtil.waitForVisible(QuoteObject.statusButton);
+            KeywordUtil.click(QuoteObject.statusButton, logStep);
+        }catch (Exception e){
+            WebElement element1 = KeywordUtil.getDriver().findElement(QuoteObject.statusButton);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element1);
+        }
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+type+"')]";
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();

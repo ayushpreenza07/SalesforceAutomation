@@ -280,6 +280,9 @@ public class KeywordUtil extends GlobalUtil {
         }
     }
 
+
+
+
     /**
      * Wait for in visibile boolean.
      *
@@ -1494,6 +1497,13 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     /**
+     * Refersh the Browser
+     */
+    public static void BrowserRefresh(){
+        GlobalUtil.getDriver().navigate().refresh();
+    }
+
+    /**
      * Take a Screenshot and attach in report.
      *
      * @param
@@ -1600,5 +1610,7 @@ class TestStepFailedException extends Exception {
         WebElement elm = KeywordUtil.waitForVisible(locator);
         return elm.getText().trim();
     }
+
+
 
 }
