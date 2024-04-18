@@ -202,10 +202,10 @@ public class ForecastingModule {
         public static void clickOnNewUser(String logStep)throws InterruptedException {
             try {
                 KeywordUtil.switchToIFrame(0, "All Users ~ Salesforce - Developer Edition");
-                KeywordUtil.isWebElementVisible(ForecastingPage.NewUser, "New User is visible");
-                KeywordUtil.waitForVisible(ForecastingPage.NewUser);
+                KeywordUtil.isWebElementVisible(ForecastingPage.newUser, "New User is visible");
+                KeywordUtil.waitForVisible(ForecastingPage.newUser);
                 takeScreenshotAndAttachInReport();
-                KeywordUtil.click(ForecastingPage.NewUser, "Click on New User.");
+                KeywordUtil.click(ForecastingPage.newUser, "Click on New User.");
                 GlobalUtil.getDriver().switchTo().defaultContent();
             } catch (Exception e) {
                 catchAssertError(e);
@@ -216,29 +216,30 @@ public class ForecastingModule {
         public static void enterNewUserDetails(HashMap<String, String> dataMap, String logStep) throws InterruptedException {
             try {
                 KeywordUtil.switchToIFrame(0, "New User ~ Salesforce - Developer Edition");
-                KeywordUtil.isWebElementVisible(ForecastingPage.FirstName, "First Name field is present");
-                KeywordUtil.waitForVisible(ForecastingPage.FirstName);
-                KeywordUtil.inputText(ForecastingPage.FirstName, dataMap.get("FirstName"), "Enter First Name value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.LastName, "Last Name field is present");
-                KeywordUtil.inputText(ForecastingPage.LastName, dataMap.get("LastName"), "Enter Last Name value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Alias, "Alias field is present");
-                KeywordUtil.inputText(ForecastingPage.Alias, dataMap.get("Alias"), "Enter Alias value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Email, "Email field is present");
-                KeywordUtil.inputText(ForecastingPage.Email, dataMap.get("Email"), "Enter Email value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Username, "UserName field is present");
-                KeywordUtil.inputText(ForecastingPage.Username, dataMap.get("n_username"), "Enter Username value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Nickname, "Nickname field is present");
-                KeywordUtil.inputText(ForecastingPage.Nickname, dataMap.get("Nickname"), "Enter Nickname value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.CompanyName, "Company name field is present");
-                KeywordUtil.inputText(ForecastingPage.CompanyName, dataMap.get("CompanyName"), "Enter Company Name");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Department, "Department field is present");
-                KeywordUtil.inputText(ForecastingPage.Department, dataMap.get("Department"), "Enter Department Name");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Role, 2, "Click and select value from Role dropdown.");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.UserLicense, 6, "Click and select value from user license dropdown");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Profile, 1, "Click and select value profile dropdown");
-                KeywordUtil.click(ForecastingPage.AllowForecasting, "Click on allow forecasting checkbox.");
-                KeywordUtil.isWebElementVisible(ForecastingPage.SaveButton, "Save button is present");
-                KeywordUtil.click(ForecastingPage.SaveButton, "Click on save button");
+                KeywordUtil.isWebElementVisible(ForecastingPage.firstName, "First Name field is present");
+                KeywordUtil.waitForVisible(ForecastingPage.firstName);
+                KeywordUtil.inputText(ForecastingPage.firstName, dataMap.get("FirstName"), "Enter First Name value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.lastName, "Last Name field is present");
+                KeywordUtil.inputText(ForecastingPage.lastName, dataMap.get("LastName"), "Enter Last Name value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.alias, "Alias field is present");
+                KeywordUtil.inputText(ForecastingPage.alias, dataMap.get("Alias"), "Enter Alias value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.email, "Email field is present");
+                KeywordUtil.inputText(ForecastingPage.email, dataMap.get("Email"), "Enter Email value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.userName, "UserName field is present");
+                KeywordUtil.inputText(ForecastingPage.userName, dataMap.get("n_username"), "Enter Username value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.nickName, "Nickname field is present");
+                KeywordUtil.inputText(ForecastingPage.nickName, dataMap.get("Nickname"), "Enter Nickname value");
+                KeywordUtil.isWebElementPresent(ForecastingPage.companyName, "Company name field is present");
+                KeywordUtil.inputText(ForecastingPage.companyName, dataMap.get("CompanyName"), "Enter Company Name");
+                KeywordUtil.isWebElementPresent(ForecastingPage.department, "Department field is present");
+                KeywordUtil.inputText(ForecastingPage.department, dataMap.get("Department"), "Enter Department Name");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.role, 2, "Click and select value from Role dropdown.");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.userLicense, 6, "Click and select value from user license dropdown");
+                KeywordUtil.selectOptionFromDropdown(ForecastingPage.profile, 1, "Click and select value profile dropdown");
+                KeywordUtil.click(ForecastingPage.allowForecast, "Click on allow forecasting checkbox.");
+                KeywordUtil.isWebElementVisible(ForecastingPage.saveButton, "Save button is present");
+                KeywordUtil.click(ForecastingPage.saveBtn, "Click on save button");
+                GlobalUtil.getDriver().switchTo().defaultContent();
 
             } catch (Exception e) {
                 catchAssertError(e);

@@ -10,7 +10,6 @@ Feature: SalesForce_Forecasting
     Then Create Users Hierarchy for Forecast
     And Assign a Role to the Forecast User
     And Check users shown in the Forecasts Hierarchy
-    Then Check users shown in the Forecasts Hierarchy
     And Enable Forecast Settings for first-time user logging
 
     Examples:
