@@ -44,4 +44,32 @@ public class ForecastingPage {
         return By.xpath("//span//a[text()='" + roleValue + "']/parent::span/following-sibling::span//a[text()='" + actionValue + "']");
     }
 
+    public static By quickFind= By.xpath("//input[@placeholder='Quick Find']");
+
+    public static By users= By.xpath("//li[@aria-level=\"2\"]/child::div[@title=\"Users\"]//a");
+    public static By newUser= By.xpath("//input[@value='New User']");
+    public static By firstName= By.xpath("//input[@id='name_firstName']");
+    public static By lastName= By.xpath("//input[@id='name_lastName']");
+    public static By alias= By.xpath("//input[@id='Alias']");
+    public static By email= By.xpath("//input[@id='Email']");
+    public static By userName= By.xpath("//input[@id='Username']");
+    public static By nickName= By.xpath("//input[@id='CommunityNickname']");
+    public static By companyName= By.xpath("//input[@id='CompanyName']");
+    public static By department= By.xpath("//input[@id='Department']");
+
+    public static By role= By.id("role");
+    public static By userLicense= By.id("user_license_id");
+    public static By profile= By.id("Profile");
+
+    public static By allowForecast= By.id("forecast_enabled");
+
+    public static By saveBtn= By.xpath("//input[@value='Save']");
+    public static By forecastsSettingsOption= By.xpath("//li[@aria-level=\"4\"]/child::div[@title=\"Forecasts Settings\"]//a");
+    public static By enableForecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//span[@part='indicator']");
+
+
+
+
+
+
 }
