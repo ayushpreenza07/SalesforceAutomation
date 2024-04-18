@@ -26,7 +26,7 @@ public class OppurtunitiesObject {
 
     public static By proposalStage = By.xpath("//SPAN[@class='title slds-path__title'][text()='Proposal/Price Quote']");
 
-    public static By markStage = By.xpath("//span[@class='uiOutputText' and text()='Mark as Current Stage']");
+    public static By markStage = By.xpath("(//span[@class='uiOutputText'])[2]");
     public static By amountField = By.xpath("//input[@name='Amount']");
 
     public static By verifyProduct = By.xpath("(//SPAN[@title='(1)'][text()='(1)'])[2]");
@@ -40,4 +40,6 @@ public class OppurtunitiesObject {
     public static By selectClosedStageDropdown = By.xpath("//select[@class='stepAction required-field select']");
 
     public static By saveClosedWon = By.xpath("//button[@title='Save']");
+
+    public static By quoteCard=By.xpath("//div[@class='slds-media__body slds-align-middle']//h2/a/span[@title='Quotes']");
 }

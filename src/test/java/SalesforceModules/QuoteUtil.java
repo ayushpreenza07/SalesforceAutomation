@@ -1,13 +1,15 @@
 package SalesforceModules;
 
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import pageobjects.SalesforceObjects.OppurtunitiesObject;
+
 import pageobjects.SalesforceObjects.QuoteObject;
+import step_definitions.RunCukesTest;
+import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
 import java.util.HashMap;
@@ -21,8 +23,7 @@ public class QuoteUtil {
      *
      * @param logStep the log
      */
-    public static void NewButtonQuote(String logStep) throws InterruptedException {
-        Thread.sleep(5000);
+    public static void NewButtonQuote(String logStep){
         KeywordUtil.waitForVisible(QuoteObject.newQuoteButton);
         KeywordUtil.click(QuoteObject.newQuoteButton,logStep);
     }
@@ -47,6 +48,7 @@ public class QuoteUtil {
      */
     public static void enterOpportunityName(String opportunityname, String logStep){
         KeywordUtil.waitForVisible(QuoteObject.searchOpportunities);
+        KeywordUtil.clickJS(QuoteObject.searchOpportunities);
         KeywordUtil.inputText(QuoteObject.searchOpportunities, opportunityname,logStep);
     }
 
@@ -60,6 +62,8 @@ public class QuoteUtil {
     public static void selectOpportunity(String oppurt, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.searchOpportunities);
+        KeywordUtil.clickJS(QuoteObject.searchOpportunities);
+
         KeywordUtil.inputText(QuoteObject.searchOpportunities,oppurt,logStep);
         KeywordUtil.delay(3000);
         String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+oppurt+"')]";
@@ -74,7 +78,25 @@ public class QuoteUtil {
             KeywordUtil.click(By.xpath(xpath), "opportunity selected");
         }
     }
+    public static void selectOpportunityForLeads(String oppurt, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(QuoteObject.searchOpportunities);
+        KeywordUtil.clickJS(QuoteObject.searchOpportunities);
+            KeywordUtil.click(QuoteObject.selectOppurtunityLeads,"Clicked on First option");
+        KeywordUtil.inputText(QuoteObject.searchOpportunities,oppurt,logStep);
+        KeywordUtil.delay(3000);
+        String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+oppurt+"')]";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
 
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such opportunity present");
+        }else {
+            KeywordUtil.click(By.xpath(xpath), "opportunity selected");
+        }
+    }
     /**
      * Enter account name field for new quote.
      *
@@ -95,6 +117,25 @@ public class QuoteUtil {
     public static void selectAccount(String account, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.searchAccounts);
+        KeywordUtil.clickJS(QuoteObject.searchAccounts);
+        KeywordUtil.inputText(QuoteObject.searchAccounts,account,logStep);
+        KeywordUtil.delay(3000);
+        String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+account+"')]";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
+
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such account present");
+        }else {
+            KeywordUtil.click(By.xpath(xpath), "account selected");
+        }
+    }
+    public static void selectAccountForLeads(String account, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(QuoteObject.searchAccounts);
+        KeywordUtil.clickJS(QuoteObject.searchAccounts);
         KeywordUtil.inputText(QuoteObject.searchAccounts,account,logStep);
         KeywordUtil.delay(3000);
         String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+account+"')]";
@@ -164,6 +205,11 @@ public class QuoteUtil {
         KeywordUtil.click(QuoteObject.quoteBtn,logStep);
     }
 
+    public static void clickQuoteCard(String logStep) {
+        KeywordUtil.waitForVisible(QuoteObject.quoteCardBtn);
+        KeywordUtil.click(QuoteObject.quoteCardBtn,logStep);
+    }
+
 
     /**
      * Tick the primary checkbox.
@@ -198,6 +244,11 @@ public class QuoteUtil {
         KeywordUtil.delay(10000);
         KeywordUtil.waitForClickable(QuoteObject.editLines);
         KeywordUtil.click(QuoteObject.editLines,logStep);
+    }
+
+    public static void clickEditLinesForLeads(String logStep) throws InterruptedException {
+        KeywordUtil.delay(10000);
+        addDiscountProductForLeads();
     }
 
     /**
@@ -246,22 +297,29 @@ public class QuoteUtil {
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", saveOnEditLines);
         KeywordUtil.delay(2000);
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>Clicked on Edit Line Save Button</font> page"));
 
         //add discount using JS path
         WebElement addDiscount = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#quoteInformation > div > sb-field-set-table').shadowRoot.querySelector('#firstColumn').shadowRoot.querySelector('#g > div > sb-field-set-table-item:nth-child(2)').shadowRoot.querySelector('#field').shadowRoot.querySelector('#f > sb-input').shadowRoot.querySelector('#myinput')");
         JavascriptExecutor js = (JavascriptExecutor)KeywordUtil.getDriver();
         js.executeScript("arguments[0].value='"+discount+"';", addDiscount);
         KeywordUtil.delay(2000);
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>Adding Discount</font>"));
 
         //click on quick save button using JS path
         WebElement quickSave = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(9)').shadowRoot.querySelector('#mainButton');");
         executor.executeScript("arguments[0].click();", quickSave);
         KeywordUtil.delay(2000);
-
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>Clicked on QuickSave Button</font> page"));
         //click on add product button using JS path
         WebElement addProducts = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(1)').shadowRoot.querySelector('#mainButton')");
         executor.executeScript("arguments[0].click();", addProducts);
         KeywordUtil.delay(2000);
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>Adding product</font>"));
 
         //click on search and enter your product using JS path
         WebElement searchProduct = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#headersearch').shadowRoot.querySelector('#typeahead').shadowRoot.querySelector('#itemLabel')");
@@ -271,25 +329,34 @@ public class QuoteUtil {
         Actions action = new Actions(KeywordUtil.getDriver());
         action.sendKeys(Keys.ENTER).build().perform();
         KeywordUtil.delay(5000);
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>click on search and enter your product</font> "));
 
         //click on search icon button using JS path
         WebElement searchIcon = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").shadowRoot.querySelector(\"#content > sb-product-lookup\").shadowRoot.querySelector(\"#headersearch\").shadowRoot.querySelector(\"#search\")");
         executor.executeScript("arguments[0].click();", searchIcon);
         KeywordUtil.delay(5000);
-
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>click on search icon button</font> page"));
         //check first checkbox after searching using JS path
         WebElement checkBox = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#lookupLayout').shadowRoot.querySelector('#tableRow').shadowRoot.querySelector('#selection').shadowRoot.querySelector('#g > div > sb-table-cell-select').shadowRoot.querySelector('#checkbox').shadowRoot.querySelector('#checkboxContainer')");
         executor.executeScript("arguments[0].click();", checkBox);
         KeywordUtil.delay(5000);
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>check first checkbox after searching</font> page"));
 
         //select product using JS path
         WebElement select = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#plSelect')");
         executor.executeScript("arguments[0].click();",select);
         KeywordUtil.delay(8000);
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>select product</font> page"));
 
         //clicking save button using JS path
         WebElement save = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(13)').shadowRoot.querySelector('#mainButton')");
         executor.executeScript("arguments[0].click();",save);
+        RunCukesTest.logger.log(LogStatus.PASS,
+                HTMLReportUtil.passStringGreenColor(" <font color='green'>clicked save button</font> page"));
 
         //switching back to parent frame
         KeywordUtil.getDriver().switchTo().parentFrame();
@@ -420,6 +487,10 @@ public class QuoteUtil {
         clickEditLines("Edit Lines clicked");
         enterDiscount("5","2FAUSBKEY","Entered discount");
     }
+    public static void addDiscountProductForLeads() throws InterruptedException {
+        clickEditLines("Edit Lines clicked");
+        enterDiscount("5","2FAUSBKEY","Entered discount");
+    }
 
     /**
      * Create new quote combining all methods
@@ -437,4 +508,23 @@ public class QuoteUtil {
         clickSaveButton("clicked save button");
         addDiscountProduct();
     }
+    public static void createNewQuotes(String opportunityName, String type) throws Exception {
+        selectOpportunityForLeads(opportunityName,opportunityName+" entered opportunities name");
+        selectType(type,"selected type");
+        clickSaveButton("clicked save button");
+    }
+
+
+    public static void verifyProductTitle(){
+       String  productTitle=KeywordUtil.getElementText(QuoteObject.quoteTitle);
+       boolean productTit=KeywordUtil.isWebElementVisible(QuoteObject.quoteTitle,"");
+       if (productTit){
+         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("verify Product Title"+productTitle));
+          }
+       else {
+           RunCukesTest.logger.log(LogStatus.FAIL, HTMLReportUtil.failStringRedColor("Title not displayed"+productTitle));
+
+       }
+    }
+
 }

@@ -29,5 +29,5 @@ public class LeadsPage {
     public static By opportunityAccountName=By.xpath("(//div[contains(@class,'slds-form-element__control')])[3]");
 
     public static By opportunityExistingRadioButton=By.xpath("(//div[@class='topSection']//span[@class='slds-radio'])[1]");
-    public static By verifyToastMessage=By.xpath("//div[@class='errorToast custom-inline_icon_text slds-grid slds-m-bottom--large custom-inline_icon_text--error']//div[@role='alert']");
+
 }

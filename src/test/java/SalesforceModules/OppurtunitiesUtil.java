@@ -209,9 +209,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
             KeywordUtil.click(OppurtunitiesObject.proposalStage, logStep);
         }catch (Exception e) {
             KeywordUtil.waitForVisible(OppurtunitiesObject.proposalStage);
-            WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.proposalStage);
-            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-            executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.clickJS(OppurtunitiesObject.proposalStage);
         }
     }
 
@@ -283,7 +281,11 @@ public class OppurtunitiesUtil extends GlobalUtil {
         setMarkAsStage("stage marked");
         goToAccount("Navigated back to account");
     }
-
+    // Leads Mark As Stage
+    public static void markAsStage() throws InterruptedException {
+        selectStageProposalQuote("proposal stage selected");
+        setMarkAsStage("stage marked");
+    }
     /**
      * selecting closed won after marking opportunity as proposal
      *

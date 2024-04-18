@@ -3,6 +3,7 @@ package utilities;
 import com.google.common.base.Function;
 import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.MobileBy;
+import org.apache.commons.compress.utils.IOUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
@@ -26,6 +27,7 @@ import static utilities.GlobalUtil.getDriver;
  * @author TX
  */
 public class KeywordUtil extends GlobalUtil {
+    private static final long DEFAULT_WAIT_MORE_SECONDS =10 ;
     /**
      * The constant cucumberTagName.
      */
@@ -1004,7 +1006,11 @@ public class KeywordUtil extends GlobalUtil {
 
         return obj == null;
     }
-
+    public static boolean clickJS(By locator) {
+        WebElement element = KeywordUtil.getDriver().findElement(locator);
+        Object obj = ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", element);
+        return obj == null;
+    }
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     /*
@@ -1519,7 +1525,7 @@ public class KeywordUtil extends GlobalUtil {
                 imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
 
                 InputStream is = new FileInputStream(imagePath);
-                byte[] imageBytes = org.apache.commons.compress.utils.IOUtils.toByteArray(is);
+                byte[] imageBytes = IOUtils.toByteArray(is);
                 Thread.sleep(2000);
                 String base64 = Base64.getEncoder().encodeToString(imageBytes);
                 pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64," + base64);
@@ -1573,7 +1579,7 @@ class TestStepFailedException extends Exception {
      * @param Element the element
      */
     public static void scrolldown(WebElement Element) {
-        JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
 
