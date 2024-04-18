@@ -246,7 +246,7 @@ public class ForecastingModule {
         }
 
         /* Click on Forecasts Settings option.... */
-    public static void forecastSettingsOption(String logstep) throws InterruptedException {
+    public static void forecastSettingsOption(String logStep) throws InterruptedException {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastsSettingsOption, "Forecasts settings Option is visible");
             KeywordUtil.click(ForecastingPage.forecastsSettingsOption, "Click on Forecasts Settings options");
