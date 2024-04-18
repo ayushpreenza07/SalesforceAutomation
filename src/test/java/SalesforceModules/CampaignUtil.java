@@ -1,6 +1,7 @@
 package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
+import org.apache.commons.exec.ExecuteException;
 import org.apache.xmlbeans.impl.xb.xsdschema.All;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
@@ -530,7 +531,7 @@ public class CampaignUtil {
      * @param  contactName  for passign the contact name
      * @throws InterruptedException
      */
-    public static void clickShowActiosnInContacs(String contactName) throws InterruptedException {
+    public static void clickShowActionsInContacs(String contactName) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(CampaignObject.clickShowActionsInContacts(contactName));
         WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.clickShowActionsInContacts(contactName));
@@ -543,7 +544,7 @@ public class CampaignUtil {
      * @param contactName for passing the contactname
      * @throws InterruptedException
      */
-    public static void clickDeleteShowActiosnInContacs(String contactName) throws InterruptedException {
+    public static void clickDeleteShowActionsInContacts(String contactName) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(CampaignObject.DeleteShowActionInContacts(contactName));
         WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.DeleteShowActionInContacts(contactName));
@@ -600,7 +601,7 @@ public class CampaignUtil {
      * @throws InterruptedException
      */
     public static void editContact(String email,String contact) throws InterruptedException {
-        clickShowActiosnInContacs(contact);
+        clickShowActionsInContacs(contact);
         clickOnContactShowActionsEditButton();
         enterEmail(email, " email entered");
         KeywordUtil.delay(8000);
@@ -613,7 +614,7 @@ public class CampaignUtil {
      * @throws InterruptedException
      */
     public static void deleteContact(String contact) throws InterruptedException {
-      clickDeleteShowActiosnInContacs(contact);
+      clickDeleteShowActionsInContacts(contact);
       clickOnShowActionsDeleteButton();
         clickOnCampaignDelete();
 
@@ -637,7 +638,7 @@ public class CampaignUtil {
      * @param email psssing the email
      * @throws InterruptedException
      */
-    public static void createConatctInConatctTab( String lastname, String email ) throws InterruptedException {
+    public static void createContactInContactTab( String lastname, String email ) throws InterruptedException {
         clickNewButtonInContactTab();
         enterLastContactName(lastname, lastname + " lastname set");
         enterEmail(email, email + " email entered");
@@ -651,7 +652,7 @@ public class CampaignUtil {
      * @param stage passing the stage
      * @throws InterruptedException
      */
-    public static void createOpportunityInConatct(String name, String amount, String stage) throws InterruptedException {
+    public static void createOpportunityInContact(String name, String amount, String stage) throws InterruptedException {
         OppurtunitiesUtil.NewButtonOppurtunity("clicked new button for Opportunity");
         OppurtunitiesUtil.enterOppurtunityName(name, name+" entered in Opportunity");
         OppurtunitiesUtil.enterCloseDate(2024,1,2,"Close date entered");
@@ -757,9 +758,8 @@ public class CampaignUtil {
 
         List<WebElement> camapignName=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Campaign list");
         for (WebElement campaign : camapignName) {
-            System.out.println(campaign.getText());
             if (campaign.getText().equals(campaignName)) {
-                Thread.sleep(8000);
+                KeywordUtil.delay(10000);
                 campaign.click();
                 break;
             }
@@ -801,7 +801,6 @@ public class CampaignUtil {
             clickNextButton();
             selectStatus();
             clickSaveButtonForContactToCampaign();
-
             verificationMessage();
         }
         catch (Exception e){

@@ -1496,6 +1496,9 @@ public class KeywordUtil extends GlobalUtil {
         Assert.fail(e.getMessage());
     }
 
+    /**
+     * Refersh the Browser
+     */
     public static void BrowserRefresh(){
         GlobalUtil.getDriver().navigate().refresh();
     }

@@ -155,14 +155,14 @@ public class SalesForceMarketing {
 
     @Then("user create new contact in Contact")
     public void createNewContact() throws InterruptedException {
-        CampaignUtil.createConatctInConatctTab( dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com");
+        CampaignUtil.createContactInContactTab( dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com");
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user create new opportunity in Contact")
     public void createOpportunityInConatct() throws InterruptedException {
-         CampaignUtil.createOpportunityInConatct(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+         CampaignUtil.createOpportunityInContact(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
 
@@ -181,6 +181,10 @@ public class SalesForceMarketing {
         CampaignUtil.addContactToCampaign(dataMap.get("ParentCampaign"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
+
+
+
+
 
 
 

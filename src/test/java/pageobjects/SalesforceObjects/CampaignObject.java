@@ -58,6 +58,7 @@ public class CampaignObject {
 
     public static By doneButton=By.xpath("//span[text()=\"Done\"]");
 
+
     public static By saveFilterButton=By.xpath("//button[text()='Save']");
     public static By closeFilterButton=By.xpath("//span[text()='Close Filters']");
 
@@ -88,10 +89,6 @@ public class CampaignObject {
     public static By statusPopUp=By.xpath("//div[@class=\"uiPopupTrigger\"]");
 
     public static By respondedStatus=By.xpath("//a[@title=\"Responded\"]");
-
-
-
-
 
 
     public static By clickCampaign(String campaignName){

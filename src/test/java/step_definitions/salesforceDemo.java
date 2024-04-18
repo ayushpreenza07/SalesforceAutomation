@@ -80,7 +80,7 @@ public class salesforceDemo {
 
     @When("^create opportunity and change its status$")
     public void create_opportunity() throws Exception{
-        OppurtunitiesUtil.createOppurtunity(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.createOpportunity(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
 
     }
 
