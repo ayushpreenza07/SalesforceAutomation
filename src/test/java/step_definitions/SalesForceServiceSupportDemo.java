@@ -3,6 +3,7 @@ package step_definitions;
 import SalesforceModules.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import org.codehaus.groovy.ast.stmt.CaseStatement;
 import org.testng.Assert;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
@@ -36,6 +37,7 @@ public class SalesForceServiceSupportDemo {
 
     @When("^create contact for service support$")
     public void create_contact() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         ContactUtil.createContactforServiceSupport(dataMap.get("Salutation"), dataMap.get("ContactLastName"),dataMap.get("ContactEmail"),dataMap.get("Phone"));
       //  ContactUtil.backToAccount("Navigated back to account");
     }
@@ -72,6 +74,12 @@ public class SalesForceServiceSupportDemo {
     @When("^Create New Cases for service support")
     public void create_new_Cases() throws Exception {
         CasesUtil.createNewCase("New","Phone");
+
+    }
+
+    @When("^Create New Case by searching contact and account")
+    public void create_new_Cases_bysearching_account_contact() throws Exception {
+        CasesUtil.createNewCasebySearchingContact_Account(dataMap.get("ContactLastName"), dataMap.get("AccountName"));
 
     }
 }

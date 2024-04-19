@@ -52,7 +52,8 @@ public class ServiceSupportObject {
     public static By origin = By.xpath("//button[@data-value='--None--']");
 
     //Xpaths for searching contact and account
-
+    public static By searchAccounts_ss=By.xpath("//input[@id='combobox-input-1096']");
+    public static By searchContacts_ss=By.xpath("//input[@id='combobox-input-1090']");
 
 
 }
