@@ -100,12 +100,20 @@ public class SalesForceForecasting {
     public void navigateToForecastSettingsPage() {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
         } catch (Exception e) {
             catchAssertError(e);
         }
     }
-    @Then("Activate Forecast")
+    @Then("Validate Forecast settings page is loaded")
+    public void validateForecastSettingsPageIsLoaded() {
+        try {
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+        }
+        catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @When("Activate Forecast")
     public void activateForecast() {
         try{
             ForecastingModule.clickOnShowActionsOfForecast("testAuto");
@@ -126,8 +134,8 @@ public class SalesForceForecasting {
         }
     }
 
-    @And("Validate Activated Forecast Is Visible")
-    public static void validateActivatedForecastIsVisible() {
+    @Then("Validate Activated Forecast Is Visible")
+    public void validateActivatedForecastIsVisible() {
         try{
             ForecastingModule.validateActivatedForecastIsAvailable("testAuto");
         }
@@ -135,7 +143,7 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
-    @Then("Deactivate Forecast")
+    @And("Deactivate Forecast")
     public void deactivateForecast() {
         try{
             ForecastingModule.clickOnShowActionsOfForecast("testAuto");
@@ -150,7 +158,6 @@ public class SalesForceForecasting {
         try {
             KeywordUtil.switchToWindow();
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
         } catch (Exception e) {
             catchAssertError(e);
         }

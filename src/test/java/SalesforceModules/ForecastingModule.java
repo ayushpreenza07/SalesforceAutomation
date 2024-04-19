@@ -302,7 +302,7 @@ Validating 'Forecast Settings' page should be loaded
      */
     public static void selectActivateFromActions(){
         try {
-            KeywordUtil.isWebElementVisible(ForecastingPage.activateOption, "Actuvation option is available");
+            KeywordUtil.isWebElementVisible(ForecastingPage.activateOption, "Activation option is available");
             KeywordUtil.click(ForecastingPage.activateOption, "Click on Activate option.");
             takeScreenshotAndAttachInReport();
             CampaignUtil.verificationMessage();
@@ -311,6 +311,9 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
+    /*
+    Click on app launcher icon and search for Forecast application
+     */
     public static void clickOnAppLauncherIconAndSearchForForecast() throws InterruptedException {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.appLauncherIcon);
@@ -364,6 +367,4 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-
-
-    }
+}

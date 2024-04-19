@@ -19,12 +19,15 @@ Feature: SalesForce_Forecasting
   @Web @salesforce @ForecastActivation
   Scenario: Activate Created Forecast
     Given navigate to salesforce
-    And login to salesforce
+    When login to salesforce
     And navigate to setup screen
     And Navigate to forecast settings page
-    Then Activate Forecast
+    Then Validate Forecast settings page is loaded
+    When Activate Forecast
     And Search For Forecasts application and Navigate To Forecasts page
-    And Validate Activated Forecast Is Visible
-    And navigate to setup screen
+    Then Validate Activated Forecast Is Visible
+    When navigate to setup screen
     And Navigate to forecast settings page In New Window
-    Then Deactivate Forecast
+    Then Validate Forecast settings page is loaded
+    And Deactivate Forecast
+
