@@ -21,6 +21,7 @@ public class ForecastingModule {
 
     /**
      * Click on setup menu
+     *
      * @throws InterruptedException
      */
     public static void clickOnSetup(String logStep) throws InterruptedException {
@@ -40,6 +41,7 @@ public class ForecastingModule {
 
     /**
      * Click and insert value in text field
+     *
      * @throws InterruptedException
      */
     public static void clickAndEnterValue(String logStep, String searchValue) throws InterruptedException {
@@ -60,6 +62,7 @@ public class ForecastingModule {
     /**
      * switch to iframe
      * click on logged in user option
+     *
      * @throws InterruptedException
      */
     public static void clickOnEditOption() throws InterruptedException {
@@ -78,6 +81,7 @@ public class ForecastingModule {
      * switch to iframe
      * scroll to element
      * checked allow forecast
+     *
      * @throws InterruptedException
      */
     public static void scrollToAllowForecast() throws InterruptedException {
@@ -123,6 +127,7 @@ public class ForecastingModule {
     /**
      * select Value From Sample Role Hierarchies
      * click on set up role button
+     *
      * @throws InterruptedException
      */
     public static void selectValueFromSampleRoleHierarchies() throws InterruptedException {
@@ -163,6 +168,7 @@ public class ForecastingModule {
     /**
      * assign Roles To User from roles page
      * check if user is added in list to assign or not.
+     *
      * @throws InterruptedException
      */
     public static void assignRolesToUser() throws InterruptedException {
@@ -192,6 +198,7 @@ public class ForecastingModule {
      * verify Role Assign To USer
      * check if assigned role is to user
      * and check same user in forecasts page from menu
+     *
      * @throws InterruptedException
      */
     public static void verifyRoleAssignToUSer() throws InterruptedException {
@@ -232,57 +239,65 @@ public class ForecastingModule {
             catchAssertError(e);
         }
     }
-        public static void clickUsers(String logstep) throws InterruptedException {
-            try {
-                KeywordUtil.isWebElementVisible(ForecastingPage.userOption, "Users Option is visible");
-                KeywordUtil.click(ForecastingPage.userOption, "Click on user options");
-            } catch (Exception e) {
-                catchAssertError(e);
-            }
-        }
-        public static void clickOnNewUser(String logStep)throws InterruptedException {
-            try {
-                KeywordUtil.switchToIFrame(0, "All Users ~ Salesforce - Developer Edition");
-                KeywordUtil.isWebElementVisible(ForecastingPage.NewUser, "New User is visible");
-                KeywordUtil.waitForVisible(ForecastingPage.NewUser);
-                takeScreenshotAndAttachInReport();
-                KeywordUtil.click(ForecastingPage.NewUser, "Click on New User.");
-                GlobalUtil.getDriver().switchTo().defaultContent();
-            } catch (Exception e) {
-                catchAssertError(e);
-            }
-        }
-        public static void enterNewUserDetails(HashMap<String, String> dataMap, String logStep) throws InterruptedException {
-            try {
-                KeywordUtil.switchToIFrame(0, "New User ~ Salesforce - Developer Edition");
-                KeywordUtil.isWebElementVisible(ForecastingPage.FirstName, "First Name field is present");
-                KeywordUtil.waitForVisible(ForecastingPage.FirstName);
-                KeywordUtil.inputText(ForecastingPage.FirstName,dataMap.get("FirstName"), "Enter First Name value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.LastName, "Last Name field is present");
-                KeywordUtil.inputText(ForecastingPage.LastName, dataMap.get("LastName"), "Enter Last Name value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Alias, "Alias field is present");
-                KeywordUtil.inputText(ForecastingPage.Alias, dataMap.get("Alias"), "Enter Alias value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Email, "Email field is present");
-                KeywordUtil.inputText(ForecastingPage.Email, dataMap.get("Email"), "Enter Email value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Username, "UserName field is present");
-                KeywordUtil.inputText(ForecastingPage.Username,dataMap.get("n_username"), "Enter Username value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Nickname, "Nickname field is present");
-                KeywordUtil.inputText(ForecastingPage.Nickname,dataMap.get("Nickname"), "Enter Nickname value");
-                KeywordUtil.isWebElementPresent(ForecastingPage.CompanyName, "Company name field is present");
-                KeywordUtil.inputText(ForecastingPage.CompanyName,dataMap.get("CompanyName"), "Enter Company Name");
-                KeywordUtil.isWebElementPresent(ForecastingPage.Department, "Department field is present");
-                KeywordUtil.inputText(ForecastingPage.Department,dataMap.get("Department"), "Enter Department Name");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Role, 2, "Click and select value from Role dropdown.");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.UserLicense,6,"Click and select value from user license dropdown");
-                KeywordUtil.selectOptionFromDropdown(ForecastingPage.Profile,1,"Click and select value profile dropdown");
-                KeywordUtil.click(ForecastingPage.AllowForecasting,"Click on allow forecasting checkbox.");
-                KeywordUtil.isWebElementVisible(ForecastingPage.SaveButton, "Save button is present");
-                KeywordUtil.click(ForecastingPage.SaveButton,"Click on save button");
 
-            } catch (Exception e) {
-                catchAssertError(e);
-            }
+    /* Click on Users Options... */
+    public static void clickUsers(String logstep) throws InterruptedException {
+        try {
+            KeywordUtil.isWebElementVisible(ForecastingPage.userOption, "Users Option is visible");
+            KeywordUtil.click(ForecastingPage.userOption, "Click on user options");
+        } catch (Exception e) {
+            catchAssertError(e);
         }
+    }
+
+    /* Click on New users button...*/
+
+    public static void clickOnNewUser(String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.switchToIFrame(0, "All Users ~ Salesforce - Developer Edition");
+            KeywordUtil.isWebElementVisible(ForecastingPage.NewUser, "New User is visible");
+            KeywordUtil.waitForVisible(ForecastingPage.NewUser);
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.NewUser, "Click on New User.");
+            GlobalUtil.getDriver().switchTo().defaultContent();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /* Enter all New User details.....*/
+
+    public static void enterNewUserDetails(HashMap<String, String> dataMap, String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.switchToIFrame(0, "New User ~ Salesforce - Developer Edition");
+            KeywordUtil.isWebElementVisible(ForecastingPage.FirstName, "First Name field is present");
+            KeywordUtil.waitForVisible(ForecastingPage.FirstName);
+            KeywordUtil.inputText(ForecastingPage.FirstName, dataMap.get("FirstName"), "Enter First Name value");
+            KeywordUtil.isWebElementPresent(ForecastingPage.LastName, "Last Name field is present");
+            KeywordUtil.inputText(ForecastingPage.LastName, dataMap.get("LastName"), "Enter Last Name value");
+            KeywordUtil.isWebElementPresent(ForecastingPage.Alias, "Alias field is present");
+            KeywordUtil.inputText(ForecastingPage.Alias, dataMap.get("Alias"), "Enter Alias value");
+            KeywordUtil.isWebElementPresent(ForecastingPage.Email, "Email field is present");
+            KeywordUtil.inputText(ForecastingPage.Email, dataMap.get("Email"), "Enter Email value");
+            KeywordUtil.isWebElementPresent(ForecastingPage.Username, "UserName field is present");
+            KeywordUtil.inputText(ForecastingPage.Username, dataMap.get("n_username"), "Enter Username value");
+            KeywordUtil.isWebElementPresent(ForecastingPage.Nickname, "Nickname field is present");
+            KeywordUtil.inputText(ForecastingPage.Nickname, dataMap.get("Nickname"), "Enter Nickname value");
+            KeywordUtil.isWebElementPresent(ForecastingPage.CompanyName, "Company name field is present");
+            KeywordUtil.inputText(ForecastingPage.CompanyName, dataMap.get("CompanyName"), "Enter Company Name");
+            KeywordUtil.isWebElementPresent(ForecastingPage.Department, "Department field is present");
+            KeywordUtil.inputText(ForecastingPage.Department, dataMap.get("Department"), "Enter Department Name");
+            KeywordUtil.selectOptionFromDropdown(ForecastingPage.Role, 2, "Click and select value from Role dropdown.");
+            KeywordUtil.selectOptionFromDropdown(ForecastingPage.UserLicense, 6, "Click and select value from user license dropdown");
+            KeywordUtil.selectOptionFromDropdown(ForecastingPage.Profile, 1, "Click and select value profile dropdown");
+            KeywordUtil.click(ForecastingPage.AllowForecasting, "Click on allow forecasting checkbox.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.SaveButton, "Save button is present");
+            KeywordUtil.click(ForecastingPage.SaveButton, "Click on save button");
+
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
 
     /**
      * Creating a Forecast Type with opportunity and amount
@@ -294,40 +309,40 @@ public class ForecastingModule {
             KeywordUtil.scrollDown();
             KeywordUtil.waitForVisible(ForecastingPage.createForcastTypeButton);
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.createForcastTypeButton,"Click on create a Forcast Type button");
+            KeywordUtil.click(ForecastingPage.createForcastTypeButton, "Click on create a Forcast Type button");
             KeywordUtil.waitForVisible(ForecastingPage.startButton);
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.startButton,"Click on start button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.startButton, "Click on start button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.pickAnObjectHeader);
-            KeywordUtil.selectOptionNameFromDropdown("Select an object... - Current Selection: Select an object...","Opportunity", "Click and select forecast type.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.selectOptionNameFromDropdown("Select an object... - Current Selection: Select an object...", "Opportunity", "Click and select forecast type.");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.measurePage);
             KeywordUtil.selectOptionNameFromDropdown("Select a measure... - Current Selection: Select a measure...", "Amount", "Click and select measure amount.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.datetypePage);
             KeywordUtil.selectOptionNameFromDropdown("Select a date type... - Current Selection: Select a date type...", "Close Date (Opportunity)", "Click and select date type option.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.hierarchyPage);
             KeywordUtil.selectOptionNameFromDropdown("Select a hierarchy... - Current Selection: Select a hierarchy...", "User role", "Click and select hierarchy option.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.optionalFilterPage);
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on optional Filter Page");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on optional Filter Page");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeName);
             String randomName = KeywordUtil.generateRandomName();
             KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, randomName, "");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on forecast Type Name Page.");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on forecast Type Name Page.");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeSet);
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastTypeSet, "Verify you've set up your forecast type.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.saveButton, "Click on save option.");
             KeywordUtil.isWebElementVisible(ForecastingPage.opportunityList, "Verify customize the opportunity list page is opened.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on opportunity list page.");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on opportunity list page.");
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastTypeCompletion, "Verify forecasts type with opportunity is created.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.doneButton,"Click on done button.");
+            KeywordUtil.click(ForecastingPage.doneButton, "Click on done button.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(randomName), "Verify created new forecast opportunity is visible in forecasts list.");
         } catch (Exception e) {
@@ -335,7 +350,7 @@ public class ForecastingModule {
         }
     }
 
- /**
+    /**
      * Creating a Forecast Type with opportunity and product
      *
      * @throws InterruptedException
@@ -345,40 +360,40 @@ public class ForecastingModule {
             KeywordUtil.scrollDown();
             KeywordUtil.waitForVisible(ForecastingPage.createForcastTypeButton);
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.createForcastTypeButton,"Click on create a Forcast Type button");
+            KeywordUtil.click(ForecastingPage.createForcastTypeButton, "Click on create a Forcast Type button");
             KeywordUtil.waitForVisible(ForecastingPage.startButton);
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.startButton,"Click on start button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.startButton, "Click on start button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.pickAnObjectHeader);
-            KeywordUtil.selectOptionNameFromDropdown("Select an object... - Current Selection: Select an object...","Opportunity Product", "Click and select forecast type.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.selectOptionNameFromDropdown("Select an object... - Current Selection: Select an object...", "Opportunity Product", "Click and select forecast type.");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.measurePage);
             KeywordUtil.selectOptionNameFromDropdown("Select a measure... - Current Selection: Select a measure...", "Quantity", "Click and select measure amount.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.datetypePage);
             KeywordUtil.selectOptionNameFromDropdown("Select a date type... - Current Selection: Select a date type...", "Date (Opportunity Product)", "Click and select date type option.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.hierarchyPage);
             KeywordUtil.selectOptionNameFromDropdown("Select a hierarchy... - Current Selection: Select a hierarchy...", "User role", "Click and select hierarchy option.");
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on Create a Forecast Type form");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on Create a Forecast Type form");
             KeywordUtil.waitForVisible(ForecastingPage.optionalFilterPage);
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on optional Filter Page");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on optional Filter Page");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeName);
 //            String randomName = KeywordUtil.generateRandomName();
             KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, KeywordUtil.generateRandomName(), "");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on forecast Type Name Page.");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on forecast Type Name Page.");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeSet);
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastTypeSet, "Verify you've set up your forecast type.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.saveButton, "Click on save option.");
             KeywordUtil.isWebElementVisible(ForecastingPage.opportunityList, "Verify customize the opportunity list page is opened.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.nextButton,"Click on next button on opportunity list page.");
+            KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on opportunity list page.");
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastTypeCompletion, "Verify forecasts type with opportunity is created.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.doneButton,"Click on done button.");
+            KeywordUtil.click(ForecastingPage.doneButton, "Click on done button.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(KeywordUtil.generateRandomName()), "Verify created new forecast opportunity is visible in forecasts list.");
         } catch (Exception e) {
@@ -387,18 +402,18 @@ public class ForecastingModule {
     }
 
 
-     /**
+    /**
      * Choose a Default Date Range
      *
      * @throws InterruptedException
      */
     public static void chooseaDefaultDateRange() throws InterruptedException {
         try {
-            KeywordUtil.scrollingToElementofAPage(ForecastingPage.dateRangeHeader,"Scroll to default date range header.");
+            KeywordUtil.scrollingToElementofAPage(ForecastingPage.dateRangeHeader, "Scroll to default date range header.");
             KeywordUtil.isWebElementVisible(ForecastingPage.dateRangeHeader, "Verify default date range is visible.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.isWebElementVisible(ForecastingPage.forecastSections("Choose a Default Date Range","Edit"), "Verify edit button of default date range is visible.");
-            KeywordUtil.click(ForecastingPage.forecastSections("Choose a Default Date Range","Edit"), "Click on edit button.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.forecastSections("Choose a Default Date Range", "Edit"), "Verify edit button of default date range is visible.");
+            KeywordUtil.click(ForecastingPage.forecastSections("Choose a Default Date Range", "Edit"), "Click on edit button.");
             KeywordUtil.isWebElementVisible(ForecastingPage.dateRangeSettingHeader("ForecastPeriod"), "Verify default date range settings are visible.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.dateRangeSettingValue("Monthly"), "Verify default forecast period value is visible.");
@@ -421,12 +436,12 @@ public class ForecastingModule {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastShowQuotesHeader, "Verify show quotas is visible.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.isWebElementVisible(ForecastingPage.forecastSections("Show Quotas","Edit"), "Verify edit button of Show Quotas is visible.");
-            KeywordUtil.click(ForecastingPage.forecastSections("Show Quotas","Edit"), "Click on edit button.");
-            if(KeywordUtil.isWebElementVisible(ForecastingPage.showQuotasCheckbox,"Verify show quotas checkbox is checked or not.")){
+            KeywordUtil.isWebElementVisible(ForecastingPage.forecastSections("Show Quotas", "Edit"), "Verify edit button of Show Quotas is visible.");
+            KeywordUtil.click(ForecastingPage.forecastSections("Show Quotas", "Edit"), "Click on edit button.");
+            if (KeywordUtil.isWebElementVisible(ForecastingPage.showQuotasCheckbox, "Verify show quotas checkbox is checked or not.")) {
                 KeywordUtil.isWebElementVisible(ForecastingPage.showQuotasCheckbox, "Show quotas checkbox is checked.");
                 takeScreenshotAndAttachInReport();
-            }else{
+            } else {
                 KeywordUtil.isWebElementVisible(ForecastingPage.showQuotasUncheckedCheckbox, "Show quotas checkbox is not checked.");
                 takeScreenshotAndAttachInReport();
                 KeywordUtil.click(ForecastingPage.showQuotasUncheckedCheckbox, "Click on Show quotas checkbox.");
@@ -456,8 +471,16 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.showingDateRangeOnForecastsPage, "Verify date range filter is visible.");
             KeywordUtil.click(ForecastingPage.showingDateRangeOnForecastsPage, "Click on date range filter.");
-            KeywordUtil.selectValueFromDropdown(ForecastingPage.dateOfStartPeriod,"March FY 2023","Select value from start date.");
+            Thread.sleep(2000);
+            KeywordUtil.selectValueFromDropdown(ForecastingPage.dateOfStartPeriod, "March FY 2023", "Select value from start date.");
+            KeywordUtil.click(ForecastingPage.dateOfStartPeriod, "Click on date range filter.");
+            KeywordUtil.click(ForecastingPage.startDateAndMonth("March FY 2023"), "Select value from date range filter.");
+//            KeywordUtil.click(ForecastingPage.startDateAndMonth("March FY 2023"), "Click on date range filter.");
             takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.saveButton, "Click on save option.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.opportunityAmountTab, "Verify opportunity amount tab is visible.");
+            KeywordUtil.click(ForecastingPage.opportunityAmountTab, "Click on opportunity amount tab.");
+
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -467,29 +490,24 @@ public class ForecastingModule {
     public static void forecastSettingsOption(String logStep) throws InterruptedException {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastsSettingsOption, "Forecasts settings Option is visible");
-            KeywordUtil.click(ForecastingPage.forecastsSettingsOption, "Click on Forecasts Settings options");
+            KeywordUtil.click(ForecastingPage.forecastsSettingsOption, logStep);
         } catch (Exception e) {
             catchAssertError(e);
         }
     }
 
     /* Click on Enable Forecasts Toggle button.... */
-    public static void enableForecasts(String logStep) throws InterruptedException
-    {
-        try{
+    public static void enableForecasts(String logStep) throws InterruptedException {
+        try {
             KeywordUtil.isWebElementVisible(ForecastingPage.enableForecastsToggleButton, "Forecasts toggle button is visible");
 
-            KeywordUtil.click(ForecastingPage.enableForecastsToggleButton, "Click on forecasts toggle button");
+            KeywordUtil.click(ForecastingPage.enableForecastsToggleButton, logStep);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             catchAssertError(e);
         }
 
     }
-
-
-
 
 
 }
