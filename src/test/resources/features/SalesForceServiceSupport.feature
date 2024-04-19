@@ -9,6 +9,13 @@ Feature: salesforce service support demo
     Then create new account
     Then Edit Account Details
     Then Delete Account
+    Then create contact for service support
+    Then Edit Contact Details for service support
+    Then Filter Contact Details for service support
+    Then Remove All Filters Contact Details for service support
+    Then Delete Contact Details for service support
+
+
 
     Examples:
       | TestData |
