@@ -15,14 +15,16 @@ import java.util.HashMap;
 import static utilities.KeywordUtil.catchAssertError;
 import java.util.Map;
 
-public class SalesForceForecasting{
+public class SalesForceForecasting {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
+
     public static void main(String[] args) {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         for (Map.Entry<String, String> entry : dataMap.entrySet()) {
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
         }
     }
+
     @Given("^Read the test data  \"([^\"]*)\" from Excel for Forecasting$")
     public void read_the_test_data_from_Excel(String arg1) {
         try {
@@ -53,21 +55,21 @@ public class SalesForceForecasting{
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Roles");
             ForecastingModule.selectValueFromSampleRoleHierarchies();
-            ForecastingModule.selectRolesFromHierarchy("CEO","Assign");
+            ForecastingModule.selectRolesFromHierarchy("CEO", "Assign");
             ForecastingModule.assignRolesToUser();
         } catch (Exception e) {
             catchAssertError(e);
         }
     }
+
     @Then("Create Users Hierarchy for Forecast")
-    public void createNewUserHierarchy(){
-        try{
+    public void createNewUserHierarchy() {
+        try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Users");
             ForecastingModule.clickUsers("Click on Users option");
             ForecastingModule.clickOnNewUser("Click on new user");
-            ForecastingModule.enterNewUserDetails(dataMap,"Enter New user details");
-        }
-        catch (Exception e) {
+            ForecastingModule.enterNewUserDetails(dataMap, "Enter New user details");
+        } catch (Exception e) {
             catchAssertError(e);
         }
     }
@@ -82,11 +84,12 @@ public class SalesForceForecasting{
         }
     }
 
-    @And("Create  Forecast Type with Opportunities")
-    public void createForecastTypeWithOpportunities() {
+    @And("Enable Forecast Settings for first-time user logging")
+    public void forecastSettings() {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-            ForecastingModule.createForecastTypeWithOpportunities();
+            ForecastingModule.forecastSettingsOption("Click on Forecasts Settings");
+            ForecastingModule.enableForecasts("Click on Forecasts toggle button");
         } catch (Exception e) {
             catchAssertError(e);
         }

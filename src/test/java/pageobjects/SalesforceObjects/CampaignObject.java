@@ -10,12 +10,7 @@ public class CampaignObject {
     public static  By CampaignName= By.xpath("//div[@class=\"actionBody\"]//span[text()='Campaign Name']//parent::label//following-sibling::input");
 
 
-    public static By SaveButton= By.xpath("//button[@title=\"Save\"]");
-
-
-    public static By Table= By.xpath("//table[@role=\"grid\"]");
-
-    public static By parentLink= By.xpath("(//span[text()='Edit Parent Campaign: Item '])[1]");
+    public static By SaveButton= By.xpath("(//span[text()=\"Save\"])[2]");
 
 
     public static By successMessage= By.xpath("//span[@class='toastMessage slds-text-heading--small forceActionsText']");
@@ -50,17 +45,52 @@ public class CampaignObject {
     public static By leadsNextButton=By.xpath("//button[text()=\"Next\"]");
     public static By leadsSubmitButton=By.xpath("//button[text()=\"Submit\"]");
     public static By searchLeads=By.xpath("//input[@title=\"Search Leads\"]");
-    public static By viewAll=By.xpath("//span[text()=\"View All\"]");
+    public static By viewAll=By.xpath("//a[@class=\"slds-card__footer\"]//span[text()='View All']");
     public static By contactTab=By.xpath("//span[@class='slds-truncate'][text()='Contacts']");
-    public static By lsitOfAllContacts=By.xpath("//th[@data-label=\"Name\"]");
 
     public static By showFiltersInContacts=By.xpath("//button[@title=\"Show filters\"]");
 
     public static By addFiltersInContacts=By.xpath("//button[text()=\"Add Filter\"]");
     public static By clickFieldFilter=By.xpath("(//button[@class=\"slds-combobox__input slds-input_faux fix-slds-input_faux slds-combobox__input-value\"])[1]");
+    public static By allDropdownElementsInFieldFilter=By.xpath("//span[@class=\"slds-media__body\"]");
 
-    public static By allDropdownElements=By.xpath("//span[@class=\"slds-media__body\"]");
-    public static By accountNameFilter=By.xpath("//span[text()='Sort by:']//following-sibling::span[text()='Account Name']");
+    public static By enter_value=By.xpath("//input[@type=\"text\"]");
+
+    public static By doneButton=By.xpath("//span[text()=\"Done\"]");
+
+
+    public static By saveFilterButton=By.xpath("//button[text()='Save']");
+    public static By closeFilterButton=By.xpath("//span[text()='Close Filters']");
+
+    public static By EditContactsShowActions=By.xpath("(//a[@title='Edit'])[2]");
+    public static By removeFiltersInContacts=By.xpath("//button[text()=\"Remove All\"]");
+
+
+    public static By saveEditContactButton=By.xpath("//button[text()=\"Save\"]");
+
+    public static By newButtonInContactTab=By.xpath("(//button[text()=\"New\"])[1]");
+
+    public static By getOpportunitiesName=By.xpath("//table[@role=\"grid\"]//tbody//tr//th[@data-label=\"Opportunity Name\"]");
+
+    public static By getAllStages=By.xpath("//table[@role=\"grid\"]//tbody//tr//td[@data-label=\"Stage\"]");
+
+    public static By getAllAmount=By.xpath("//table[@role=\"grid\"]//tbody//tr//td[@data-label=\"Amount\"]");
+
+    public static By getCloseDate=By.xpath("//table[@role=\"grid\"]//tbody//tr//td[@data-label=\"Close Date\"]");
+
+    public static By campaignHistory=By.xpath("//span[@title=\"Campaign History\"]");
+
+    public static By addToCampaign=By.xpath("//div[@title=\"Add to Campaign\"]");
+
+    public static By enterCampaignName=By.xpath("//input[@title=\"Search Campaigns\"]");
+
+    public static By saveButtonAfterSelectingCampaign=By.xpath("//span[text()='Save']");
+
+    public static By statusPopUp=By.xpath("//div[@class=\"uiPopupTrigger\"]");
+
+    public static By respondedStatus=By.xpath("//a[@title=\"Responded\"]");
+
+
     public static By clickCampaign(String campaignName){
         return By.xpath("//table[@role=\"grid\"]//tr//th[@scope=\"row\" ]//a[text()='"+campaignName+"']");
     }
@@ -74,11 +104,14 @@ public class CampaignObject {
     public static By showActions(String campaignName){
         return By.xpath("//table[@role=\"grid\"]//tr//th[@scope=\"row\"]//a[text()='"+campaignName+"']//ancestor::th//following-sibling::td[8]//a//span[text()='Show Actions']");
     }
-    public static WebElement select_Tab(String tabname){
-        return (WebElement) By.xpath("//span[@class='slds-truncate'][text()='"+tabname+"']");
-    }
-    public static By clickShowActionsInContacts(){
-        return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title=\"Rose Gonzalez\"]//ancestor::th//following-sibling::td[6]//a//span[text()='Show more actions']");
+
+    public static By clickShowActionsInContacts(String name){
+        return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[6]//span[text()='Show Actions']");
     }
 
+    public static By DeleteShowActionInContacts(String name){
+        return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[6]//span[text()='Show more actions']");
+    }
 }
+
+
