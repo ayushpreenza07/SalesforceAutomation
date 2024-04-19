@@ -70,7 +70,7 @@ public class CampaignUtil {
         List<WebElement> campaignNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the parent Campaigns list");
         for (WebElement campaign : campaignNames) {
             if (campaign.getText().equalsIgnoreCase(campaignName)) {
-                KeywordUtil.delay(9000);
+
                 campaign.click();
                 break;
             }
@@ -395,8 +395,8 @@ public class CampaignUtil {
         KeywordUtil.delay(6000);
         List<WebElement> LeadNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Lead members list");
         for (WebElement Lead : LeadNames) {
-            System.out.println(Lead.getText());
-            if (Lead.getText().equals(leadName)) {
+
+            if (Lead.getText().contains(leadName)) {
                 Thread.sleep(8000);
                 Lead.click();
                 break;
@@ -762,7 +762,6 @@ public class CampaignUtil {
         List<WebElement> camapignName=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Campaign list");
         for (WebElement campaign : camapignName) {
             if (campaign.getText().equals(campaignName)) {
-                KeywordUtil.delay(10000);
                 campaign.click();
                 break;
             }
