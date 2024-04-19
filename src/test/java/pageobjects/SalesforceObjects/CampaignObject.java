@@ -107,7 +107,7 @@ public class CampaignObject {
 
     public static By saveButtonInCase=By.xpath("//button[@class='slds-button slds-button_brand'][text()='Save']");
 
-    public static By casesViewAllButton=By.xpath("//span[@title=\"Cases\"]//ancestor::div//a[@class=\"slds-card__footer\"]//span[text()='View All']");
+    public static By casesViewAllButton=By.xpath("(//span[@title=\"Cases\"]//ancestor::div//a[@class=\"slds-card__footer\"]//span[text()='View All'])[2]");
 
     public static By casesNameInCaseHistory=By.xpath("//table[@role=\"grid\"]//th[@data-label=\"Case\"]");
 
