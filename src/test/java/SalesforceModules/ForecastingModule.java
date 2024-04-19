@@ -218,6 +218,7 @@ public class ForecastingModule {
                 KeywordUtil.inputText(ForecastingPage.searchForOtherUser, "Sukanya", "User Entered Text");
                 Assert.assertEquals(getElementText(ForecastingPage.verifyOtherUser), "Sukanya");
                 RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("User listed in Forecast CPQ"));
+
                 takeScreenshotAndAttachInReport();
             } else {
                 RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Role is not visible to the user, so checking if the user is visible on the Forecast CPQ page."));
@@ -233,6 +234,7 @@ public class ForecastingModule {
                 Assert.assertEquals(getElementText(ForecastingPage.verifyOtherUser), "Sukanya");
                 RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("User listed in Forecast CPQ"));
                 takeScreenshotAndAttachInReport();
+
             }
 
         } catch (Exception e) {
@@ -329,8 +331,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on optional Filter Page");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeName);
-            String randomName = KeywordUtil.generateRandomName();
-            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, randomName, "");
+            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, KeywordUtil.generateRandomName(), "Enter forecast type name.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on forecast Type Name Page.");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeSet);
@@ -344,7 +345,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.doneButton, "Click on done button.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(randomName), "Verify created new forecast opportunity is visible in forecasts list.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(KeywordUtil.generateRandomName()), "Verify created new forecast opportunity is visible in forecasts list.");
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -380,8 +381,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on optional Filter Page");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeName);
-//            String randomName = KeywordUtil.generateRandomName();
-            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, KeywordUtil.generateRandomName(), "");
+            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, KeywordUtil.generateRandomName(), "Enter forecast type name.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on forecast Type Name Page.");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeSet);
@@ -468,6 +468,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             Leads.enterText("Forecasts");
             KeywordUtil.waitForVisible(ForecastingPage.ownerName);
+            KeywordUtil.isWebElementVisible(ForecastingPage.ownerName, "Forecast on manager users dashboard is visible for user.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.showingDateRangeOnForecastsPage, "Verify date range filter is visible.");
             KeywordUtil.click(ForecastingPage.showingDateRangeOnForecastsPage, "Click on date range filter.");
@@ -475,12 +476,20 @@ public class ForecastingModule {
             KeywordUtil.selectValueFromDropdown(ForecastingPage.dateOfStartPeriod, "March FY 2023", "Select value from start date.");
             KeywordUtil.click(ForecastingPage.dateOfStartPeriod, "Click on date range filter.");
             KeywordUtil.click(ForecastingPage.startDateAndMonth("March FY 2023"), "Select value from date range filter.");
-//            KeywordUtil.click(ForecastingPage.startDateAndMonth("March FY 2023"), "Click on date range filter.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.saveButton, "Click on save option.");
+            takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.opportunityAmountTab, "Verify opportunity amount tab is visible.");
             KeywordUtil.click(ForecastingPage.opportunityAmountTab, "Click on opportunity amount tab.");
+            takeScreenshotAndAttachInReport();
+            if (KeywordUtil.isWebElementVisible(ForecastingPage.assignedQuotas, "Verify assigned quotas value is visible or not.")) {
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Assigned quotas value is visible to user on forecast on manager users dashboard."));
+                takeScreenshotAndAttachInReport();
+            } else {
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("No quotas value is assign to user from forecasts settings."));
+                takeScreenshotAndAttachInReport();
 
+            }
         } catch (Exception e) {
             catchAssertError(e);
         }

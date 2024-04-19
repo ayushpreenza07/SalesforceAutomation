@@ -14,7 +14,7 @@ Feature: SalesForce_Forecasting
     And Create  Forecast Type with Opportunities
     And Create  Forecast Type with Opportunities and Product
     And Choose forecast range and show or hide quotas from the forecast
-#    And Verify Forecast on Manager Users Dashboard
+    And Verify Forecast on Manager Users Dashboard
     Examples:
       | TestData |
       | TestData1 |

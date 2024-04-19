@@ -98,6 +98,7 @@ public class SalesForceForecasting {
     @And("Create  Forecast Type with Opportunities")
     public void createForecastTypeWithOpportunities() {
         try {
+            ForecastingModule.clickOnSetup("Setup page is opened");
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
             ForecastingModule.createForecastTypeWithOpportunities();
         } catch (Exception e) {
@@ -131,7 +132,6 @@ public class SalesForceForecasting {
     public void verifyForecastOnManagerUsersDashboard() {
         try {
             ForecastingModule.verifyForecastonManagerUsersDashboard();
-
         } catch (Exception e) {
             catchAssertError(e);
         }

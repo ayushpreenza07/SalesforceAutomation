@@ -7,7 +7,7 @@ public class ForecastingPage {
     public static By setupIcon = By.xpath("//lightning-icon[@class='slds-icon-utility-setup slds-button__icon slds-global-header__icon forceIcon slds-icon_container']");
     public static By setupTitle = By.xpath("//span[@title='Setup']");
     public static By setupOption = By.xpath("//*[@class='slds-align-middle'][text()='Setup']");
-    public static By setupSearch = By.xpath("//input[@class=\"filter-box input\"]");
+    public static By setupSearch = By.xpath("//input[@class=\"filter-box input\"] | //*[@class=\"uiInput uiInputSearch uiInput--custom\"]/input");
     public static By usersPage = By.xpath("//h1[@class='noSecondHeader pageType']");
     public static By loggedInUser = By.xpath("//*[@title=\"Select Jagtap, Sukanya\"]/following-sibling::a[text()=\"Edit\"]");
     public static By allowForecasting = By.xpath("//*[@for=\"forecast_enabled\"][text()=\"Allow Forecasting\"]");
@@ -77,6 +77,8 @@ public class ForecastingPage {
     public static By AllowForecasting = By.id("forecast_enabled");
 
     public static By SaveButton = By.xpath("//input[@value=' Save ']");
+    public static By opportunityAmountTab = By.xpath("//a[@data-label='Opportunity Amount']");
+    public static By assignedQuotas = By.xpath("//span[@class='fct-value-quota-width forceOutputCurrency']");
 
     public static By searchSetupOption(String searchValue) {
         return By.xpath("//li[@aria-level=\"2\" and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
@@ -105,6 +107,9 @@ public class ForecastingPage {
 
     public static By newForecastAdded(String Value) {
         return By.xpath("//*[text()='" + Value + "']");
+    }
+    public static By startDateAndMonth(String Value) {
+        return By.xpath("//option[text()='" + Value + "']");
     }
 
 
