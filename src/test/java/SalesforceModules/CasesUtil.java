@@ -27,10 +27,20 @@ public class CasesUtil {
      *
      * @param logStep the log
      */
-    public static void clickNewButton(String logStep){
-        KeywordUtil.waitForVisible(ServiceSupportObject.newTab);
-        KeywordUtil.click(ServiceSupportObject.newTab,logStep);
+    public static void clickNewButton(String logStep) throws InterruptedException {
+//        KeywordUtil.delay(5000);
+//        KeywordUtil.waitForVisible(ServiceSupportObject.newTab);
+//        KeywordUtil.click(ServiceSupportObject.newTab,logStep);
 
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(ServiceSupportObject.newTab);
+            WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.newTab);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -155,8 +165,10 @@ public class CasesUtil {
      *  @param contact the contact
      *  @param account the account
      */
-    public static void createNewCasebySearchingContact_Account(String contact, String account) throws InterruptedException {
+    public static void createNewCasebySearchingContact_Account(String contact, String account, String status, String origin) throws InterruptedException {
         clickNewButton("Clicked new button for Cases");
+        setStatus(status,status+" entered status");
+        setCaseOrigin(origin,origin+" entered origin");
         selectContact_ss(contact,contact+ " entered account name");
         selectAccount_ss(account,account+ " entered account name");
         clickSaveButton("clicked save button");

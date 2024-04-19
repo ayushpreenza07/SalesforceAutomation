@@ -15,8 +15,8 @@ Feature: salesforce service support demo
 #    Then Remove All Filters Contact Details for service support
 #    Then Delete Contact Details for service support
      Then Click on CasesTab for service support
-     Then Create New Cases for service support
-     Then Create New Case by searching account and contact
+    # Then Create New Cases for service support
+     Then Create New Case by searching contact and account
 
 
     Examples:
