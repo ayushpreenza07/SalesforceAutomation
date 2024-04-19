@@ -149,9 +149,11 @@ public class OppurtunitiesUtil extends GlobalUtil {
      *
      * @param stage the stage
      * @param logStep the log
+     * @throws InterruptedException
      */
-    public static void setStage(String stage, String logStep){
+    public static void setStage(String stage, String logStep) throws InterruptedException {
         boolean flag = false;
+        KeywordUtil.scrollingToElementofAPage(OppurtunitiesObject.Stage,"scrolling to the Stage");
         KeywordUtil.waitForVisible(OppurtunitiesObject.Stage);
         KeywordUtil.click(OppurtunitiesObject.Stage,logStep);
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+stage+"')]";
