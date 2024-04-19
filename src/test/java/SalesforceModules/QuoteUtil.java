@@ -19,8 +19,7 @@ public class QuoteUtil {
     static HashMap<String, String> map = new HashMap<>();
 
     /**
-     * click new button for creating new Quote.
-     *
+     * click on new button for creating new Quote.
      * @param logStep the log
      */
     public static void newButtonQuote(String logStep){
@@ -138,6 +137,11 @@ public class QuoteUtil {
             KeywordUtil.click(By.xpath(xpath), "account selected");
         }
     }
+    /**
+     * Click on Search field on Accounts to select the Account.
+     * @param logStep the log
+     * @param account the account name
+     */
     public static void selectAccountForLeads(String account, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.searchAccounts);
@@ -210,7 +214,10 @@ public class QuoteUtil {
         KeywordUtil.waitForVisible(QuoteObject.quoteBtn);
         KeywordUtil.click(QuoteObject.quoteBtn,logStep);
     }
-
+    /**
+     * Click on Quote Card in RHS.
+     * @param logStep the log
+     */
     public static void clickQuoteCard(String logStep) {
         KeywordUtil.waitForVisible(QuoteObject.quoteCardBtn);
         KeywordUtil.click(QuoteObject.quoteCardBtn,logStep);
@@ -251,7 +258,11 @@ public class QuoteUtil {
         KeywordUtil.waitForClickable(QuoteObject.editLines);
         KeywordUtil.click(QuoteObject.editLines,logStep);
     }
-
+    /**
+     * Click on EditLines for adding the products
+     * @param logStep the log
+     *
+     */
     public static void clickEditLinesForLeads(String logStep) throws InterruptedException {
         KeywordUtil.delay(10000);
         addDiscountProductForLeads();
@@ -493,6 +504,9 @@ public class QuoteUtil {
         clickEditLines("Edit Lines clicked");
         enterDiscount("5","2FAUSBKEY","Entered discount");
     }
+    /**
+     * Click edit lines and add discount
+     */
     public static void addDiscountProductForLeads() throws InterruptedException {
         clickEditLines("Edit Lines clicked");
         enterDiscount("5","2FAUSBKEY","Entered discount");
@@ -500,7 +514,6 @@ public class QuoteUtil {
 
     /**
      * Create new quote combining all methods
-     *
      * @param name,opportunityName the log
      *
      */
@@ -514,13 +527,19 @@ public class QuoteUtil {
         clickSaveButton("clicked save button");
         addDiscountProduct();
     }
+    /**
+     * Selecting Opportunity and type and click on save button
+     * @param type
+     * @param opportunityName the account name
+     */
     public static void createNewQuotes(String opportunityName, String type) throws Exception {
         selectOpportunityForLeads(opportunityName,opportunityName+" entered opportunities name");
         selectType(type,"selected type");
         clickSaveButton("clicked save button");
     }
-
-
+    /**
+     * Verifying Product Titile
+     */
     public static void verifyProductTitle(){
        String  productTitle=KeywordUtil.getElementText(QuoteObject.quoteTitle);
        boolean productTit=KeywordUtil.isWebElementVisible(QuoteObject.quoteTitle,"");
