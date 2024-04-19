@@ -11,7 +11,10 @@ Feature: SalesForce_Forecasting
     And Assign a Role to the Forecast User
     And Check users shown in the Forecasts Hierarchy
     And Enable Forecast Settings for first-time user logging
-
+    And Create  Forecast Type with Opportunities
+    And Create  Forecast Type with Opportunities and Product
+    And Choose forecast range and show or hide quotas from the forecast
+#    And Verify Forecast on Manager Users Dashboard
     Examples:
       | TestData |
       | TestData1 |
