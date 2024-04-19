@@ -63,4 +63,15 @@ public class SalesForceServiceSupportDemo {
     public void Delete_contact_details() throws Exception {
         EditandDeleteUtil.deleteContact("Deleted the contact");
     }
+
+    @When("^Click on CasesTab for service support")
+    public void click_CasesTab() throws Exception {
+       CasesUtil.clickCasesTab("Clicked on CasesTab");
+    }
+
+    @When("^Create New Cases for service support")
+    public void create_new_Cases() throws Exception {
+        CasesUtil.createNewCase("New","Phone");
+
+    }
 }

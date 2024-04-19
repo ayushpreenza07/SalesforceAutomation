@@ -43,6 +43,16 @@ public class ServiceSupportObject {
     public static By contactTab_ss=By.xpath("//span[@class='slds-truncate'][text()='Contacts']");
 
     //xpaths for RemoveAll filter
-
     public static By removeFiltersInContacts_ss=By.xpath("//button[text()=\"Remove All\"]");
+
+    //Xpaths for CasesTab
+    public static By CasesTab=By.xpath("//span[@class='slds-truncate'][text()='Cases']");
+    public static By newTab=By.xpath("//div[@title='New']");
+    public static By status=By.xpath("//button[@data-value='New']");
+    public static By origin = By.xpath("//button[@data-value='--None--']");
+
+    //Xpaths for searching contact and account
+
+
+
 }
