@@ -23,7 +23,7 @@ public class QuoteUtil {
      *
      * @param logStep the log
      */
-    public static void NewButtonQuote(String logStep){
+    public static void newButtonQuote(String logStep){
         KeywordUtil.waitForVisible(QuoteObject.newQuoteButton);
         KeywordUtil.click(QuoteObject.newQuoteButton,logStep);
     }
@@ -78,14 +78,20 @@ public class QuoteUtil {
             KeywordUtil.click(By.xpath(xpath), "opportunity selected");
         }
     }
-    public static void selectOpportunityForLeads(String oppurt, String logStep) throws InterruptedException {
+    /**
+     * Using the following method need to select Opportunity
+     * @param  logStep the log
+     * @param opport the opportunity name
+     * @return
+     */
+    public static void selectOpportunityForLeads(String opport, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.searchOpportunities);
         KeywordUtil.clickJS(QuoteObject.searchOpportunities);
             KeywordUtil.click(QuoteObject.selectOppurtunityLeads,"Clicked on First option");
-        KeywordUtil.inputText(QuoteObject.searchOpportunities,oppurt,logStep);
+        KeywordUtil.inputText(QuoteObject.searchOpportunities,opport,logStep);
         KeywordUtil.delay(3000);
-        String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+oppurt+"')]";
+        String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+opport+"')]";
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
 
@@ -500,7 +506,7 @@ public class QuoteUtil {
      */
     public static void createNewQuote(String name, String opportunityName, String type) throws Exception {
         clickQuoteButton("Navigated to quote");
-        NewButtonQuote("Clicked new button");
+        newButtonQuote("Clicked new button");
         checkPrimary("primary checkbox marked");
         selectOpportunity(opportunityName,opportunityName+" entered opportunities name");
         selectAccount(name,name+" entered account name");

@@ -1006,6 +1006,11 @@ public class KeywordUtil extends GlobalUtil {
 
         return obj == null;
     }
+    /**
+     * Using clickJS for identifying the Webelement and click the element using JavaScript
+     * @param locator
+     * @return
+     */
     public static boolean clickJS(By locator) {
         WebElement element = KeywordUtil.getDriver().findElement(locator);
         Object obj = ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", element);

@@ -122,7 +122,7 @@ public class SalesForceLeads {
     @When("Click on QuoteCard and Click on New")
     public void click_on_quote_card_and_click_on_new() throws Exception {
         clickQuoteCard("Clicked on QuoteCard");
-        NewButtonQuote("Clicked new button");
+        newButtonQuote("Clicked new button");
     }
 
     @When("Enter New quote details")
