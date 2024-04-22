@@ -146,7 +146,6 @@ public class EditandDeleteUtil extends GlobalUtil {
     public static void editContactDetails(String lastname) throws InterruptedException {
         clickDropDownButton_ss("Clicked drop down button for contacts");
         clickEditButtonforcontact("Clicked edit button for accounts");
-      //  editPhoneNumber(phone, phone+" entered phone");
         enterLastContactName(lastname,lastname+" lastname set");
         clickSaveButton("clicked save button");
     }
@@ -198,8 +197,14 @@ public class EditandDeleteUtil extends GlobalUtil {
 
     }
 
-    // For creating filter
-
+    /**
+     * For creating filter
+     *
+     *
+     *  @param fieldname the fieldname
+     *  @param matchingValue the matchingValue
+     *
+     */
     public static void selectFilterInContacts_cnt(String fieldname,String matchingValue) throws InterruptedException {
         clickShowFilter_cnt();
         clickAddFilter_cnt();
@@ -211,25 +216,57 @@ public class EditandDeleteUtil extends GlobalUtil {
         clickCloseFilter_cnt();
     }
 
+    /**
+     * For clicking show filter
+
+     *
+     */
     public static void clickShowFilter_cnt(){
         KeywordUtil.waitForClickable(ServiceSupportObject.showFiltersInContacts_ss);
         KeywordUtil.click(ServiceSupportObject.showFiltersInContacts_ss,"click on show filters");
     }
+
+    /**
+     * For adding filter
+
+     *
+     */
     public static void clickAddFilter_cnt(){
         KeywordUtil.waitForClickable(ServiceSupportObject.addFiltersInContacts_ss);
         KeywordUtil.click(ServiceSupportObject.addFiltersInContacts_ss,"click on Add filters");
     }
+
+    /**
+     * For clicking field filter
+
+     *
+     */
     public static void clickFieldFilter_cnt(){
         KeywordUtil.waitForClickable(ServiceSupportObject.clickFieldFilter_ss);
         KeywordUtil.click(ServiceSupportObject.clickFieldFilter_ss,"click on Field filters dropdown");
     }
+
+    /**
+     * For entering value filled
+     *
+     */
     public static void enterValue_cnt(String matchingValue){
         KeywordUtil.inputText(ServiceSupportObject.enter_value_ss,matchingValue,"enter the value in filed");
     }
+
+    /**
+     * For entering value filled
+     *
+     */
     public static void clickDoneButton_cnt(){
         KeywordUtil.waitForClickable(ServiceSupportObject.doneButton_ss);
         KeywordUtil.click(ServiceSupportObject.doneButton_ss,"click on done button");
     }
+
+    /**
+     * For Save filter
+     *
+     */
     public static void saveFilter_cnt() throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ServiceSupportObject.saveFilterButton_ss);
@@ -237,6 +274,11 @@ public class EditandDeleteUtil extends GlobalUtil {
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
+
+    /**
+     * For selecting name filter
+     *
+     */
     public static void selectNameFilter_cnt(String filedName) throws InterruptedException {
         List<WebElement> getAllelements=KeywordUtil.getListElements(ServiceSupportObject.allDropdownElementsInFieldFilter_ss,"");
         for(WebElement element:getAllelements){
@@ -248,8 +290,12 @@ public class EditandDeleteUtil extends GlobalUtil {
                 element.click();
             }
         }
-
     }
+
+    /**
+     * For clicking close filter
+     *
+     */
     public static void clickCloseFilter_cnt() throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ServiceSupportObject.closeFilterButton_ss);
@@ -257,6 +303,11 @@ public class EditandDeleteUtil extends GlobalUtil {
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
+
+    /**
+     * For clicking contact tab
+     *
+     */
     public static void clickContactTab_cnt() throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ServiceSupportObject.contactTab_ss);
@@ -265,6 +316,10 @@ public class EditandDeleteUtil extends GlobalUtil {
         executor.executeScript("arguments[0].click();", element);
     }
 
+    /**
+     * For remove filter
+     *
+     */
     public static void removeFilter_cnt() throws InterruptedException {
         clickShowFilter_cnt();
         clickRemoveAllButton_cnt();
@@ -273,6 +328,10 @@ public class EditandDeleteUtil extends GlobalUtil {
 
     }
 
+    /**
+     * For clicking removeAll button for filter
+     *
+     */
     public static void clickRemoveAllButton_cnt() throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ServiceSupportObject.removeFiltersInContacts_ss);

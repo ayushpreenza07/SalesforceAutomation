@@ -55,4 +55,11 @@ public class ServiceSupportObject {
     public static By searchAccounts_ss=By.xpath("//input[@placeholder='Search Accounts...']");
     public static By searchContacts_ss=By.xpath("//input[@placeholder='Search Contacts...']");
 
+    //Xpaths for editing the case section
+    public static By editbutton_ss=By.xpath("(//button[@class='slds-button slds-button_neutral' and @name='Edit'])[2]");
+    public static By contactEmailAddress=By.xpath("//input[@inputmode=\"email\"]");
+
+    //Xpaths for Deleting the case
+    public static By deletebutton_case=By.xpath("//button[text()='Delete']");
+    public static By clickdeletebutton_case =By.xpath("//span[text()='Delete']");
 }

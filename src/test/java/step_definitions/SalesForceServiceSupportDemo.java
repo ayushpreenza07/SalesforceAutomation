@@ -39,7 +39,6 @@ public class SalesForceServiceSupportDemo {
     public void create_contact() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         ContactUtil.createContactforServiceSupport(dataMap.get("Salutation"), dataMap.get("ContactLastName"),dataMap.get("ContactEmail"),dataMap.get("Phone"));
-      //  ContactUtil.backToAccount("Navigated back to account");
     }
 
     @When("^Edit Contact Details for service support")
@@ -74,7 +73,6 @@ public class SalesForceServiceSupportDemo {
     @When("^Create New Cases for service support")
     public void create_new_Cases() throws Exception {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        //CasesUtil.createNewCase("New","Phone");
         CasesUtil.createNewCase (dataMap.get("status"), dataMap.get("origin"));
 
     }
@@ -84,5 +82,16 @@ public class SalesForceServiceSupportDemo {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         CasesUtil.createNewCasebySearchingContact_Account(dataMap.get("ContactLastName"), dataMap.get("AccountName"), dataMap.get("status"), dataMap.get("origin"));
 
+    }
+
+    @When("^Edit Case Details for service support")
+    public void edit_case_details() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        CasesUtil.editCaseDetails(dataMap.get("ContactEmail"));
+    }
+
+    @When("^Delete Case for service support")
+    public void delete_case() throws Exception{
+        CasesUtil.deleteCase("Deleted the contact");
     }
 }

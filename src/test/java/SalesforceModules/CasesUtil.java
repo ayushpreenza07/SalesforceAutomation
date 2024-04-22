@@ -4,10 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.AccountObject;
-import pageobjects.SalesforceObjects.OppurtunitiesObject;
-import pageobjects.SalesforceObjects.QuoteObject;
-import pageobjects.SalesforceObjects.ServiceSupportObject;
+import pageobjects.SalesforceObjects.*;
 import utilities.KeywordUtil;
 
 import static pageobjects.SalesforceObjects.ServiceSupportObject.origin;
@@ -174,4 +171,74 @@ public class CasesUtil {
         clickSaveButton("clicked save button");
     }
 
+    /**
+     * click edit Button in case section.
+     *
+     * @param logStep the log
+     */
+    public static void clickEditButton(String logStep) throws InterruptedException {
+        KeywordUtil.delay(8000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.editbutton_ss);
+        KeywordUtil.click(ServiceSupportObject.editbutton_ss,logStep);
+    }
+
+    /**
+     * Edit email field for new case.
+     *
+     * @param logStep the log
+     * @param email the edit
+     */
+    public static void enterEmail(String email, String logStep) {
+        KeywordUtil.waitForVisible(ServiceSupportObject.contactEmailAddress);
+        if (email.contains("@") && email.contains(".")) {
+            KeywordUtil.inputText(ServiceSupportObject.contactEmailAddress, email, logStep);
+        } else {
+            Assert.fail("invalid email format");
+        }
+    }
+
+    /**
+     * Edit Case Details
+     *
+     *
+     *  @param email the email field
+     */
+    public static void editCaseDetails(String email) throws InterruptedException {
+        clickEditButton("Clicked edit button for case");
+        enterEmail(email, email+" entered email");
+        clickSaveButton("clicked save button");
+    }
+
+
+    /**
+     * select delete button in case section
+     *
+     * @param logStep the log
+     */
+    public static void selectDeleteButton_case(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.deletebutton_case);
+        KeywordUtil.click(ServiceSupportObject.deletebutton_case,logStep);
+    }
+
+    /**
+     * click delete in case section.
+     *
+     * @param logStep the log
+     */
+    public static void clickDeleteButton_case(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.clickdeletebutton_case);
+        KeywordUtil.click(ServiceSupportObject.clickdeletebutton_case,logStep);
+    }
+
+    /**
+     * Delete Case
+     *
+     *
+     *  @param logStep the log
+     */
+    public static void deleteCase(String logStep) throws InterruptedException {
+        selectDeleteButton_case("Selected delete button");
+        clickDeleteButton_case("Clicked delete button");
+
+    }
 }
