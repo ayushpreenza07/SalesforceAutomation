@@ -15,4 +15,6 @@ public class AccountObject {
     public static By cpqButton = By.xpath("//P[@class='slds-truncate'][text()='Salesforce CPQ']");
     public static By billingAddress = By.xpath("(//textarea[@name='street'])[1]");
     public static By shippingAddress = By.xpath("(//textarea[@name='street'])[2]");
+    public static By logOutButton = By.xpath("//a[text()='Log Out']");
+    public static By accountProfileImage = By.xpath("//div[@class=\"profileTrigger branding-user-profile bgimg slds-avatar slds-avatar_profile-image-small circular forceEntityIcon\"]");
 }
