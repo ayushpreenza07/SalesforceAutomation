@@ -458,12 +458,55 @@ public class ForecastingModule {
 
 
     /**
-     * Choose a Default Date Range
+     * Verify Forecast on Manager Users Dashboard
      *
      * @throws InterruptedException
      */
     public static void verifyForecastonManagerUsersDashboard() throws InterruptedException {
         try {
+            Leads.clickOnHamburgerMenu("User Clicked on Menu");
+            takeScreenshotAndAttachInReport();
+            Leads.enterText("Forecasts");
+            KeywordUtil.waitForVisible(ForecastingPage.ownerName);
+            KeywordUtil.isWebElementVisible(ForecastingPage.ownerName, "Forecast on manager users dashboard is visible for user.");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.isWebElementVisible(ForecastingPage.showingDateRangeOnForecastsPage, "Verify date range filter is visible.");
+            KeywordUtil.click(ForecastingPage.showingDateRangeOnForecastsPage, "Click on date range filter.");
+            Thread.sleep(2000);
+            KeywordUtil.selectValueFromDropdown(ForecastingPage.dateOfStartPeriod, "March FY 2023", "Select value from start date.");
+            KeywordUtil.click(ForecastingPage.dateOfStartPeriod, "Click on date range filter.");
+            KeywordUtil.click(ForecastingPage.startDateAndMonth("March FY 2023"), "Select value from date range filter.");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.click(ForecastingPage.saveButton, "Click on save option.");
+            takeScreenshotAndAttachInReport();
+            KeywordUtil.isWebElementVisible(ForecastingPage.opportunityAmountTab, "Verify opportunity amount tab is visible.");
+            KeywordUtil.click(ForecastingPage.opportunityAmountTab, "Click on opportunity amount tab.");
+            takeScreenshotAndAttachInReport();
+            if (KeywordUtil.isWebElementVisible(ForecastingPage.assignedQuotas, "Verify assigned quotas value is visible or not.")) {
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Assigned quotas value is visible to user on forecast on manager users dashboard."));
+                takeScreenshotAndAttachInReport();
+            } else {
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("No quotas value is assign to user from forecasts settings."));
+                takeScreenshotAndAttachInReport();
+
+            }
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /**
+     * Verify Forecast on Teams Users Dashboard
+     *
+     * @throws InterruptedException
+     */
+    public static void verifyForecastonTeamsUsersDashboard() throws InterruptedException {
+        try {
+            KeywordUtil.isWebElementVisible(AccountObject.accountProfileImage, "Account profile image is visible.");
+            KeywordUtil.click(AccountObject.accountProfileImage, "Click on Account profile image.");
+            KeywordUtil.isWebElementVisible(AccountObject.logOutButton, "Log out button is visible.");
+            KeywordUtil.click(AccountObject.logOutButton, "Click on Log out.");
+            LoginSalesforceUtil.loginToSalesforce("sukanya@testingxperts.com", "Tiger@1234");
             Leads.clickOnHamburgerMenu("User Clicked on Menu");
             takeScreenshotAndAttachInReport();
             Leads.enterText("Forecasts");

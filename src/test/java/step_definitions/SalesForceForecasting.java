@@ -136,4 +136,14 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
+
+    @And("Verify Forecast on Teams Users Dashboard")
+    public void verifyForecastOnTeamsUsersDashboard() {
+        try {
+            ForecastingModule.verifyForecastonTeamsUsersDashboard();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+
+    }
 }
