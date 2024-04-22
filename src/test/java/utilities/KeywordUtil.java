@@ -1593,7 +1593,6 @@ public class KeywordUtil extends GlobalUtil {
         try {
             KeywordUtil.click(By.xpath("//*[@aria-label='" + dropdownLocator + "']"), "Click on dropdown.");
             WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-//            wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownLocator));
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label='" + dropdownLocator + "']")));
             WebElement dropdownElement = getDriver().findElement(By.xpath("//*[@aria-label='" + dropdownLocator + "']"));
             WebElement option = dropdownElement.findElement(By.xpath("//span[text()='" + optionName + "']"));

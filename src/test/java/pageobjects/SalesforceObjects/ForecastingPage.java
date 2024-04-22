@@ -40,11 +40,7 @@ public class ForecastingPage {
     public static By dateOfStartPeriod = By.xpath("//select[@name=\"startPeriod\"]");
     public static By showingDateRangeOnForecastsPage = By.xpath("//span[@class=\"slds-m-right_small slds-text-color_weak\"]");
     public static By datetypePage = By.xpath("//*[text()=\"Select a date type\"]");
-    public static By selectDateType = By.xpath("//*[@aria-label=\"Select a date type... - Current Selection: Select a date type...\"]");
-    public static By selectDateTypeOption = By.xpath("//span[text()=\"Close Date (Opportunity)\"]");
     public static By hierarchyPage = By.xpath("//*[text()=\"Choose a hierarchy\"]");
-    public static By selectHierarchyDropdown = By.xpath("//*[@aria-label=\"Select a hierarchy... - Current Selection: Select a hierarchy...\"]");
-    public static By selectHierarchyOption = By.xpath("//span[text()=\"User role\"]");
     public static By optionalFilterPage = By.xpath("//*[text()=\"Add optional filters\"]");
     public static By forecastTypeName = By.xpath("//*[text()=\"Name your forecast type\"]");
     public static By forecastTypeNameInputTextField = By.xpath("//input[@name=\"forecastTypeName\"]");
@@ -57,26 +53,26 @@ public class ForecastingPage {
     public static By enableForecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//span[@part='indicator']");
 
 
-    public static By QuickFind = By.xpath("//input[@placeholder='Quick Find']");
+    public static By quickFind = By.xpath("//input[@placeholder='Quick Find']");
 
-    public static By Users = By.xpath("//li[@aria-level=\"2\"]/child::div[@title=\"Users\"]//a");
-    public static By NewUser = By.xpath("//input[@value='New User']");
-    public static By FirstName = By.xpath("//input[@id='name_firstName']");
-    public static By LastName = By.xpath("//input[@id='name_lastName']");
-    public static By Alias = By.xpath("//input[@id='Alias']");
-    public static By Email = By.xpath("//input[@id='Email']");
-    public static By Username = By.xpath("//input[@id='Username']");
-    public static By Nickname = By.xpath("//input[@id='CommunityNickname']");
-    public static By CompanyName = By.xpath("//input[@id='CompanyName']");
-    public static By Department = By.xpath("//input[@id='Department']");
+    public static By users = By.xpath("//li[@aria-level=\"2\"]/child::div[@title=\"Users\"]//a");
+    public static By newUser = By.xpath("//input[@value='New User']");
+    public static By firstName = By.xpath("//input[@id='name_firstName']");
+    public static By lastName = By.xpath("//input[@id='name_lastName']");
+    public static By alias = By.xpath("//input[@id='Alias']");
+    public static By email = By.xpath("//input[@id='Email']");
+    public static By username = By.xpath("//input[@id='Username']");
+    public static By nickname = By.xpath("//input[@id='CommunityNickname']");
+    public static By companyName = By.xpath("//input[@id='CompanyName']");
+    public static By department = By.xpath("//input[@id='Department']");
 
-    public static By Role = By.id("role");
-    public static By UserLicense = By.id("user_license_id");
-    public static By Profile = By.id("Profile");
+    public static By role = By.id("role");
+    public static By userLicense = By.id("user_license_id");
+    public static By profile = By.id("Profile");
 
-    public static By AllowForecasting = By.id("forecast_enabled");
+    public static By allowForecasts = By.id("forecast_enabled");
 
-    public static By SaveButton = By.xpath("//input[@value=' Save ']");
+    public static By saveBtn = By.xpath("//input[@value=' Save ']");
     public static By opportunityAmountTab = By.xpath("//a[@data-label='Opportunity Amount']");
     public static By assignedQuotas = By.xpath("//span[@class='fct-value-quota-width forceOutputCurrency']");
 
