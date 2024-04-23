@@ -163,7 +163,7 @@ public class salesforceDemo {
         ContractUtil.createContract(dataMap.get("AccountName"));
     }
 
-    @And("navigate to setup screen")
+    @When("navigate to setup screen")
     public void navigateToSetupScreen() {
         try {
             KeywordUtil.takeScreenshotAndAttachInReport();
