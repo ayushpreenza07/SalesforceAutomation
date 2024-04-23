@@ -54,14 +54,14 @@ public class salesforceDemo {
 
         KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
         //KeywordUtil.navigateToUrl("https://testingxperts17-dev-ed.develop.my.salesforce.com/");//neelima SF URL
-//        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-//        KeywordUtil.navigateToUrl(dataMap.get("URL"));
+        //dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        //KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
 
     @When("^login to salesforce$")
     public void login_Salesforce() throws Exception{
 //        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-//        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
+        //LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
         LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
         //LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername2"),ConfigReader.getValue("salesforcePassword2"));// neelima credentials
 
