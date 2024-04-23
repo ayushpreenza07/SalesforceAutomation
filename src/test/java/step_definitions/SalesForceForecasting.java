@@ -2,11 +2,9 @@ package step_definitions;
 
 import SalesforceModules.ForecastingModule;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import utilities.KeywordUtil;
 import org.testng.Assert;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
@@ -57,7 +55,7 @@ public class SalesForceForecasting {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Roles");
             ForecastingModule.selectValueFromSampleRoleHierarchies();
-            ForecastingModule.selectRolesFromHierarchy("CEO","Assign");
+            ForecastingModule.selectRolesFromHierarchy("CEO", "Assign");
             ForecastingModule.assignRolesToUser();
         } catch (Exception e) {
             catchAssertError(e);
@@ -95,6 +93,58 @@ public class SalesForceForecasting {
         } catch (Exception e) {
             catchAssertError(e);
         }
+    }
+
+    @And("Create  Forecast Type with Opportunities")
+    public void createForecastTypeWithOpportunities() {
+        try {
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.createForecastTypeWithOpportunities();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+
+    @And("Create  Forecast Type with Opportunities and Product")
+    public void createForecastTypeWithOpportunitiesAndProduct() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.createForecastTypeWithOpportunitiesandProduct();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    @And("Choose forecast range and show or hide quotas from the forecast")
+    public void chooseForecastRangeOrShowHideQuotasFromTheForecast() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.chooseaDefaultDateRange();
+            ForecastingModule.chooseaDefaultQuotas();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    @And("Verify Forecast on Manager Users Dashboard")
+    public void verifyForecastOnManagerUsersDashboard() {
+        try {
+            ForecastingModule.verifyForecastonManagerUsersDashboard();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    @And("Verify Forecast on Teams Users Dashboard")
+    public void verifyForecastOnTeamsUsersDashboard() {
+        try {
+            ForecastingModule.verifyForecastonTeamsUsersDashboard();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+
     }
     @And("Navigate to forecast settings page")
     public void navigateToForecastSettingsPage() {
@@ -162,4 +212,7 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
+
+
 }
+

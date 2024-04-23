@@ -146,6 +146,15 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     /**
+     * Scroll down as per coordinates
+     *
+     * @throws InterruptedException the interrupted exception
+     */
+    public static void scrollDown() {
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0, 250)");
+    }
+
+    /**
      * Take mobile screenshot byte [ ].
      *
      * @param screenshotFilePath the screenshot file path
@@ -1421,6 +1430,28 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     /**
+     * Select value from drop down.
+     *
+     * @param dropdownLocator dropdown field by locator
+     * @param optionName select option by name
+     *
+     */
+    public static void  selectValueFromDropdown(By dropdownLocator, String optionName,String logStep) {
+        try {
+            KeywordUtil.click(dropdownLocator, "Click on dropdown.");
+            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dropdownLocator));
+            WebElement dropdownElement = getDriver().findElement(dropdownLocator);
+            WebElement option = dropdownElement.findElement(By.xpath("//span[text()='" + optionName + "']"));
+            option.click();
+            takeScreenshotAndAttachInReport();
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Gets element by img.
      *
      * @param img the img
@@ -1576,6 +1607,43 @@ public class KeywordUtil extends GlobalUtil {
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Select name value from drop down.
+     *
+     * @param dropdownLocator dropdown field
+     * @param optionName option name from list
+     *
+     */
+    public static void selectOptionNameFromDropdown(String dropdownLocator, String optionName, String logStep) {
+        try {
+            KeywordUtil.click(By.xpath("//*[@aria-label='" + dropdownLocator + "']"), "Click on dropdown.");
+            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label='" + dropdownLocator + "']")));
+            WebElement dropdownElement = getDriver().findElement(By.xpath("//*[@aria-label='" + dropdownLocator + "']"));
+            WebElement option = dropdownElement.findElement(By.xpath("//span[text()='" + optionName + "']"));
+            option.click();
+            takeScreenshotAndAttachInReport();
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Generate a random name
+     *
+     * @return
+     */
+    public static String generateRandomName() {
+        Random rand = new Random();
+        StringBuilder name = new StringBuilder();
+        for (int i = 0; i < 5; i++) { // Generating a random name of length 5
+            char randomChar = (char) ('A' + rand.nextInt(26)); // Random letter from A to Z
+            name.append(randomChar);
+        }
+        return name.toString();
     }
 
 }// End class
