@@ -51,6 +51,13 @@ public class ForecastingPage {
     public static By forecastAppOption = By.xpath("//a[.//b[text()='Forecasts']]");
     public static By deactivateOption = By.xpath("//a[./span[text()='Deactivate']]");
     public static By deactivateButton = By.xpath(("//button[text()='Deactivate']"));
+    public static By showQuotasButton = By.xpath("//button[normalize-space()='Show Quotas']");
+    public static By selectAllCheckbox = By.xpath("//span[text()='Select All']/preceding-sibling::span");
+    public static By editSelectedRowsButton = By.xpath("//button[normalize-space()='Edit Selected Rows']");
+    public static By editQuotasDialog = By.xpath("//h2[text()='Edit Quotas']");
+    public static By quotaInputField = By.xpath("//div[@role='dialog']//input");
+    public static By editQuotaSaveButton = By.xpath("//button[normalize-space()='Save']");
+    public static By quotaFieldValue = By.xpath("//td[.//span[text()='March FY 2023']]/following-sibling::td//span[@class='fct-value-quota-width uiOutputNumber']");
 
 
     public static By opportunityList = By.xpath("//*[text()=\"Customize the opportunity list\"]");
@@ -84,11 +91,14 @@ public class ForecastingPage {
     public static By assignedQuotas = By.xpath("//span[@class='fct-value-quota-width forceOutputCurrency']");
 
     public static By searchSetupOption(String searchValue) {
-        return By.xpath("//li[@role='treeitem' and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
+        return By.xpath("//li[@aria-level=\"2\" and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
     }
 
     public static By userOption(String searchValue) {
-        return By.xpath("//li[@role='treeitem']/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
+
+        return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
+
+
     }
 
     public static By assignOption(String roleValue, String actionValue) {
@@ -122,5 +132,8 @@ public class ForecastingPage {
         return By.xpath("//li[@title='"+ forecastName +"']");
     }
 
+    public static By forecastTypeLink(String forecastTypeName){
+        return By.xpath("//a[text()='"+ forecastTypeName +"']");
+    }
 
 }

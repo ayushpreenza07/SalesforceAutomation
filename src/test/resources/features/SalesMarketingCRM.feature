@@ -5,7 +5,7 @@ Feature: Salesforce Marketing CRM
   @MarketingCRM_01
   Scenario Outline:Create and edit comapigns
     Given Read the testdata "<TestData>" and "<SheetName>" from excel file
-    Given navigate to Salesforce as "System Admin"
+    When navigate to Salesforce as "System Admin"
     And login to Salesforce with "System Admin" credentials
     And user clicks on the App launcher button
     And user selects the "Marketing CRM Classic"

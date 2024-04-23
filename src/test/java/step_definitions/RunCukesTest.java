@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Date;
 
 @CucumberOptions(features = "classpath:features", plugin = {"pretty", "html:target/cucumber-html-report.html",
-		"json:target/cucumber.json"}, tags = "@ForecastActivation", monochrome = true
+		"json:target/cucumber.json"}, tags = "@Forecast", monochrome = true
 
 )
 public class RunCukesTest extends AbstractTestNGCucumberTests {

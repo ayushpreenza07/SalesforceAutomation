@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class SalesForceForecasting {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
+    public static String forecastName = KeywordUtil.generateRandomName();
 
     public static void main(String[] args) {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
@@ -100,7 +101,7 @@ public class SalesForceForecasting {
         try {
             ForecastingModule.clickOnSetup("Setup page is opened");
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-            ForecastingModule.createForecastTypeWithOpportunities();
+            ForecastingModule.createForecastTypeWithOpportunities(forecastName);
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -111,7 +112,7 @@ public class SalesForceForecasting {
     public void createForecastTypeWithOpportunitiesAndProduct() {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-            ForecastingModule.createForecastTypeWithOpportunitiesandProduct();
+            ForecastingModule.createForecastTypeWithOpportunitiesandProduct(forecastName);
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -163,56 +164,46 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
-    @When("Activate Forecast")
-    public void activateForecast() {
-        try{
-            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
-            ForecastingModule.selectActivateFromActions();
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-    @And("Search For Forecasts application and Navigate To Forecasts page")
-    public void searchForForForecastsApplicationAndNavigateToForecastsPage() {
+    @And("Activate Created Forecast")
+    public void activateCreatedForecast() {
         try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+            ForecastingModule.clickOnShowActionsOfForecast(forecastName);
+            ForecastingModule.selectActivateFromActions();
             ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
             ForecastingModule.validateForecastingPageIsLoaded();
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-
-    @Then("Validate Activated Forecast Is Visible")
-    public void validateActivatedForecastIsVisible() {
-        try{
-            ForecastingModule.validateActivatedForecastIsAvailable("testAuto");
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-    @And("Deactivate Forecast")
-    public void deactivateForecast() {
-        try{
-            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
-            ForecastingModule.selectDeactivateFromActions();
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-    @And("Navigate to forecast settings page In New Window")
-    public void navigateToForecastSettingsPageInNewWindow() {
-        try {
+            ForecastingModule.validateActivatedForecastIsAvailable(forecastName);
+            ForecastingModule.clickOnSetup("Setup page is opened");
             KeywordUtil.switchToWindow();
-            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @And("Assign Forecast Quotes To User")
+    public void assignForecastQuotesToUser() {
+        try{
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Quotas");
+            ForecastingModule.validateForecastQuotasPageIsLoaded();
+            ForecastingModule.selectAllRoleBasedForecasts();
+            ForecastingModule.clickOnEditSelectedRows();
+            ForecastingModule.validateEditQuotasDialogIsDisplayed();
+            ForecastingModule.enterQuotaValueAndClickOnSaveButton("3000");
+            ForecastingModule.validateQuotasSavedDialogIsDisplayed();
+            KeywordUtil.BrowserRefresh();
+            KeywordUtil.delay(3000);
+            ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
+            ForecastingModule.validateForecastingPageIsLoaded();
+            ForecastingModule.navigateToForecastType("Automation");
+            ForecastingModule.validateUserAbleToSeeTheEditedQuota("3,000");
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            KeywordUtil.switchToWindow();
+        }
+        catch (Exception e) {
             catchAssertError(e);
         }
     }
 
-
-}
+    }
 
