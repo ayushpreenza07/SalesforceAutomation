@@ -6,8 +6,10 @@ Feature: Salesforce Leads
   and Change Lead Status to Contacted or
   Close Leads if not required to Convert
 
-    Given navigate to salesforce URL
-    And login to salesforce URL
+#    Given navigate to salesforce URL
+#    And login to salesforce URL
+    Given navigate to Salesforce as "Leads Admin"
+    And login to Salesforce with "Leads Admin" credentials
     When Click on Hamburger Menu
     And click on Search <"Leads">
     Then verify Leads Page
@@ -25,8 +27,10 @@ Feature: Salesforce Leads
   Convert Leads to Opportunities: Create New or
   Select Existing Accounts, Contacts, and Opportunities
 
-    Given navigate to salesforce URL
-    And login to salesforce URL
+#    Given navigate to salesforce URL
+#    And login to salesforce URL
+    Given navigate to Salesforce as "Leads Admin"
+    And login to Salesforce with "Leads Admin" credentials
     When Click on Hamburger Menu
     And click on Search <"Leads">
     Then verify Leads Page
