@@ -23,7 +23,7 @@ public class SalesForceBilling {
     }
 
     @And("Create new product")
-    public void create_new_product() throws Exception {
+    public void createNewProduct() throws Exception {
         SalesForceBillingUtil.newProduct();
     }
 
