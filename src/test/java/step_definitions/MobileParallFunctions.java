@@ -16,7 +16,7 @@ public class MobileParallFunctions {
 	public void setUp(String platformVersion, String deviceName, String port) throws MalformedURLException {
 		AppiumDriverLocalService service = new AppiumServiceBuilder().usingPort(Integer.valueOf(port)).build();
 		service.start();
-		DesiredCapabilities dc = new DesiredCapabilities();
+	DesiredCapabilities dc = new DesiredCapabilities();
 		dc.setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion);
 		dc.setCapability(MobileCapabilityType.DEVICE_NAME, deviceName);
 		dc.setCapability("appPackage", "in.amazon.mShop.android.shopping");

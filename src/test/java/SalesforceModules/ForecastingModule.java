@@ -561,5 +561,99 @@ public class ForecastingModule {
 
     }
 
+    /*
+Validating 'Forecast Settings' page should be loaded
+ */
+    public static void validateForecastSettingsPageShouldBeLoaded() throws InterruptedException {
+        try {
+            Thread.sleep(2000);
+            KeywordUtil.validatePageShouldBeLoaded("Forecasts Settings");
+        }catch (Exception e){
+            catchAssertError(e);
+        }
+    }
+    /*
+    Clicking on 'Show Actions' Of specific Forecast, We need to pass the Forecast name
+     */
+    public static void clickOnShowActionsOfForecast(String forecastName) throws InterruptedException
+    {
+        try {
+            KeywordUtil.isWebElementVisible(ForecastingPage.showActionsButton(forecastName), "Forecasts is available");
+            KeywordUtil.scrollElementIntoViewUsingActions(ForecastingPage.showActionsButton(forecastName));
+            KeywordUtil.click(ForecastingPage.showActionsButton(forecastName), "Click on Show Actions button.");
 
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    /*
+    Select 'Activate' From Actions of Forecast
+     */
+    public static void selectActivateFromActions(){
+        try {
+            KeywordUtil.isWebElementVisible(ForecastingPage.activateOption, "Activation option is available");
+            KeywordUtil.click(ForecastingPage.activateOption, "Click on Activate option.");
+            takeScreenshotAndAttachInReport();
+            CampaignUtil.verificationMessage();
+        }
+        catch (Exception e){
+            catchAssertError(e);
+        }
+    }
+    /*
+    Click on app launcher icon and search for Forecast application
+     */
+    public static void clickOnAppLauncherIconAndSearchForForecast() throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.appLauncherIcon);
+            KeywordUtil.click(ForecastingPage.appLauncherIcon, "Click on App Launcher Icon.");
+            KeywordUtil.waitForVisible(ForecastingPage.searchAppInput);
+            KeywordUtil.inputText(ForecastingPage.searchAppInput, "Forecasts", "Search for Forecast");
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(ForecastingPage.forecastAppOption);
+            KeywordUtil.pressEnter(ForecastingPage.forecastAppOption);
+        }
+        catch (Exception e){
+            catchAssertError(e);
+        }
+    }
+    /*
+    Validate Forecasting Page is loaded
+     */
+    public static void validateForecastingPageIsLoaded() throws InterruptedException {
+        try{
+            Thread.sleep(6000);
+            KeywordUtil.validatePageShouldBeLoaded("Forecasts");
+        }catch (Exception e){
+            catchAssertError(e);
+        }
+    }
+    /*
+    Validate Activated Forecast is available in Forecast page
+     */
+    public static void validateActivatedForecastIsAvailable(String forecastName) throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.forecastTitle(forecastName));
+        }
+        catch (Exception e){
+            catchAssertError(e);
+        }
+    }
+    /*
+    Select 'Deactivate' From Actions of Forecast
+     */
+    public static void selectDeactivateFromActions(){
+        try {
+            KeywordUtil.isWebElementVisible(ForecastingPage.deactivateOption, "Deactivation option is available");
+            KeywordUtil.click(ForecastingPage.deactivateOption, "Click on Deactivate option.");
+            KeywordUtil.delay(2000);
+            KeywordUtil.waitForVisible(ForecastingPage.deactivateButton);
+            KeywordUtil.click(ForecastingPage.deactivateButton, "Click on Deactivate button.");
+            takeScreenshotAndAttachInReport();
+            CampaignUtil.verificationMessage();
+        }
+        catch (Exception e){
+            catchAssertError(e);
+        }
+    }
 }

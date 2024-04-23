@@ -45,6 +45,13 @@ public class ForecastingPage {
     public static By forecastTypeName = By.xpath("//*[text()=\"Name your forecast type\"]");
     public static By forecastTypeNameInputTextField = By.xpath("//input[@name=\"forecastTypeName\"]");
     public static By forecastTypeSet = By.xpath("//*[text()=\"You've set up your forecast type\"]");
+    public static By activateOption = By.xpath("//a[./span[text()='Activate']]");
+    public static By appLauncherIcon = By.xpath("//div[@class='appLauncher slds-context-bar__icon-action']//button");
+    public static By searchAppInput = By.xpath("//input[@class='slds-input']");
+    public static By forecastAppOption = By.xpath("//a[.//b[text()='Forecasts']]");
+    public static By deactivateOption = By.xpath("//a[./span[text()='Deactivate']]");
+    public static By deactivateButton = By.xpath(("//button[text()='Deactivate']"));
+
 
     public static By opportunityList = By.xpath("//*[text()=\"Customize the opportunity list\"]");
     public static By forecastTypeCompletion = By.xpath("//*[text()=\"Good job!\"]");
@@ -77,11 +84,11 @@ public class ForecastingPage {
     public static By assignedQuotas = By.xpath("//span[@class='fct-value-quota-width forceOutputCurrency']");
 
     public static By searchSetupOption(String searchValue) {
-        return By.xpath("//li[@aria-level=\"2\" and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
+        return By.xpath("//li[@role='treeitem' and @aria-label='" + searchValue + "'] | //li[@aria-level=\"4\" and @aria-label='" + searchValue + "']");
     }
 
     public static By userOption(String searchValue) {
-        return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
+        return By.xpath("//li[@role='treeitem']/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
     }
 
     public static By assignOption(String roleValue, String actionValue) {
@@ -106,6 +113,13 @@ public class ForecastingPage {
     }
     public static By startDateAndMonth(String Value) {
         return By.xpath("//option[text()='" + Value + "']");
+    }
+    public static By showActionsButton(String forecastName){
+        return By.xpath("//tr[.//div[normalize-space()='"+ forecastName +"']]//button[./*[text()='Show actions']]");
+    }
+
+    public static By forecastTitle(String forecastName){
+        return By.xpath("//li[@title='"+ forecastName +"']");
     }
 
 

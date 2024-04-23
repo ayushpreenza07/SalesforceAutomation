@@ -53,6 +53,7 @@ public class salesforceDemo {
     public void navigate_to_the_url() throws Exception {
 
         KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
+        //KeywordUtil.navigateToUrl("https://testingxperts17-dev-ed.develop.my.salesforce.com/");//neelima SF URL
 //        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
 //        KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
@@ -62,6 +63,7 @@ public class salesforceDemo {
 //        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
 //        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
         LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
+        //LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername2"),ConfigReader.getValue("salesforcePassword2"));// neelima credentials
 
     }
 
@@ -118,7 +120,7 @@ public class salesforceDemo {
         ContractUtil.createContract(dataMap.get("AccountName"));
     }
 
-    @And("navigate to setup screen")
+    @When("navigate to setup screen")
     public void navigateToSetupScreen() {
         try {
             KeywordUtil.takeScreenshotAndAttachInReport();

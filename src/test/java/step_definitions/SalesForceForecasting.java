@@ -146,4 +146,73 @@ public class SalesForceForecasting {
         }
 
     }
+    @And("Navigate to forecast settings page")
+    public void navigateToForecastSettingsPage() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @Then("Validate Forecast settings page is loaded")
+    public void validateForecastSettingsPageIsLoaded() {
+        try {
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+        }
+        catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @When("Activate Forecast")
+    public void activateForecast() {
+        try{
+            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
+            ForecastingModule.selectActivateFromActions();
+        }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+    @And("Search For Forecasts application and Navigate To Forecasts page")
+    public void searchForForForecastsApplicationAndNavigateToForecastsPage() {
+        try {
+            ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
+            ForecastingModule.validateForecastingPageIsLoaded();
+        }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+
+    @Then("Validate Activated Forecast Is Visible")
+    public void validateActivatedForecastIsVisible() {
+        try{
+            ForecastingModule.validateActivatedForecastIsAvailable("testAuto");
+        }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+    @And("Deactivate Forecast")
+    public void deactivateForecast() {
+        try{
+            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
+            ForecastingModule.selectDeactivateFromActions();
+        }
+        catch(Exception e){
+            catchAssertError(e);
+        }
+    }
+    @And("Navigate to forecast settings page In New Window")
+    public void navigateToForecastSettingsPageInNewWindow() {
+        try {
+            KeywordUtil.switchToWindow();
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+
 }
+
