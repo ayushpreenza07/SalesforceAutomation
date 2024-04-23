@@ -62,6 +62,9 @@ public class SalesForceCPQ {
             case "Leads Admin":
                 baseUrl = ConfigReader.getValue("Leads_URL");
                 break;
+            case "Billing Admin":
+                baseUrl = ConfigReader.getValue("Billing_URL");
+                break;
 
             // Add cases for other user types as needed
             default:
@@ -94,6 +97,11 @@ public class SalesForceCPQ {
                 username = ConfigReader.getValue("leadsUsername");
                 password = ConfigReader.getValue("leadsPassword");
                 break;
+            case "Billing Admin":
+                username = ConfigReader.getValue("salesforceUsernameBilling");
+                password = ConfigReader.getValue("salesforcePasswordBilling");
+                break;
+
             // Add cases for other user types as needed
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
@@ -103,8 +111,6 @@ public class SalesForceCPQ {
 
     @When("^create new account$")
     public void create_new_account() throws Exception{
-
-
         AccountUtil.createNewAccount(dataMap.get("AccountName"), dataMap.get("Phone"));
     }
 

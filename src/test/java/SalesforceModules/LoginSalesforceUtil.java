@@ -38,5 +38,9 @@ public class LoginSalesforceUtil extends GlobalUtil {
         clickLogin("login button clicked");
     }
 
+    public static void okayLogin(){
+        KeywordUtil.waitForVisible(LoginObject.okayLogin);
+        KeywordUtil.click(LoginObject.okayLogin, "Okay button clicked");
+    }
 
 }
