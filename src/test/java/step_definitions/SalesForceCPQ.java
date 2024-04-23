@@ -4,26 +4,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.OppurtunitiesObject;
-import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 import SalesforceModules.*;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import java.util.HashMap;
-
-public class salesforceDemo {
+public class SalesForceCPQ {
 
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
 
@@ -58,7 +49,7 @@ public class salesforceDemo {
 
 
     @When("^navigate to Salesforce as \"([^\"]*)\"$")
-    public void navigate_to_the_url(String userType) throws Exception {
+    public void navigateToUrlAccordingToUserType(String userType) throws Exception {
 
         String baseUrl = "";
         switch (userType) {
@@ -87,7 +78,7 @@ public class salesforceDemo {
     }
 
     @When("^login to Salesforce with \"([^\"]*)\" credentials$")
-    public void loginToSalesforce(String userType) throws Exception {
+    public void loginToSalesforceAccordingToUserType(String userType) throws Exception {
         String username = "";
         String password = "";
         switch (userType) {

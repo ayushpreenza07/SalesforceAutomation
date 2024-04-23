@@ -3,8 +3,6 @@ Feature: salesforce demo
   @salesforce
   Scenario Outline: salesforce demo
     Given Read the test data  "<TestData>" from Excel
-#    Given navigate to salesforce
-#    And login to salesforce
     Given navigate to Salesforce as "System Admin"
     And login to Salesforce with "System Admin" credentials
     Then create new account

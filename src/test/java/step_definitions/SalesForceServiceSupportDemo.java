@@ -2,19 +2,10 @@ package step_definitions;
 
 import SalesforceModules.AccountUtil;
 import SalesforceModules.EditandDeleteUtil;
-import SalesforceModules.LoginSalesforceUtil;
 import SalesforceModules.ServiceSupportUtil;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
-import utilities.ConfigReader;
-import utilities.ExcelDataUtil;
-import utilities.GlobalUtil;
-import utilities.KeywordUtil;
 
 import java.util.HashMap;
-
-import static step_definitions.salesforceDemo.dataMap;
 
 public class SalesForceServiceSupportDemo {
 
@@ -28,7 +19,7 @@ public class SalesForceServiceSupportDemo {
 
     @When("^Edit Account Details")
     public void edit_account_details() throws Exception{
-        dataMap= salesforceDemo.dataMap;
+        dataMap= SalesForceCPQ.dataMap;
         EditandDeleteUtil.editAccountDetails(dataMap.get("Phone"));
     }
 
