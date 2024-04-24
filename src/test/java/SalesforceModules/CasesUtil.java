@@ -10,6 +10,7 @@ import utilities.KeywordUtil;
 import java.security.Key;
 
 import static pageobjects.SalesforceObjects.ServiceSupportObject.origin;
+import static utilities.KeywordUtil.catchAssertError;
 
 public class CasesUtil {
 
@@ -283,6 +284,101 @@ public class CasesUtil {
         clickCasesTab("Click on case Tab");
         clickSearch_case("Clicked search button");
 
+    }
 
+    /**
+     * Enter phone number field for new account.
+     *
+     * @param logStep the log
+     * @param PhoneNumber1 the phoneNumber1
+     */
+    public static void enterPhoneNumber1(String PhoneNumber1, String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.PhoneNumber1);
+        KeywordUtil.inputText(ServiceSupportObject.PhoneNumber1, PhoneNumber1,logStep);
+    }
+
+    /**
+     * Enter account name field for new account.
+     *
+     * @param logStep the log
+     * @param name the account name
+     */
+    public static void enterAccountName(String name, String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.AccountName1);
+        KeywordUtil.inputText(ServiceSupportObject.AccountName1, name,logStep);
+    }
+
+    /**
+     * click save button for case section in search flow
+     *
+     * @param logStep the log
+     */
+    public static void saveBtnOfNewAccount_ss(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.saveBtnOfNewAccount);
+        KeywordUtil.click(ServiceSupportObject.saveBtnOfNewAccount,logStep);
+
+    }
+
+    /**
+     * click save button for case section in search flow
+     *
+     * @param logStep the log
+     */
+    public static void saveBtnOfNewCase_ss(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.saveBtnOfNewCase);
+        KeywordUtil.click(ServiceSupportObject.saveBtnOfNewCase,logStep);
+    }
+
+    /**
+     * Enter account name field for new account.
+     *
+     * @param logStep the log
+     * @param AccountName1 the account name
+     * @param PhoneNumber1 the PhoneNumber1
+     */
+    public static void newCaseByCreatingNewAccount(String AccountName1, String PhoneNumber1,String origin,String logStep) throws InterruptedException {
+        try {
+            clickCasesTab("Clicked on CasesTab");
+            clickNewButton("Clicked on New Button for Cases");
+            KeywordUtil.waitForVisible(ServiceSupportObject.searchAccountsForAccountName);
+            KeywordUtil.click(ServiceSupportObject.searchAccountsForAccountName, "Click on search accounts");
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(ServiceSupportObject.newAccountOption);
+            KeywordUtil.click(ServiceSupportObject.newAccountOption, "Click on New Account option");
+            enterAccountName(AccountName1, "Entered Account Name");
+            enterPhoneNumber1(PhoneNumber1, "Entered phone Number");
+            saveBtnOfNewAccount_ss("clicked save button");
+            setCaseOrigin(origin, "Case origin value is selected");
+            saveBtnOfNewCase_ss("Clicked on Save button");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /**
+     * Enter contact name field for new account.
+     *
+     * @param logStep the log
+     * @param firstname the firstname
+     * @param lastname the lastname
+     * @param origin the origin
+     */
+    public static void newCaseByCreatingNewContact(String firstname,String lastname,String origin,String logStep) throws InterruptedException {
+        try {
+            CasesUtil.clickCasesTab("Clicked on CasesTab");
+            CasesUtil.clickNewButton("Clicked on New Button for Cases");
+            KeywordUtil.waitForVisible(ServiceSupportObject.searchContacts);
+            KeywordUtil.click(ServiceSupportObject.searchContacts, "Click on search contacts");
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(ServiceSupportObject.newContactOption);
+            KeywordUtil.click(ServiceSupportObject.newContactOption, "Click on New Contact option");
+            KeywordUtil.inputText(ServiceSupportObject.firstNameFieldForNewContact, firstname,logStep);
+            KeywordUtil.inputText(ServiceSupportObject.lastNameFieldForNewContact, lastname,logStep);
+            KeywordUtil.click(ServiceSupportObject.saveBtnOfNewAccount, "Click on New Contact option");
+            setCaseOrigin(origin, "Case origin value is selected");
+            saveBtnOfNewCase_ss("Clicked on Save button");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
     }
 }

@@ -68,4 +68,20 @@ public class ServiceSupportObject {
     //Xpaths for searching the case from the list
     public static By searchbutton_case=By.xpath("//input[@placeholder='Search this list...']");
 
+    //Xpaths for creating new account
+    public static By searchAccountsForAccountName= By.xpath("//input[@placeholder='Search Accounts...' and @class='slds-combobox__input slds-input']");
+    public static By newAccountOption= By.xpath("//span[@class='slds-truncate' and text()='New Account']");
+
+    //Xpaths for creating new account and Phone in case section
+    public static By PhoneNumber1 = By.xpath("//label[span[text()='Phone']]/following-sibling::input[@type='tel']");
+    public static By AccountName1 = By.xpath("//label[span[text()='Account Name']]/following-sibling::input[@type='text']");
+    public static By saveBtnOfNewAccount= By.xpath("(//span[@class=' label bBody' and text()='Save'])[2]");
+    public static By saveBtnOfNewCase= By.xpath("//button[@class='slds-button slds-button_brand' and @name='SaveEdit' and @type='button']");
+
+    //Xpaths for creating new contact in case section
+    public static By searchContacts= By.xpath("//input[@placeholder='Search Contacts...' and @class='slds-combobox__input slds-input']");
+    public static By newContactOption= By.xpath("//span[@class='slds-truncate' and text()='New Contact']");
+    public static By firstNameFieldForNewContact= By.xpath("//input[@class='firstName compoundBorderBottom form-element__row input' and @placeholder='First Name']");
+    public static By lastNameFieldForNewContact= By.xpath("//input[@class='lastName compoundBLRadius compoundBRRadius form-element__row input' and @placeholder='Last Name']");
+
 }

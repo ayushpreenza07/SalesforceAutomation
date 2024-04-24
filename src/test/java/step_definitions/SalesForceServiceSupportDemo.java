@@ -107,4 +107,16 @@ public class SalesForceServiceSupportDemo {
     public void search_case() throws Exception{
         CasesUtil.searchCase("search the case from the list");
     }
+
+    @When("Create New Case by Creating an New Account")
+    public void createNewCaseByNewAccount() throws Exception {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        CasesUtil.newCaseByCreatingNewAccount(dataMap.get("AccountName1"),dataMap.get("PhoneNumber1"),dataMap.get("origin"),"create new account by passing name and phone");
+    }
+
+    @When("Create New case By creating a New contact")
+    public void createNewCaseByNewContact() throws Exception {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        CasesUtil.newCaseByCreatingNewContact(dataMap.get("FirstName1"),dataMap.get("LastName1"),dataMap.get("origin"),"create new contact by passing firstname, lastname, origin");
+    }
 }
