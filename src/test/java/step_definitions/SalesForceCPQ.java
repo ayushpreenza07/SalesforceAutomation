@@ -20,9 +20,10 @@ import java.util.HashMap;
 import static SalesforceModules.QuoteUtil.clickQuoteNumber;
 import static SalesforceModules.QuoteUtil.clickQuoteTab;
 
-public class salesforceDemo {
+
 
 public class SalesForceCPQ {
+
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
 
     public static void main(String[] args) {
@@ -67,7 +68,7 @@ public class SalesForceCPQ {
                 baseUrl = ConfigReader.getValue("Forecast_URL");
                 break;
             case "Leads Admin":
-                baseUrl = ConfigReader.getValue("Leads_URL");
+                baseUrl = ConfigReader.getValue("BASE_URL");
                 break;
             case "Billing Admin":
                 baseUrl = ConfigReader.getValue("Billing_URL");
@@ -101,8 +102,8 @@ public class SalesForceCPQ {
                 password = ConfigReader.getValue("forecastPassword");
                 break;
             case "Leads Admin":
-                username = ConfigReader.getValue("leadsUsername");
-                password = ConfigReader.getValue("leadsPassword");
+                username = ConfigReader.getValue("adminUsername");
+                password = ConfigReader.getValue("adminPassword");
                 break;
             case "Billing Admin":
                 username = ConfigReader.getValue("salesforceUsernameBilling");

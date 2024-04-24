@@ -584,7 +584,6 @@ public class QuoteUtil {
      */
     public static void createNewQuotes(String opportunityName) throws Exception {
         selectOpportunityForLeads(opportunityName,opportunityName+" entered opportunities name");
-       // selectType(type,"selected type");
         checkPrimary("primary checkbox marked");
         clickSaveButton("clicked save button");
     }
@@ -679,7 +678,11 @@ public class QuoteUtil {
             executor.executeScript("arguments[0].click();", element);
              }
     }
-
+    /**
+     * Change Review to Approve.
+     *
+     * @param logStep the log
+     */
     public static void clickOnEditStatusReviewToApprove(String type,String logStep) throws InterruptedException {
         try {
             KeywordUtil.delay(3000);
@@ -699,7 +702,11 @@ public class QuoteUtil {
             KeywordUtil.click(QuoteObject.selectApproveOption, "Select Review Option");
         }
     }
-
+    /**
+     * verify Approve Status.
+     *
+     *
+     */
     public static void verifyApprovedStatus(){
         String approvedText=KeywordUtil.getVisibleText(QuoteObject.statusApproved);
     if (KeywordUtil.isWebElementVisible(QuoteObject.statusApproved,"Approved status visible")){
