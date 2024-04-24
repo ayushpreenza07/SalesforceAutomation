@@ -1,12 +1,12 @@
 Feature: salesforce service support demo
 
-  @salesforce
+  @salesforce_servicesupport
   Scenario Outline: salesforce service support demo
     Given Read the test data  "<TestData>" from Excel
-    Given navigate to salesforce
-    And login to salesforce
+    When navigate to Salesforce as "System Admin"
+    And login to Salesforce with "System Admin" credentials
     Then click on service support button
-    Then create new account
+    Then create account for service support
     Then Edit Account Details
     Then create contact for service support
     Then Edit Contact Details for service support

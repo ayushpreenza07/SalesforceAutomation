@@ -2,6 +2,9 @@ package step_definitions;
 
 import SalesforceModules.*;
 import io.cucumber.java.en.Given;
+import SalesforceModules.AccountUtil;
+import SalesforceModules.EditandDeleteUtil;
+import SalesforceModules.ServiceSupportUtil;
 import io.cucumber.java.en.When;
 import org.codehaus.groovy.ast.stmt.CaseStatement;
 import org.testng.Assert;
@@ -11,8 +14,6 @@ import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 
 import java.util.HashMap;
-
-import static step_definitions.salesforceDemo.dataMap;
 
 public class SalesForceServiceSupportDemo {
 
@@ -24,9 +25,15 @@ public class SalesForceServiceSupportDemo {
         ServiceSupportUtil.ClickServiceSupportButton("click service support button");
         }
 
+    @When("^create account for service support$")
+    public void create_account_service_support() throws Exception {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        AccountUtil.createNewAccount_ss(dataMap.get("AccountName"), dataMap.get("Phone"));
+    }
+
     @When("^Edit Account Details")
     public void edit_account_details() throws Exception{
-        dataMap= salesforceDemo.dataMap;
+        dataMap= SalesForceCPQ.dataMap;
         EditandDeleteUtil.editAccountDetails(dataMap.get("Phone"));
     }
 
@@ -43,7 +50,7 @@ public class SalesForceServiceSupportDemo {
 
     @When("^Edit Contact Details for service support")
     public void edit_contact_details() throws Exception{
-        dataMap= salesforceDemo.dataMap;
+       // dataMap= salesforceDemo.dataMap;
         EditandDeleteUtil.editContactDetails("Anjali");
     }
 

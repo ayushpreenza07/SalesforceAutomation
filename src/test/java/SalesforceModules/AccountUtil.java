@@ -137,4 +137,18 @@ public class AccountUtil extends GlobalUtil {
         clickSaveButton("clicked save button");
     }
 
+    /**
+     * Create New Account
+     *
+     *  @param name the name
+     *  @param phone the phone
+     */
+    public static void createNewAccount_ss(String name, String phone) throws InterruptedException {
+        clickAccountsTab("Navigated to accounts");
+        clickNewButton("Clicked new button for accounts");
+        enterAccountName(name,name+" entered name");
+        enterPhoneNumber(phone, phone+" entered phone");
+        clickSaveButton("clicked save button");
+    }
+
 }
