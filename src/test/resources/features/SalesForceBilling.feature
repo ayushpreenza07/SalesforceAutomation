@@ -10,6 +10,10 @@ Feature: salesforce demo
     And go to products tab
     And Create new product
     And add price book and standard price
+    And edit standard price book
+    And go to products tab
+    And search product in products tab
+
     Examples:
       | TestData |
       | TestData1 |
