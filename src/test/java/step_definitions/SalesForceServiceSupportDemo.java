@@ -55,7 +55,7 @@ public class SalesForceServiceSupportDemo {
     }
 
     @When("^Remove All Filters Contact Details for service support")
-    public void RemoveAll_filter_contact_details() throws Exception{
+    public void removeAll_filter_contact_details() throws Exception{
         EditandDeleteUtil.removeFilter_cnt();
 
     }
@@ -80,7 +80,8 @@ public class SalesForceServiceSupportDemo {
     @When("^Create New Case by searching contact and account")
     public void create_new_Cases_bysearching_account_contact() throws Exception {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        CasesUtil.createNewCasebySearchingContact_Account(dataMap.get("ContactLastName"), dataMap.get("AccountName"), dataMap.get("status"), dataMap.get("origin"));
+        //CasesUtil.createNewCasebySearchingContact_Account(dataMap.get("ContactLastName"), dataMap.get("AccountName"), dataMap.get("status"), dataMap.get("origin"));
+        CasesUtil.createNewCasebySearchingContact_Account(("Anjali"), dataMap.get("AccountName"), dataMap.get("status"), dataMap.get("origin"));
 
     }
 
@@ -93,5 +94,10 @@ public class SalesForceServiceSupportDemo {
     @When("^Delete Case for service support")
     public void delete_case() throws Exception{
         CasesUtil.deleteCase("Deleted the contact");
+    }
+
+    @When("^Search Case for service support")
+    public void search_case() throws Exception{
+        CasesUtil.searchCase("search the case from the list");
     }
 }

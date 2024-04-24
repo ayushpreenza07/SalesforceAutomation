@@ -7,19 +7,19 @@ Feature: salesforce service support demo
     And login to salesforce
     Then click on service support button
     Then create new account
-#    Then Edit Account Details
-#    Then Delete Account
+    Then Edit Account Details
     Then create contact for service support
-#    Then Edit Contact Details for service support
-#    Then Filter Contact Details for service support
-#    Then Remove All Filters Contact Details for service support
-#    Then Delete Contact Details for service support
-     Then Click on CasesTab for service support
-    # Then Create New Cases for service support
-     Then Create New Case by searching contact and account
-     Then Edit Case Details for service support
-     Then Delete Case for service support
-
+    Then Edit Contact Details for service support
+    Then Filter Contact Details for service support
+    Then Remove All Filters Contact Details for service support
+    Then Click on CasesTab for service support
+    Then Create New Cases for service support
+    Then Create New Case by searching contact and account
+    Then Edit Case Details for service support
+    Then Delete Case for service support
+    Then Search Case for service support
+    Then Delete Account
+    Then Delete Contact Details for service support
 
     Examples:
       | TestData |

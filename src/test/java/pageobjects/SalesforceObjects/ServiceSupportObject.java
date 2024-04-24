@@ -17,7 +17,8 @@ public class ServiceSupportObject {
 
     //Contact xpaths
     public static By newContactButton_ss = By.xpath("//button[@class='slds-button slds-button_neutral middleButton actionListButton' and text()='New']");
-    public static By dropdown_ss = By.xpath("(//button[@class='slds-button slds-button_icon-border-filled fix-slds-button_icon-border-filled slds-button_last'])[1]");
+    //public static By dropdown_ss = By.xpath("(//button[@class='slds-button slds-button_icon-border-filled fix-slds-button_icon-border-filled slds-button_last'])[9]");
+    public static By dropdown_ss = By.xpath ("//tr[th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/runtime_pipeline_inspector-name-field/force-lookup/div/a/slot[text()='Rahul']]/td//button[span[text()='Show Actions']]");
     public static By editButton_ss =By.xpath("(//a[@role='menuitem' and @aria-disabled='false'])[1]");
 
     //Delete xpaths for contact
@@ -54,12 +55,17 @@ public class ServiceSupportObject {
     //Xpaths for searching contact and account
     public static By searchAccounts_ss=By.xpath("//input[@placeholder='Search Accounts...']");
     public static By searchContacts_ss=By.xpath("//input[@placeholder='Search Contacts...']");
+    public static By savebutton_ss=By.xpath("//button[@class='slds-button slds-button_brand' and @name='SaveEdit']");
 
     //Xpaths for editing the case section
     public static By editbutton_ss=By.xpath("(//button[@class='slds-button slds-button_neutral' and @name='Edit'])[2]");
     public static By contactEmailAddress=By.xpath("//input[@inputmode=\"email\"]");
 
     //Xpaths for Deleting the case
-    public static By deletebutton_case=By.xpath("//button[text()='Delete']");
+    public static By deletebutton_case=By.xpath("(//button[text()='Delete'])[2]");
     public static By clickdeletebutton_case =By.xpath("//span[text()='Delete']");
+
+    //Xpaths for searching the case from the list
+    public static By searchbutton_case=By.xpath("//input[@placeholder='Search this list...']");
+
 }

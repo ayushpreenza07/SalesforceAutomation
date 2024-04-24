@@ -123,7 +123,8 @@ public class EditandDeleteUtil extends GlobalUtil {
      */
     public static void clickDropDownButton_ss(String logStep){
         KeywordUtil.waitForVisible(ServiceSupportObject.dropdown_ss);
-        KeywordUtil.click(ServiceSupportObject.dropdown_ss,logStep);
+        KeywordUtil.clickJS(ServiceSupportObject.dropdown_ss,logStep);
+       // KeywordUtil.click(ServiceSupportObject.dropdown_ss,logStep);
     }
 
     /**
@@ -144,13 +145,13 @@ public class EditandDeleteUtil extends GlobalUtil {
      *  @param lastname the lastname
      */
     public static void editContactDetails(String lastname) throws InterruptedException {
+        clickContactTab_cnt();
         clickDropDownButton_ss("Clicked drop down button for contacts");
         clickEditButtonforcontact("Clicked edit button for accounts");
         enterLastContactName(lastname,lastname+" lastname set");
         clickSaveButton("clicked save button");
     }
 
-// For delete flow in contact
     /**
      * click drop down in contacts section.
      *
@@ -188,7 +189,6 @@ public class EditandDeleteUtil extends GlobalUtil {
      *  @param logStep the log
      */
     public static void deleteContact(String logStep) throws InterruptedException {
-        //ServiceSupportObject.DeleteShowActionInContacts("Rahul");
         clickContactTab_cnt();
         KeywordUtil.delay(5000);
         clickDropDownButton_cnt("Clicked dropdown button");

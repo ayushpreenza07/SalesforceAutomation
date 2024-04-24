@@ -7,10 +7,17 @@ import org.testng.Assert;
 import pageobjects.SalesforceObjects.*;
 import utilities.KeywordUtil;
 
+import java.security.Key;
+
 import static pageobjects.SalesforceObjects.ServiceSupportObject.origin;
 
 public class CasesUtil {
 
+    /**
+     * click cases tab for Cases section.
+     *
+     * @param logStep the log
+     */
     public static void clickCasesTab(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ServiceSupportObject.CasesTab);
@@ -25,9 +32,6 @@ public class CasesUtil {
      * @param logStep the log
      */
     public static void clickNewButton(String logStep) throws InterruptedException {
-//        KeywordUtil.delay(5000);
-//        KeywordUtil.waitForVisible(ServiceSupportObject.newTab);
-//        KeywordUtil.click(ServiceSupportObject.newTab,logStep);
 
         try {
             KeywordUtil.delay(3000);
@@ -157,6 +161,17 @@ public class CasesUtil {
     }
 
     /**
+     * click save button for case section in search flow
+     *
+     * @param logStep the log
+     */
+    public static void clickSaveButton_ss(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.savebutton_ss);
+        KeywordUtil.click(ServiceSupportObject.savebutton_ss,logStep);
+
+    }
+
+    /**
      * Create New Cases by searching contact and account.
      *
      *  @param contact the contact
@@ -166,9 +181,9 @@ public class CasesUtil {
         clickNewButton("Clicked new button for Cases");
         setStatus(status,status+" entered status");
         setCaseOrigin(origin,origin+" entered origin");
-        selectContact_ss(contact,contact+ " entered account name");
+        selectContact_ss(contact,contact+ " entered contact name");
         selectAccount_ss(account,account+ " entered account name");
-        clickSaveButton("clicked save button");
+        clickSaveButton_ss("clicked save button");
     }
 
     /**
@@ -215,8 +230,9 @@ public class CasesUtil {
      *
      * @param logStep the log
      */
-    public static void selectDeleteButton_case(String logStep){
+    public static void selectDeleteButton_case(String logStep) throws InterruptedException {
         KeywordUtil.waitForVisible(ServiceSupportObject.deletebutton_case);
+        KeywordUtil.delay(2000);
         KeywordUtil.click(ServiceSupportObject.deletebutton_case,logStep);
     }
 
@@ -239,6 +255,34 @@ public class CasesUtil {
     public static void deleteCase(String logStep) throws InterruptedException {
         selectDeleteButton_case("Selected delete button");
         clickDeleteButton_case("Clicked delete button");
+
+    }
+
+    /**
+     * click search in case section.
+     *
+     * @param logStep the log
+     */
+    public static void clickSearch_case(String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(ServiceSupportObject.searchbutton_case);
+        KeywordUtil.delay(3000);
+        KeywordUtil.click(ServiceSupportObject.searchbutton_case,logStep);
+        KeywordUtil.delay(3000);
+        KeywordUtil.inputText(ServiceSupportObject.searchbutton_case, "00001058", logStep);
+
+    }
+
+    /**
+     * Search Case
+     *
+     *
+     *  @param logStep the log
+     */
+    public static void searchCase(String logStep) throws InterruptedException {
+        KeywordUtil.delay(2000);
+        clickCasesTab("Click on case Tab");
+        clickSearch_case("Clicked search button");
+
 
     }
 }
