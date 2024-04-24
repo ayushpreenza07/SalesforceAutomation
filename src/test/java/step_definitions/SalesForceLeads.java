@@ -14,8 +14,8 @@ import utilities.KeywordUtil;
 import java.io.IOException;
 import java.util.HashMap;
 
-import static SalesforceModules.OppurtunitiesUtil.markAsStage;
-import static SalesforceModules.OppurtunitiesUtil.markStage;
+import static SalesforceModules.OppurtunitiesUtil.*;
+import static SalesforceModules.OrdersUtl.*;
 import static SalesforceModules.QuoteUtil.*;
 import static pageobjects.SalesforceObjects.OppurtunitiesObject.opportunityName;
 
@@ -119,6 +119,11 @@ public class SalesForceLeads {
         markAsStage();
     }
 
+    @When("Click on Proposal and markStages")
+    public void click_on_proposal_and_mark_stages() throws InterruptedException {
+        markAsStages();
+    }
+
     @When("Click on QuoteCard and Click on New")
     public void click_on_quote_card_and_click_on_new() throws Exception {
         clickQuoteCard("Clicked on QuoteCard");
@@ -127,8 +132,8 @@ public class SalesForceLeads {
 
     @When("Enter New quote details")
     public void enter_new_quote_details() throws Exception {
-        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        QuoteUtil.createNewQuotes(dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
+        QuoteUtil.createNewQuotes(dataMap.get("OpportunityName"));
     }
 
     @When("Click on EditLines Tab")
@@ -143,5 +148,81 @@ public class SalesForceLeads {
     @When ("click on Generate Document")
     public void click_on_Generate_Document() throws InterruptedException {
         QuoteUtil.clickGenerateDocument("generated Document");
+    }
+
+    @When("Click on QuoteNumber from the RHS Card")
+    public void click_on_quote_tab_fromRHS() throws InterruptedException {
+        clickQuoteTabFromRHS("Clicked on Quote Tab from RHS");
+    }
+
+
+    @When("Click on QuoteNumber")
+    public void click_on_QuoteNumber() throws InterruptedException {
+        clickQuoteNumber("Clicked on Quote Number");
+    }
+
+    @When("Change the Quote status Draft to Review")
+    public void change_the_status_draft_to_review() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
+        clickOnEditStatus(dataMap.get("QuoteType"),"Clicked on Change Status");
+    }
+    @When("Click on Edit Quote")
+    public void click_on_edit() throws InterruptedException {
+        clickOnEdit("Clicked on Edit Button");
+    }
+    @When("Change the Quote status Review to Approved")
+    public void change_the_status_review_to_approved() throws InterruptedException {
+        clickOnEditStatusReviewToApprove(dataMap.get("QuoteType"),"Changed Status Review to Approved");
+    }
+    @Then("verify the Quote Status should be Approved")
+    public void verify_status_should_be_approved() {
+        verifyApprovedStatus();
+    }
+
+    @Given("Click On SalesForceCPQ")
+    public void clickn_on_sales_force_cpq() {
+        clickOnSalesforceCPQ();
+    }
+     @When("Click on Opportunity Tab")
+    public void clickOnOpportunityTab() throws InterruptedException {
+        OppurtunitiesUtil.clickOnOpportunityTab();
+     }
+
+    @When("Click on Opporunity Name")
+    public void clickOnOpportunityName(){
+
+        OppurtunitiesUtil.clickOnOpportunityName();
+    }
+    @When("Select Close Tab and change the Status to Closed Won")
+    public void select_close_tab_and_change_the_status_to_closed_won() {
+        OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
+    }
+    @Then("Verify Stage should be Closed Won")
+    public void verify_stage_should_be_closed_won() throws InterruptedException {
+        verifyOpportunityStage();
+    }
+    @When("Click on Quotes Tab")
+    public void click_on_quotes_tab() throws InterruptedException {
+        clickQuotesTab("Clicked on Quote Tab");
+    }
+    @Then("Click On Ordered")
+    public void click_on_ordered() throws Exception {
+        checkOrderedUnderEdit("Ordered checkbox checked");
+    }
+    @Then("Click On Orders from RHS")
+    public void click_on_orders_from_rhs() {
+        clickOnOrderTab("Clicked on Order Tab");
+    }
+    @Then("Click on Order Number")
+    public void click_on_order_number() {
+        clickOnOrderNumber("Clicked on Order Number");
+    }
+    @Then("Click on Activated")
+    public void click_on_activated() {
+        clickOnOrderActivated("Clicked on Order Activated");
+    }
+    @Then("Click on MarkAsCurrentStatus Button")
+    public void click_on_mark_as_current_status_button() {
+        clickOnMarkStatusAsComplete("ClickOnMarkStatus As Complete");
     }
 }

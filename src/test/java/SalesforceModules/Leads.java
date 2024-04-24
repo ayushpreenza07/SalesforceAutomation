@@ -68,6 +68,7 @@ public class Leads {
 
     public static void clickOnSaveButton(){
         try {
+            KeywordUtil.delay(1000);
             KeywordUtil.waitForVisible(LeadsPage.saveButton);
             KeywordUtil.click(LeadsPage.saveButton, "Clicked on Save Button");
         }
@@ -103,7 +104,7 @@ public class Leads {
     }
     public static void clickOnConvertedStatusButton () throws InterruptedException {
         try {
-            KeywordUtil.delay(2000);
+            KeywordUtil.delay(3000);
             KeywordUtil.scrollup(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.clickJS(LeadsPage.selectConvertedStatusButton, "Clicked on Converted Status Button");
@@ -117,7 +118,7 @@ public class Leads {
     public static void clickOnConvertedButton () throws InterruptedException {
 
         try {
-            KeywordUtil.delay(2000);
+            KeywordUtil.delay(4000);
             KeywordUtil.waitForVisible(LeadsPage.convertButton);
             KeywordUtil.clickJS(LeadsPage.convertButton, "Clicked on Converted Button");
         }

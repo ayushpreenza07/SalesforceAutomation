@@ -6,6 +6,9 @@ public class QuoteObject {
 
     //Creating New Quotes
     public static By clickOnQuotes =By.xpath("//SPAN[@class='slds-truncate'][text()='Quotes']");
+    public static By clickOnQuotesTab =By.xpath("//div[@class='slds-context-bar']//a[@title='Quotes']");
+
+    public static By rhsQuote=By.xpath("(//div[@class='slds-media__body slds-align-middle']/h2[@class='slds-card__header-title']/a/span[@title='Quotes'])[3]");
     public static By newQuoteButton = By.xpath("(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1]");
     public static By searchOpportunities =By.xpath("//input[@class='slds-combobox__input slds-input' and @placeholder='Search Opportunities...']");
     public static By selectOppurtunity = By.xpath("//lightning-base-combobox-formatted-text[contains(@title,'asz')]");
@@ -51,5 +54,18 @@ public class QuoteObject {
     public static By markCurrentStatus = By.xpath("//span[@class='uiOutputText'][contains(text(),'Mark as Current Status')]");
 
     public static By quoteTitle=By.xpath("(//div[1]/div/div[1]/div[2]/h1/slot/lightning-formatted-text[@slot='primaryField'])[1]");
+    public static By quoteNumber=By.xpath("//*[@id='brandBand_1']//div/div/table/tbody/tr[1]/th/span/a");
 
+
+    public static By quoteNumberFromQuote=By.xpath("(//span[@class='slds-grid slds-grid_align-spread']//a[@class='flex-wrap-ie11 slds-truncate'])");
+
+    public static By changeEditStatus=By.xpath("(//div[@class='slds-form-element__control']//button[contains(@title,'Edit Status')]//span)[1]");
+    public static By clickOnStatus=By.xpath("(//*[@data-value='Draft'])[1]");
+
+    public static By selectReviewOption=By.xpath("//*[contains(@id,'combobox-button')]/span[2]/span[@title='In Review']");
+    public static By quoteEditButton = By.xpath("//ul[@class='slds-button-group-list']//li[@class='visible']//button[@name='Edit']");
+    public static By selectApproveOption=By.xpath("//*[contains(@id,'combobox-button')]/span[2]/span[@title='Approved']");
+    public static  By clickReviewStatusDropDown=By.xpath("(//*[@data-value='In Review'])[1]");
+
+    public static By statusApproved=By.xpath("(//*[@data-value='Approved'])[1]");
 }

@@ -493,15 +493,12 @@ public class KeywordUtil extends GlobalUtil {
 
     /**
      * Switch to window boolean.
-     *
-     * @return the boolean
      */
 // ......
-    public static boolean switchToWindow() {
+    public static void switchToWindow() {
 
-        ArrayList<String> tabs2 = new ArrayList<String>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(tabs2.get(1));
-        return true;
+        ArrayList<String> tabs = new ArrayList<String>(Integer.parseInt(getDriver().getWindowHandle()));
+        getDriver().switchTo().window(tabs.get(0));
 
     }
     // ....
@@ -748,6 +745,10 @@ public class KeywordUtil extends GlobalUtil {
     public static void pressEnter(By locator) {
         WebElement elm = waitForVisible(locator);
         elm.sendKeys(Keys.ENTER);
+    }
+    public static void pressDown(By locator) {
+        WebElement elm = waitForVisible(locator);
+        elm.sendKeys(Keys.PAGE_DOWN);
     }
 
     /**
@@ -1248,6 +1249,23 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
+    public static void scrolldownScrollbar(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", locator);
+
+    }
+
+    public static void scrollElementIntoViewUsingActions(By locator) {
+        try {
+            // Actions class with moveToElement()
+            Actions a = new Actions(getDriver());
+            a.moveToElement(getDriver().findElement(locator)).perform();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Verify current date input boolean.
@@ -1594,7 +1612,19 @@ class TestStepFailedException extends Exception {
         WebElement elm = KeywordUtil.waitForVisible(locator);
         return elm.getText().trim();
     }
-
+    /**
+     * Scroll Element into view using Actions
+     */
+    public static void scrollElementIntoViewUsingActions(By element){
+        try {
+            // Actions class with moveToElement()
+            Actions a = new Actions(getDriver());
+            a.moveToElement(getDriver().findElement(element)).perform();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

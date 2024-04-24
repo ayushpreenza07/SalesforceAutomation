@@ -23,6 +23,9 @@ import java.util.Map;
 
 import java.util.HashMap;
 
+import static SalesforceModules.QuoteUtil.clickQuoteNumber;
+import static SalesforceModules.QuoteUtil.clickQuoteTab;
+
 public class salesforceDemo {
 
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
@@ -114,7 +117,7 @@ public class salesforceDemo {
 
     @When("^create new contract$")
     public void create_new_contract() throws Exception{
-
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         ContractUtil.createContract(dataMap.get("AccountName"));
     }
 

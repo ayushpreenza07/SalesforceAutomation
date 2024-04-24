@@ -1,6 +1,7 @@
 package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
+import org.bouncycastle.operator.KeyWrapper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -9,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import pageobjects.SalesforceObjects.QuoteObject;
 import step_definitions.RunCukesTest;
+import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
@@ -38,7 +40,34 @@ public class QuoteUtil {
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
+    public static void clickQuotesTab(String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.isWebElementVisible(QuoteObject.clickOnQuotesTab,"Quoates tab visible");
+          KeywordUtil.click(QuoteObject.clickOnQuotesTab,"Clicked on Quote Tab");
 
+        }
+        catch (Exception e) {
+            KeywordUtil.delay(3000);
+            WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.clickOnQuotesTab);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        }
+    }
+    public static void clickQuoteTabFromRHS(String logStep) throws InterruptedException {
+        KeywordUtil.delay(5000);
+        try {
+            KeywordUtil.isWebElementVisible(QuoteObject.rhsQuote,"Quote is visible");
+            KeywordUtil.click(QuoteObject.rhsQuote,"Quote is Clickable");
+
+               } catch (Exception e) {
+            KeywordUtil.delay(3000);
+            WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.rhsQuote);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+
+        }
+    }
     /**
      * Select the opportunity field for new quote.
      *
@@ -85,6 +114,7 @@ public class QuoteUtil {
      */
     public static void selectOpportunityForLeads(String opport, String logStep) throws InterruptedException {
         boolean flag = false;
+        KeywordUtil.delay(2000);
         KeywordUtil.waitForVisible(QuoteObject.searchOpportunities);
         KeywordUtil.clickJS(QuoteObject.searchOpportunities);
             KeywordUtil.click(QuoteObject.selectOppurtunityLeads,"Clicked on First option");
@@ -247,7 +277,27 @@ public class QuoteUtil {
             JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", check);
     }
+    /**
+     * Tick the ordered checkbox.
+     *
+     * @param logStep the log
+     */
+    public static void checkOrderedUnderEdit(String logStep) throws Exception {
+        try {
+            KeywordUtil.waitForVisible(QuoteObject.orderedCheckbox);
+            KeywordUtil.scrollElementIntoViewUsingActions(QuoteObject.orderedCheckbox);
+            KeywordUtil.click(QuoteObject.orderedCheckbox,"Clicked on Ordered Checkbox");
 
+        }
+        catch (Exception e){
+            KeywordUtil.waitForVisible(QuoteObject.orderedCheckbox);
+            KeywordUtil.scrollElementIntoViewUsingActions(QuoteObject.orderedCheckbox);
+            WebElement check = KeywordUtil.getDriver().findElement(QuoteObject.orderedCheckbox);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", check);
+
+        }
+    }
     /**
      * Click EditLines
      *
@@ -529,12 +579,13 @@ public class QuoteUtil {
     }
     /**
      * Selecting Opportunity and type and click on save button
-     * @param type
+     *
      * @param opportunityName the account name
      */
-    public static void createNewQuotes(String opportunityName, String type) throws Exception {
+    public static void createNewQuotes(String opportunityName) throws Exception {
         selectOpportunityForLeads(opportunityName,opportunityName+" entered opportunities name");
-        selectType(type,"selected type");
+       // selectType(type,"selected type");
+        checkPrimary("primary checkbox marked");
         clickSaveButton("clicked save button");
     }
     /**
@@ -551,5 +602,111 @@ public class QuoteUtil {
 
        }
     }
+    /**
+     * click Quote Number in Quote Tab.
+     *
+     * @param logStep the log
+     */
+    public static void clickQuoteNumber(String logStep) throws InterruptedException {
+       try {
+           KeywordUtil.delay(4000);
+           KeywordUtil.isWebElementVisible(QuoteObject.quoteNumber,"Quote Number displayed");
+           KeywordUtil.click(QuoteObject.quoteNumber,"Clicked on Quotenumber");
+       }
+       catch (Exception e){
+           KeywordUtil.delay(4000);
+           KeywordUtil.isWebElementVisible(QuoteObject.quoteNumber,"");
+           WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.quoteNumber);
+           JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+           executor.executeScript("arguments[0].click();", element);
 
+       }
+    }
+    /**
+     * click Quote Number in Quote Tab.
+     *
+     * @param logStep the log
+     */
+    public static void clickQuoteNumberFromQuote(String logStep) throws InterruptedException {
+        KeywordUtil.delay(4000);
+        WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.quoteNumberFromQuote);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * click on Quote Edit Status.
+     *
+     * @param logStep the log
+     */
+    public static void clickOnEditStatus(String type,String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.isWebElementVisible(QuoteObject.changeEditStatus, "Edit icon displayed");
+            KeywordUtil.click(QuoteObject.changeEditStatus,"Clicked on EditStatus");
+            KeywordUtil.delay(1000);
+            KeywordUtil.isWebElementVisible(QuoteObject.clickOnStatus, "Status displayed");
+            KeywordUtil.scrollElementIntoViewUsingActions(QuoteObject.clickOnStatus);
+            KeywordUtil.clickJS(QuoteObject.clickOnStatus);
+            KeywordUtil.delay(2000);
+            KeywordUtil.isWebElementVisible(QuoteObject.selectReviewOption,"Review Option Displayed");
+            KeywordUtil.scrollElementIntoViewUsingActions(QuoteObject.selectReviewOption);
+            KeywordUtil.click(QuoteObject.selectReviewOption, "Select Review Option");
+        } catch (Exception e) {
+            KeywordUtil.scrollElementIntoViewUsingActions(QuoteObject.changeEditStatus);
+            WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.changeEditStatus);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.clickJS(QuoteObject.clickOnStatus);
+            KeywordUtil.click(QuoteObject.selectReviewOption, "Select Review Option");
+        }
+    }
+    /**
+     * click on Quote Edit Button.
+     *
+     * @param logStep the log
+     */
+    public static void clickOnEdit(String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.delay(4000);
+            KeywordUtil.isWebElementVisible(QuoteObject.quoteEditButton
+                    , "Edit button displayed");
+            KeywordUtil.clickJS(QuoteObject.quoteEditButton);
+
+          } catch (Exception e) {
+            WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.quoteEditButton);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+             }
+    }
+
+    public static void clickOnEditStatusReviewToApprove(String type,String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.delay(3000);
+            selectType(type,"selected type");
+            KeywordUtil.isWebElementVisible(QuoteObject.clickReviewStatusDropDown,"verified Review Status Dropdown");
+            KeywordUtil.clickJS(QuoteObject.clickReviewStatusDropDown);
+            KeywordUtil.isWebElementVisible(QuoteObject.selectApproveOption, "verified Approve option");
+            KeywordUtil.clickJS(QuoteObject.selectApproveOption);
+              }
+        catch (Exception e) {
+            KeywordUtil.waitForVisible(QuoteObject.selectTypes);
+            KeywordUtil.click(QuoteObject.selectTypes,logStep);
+            KeywordUtil.pressDown(QuoteObject.clickReviewStatusDropDown);
+            WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.clickReviewStatusDropDown);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.click(QuoteObject.selectApproveOption, "Select Review Option");
+        }
+    }
+
+    public static void verifyApprovedStatus(){
+        String approvedText=KeywordUtil.getVisibleText(QuoteObject.statusApproved);
+    if (KeywordUtil.isWebElementVisible(QuoteObject.statusApproved,"Approved status visible")){
+        RunCukesTest.logger.log(LogStatus.PASS,HTMLReportUtil.passStringGreenColor("verify Status"+approvedText));
+    }
+    else{
+        RunCukesTest.logger.log(LogStatus.FAIL,"Status is not showing: "+approvedText);
+    }
+    }
 }
