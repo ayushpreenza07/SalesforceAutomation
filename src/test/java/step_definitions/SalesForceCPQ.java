@@ -4,22 +4,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.OppurtunitiesObject;
-import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 import SalesforceModules.*;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
+
 
 import java.util.HashMap;
 
@@ -28,6 +22,7 @@ import static SalesforceModules.QuoteUtil.clickQuoteTab;
 
 public class salesforceDemo {
 
+public class SalesForceCPQ {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
 
     public static void main(String[] args) {
@@ -55,23 +50,74 @@ public class salesforceDemo {
     @When("^navigate to salesforce$")
     public void navigate_to_the_url() throws Exception {
 
-        KeywordUtil.navigateToUrl("https://testing-f5-dev-ed.develop.my.salesforce.com");
-//        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-//        KeywordUtil.navigateToUrl(dataMap.get("URL"));
+        KeywordUtil.navigateToUrl(ConfigReader.getValue("BASE_URL"));
+
+    }
+
+
+    @When("^navigate to Salesforce as \"([^\"]*)\"$")
+    public void navigateToUrlAccordingToUserType(String userType) throws Exception {
+
+        String baseUrl = "";
+        switch (userType) {
+            case "System Admin":
+                baseUrl = ConfigReader.getValue("BASE_URL");
+                break;
+            case "Forecast Admin":
+                baseUrl = ConfigReader.getValue("Forecast_URL");
+                break;
+            case "Leads Admin":
+                baseUrl = ConfigReader.getValue("Leads_URL");
+                break;
+            case "Billing Admin":
+                baseUrl = ConfigReader.getValue("Billing_URL");
+                break;
+
+            // Add cases for other user types as needed
+            default:
+                throw new IllegalArgumentException("Invalid user type: " + userType);
+        }
+
+        KeywordUtil.navigateToUrl(baseUrl);
     }
 
     @When("^login to salesforce$")
     public void login_Salesforce() throws Exception{
-//        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-//        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"),dataMap.get("Password"));
         LoginSalesforceUtil.loginToSalesforce(ConfigReader.getValue("salesforceUsername"),ConfigReader.getValue("salesforcePassword"));
 
     }
 
+    @When("^login to Salesforce with \"([^\"]*)\" credentials$")
+    public void loginToSalesforceAccordingToUserType(String userType) throws Exception {
+        String username = "";
+        String password = "";
+        switch (userType) {
+            case "System Admin":
+                username = ConfigReader.getValue("adminUsername");
+                password = ConfigReader.getValue("adminPassword");
+                break;
+            case "Forecast Admin":
+                username = ConfigReader.getValue("forecastUsername");
+                password = ConfigReader.getValue("forecastPassword");
+                break;
+            case "Leads Admin":
+                username = ConfigReader.getValue("leadsUsername");
+                password = ConfigReader.getValue("leadsPassword");
+                break;
+            case "Billing Admin":
+                username = ConfigReader.getValue("salesforceUsernameBilling");
+                password = ConfigReader.getValue("salesforcePasswordBilling");
+                break;
+
+            // Add cases for other user types as needed
+            default:
+                throw new IllegalArgumentException("Invalid user type: " + userType);
+        }
+        LoginSalesforceUtil.loginToSalesforce(username, password);
+    }
+
     @When("^create new account$")
     public void create_new_account() throws Exception{
-
-
         AccountUtil.createNewAccount(dataMap.get("AccountName"), dataMap.get("Phone"));
     }
 
@@ -121,7 +167,7 @@ public class salesforceDemo {
         ContractUtil.createContract(dataMap.get("AccountName"));
     }
 
-    @And("navigate to setup screen")
+    @When("navigate to setup screen")
     public void navigateToSetupScreen() {
         try {
             KeywordUtil.takeScreenshotAndAttachInReport();

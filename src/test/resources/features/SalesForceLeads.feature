@@ -15,8 +15,9 @@ Feature: Salesforce Leads
   Verify Ordered and Contract created after Quote checked as Ordered
   Activate Order (Change Status Draft to Activate )
 
-    Given navigate to salesforce URL
-    And login to salesforce URL
+
+    Given navigate to Salesforce as "Leads Admin"
+    And login to Salesforce with "Leads Admin" credentials
     When Click on Hamburger Menu
     And click on Search <"Leads">
     Then verify Leads Page
@@ -64,9 +65,8 @@ Feature: Salesforce Leads
   Scenario: Convert Leads to Opportunities
   Convert Leads to Opportunities: Create New or
   Select Existing Accounts, Contacts, and Opportunities
-
-    Given navigate to salesforce URL
-    And login to salesforce URL
+    Given navigate to Salesforce as "Leads Admin"
+    And login to Salesforce with "Leads Admin" credentials
     When Click on Hamburger Menu
     And click on Search <"Leads">
     Then verify Leads Page

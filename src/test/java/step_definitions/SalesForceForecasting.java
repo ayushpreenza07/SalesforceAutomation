@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class SalesForceForecasting {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
+    public static String forecastName = KeywordUtil.generateRandomName();
 
     public static void main(String[] args) {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
@@ -94,4 +95,115 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
-}
+
+    @And("Create  Forecast Type with Opportunities")
+    public void createForecastTypeWithOpportunities() {
+        try {
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.createForecastTypeWithOpportunities(forecastName);
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+
+    @And("Create  Forecast Type with Opportunities and Product")
+    public void createForecastTypeWithOpportunitiesAndProduct() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.createForecastTypeWithOpportunitiesandProduct(forecastName);
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    @And("Choose forecast range and show or hide quotas from the forecast")
+    public void chooseForecastRangeOrShowHideQuotasFromTheForecast() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.chooseaDefaultDateRange();
+            ForecastingModule.chooseaDefaultQuotas();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    @And("Verify Forecast on Manager Users Dashboard")
+    public void verifyForecastOnManagerUsersDashboard() {
+        try {
+            ForecastingModule.verifyForecastonManagerUsersDashboard();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    @And("Verify Forecast on Teams Users Dashboard")
+    public void verifyForecastOnTeamsUsersDashboard() {
+        try {
+            ForecastingModule.verifyForecastonTeamsUsersDashboard();
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+
+    }
+    @And("Navigate to forecast settings page")
+    public void navigateToForecastSettingsPage() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @Then("Validate Forecast settings page is loaded")
+    public void validateForecastSettingsPageIsLoaded() {
+        try {
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+        }
+        catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @And("Activate Created Forecast")
+    public void activateCreatedForecast() {
+        try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+            ForecastingModule.clickOnShowActionsOfForecast(forecastName);
+            ForecastingModule.selectActivateFromActions();
+            ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
+            ForecastingModule.validateForecastingPageIsLoaded();
+            ForecastingModule.validateActivatedForecastIsAvailable(forecastName);
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            KeywordUtil.switchToWindow();
+        }
+        catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @And("Assign Forecast Quotes To User")
+    public void assignForecastQuotesToUser() {
+        try{
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Quotas");
+            ForecastingModule.validateForecastQuotasPageIsLoaded();
+            ForecastingModule.selectAllRoleBasedForecasts();
+            ForecastingModule.clickOnEditSelectedRows();
+            ForecastingModule.validateEditQuotasDialogIsDisplayed();
+            ForecastingModule.enterQuotaValueAndClickOnSaveButton("3000");
+            ForecastingModule.validateQuotasSavedDialogIsDisplayed();
+            KeywordUtil.BrowserRefresh();
+            KeywordUtil.delay(3000);
+            ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
+            ForecastingModule.validateForecastingPageIsLoaded();
+            ForecastingModule.navigateToForecastType("Automation");
+            ForecastingModule.validateUserAbleToSeeTheEditedQuota("3,000");
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            KeywordUtil.switchToWindow();
+        }
+        catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    }
+
