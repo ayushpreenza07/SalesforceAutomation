@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pageobjects.SalesforceObjects.ContactObject;
+import pageobjects.SalesforceObjects.ServiceSupportObject;
 import utilities.KeywordUtil;
 
 import java.util.HashMap;
@@ -156,4 +157,47 @@ public class ContactUtil {
         enterPhoneContact(phoneNumber,phoneNumber+" phone number entered");
         clickSaveButton("save button clicked");
     }
+
+    /**
+     * click Contact button for service support.
+     *
+     * @param logStep the log
+     */
+    public static void clickContactTab_cnt(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(ContactObject.contactButton);
+        WebElement element = KeywordUtil.getDriver().findElement(ContactObject.contactButton);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * click new button for creating new contact for service support.
+     *
+     * @param logStep the log
+     */
+    public static void NewButtonContact_ss(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.newContactButton_ss);
+        KeywordUtil.click(ServiceSupportObject.newContactButton_ss,logStep);
+    }
+
+    /**
+     * Create contact for service support
+     *
+     * @param salutation the salutation
+     * @param lastname the lastname
+     * @param email the email
+     * @param phoneNumber the phoneNumber
+     */
+    public static void createContactforServiceSupport(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
+        clickContactTab_cnt("Navigated to contact");
+        NewButtonContact_ss("New contact button clicked");
+        setSalutation(salutation,salutation+"Set Salutation");
+        enterLastContactName(lastname,lastname+" lastname set");
+        enterEmail(email,email+" email entered");
+        enterPhoneContact(phoneNumber,phoneNumber+" phone number entered");
+        clickSaveButton("save button clicked");
+    }
+
 }
