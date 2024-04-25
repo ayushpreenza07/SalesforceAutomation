@@ -186,7 +186,6 @@ public class CasesUtil {
         selectAccount_ss(account,account+ " entered account name");
         clickSaveButton_ss("clicked save button");
     }
-
     /**
      * click edit Button in case section.
      *
