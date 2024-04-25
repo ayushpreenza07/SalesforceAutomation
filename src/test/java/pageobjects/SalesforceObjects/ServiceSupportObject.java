@@ -7,7 +7,7 @@ public class ServiceSupportObject {
     //Edit xpaths
     public static By clickServiceSupportButton = By.xpath("//p[@class='slds-truncate'][text()='Service']");
     public static By editButton = By.xpath ("//button[@class='slds-button slds-button_neutral' and @name='Edit']");
-    public static By  phoneNumberUpdate= By.xpath ("//input[@class='slds-input' and @name='Phone']");
+    public static By phoneNumberUpdate= By.xpath ("//input[@class='slds-input' and @name='Phone']");
     public static By saveButton = By.xpath("//BUTTON[@class='slds-button slds-button_brand'][text()='Save']");
 
     //Delete xpaths
@@ -17,12 +17,11 @@ public class ServiceSupportObject {
 
     //Contact xpaths
     public static By newContactButton_ss = By.xpath("//button[@class='slds-button slds-button_neutral middleButton actionListButton' and text()='New']");
-    //public static By dropdown_ss = By.xpath("(//button[@class='slds-button slds-button_icon-border-filled fix-slds-button_icon-border-filled slds-button_last'])[9]");
     public static By dropdown_ss = By.xpath ("//tr[th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/runtime_pipeline_inspector-name-field/force-lookup/div/a/slot[text()='Rahul']]/td//button[span[text()='Show Actions']]");
     public static By editButton_ss =By.xpath("(//a[@role='menuitem' and @aria-disabled='false'])[1]");
 
     //Delete xpaths for contact
-    public static By  dropDown_cnt= By.xpath("//tr[th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/runtime_pipeline_inspector-name-field/force-lookup/div/a/slot[text()='Anjali']]/td//button[span[text()='Show Actions']]");
+    public static By dropDown_cnt= By.xpath("//tr[th/lightning-primitive-cell-factory/span/div/lightning-primitive-custom-cell/runtime_pipeline_inspector-name-field/force-lookup/div/a/slot[text()='Anjali']]/td//button[span[text()='Show Actions']]");
     public static By deleteButton_cnt = By.xpath("//a[@title='Delete']");
     public static By clickdeleteButton_cnt = By.xpath("//button//span[text()='Delete']");
 
@@ -73,8 +72,8 @@ public class ServiceSupportObject {
     public static By newAccountOption= By.xpath("//span[@class='slds-truncate' and text()='New Account']");
 
     //Xpaths for creating new account and Phone in case section
-    public static By PhoneNumber1 = By.xpath("//label[span[text()='Phone']]/following-sibling::input[@type='tel']");
-    public static By AccountName1 = By.xpath("//label[span[text()='Account Name']]/following-sibling::input[@type='text']");
+    public static By phoneNumber1 = By.xpath("//label[span[text()='Phone']]/following-sibling::input[@type='tel']");
+    public static By accountName1 = By.xpath("//label[span[text()='Account Name']]/following-sibling::input[@type='text']");
     public static By saveBtnOfNewAccount= By.xpath("(//span[@class=' label bBody' and text()='Save'])[2]");
     public static By saveBtnOfNewCase= By.xpath("//button[@class='slds-button slds-button_brand' and @name='SaveEdit' and @type='button']");
 
@@ -83,5 +82,10 @@ public class ServiceSupportObject {
     public static By newContactOption= By.xpath("//span[@class='slds-truncate' and text()='New Contact']");
     public static By firstNameFieldForNewContact= By.xpath("//input[@class='firstName compoundBorderBottom form-element__row input' and @placeholder='First Name']");
     public static By lastNameFieldForNewContact= By.xpath("//input[@class='lastName compoundBLRadius compoundBRRadius form-element__row input' and @placeholder='Last Name']");
+
+    //Xpaths for creating new opportunity
+    public static By createNewOpportunities_ss= By.xpath("//button[@class='slds-button slds-button_neutral' and text()='New Opportunity']");
+    public static By opportunityName_ss=By.xpath("");
+
 
 }

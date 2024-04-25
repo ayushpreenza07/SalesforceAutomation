@@ -176,7 +176,7 @@ public class ContactUtil {
      *
      * @param logStep the log
      */
-    public static void NewButtonContact_ss(String logStep) throws InterruptedException {
+    public static void newButtonContact_ss(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ServiceSupportObject.newContactButton_ss);
         KeywordUtil.click(ServiceSupportObject.newContactButton_ss,logStep);
@@ -192,7 +192,7 @@ public class ContactUtil {
      */
     public static void createContactforServiceSupport(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
         clickContactTab_cnt("Navigated to contact");
-        NewButtonContact_ss("New contact button clicked");
+        newButtonContact_ss("New contact button clicked");
         setSalutation(salutation,salutation+"Set Salutation");
         enterLastContactName(lastname,lastname+" lastname set");
         enterEmail(email,email+" email entered");

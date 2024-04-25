@@ -126,7 +126,6 @@ public class EditandDeleteUtil extends GlobalUtil {
     public static void clickDropDownButton_ss(String logStep){
         KeywordUtil.waitForVisible(ServiceSupportObject.dropdown_ss);
         KeywordUtil.clickJS(ServiceSupportObject.dropdown_ss,logStep);
-       // KeywordUtil.click(ServiceSupportObject.dropdown_ss,logStep);
     }
 
     /**
