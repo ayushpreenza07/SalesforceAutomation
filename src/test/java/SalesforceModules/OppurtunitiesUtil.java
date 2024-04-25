@@ -244,6 +244,11 @@ public class OppurtunitiesUtil extends GlobalUtil {
             executor.executeScript("arguments[0].click();", element);
         }
     }
+    /**
+     * Clicking mark as stage button
+     *
+     * @param logStep the log
+     */
     public static void setMarkAsStages(String logStep) throws InterruptedException {
         try {
             KeywordUtil.delay(3000);
