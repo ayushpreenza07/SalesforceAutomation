@@ -15,9 +15,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import static SalesforceModules.OppurtunitiesUtil.*;
-import static SalesforceModules.OrdersUtl.*;
+import static SalesforceModules.OrderUtil.*;
 import static SalesforceModules.QuoteUtil.*;
-import static pageobjects.SalesforceObjects.OppurtunitiesObject.opportunityName;
 
 
 public class SalesForceLeads {
@@ -40,12 +39,12 @@ public class SalesForceLeads {
     public void click_on_hamburger_menu() throws InterruptedException {
         Leads.clickOnHamburgerMenu("User Clicked on Hamburger Menu");
     }
-    @When("click on Search <{string}>")
+    @When("Click on Search <{string}>")
     public void click_on_search(String string) throws InterruptedException {
         Leads.enterText("Leads");
     }
 
-    @Then("verify Leads Page")
+    @Then("Verify Leads Page")
     public void verify_leads_page() {
         Leads.verifyPageTitle();
     }
@@ -66,7 +65,7 @@ public class SalesForceLeads {
     public void click_on_save_button() {
         Leads.clickOnSaveButton();
     }
-    @Then("verify New with Open Status")
+    @Then("Verify New with Open Status")
     public void verify_new_with_open_status() {
         Leads.verifyOpenNotContacted();
     }
@@ -84,7 +83,7 @@ public class SalesForceLeads {
         Leads.clickOnConvertedButton();
     }
 
-    @Then("verify Your lead has been converted")
+    @Then("Verify Your lead has been converted")
     public void verify_your_lead_has_been_converted() throws InterruptedException {
         Leads.verifyConvertStatusMessage();
     }
@@ -109,7 +108,7 @@ public class SalesForceLeads {
         Leads.clickOnOpportunityName();
     }
 
-    @Then("verify the Opportunity AccountName")
+    @Then("Verify the Opportunity AccountName")
     public void verify_the_opportunity_accountName() throws InterruptedException {
         Leads.verifyOpportunityAccountName();
     }
@@ -141,7 +140,7 @@ public class SalesForceLeads {
         clickEditLinesForLeads("Edit Lines clicked");
     }
 
-    @Then("verify product added in the Opportunity")
+    @Then("Verify product added in the Opportunity")
     public void verify_product_added_in_the_quote() {
         QuoteUtil.verifyProductTitle();
     }
@@ -149,12 +148,6 @@ public class SalesForceLeads {
     public void click_on_Generate_Document() throws InterruptedException {
         QuoteUtil.clickGenerateDocument("generated Document");
     }
-
-    @When("Click on QuoteNumber from the RHS Card")
-    public void click_on_quote_tab_fromRHS() throws InterruptedException {
-        clickQuoteTabFromRHS("Clicked on Quote Tab from RHS");
-    }
-
 
     @When("Click on QuoteNumber")
     public void click_on_QuoteNumber() throws InterruptedException {
@@ -174,22 +167,22 @@ public class SalesForceLeads {
     public void change_the_status_review_to_approved() throws InterruptedException {
         clickOnEditStatusReviewToApprove(dataMap.get("QuoteType"),"Changed Status Review to Approved");
     }
-    @Then("verify the Quote Status should be Approved")
+    @Then("Verify the Quote Status should be Approved")
     public void verify_status_should_be_approved() {
         verifyApprovedStatus();
     }
 
     @Given("Click On SalesForceCPQ")
-    public void clickn_on_sales_force_cpq() {
+    public void click_on_sales_force_cpq() {
         clickOnSalesforceCPQ();
     }
      @When("Click on Opportunity Tab")
-    public void clickOnOpportunityTab() throws InterruptedException {
+    public void click_on_opportunity_tab() throws InterruptedException {
         OppurtunitiesUtil.clickOnOpportunityTab();
      }
 
     @When("Click on Opporunity Name")
-    public void clickOnOpportunityName(){
+    public void click_On_Opportunity_Name(){
 
         OppurtunitiesUtil.clickOnOpportunityName();
     }

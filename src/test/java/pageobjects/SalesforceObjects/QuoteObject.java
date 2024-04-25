@@ -7,8 +7,6 @@ public class QuoteObject {
     //Creating New Quotes
     public static By clickOnQuotes =By.xpath("//SPAN[@class='slds-truncate'][text()='Quotes']");
     public static By clickOnQuotesTab =By.xpath("//div[@class='slds-context-bar']//a[@title='Quotes']");
-
-    public static By rhsQuote=By.xpath("(//div[@class='slds-media__body slds-align-middle']/h2[@class='slds-card__header-title']/a/span[@title='Quotes'])[3]");
     public static By newQuoteButton = By.xpath("(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1]");
     public static By searchOpportunities =By.xpath("//input[@class='slds-combobox__input slds-input' and @placeholder='Search Opportunities...']");
     public static By selectOppurtunity = By.xpath("//lightning-base-combobox-formatted-text[contains(@title,'asz')]");

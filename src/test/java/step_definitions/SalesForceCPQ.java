@@ -56,7 +56,7 @@ public class SalesForceCPQ {
     }
 
 
-    @When("^navigate to Salesforce as \"([^\"]*)\"$")
+    @When("^Navigate to Salesforce as \"([^\"]*)\"$")
     public void navigateToUrlAccordingToUserType(String userType) throws Exception {
 
         String baseUrl = "";
@@ -68,7 +68,7 @@ public class SalesForceCPQ {
                 baseUrl = ConfigReader.getValue("Forecast_URL");
                 break;
             case "Leads Admin":
-                baseUrl = ConfigReader.getValue("BASE_URL");
+                baseUrl = ConfigReader.getValue("Leads_URL");
                 break;
             case "Billing Admin":
                 baseUrl = ConfigReader.getValue("Billing_URL");
@@ -88,7 +88,7 @@ public class SalesForceCPQ {
 
     }
 
-    @When("^login to Salesforce with \"([^\"]*)\" credentials$")
+    @When("^Login to Salesforce with \"([^\"]*)\" credentials$")
     public void loginToSalesforceAccordingToUserType(String userType) throws Exception {
         String username = "";
         String password = "";
@@ -102,8 +102,8 @@ public class SalesForceCPQ {
                 password = ConfigReader.getValue("forecastPassword");
                 break;
             case "Leads Admin":
-                username = ConfigReader.getValue("adminUsername");
-                password = ConfigReader.getValue("adminPassword");
+                username = ConfigReader.getValue("leadsUsername");
+                password = ConfigReader.getValue("leadsPassword");
                 break;
             case "Billing Admin":
                 username = ConfigReader.getValue("salesforceUsernameBilling");
@@ -144,7 +144,7 @@ public class SalesForceCPQ {
         QuoteUtil.clickGenerateDocument("generated document");
     }
 
-    @When("^verify if product added$")
+    @When("^Verify if product added$")
     public void verify_product_added() throws Exception{
 
         OppurtunitiesUtil.verifyProduct("verify product");
@@ -162,7 +162,7 @@ public class SalesForceCPQ {
         QuoteUtil.changeQuoteStatusAndGoToOpportunity("Quote status changed to approved and navigated back to opportunity");
     }
 
-    @When("^create new contract$")
+    @When("^Create new contract$")
     public void create_new_contract() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         ContractUtil.createContract(dataMap.get("AccountName"));

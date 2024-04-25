@@ -502,13 +502,15 @@ public class KeywordUtil extends GlobalUtil {
 
     /**
      * Switch to window boolean.
+     *
+     * @return
      */
 // ......
-    public static void switchToWindow() {
+    public static boolean switchToWindow() {
 
-        ArrayList<String> tabs = new ArrayList<String>(Integer.parseInt(getDriver().getWindowHandle()));
-        getDriver().switchTo().window(tabs.get(0));
-
+        ArrayList<String> tabs2 = new ArrayList<String>(getDriver().getWindowHandles());
+        getDriver().switchTo().window(tabs2.get(1));
+        return true;
     }
     // ....
 
@@ -755,6 +757,11 @@ public class KeywordUtil extends GlobalUtil {
         WebElement elm = waitForVisible(locator);
         elm.sendKeys(Keys.ENTER);
     }
+    /**
+     * Press Down.
+     *
+     * @param locator the locator
+     */
     public static void pressDown(By locator) {
         WebElement elm = waitForVisible(locator);
         elm.sendKeys(Keys.PAGE_DOWN);
@@ -1257,7 +1264,9 @@ public class KeywordUtil extends GlobalUtil {
         js.executeScript("window.scrollBy(0,600);", locator);
 
     }
-
+    /**
+     * scroll bar scroll down
+     */
     public static void scrolldownScrollbar(By locator) {
         JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
         js.executeScript("arguments[0].scrollIntoView(true);", locator);
@@ -1691,7 +1700,9 @@ class TestStepFailedException extends Exception {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
-
+    /**
+     * Get Element Text
+     */
     public static String getVisibleText(By locator) {
         KeywordUtil.lastAction = "Get Element text: " + locator.toString();
         LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
@@ -1703,7 +1714,6 @@ class TestStepFailedException extends Exception {
      */
     public static void scrollElementIntoViewUsingActions(By element){
         try {
-            // Actions class with moveToElement()
             Actions a = new Actions(getDriver());
             a.moveToElement(getDriver().findElement(element)).perform();
         }

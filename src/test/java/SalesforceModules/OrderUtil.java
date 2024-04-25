@@ -1,13 +1,16 @@
 package SalesforceModules;
 
-import io.cucumber.java.an.E;
-import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import pageobjects.SalesforceObjects.OrdersObject;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 
-public class OrdersUtl extends GlobalUtil {
-
+public class OrderUtil extends GlobalUtil {
+    /**
+     * ClickingOrderTab
+     *
+     * @param logStep the log
+     *
+     */
     public static void clickOnOrderTab(String logStep) {
         try{
             KeywordUtil.waitForVisible(OrdersObject.ordersTab);
@@ -18,6 +21,12 @@ public class OrdersUtl extends GlobalUtil {
            KeywordUtil.clickJS(OrdersObject.ordersTab, logStep);
        }
     }
+    /**
+     * ClickingOrderNumberInOrderTab
+     *
+     * @param logStep the log
+     *
+     */
     public static void clickOnOrderNumber(String logStep) {
         try{
             KeywordUtil.waitForVisible(OrdersObject.orderNumber);
@@ -28,6 +37,12 @@ public class OrdersUtl extends GlobalUtil {
             KeywordUtil.clickJS(OrdersObject.orderNumber, logStep);
         }
     }
+    /**
+     * ClickingOrderActivatedTab
+     *
+     * @param logStep the log
+     *
+     */
     public static void clickOnOrderActivated(String logStep) {
         try{
             KeywordUtil.isWebElementVisible(OrdersObject.orderActivated,"Activated Tab Displayed");
@@ -38,6 +53,12 @@ public class OrdersUtl extends GlobalUtil {
             KeywordUtil.clickJS(OrdersObject.orderActivated, logStep);
         }
     }
+    /**
+     * ClickingOnMarkStatusAsCompleteInOrderTab
+     *
+     * @param logStep the log
+     *
+     */
     public static void clickOnMarkStatusAsComplete(String logStep) {
         try{
             KeywordUtil.waitForVisible(OrdersObject.markStatusAsComplete);

@@ -40,6 +40,11 @@ public class QuoteUtil {
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
+    /**
+     * click Quotes tab.
+     *
+     * @param logStep the log
+     */
     public static void clickQuotesTab(String logStep) throws InterruptedException {
         try {
             KeywordUtil.delay(3000);
@@ -54,20 +59,7 @@ public class QuoteUtil {
             executor.executeScript("arguments[0].click();", element);
         }
     }
-    public static void clickQuoteTabFromRHS(String logStep) throws InterruptedException {
-        KeywordUtil.delay(5000);
-        try {
-            KeywordUtil.isWebElementVisible(QuoteObject.rhsQuote,"Quote is visible");
-            KeywordUtil.click(QuoteObject.rhsQuote,"Quote is Clickable");
 
-               } catch (Exception e) {
-            KeywordUtil.delay(3000);
-            WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.rhsQuote);
-            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-            executor.executeScript("arguments[0].click();", element);
-
-        }
-    }
     /**
      * Select the opportunity field for new quote.
      *

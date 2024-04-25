@@ -16,28 +16,28 @@ Feature: Salesforce Leads
   Activate Order (Change Status Draft to Activate )
 
 
-    Given navigate to Salesforce as "Leads Admin"
-    And login to Salesforce with "Leads Admin" credentials
+    Given Navigate to Salesforce as "System Admin"
+    And Login to Salesforce with "System Admin" credentials
     When Click on Hamburger Menu
-    And click on Search <"Leads">
-    Then verify Leads Page
+    And Click on Search <"Leads">
+    Then Verify Leads Page
     When Click on New Button
     And Enter LastName and CompanyName
     And Click on Save Button
-    Then verify New with Open Status
+    Then Verify New with Open Status
     When Click on Converted Tab
     And Click on Select Convert Status
     And Click on Convert button
-    Then verify Your lead has been converted
+    Then Verify Your lead has been converted
     When Click on Opportunity Tab in converted popUp
-    Then verify the Opportunity AccountName
+    Then Verify the Opportunity AccountName
     When Click on Proposal and markStage
     And Click on QuoteCard and Click on New
     And Enter New quote details
     And Click on EditLines Tab
-    Then verify product added in the Opportunity
+    Then Verify product added in the Opportunity
     When Generate document
-    Then verify if product added
+    Then Verify if product added
     And Click on Hamburger Menu
     And Click On SalesForceCPQ
     And Click on Quotes Tab
@@ -47,11 +47,11 @@ Feature: Salesforce Leads
     And Click on Edit Quote
     And Change the Quote status Review to Approved
     And Click on Save Button
-    Then verify the Quote Status should be Approved
+    Then Verify the Quote Status should be Approved
     And Click on Opportunity Tab
     And Click on Opporunity Name
     And Select Close Tab and change the Status to Closed Won
-    And create new contract
+    And Create new contract
     And Click on Edit Quote
     And Click On Ordered
     And Click on Save Button
