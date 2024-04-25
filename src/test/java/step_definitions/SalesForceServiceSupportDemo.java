@@ -117,11 +117,5 @@ public class SalesForceServiceSupportDemo {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         CasesUtil.newCaseByCreatingNewContact(dataMap.get("FirstName1"),dataMap.get("LastName1"),dataMap.get("origin"),"create new contact by passing firstname, lastname, origin");
     }
-
-    @When("^create new opportunity and change its status$")
-    public void create_opportunity() throws Exception{
-        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        OppurtunitiesUtil.createOpportunity_ss(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
-
-    }
+    
 }
