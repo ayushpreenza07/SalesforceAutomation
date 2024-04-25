@@ -14,6 +14,14 @@ import SalesforceModules.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
+import java.util.HashMap;
+
+import static SalesforceModules.QuoteUtil.clickQuoteNumber;
+import static SalesforceModules.QuoteUtil.clickQuoteTab;
+
+
+
 public class SalesForceCPQ {
 
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
@@ -48,7 +56,7 @@ public class SalesForceCPQ {
     }
 
 
-    @When("^navigate to Salesforce as \"([^\"]*)\"$")
+    @When("^Navigate to Salesforce as \"([^\"]*)\"$")
     public void navigateToUrlAccordingToUserType(String userType) throws Exception {
 
         String baseUrl = "";
@@ -80,7 +88,7 @@ public class SalesForceCPQ {
 
     }
 
-    @When("^login to Salesforce with \"([^\"]*)\" credentials$")
+    @When("^Login to Salesforce with \"([^\"]*)\" credentials$")
     public void loginToSalesforceAccordingToUserType(String userType) throws Exception {
         String username = "";
         String password = "";
@@ -136,7 +144,7 @@ public class SalesForceCPQ {
         QuoteUtil.clickGenerateDocument("generated document");
     }
 
-    @When("^verify if product added$")
+    @When("^Verify if product added$")
     public void verify_product_added() throws Exception{
 
         OppurtunitiesUtil.verifyProduct("verify product");
@@ -154,9 +162,9 @@ public class SalesForceCPQ {
         QuoteUtil.changeQuoteStatusAndGoToOpportunity("Quote status changed to approved and navigated back to opportunity");
     }
 
-    @When("^create new contract$")
+    @When("^Create new contract$")
     public void create_new_contract() throws Exception{
-
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         ContractUtil.createContract(dataMap.get("AccountName"));
     }
 
