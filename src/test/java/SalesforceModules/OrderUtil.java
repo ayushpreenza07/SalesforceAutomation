@@ -75,6 +75,12 @@ public class OrderUtil extends GlobalUtil {
             KeywordUtil.clickJS(OrdersObject.markStatusAsComplete, logStep);
         }
     }
+    /**
+     * verifyOnMarkStatusAsCompleteInOrderTab
+     *
+     * @param logStep the log
+     *
+     */
     public static void verifyOnOrderActivated(String logStep) {
             String activatedTab= KeywordUtil.getVisibleText(OrdersObject.orderActivated);
             boolean activatedTabVisibile=KeywordUtil.isWebElementVisible(OrdersObject.orderActivated,"Activated Tab Displayed");
