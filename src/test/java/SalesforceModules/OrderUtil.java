@@ -1,8 +1,13 @@
 package SalesforceModules;
 
+import com.relevantcodes.extentreports.LogStatus;
 import pageobjects.SalesforceObjects.OrdersObject;
+import step_definitions.RunCukesTest;
 import utilities.GlobalUtil;
+import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
+
+import java.security.Key;
 
 public class OrderUtil extends GlobalUtil {
     /**
@@ -70,5 +75,14 @@ public class OrderUtil extends GlobalUtil {
             KeywordUtil.clickJS(OrdersObject.markStatusAsComplete, logStep);
         }
     }
-
+    public static void verifyOnOrderActivated(String logStep) {
+            String activatedTab= KeywordUtil.getVisibleText(OrdersObject.orderActivated);
+            boolean activatedTabVisibile=KeywordUtil.isWebElementVisible(OrdersObject.orderActivated,"Activated Tab Displayed");
+            if(activatedTabVisibile){
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("verify Status: "+activatedTab));
+            }
+            else{
+                RunCukesTest.logger.log(LogStatus.FAIL, HTMLReportUtil.failStringRedColor("verify Status: "+activatedTab));
+            }
+     }
 }

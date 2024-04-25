@@ -584,9 +584,9 @@ public class QuoteUtil {
      */
     public static void verifyProductTitle(){
        String  productTitle=KeywordUtil.getElementText(QuoteObject.quoteTitle);
-       boolean productTit=KeywordUtil.isWebElementVisible(QuoteObject.quoteTitle,"");
+       boolean productTit=KeywordUtil.isWebElementVisible(QuoteObject.quoteTitle,"product title displayed");
        if (productTit){
-         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("verify Product Title"+productTitle));
+         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("verify Product Title: "+productTitle));
           }
        else {
            RunCukesTest.logger.log(LogStatus.FAIL, HTMLReportUtil.failStringRedColor("Title not displayed"+productTitle));
