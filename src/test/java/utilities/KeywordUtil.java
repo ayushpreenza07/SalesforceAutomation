@@ -30,7 +30,7 @@ public class KeywordUtil extends GlobalUtil {
      * The constant cucumberTagName.
      */
     public static String cucumberTagName;
-    private static final int DEFAULT_WAIT_SECONDS = 30;
+    private static final int DEFAULT_WAIT_SECONDS = 40;
     /**
      * The constant FAIL.
      */

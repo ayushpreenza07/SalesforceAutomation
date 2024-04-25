@@ -69,7 +69,6 @@ public class SalesForceForecasting {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Users");
             ForecastingModule.clickUsers("Click on Users option");
             ForecastingModule.clickOnNewUser("Click on new user");
-            ForecastingModule.enterNewUserDetails(dataMap, "Enter New user details");
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -88,6 +87,8 @@ public class SalesForceForecasting {
     @And("Enable Forecast Settings for first-time user logging")
     public void forecastSettings() {
         try {
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            ForecastingModule.closePrevioustab();
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
             ForecastingModule.forecastSettingsOption("Click on Forecasts Settings");
             ForecastingModule.enableForecasts("Click on Forecasts toggle button");
@@ -96,7 +97,7 @@ public class SalesForceForecasting {
         }
     }
 
-    @And("Create  Forecast Type with Opportunities")
+    @And("Create Forecast Type with Opportunities")
     public void createForecastTypeWithOpportunities() {
         try {
             ForecastingModule.clickOnSetup("Setup page is opened");
@@ -108,7 +109,7 @@ public class SalesForceForecasting {
     }
 
 
-    @And("Create  Forecast Type with Opportunities and Product")
+    @And("Create Forecast Type with Opportunities and Product")
     public void createForecastTypeWithOpportunitiesAndProduct() {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
