@@ -72,8 +72,8 @@ public class ServiceSupportObject {
     public static By newAccountOption= By.xpath("//span[@class='slds-truncate' and text()='New Account']");
 
     //Xpaths for creating new account and Phone in case section
-    public static By phoneNumber1 = By.xpath("//label[span[text()='Phone']]/following-sibling::input[@type='tel']");
-    public static By accountName1 = By.xpath("//label[span[text()='Account Name']]/following-sibling::input[@type='text']");
+    public static By phoneNumber_ss = By.xpath("//label[span[text()='Phone']]/following-sibling::input[@type='tel']");
+    public static By accountName_ss = By.xpath("//label[span[text()='Account Name']]/following-sibling::input[@type='text']");
     public static By saveBtnOfNewAccount= By.xpath("(//span[@class=' label bBody' and text()='Save'])[2]");
     public static By saveBtnOfNewCase= By.xpath("//button[@class='slds-button slds-button_brand' and @name='SaveEdit' and @type='button']");
 

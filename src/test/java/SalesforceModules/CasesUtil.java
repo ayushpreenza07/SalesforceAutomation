@@ -289,11 +289,11 @@ public class CasesUtil {
      * Enter phone number field for new account.
      *
      * @param logStep the log
-     * @param phoneNumber1 the phoneNumber1
+     * @param phoneNumber_ss the phoneNumber
      */
-    public static void enterPhoneNumber1(String phoneNumber1, String logStep){
-        KeywordUtil.waitForVisible(ServiceSupportObject.phoneNumber1);
-        KeywordUtil.inputText(ServiceSupportObject.phoneNumber1, phoneNumber1,logStep);
+    public static void enterPhoneNumberForServiceSupport(String phoneNumber_ss, String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.phoneNumber_ss);
+        KeywordUtil.inputText(ServiceSupportObject.phoneNumber_ss, phoneNumber_ss,logStep);
     }
 
     /**
@@ -302,9 +302,9 @@ public class CasesUtil {
      * @param logStep the log
      * @param name the account name
      */
-    public static void enterAccountName(String name, String logStep){
-        KeywordUtil.waitForVisible(ServiceSupportObject.accountName1);
-        KeywordUtil.inputText(ServiceSupportObject.accountName1, name,logStep);
+    public static void enterAccountNameForServiceSupport(String name, String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.accountName_ss);
+        KeywordUtil.inputText(ServiceSupportObject.accountName_ss, name,logStep);
     }
 
     /**
@@ -332,10 +332,10 @@ public class CasesUtil {
      * Enter account name field for new account.
      *
      * @param logStep the log
-     * @param accountName1 the account name
-     * @param phoneNumber1 the PhoneNumber1
+     * @param accountName_ss the account name
+     * @param phoneNumber_ss the PhoneNumber
      */
-    public static void newCaseByCreatingNewAccount(String accountName1, String phoneNumber1,String origin,String logStep) throws InterruptedException {
+    public static void newCaseByCreatingNewAccount(String accountName_ss, String phoneNumber_ss,String origin,String logStep) throws InterruptedException {
         try {
             clickCasesTab("Clicked on CasesTab");
             clickNewButton("Clicked on New Button for Cases");
@@ -344,8 +344,8 @@ public class CasesUtil {
             KeywordUtil.delay(3000);
             KeywordUtil.waitForVisible(ServiceSupportObject.newAccountOption);
             KeywordUtil.click(ServiceSupportObject.newAccountOption, "Click on New Account option");
-            enterAccountName(accountName1, "Entered Account Name");
-            enterPhoneNumber1(phoneNumber1, "Entered phone Number");
+            enterAccountNameForServiceSupport(accountName_ss, "Entered Account Name");
+            enterPhoneNumberForServiceSupport(phoneNumber_ss, "Entered Phone Number");
             saveBtnOfNewAccount_ss("clicked save button");
             setCaseOrigin(origin, "Case origin value is selected");
             saveBtnOfNewCase_ss("Clicked on Save button");
