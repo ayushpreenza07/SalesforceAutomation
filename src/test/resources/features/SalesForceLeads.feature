@@ -16,8 +16,8 @@ Feature: Salesforce Leads
   Activate Order (Change Status Draft to Activate )
 
 
-    Given Navigate to Salesforce as "System Admin"
-    And Login to Salesforce with "System Admin" credentials
+    Given navigate to Salesforce as "System Admin"
+    And login to Salesforce with "System Admin" credentials
     When Click on Hamburger Menu
     And Click on Search <"Leads">
     Then Verify Leads Page
@@ -59,6 +59,7 @@ Feature: Salesforce Leads
     And Click on Order Number
     And Click on Activated
     And Click on MarkAsCurrentStatus Button
+    Then Verify order status should be activated
 
 
   @salesforce @LeadsTest  @Web
@@ -68,18 +69,18 @@ Feature: Salesforce Leads
     Given navigate to Salesforce as "Leads Admin"
     And login to Salesforce with "Leads Admin" credentials
     When Click on Hamburger Menu
-    And click on Search <"Leads">
-    Then verify Leads Page
+    And Click on Search <"Leads">
+    Then Verify Leads Page
     When Click on New Button
     And Enter LastName and CompanyName
     When Click on Save Button
-    Then verify New with Open Status
+    Then Verify New with Open Status
     When Click on Converted Tab
     And Click on Select Convert Status
     And Click on Choose Existing Account Search
     And Click on Choose Existing Contact Search
     And Click on Choose Existing Opportunity Search
     And Click on Convert button
-    Then verify Your lead has been converted
+    Then Verify Your lead has been converted
     When Click on Opportunity Tab in converted popUp
-    Then verify the Opportunity AccountName
+    Then Verify the Opportunity AccountName

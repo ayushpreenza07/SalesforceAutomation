@@ -56,7 +56,7 @@ public class SalesForceCPQ {
     }
 
 
-    @When("^Navigate to Salesforce as \"([^\"]*)\"$")
+    @When("^navigate to Salesforce as \"([^\"]*)\"$")
     public void navigateToUrlAccordingToUserType(String userType) throws Exception {
 
         String baseUrl = "";
@@ -74,6 +74,10 @@ public class SalesForceCPQ {
                 baseUrl = ConfigReader.getValue("Billing_URL");
                 break;
 
+            case "Billing Opportunity":
+                baseUrl = ConfigReader.getValue("Billing_URL_OPP");
+                break;
+
             // Add cases for other user types as needed
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
@@ -88,7 +92,7 @@ public class SalesForceCPQ {
 
     }
 
-    @When("^Login to Salesforce with \"([^\"]*)\" credentials$")
+    @When("^login to Salesforce with \"([^\"]*)\" credentials$")
     public void loginToSalesforceAccordingToUserType(String userType) throws Exception {
         String username = "";
         String password = "";
@@ -108,6 +112,10 @@ public class SalesForceCPQ {
             case "Billing Admin":
                 username = ConfigReader.getValue("salesforceUsernameBilling");
                 password = ConfigReader.getValue("salesforcePasswordBilling");
+                break;
+            case "Billing Opportunity":
+                username = ConfigReader.getValue("BillingUsername");
+                password = ConfigReader.getValue("BillingPassword");
                 break;
 
             // Add cases for other user types as needed

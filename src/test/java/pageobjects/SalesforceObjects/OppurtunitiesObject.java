@@ -52,4 +52,6 @@ public class OppurtunitiesObject {
     public static By opportunityNameInTable=By.xpath("//div[1]/div/div/table/tbody/tr[1]/th/span/a");
     public static By salesForceCPQ=By.xpath("//div[@class='al-menu-dropdown-list']//a[@data-label='Salesforce CPQ']");
     public static By opportunityStage=By.xpath("//*/div[1]/div/div/table/tbody/tr[1]/td[5]/span/span[1]");
-}
+    public static By opportunityDropdownEdit=By.xpath("//li[@class='uiMenuItem']/a[@title='Edit']");
+    public static By opportunityDropdown=By.xpath("(//div[@class='forceVirtualActionMarker forceVirtualAction']/a)[1]");
+  }

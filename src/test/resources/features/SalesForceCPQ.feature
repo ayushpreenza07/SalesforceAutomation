@@ -10,10 +10,10 @@ Feature: salesforce demo
     Then create opportunity and change its status
     And create new quote and add product
     Then Generate document
-    Then verify if product added
+    Then Verify if product added
     And verify if document generated
     Then Go to quote and change its status to approve
-    And create new contract
+    And Create new contract
     Then Change Opportunity Status to Close Won after Quote Approve
     And create an order and activate
     Examples:
