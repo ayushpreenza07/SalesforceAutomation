@@ -428,10 +428,6 @@ public class OppurtunitiesUtil extends GlobalUtil {
         }
     }
 
-
-    //(OppurtunitiesObject.opportunityStage,"Stage status Closed Won"));
-
-
     /**
      * Click on the Opportunity Tab
      *
