@@ -594,7 +594,7 @@ public class ForecastingModule {
     /* Click on Enable Forecasts Toggle button.... */
     public static void enableForecasts(String logStep) throws InterruptedException {
         try {
-            if (!KeywordUtil.isWebElementVisible(ForecastingPage.ForecastsToggleButton, "Verify forecasts toggle button is enabled or not")) {
+            if (!KeywordUtil.isWebElementVisible(ForecastingPage.forecastsToggleButton, "Verify forecasts toggle button is enabled or not")) {
                 KeywordUtil.isWebElementVisible(ForecastingPage.enableForecastsToggleButton, "Forecasts toggle button is visible");
                 KeywordUtil.click(ForecastingPage.enableForecastsToggleButton, logStep);
             } else {

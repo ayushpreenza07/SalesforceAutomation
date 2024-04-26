@@ -66,12 +66,7 @@ public class ForecastingPage {
     public static By doneButton = By.xpath("//*[text()=\"Done\"]");
     public static By forecastsSettingsOption= By.xpath("//li[@aria-level=\"4\"]/child::div[@title=\"Forecasts Settings\"]//a");
     public static By enableForecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//span[@part='indicator']");
-    public static By ForecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//label//span[text()='Enable Forecasts']");
-
-
-    public static By quickFind = By.xpath("//input[@placeholder='Quick Find']");
-
-    public static By users = By.xpath("//li[@aria-level=\"2\"]/child::div[@title=\"Users\"]//a");
+    public static By forecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//label//span[text()='Enable Forecasts']");
     public static By newUser = By.xpath("//input[@value='New User']");
     public static By firstName = By.xpath("//input[@id='name_firstName']");
     public static By lastName = By.xpath("//input[@id='name_lastName']");
