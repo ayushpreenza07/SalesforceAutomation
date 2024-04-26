@@ -7,7 +7,7 @@ public class OppurtunitiesObject {
 
     public static By opportunitiesTab =By.xpath("//div[@class='slds-context-bar']//a[@title='Opportunities']");
 
-     public static By createNewOpportunities = By.xpath("//button[@name='New']");
+    public static By createNewOpportunities = By.xpath("//button[@name='New'] | //*[text()='New']");
 
     public static By opportunityName = By.xpath("//input[@name='Name']");
 
@@ -19,6 +19,8 @@ public class OppurtunitiesObject {
     public static By CloseDate = By.xpath("//input[@name='CloseDate']");
 
     public static By clickOnSave = By.name("SaveEdit");
+    public static By editButton = By.name("Edit");
+    public static By opportunitiesTabb = By.xpath("//span[@class='slds-truncate'][text()='Opportunities']");
 
     public static By selectOpportunity = By.xpath("(//span[@lwc-47ngqe6rvah])[7]");
 
