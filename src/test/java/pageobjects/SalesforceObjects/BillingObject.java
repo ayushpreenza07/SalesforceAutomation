@@ -22,5 +22,11 @@ public class BillingObject {
     public static By addStandardPrice = By.xpath("//a[@title='Add Standard Price']");
 
     public static By addListPrice = By.xpath("//input[@data-interactive-lib-uid='68']");
+    public static By editViewButtonHolder = By.xpath("//a[@class='rowActionsPlaceHolder slds-button slds-button--icon-x-small slds-button--icon-border-filled keyboardMode--trigger']");
+    public static By editButton = By.xpath("//a[@title='Edit']");
+
+    public static By editListPrice = By.xpath("//input[@data-interactive-lib-uid='70']");
+
+    public static By searchProduct = By.xpath("//input[@placeholder='Search this list...']");
 
 }
