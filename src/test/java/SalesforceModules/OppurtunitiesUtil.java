@@ -7,10 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.CampaignObject;
-import pageobjects.SalesforceObjects.ContactObject;
-import pageobjects.SalesforceObjects.OppurtunitiesObject;
-import pageobjects.SalesforceObjects.QuoteObject;
+import pageobjects.SalesforceObjects.*;
 import step_definitions.RunCukesTest;
 import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
@@ -220,6 +217,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
             KeywordUtil.clickJS(OppurtunitiesObject.proposalStage);
         }
     }
+
     public static void selectStageProposalQuotes(String logStep) {
         try {
             KeywordUtil.delay(2000);
@@ -230,6 +228,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
             KeywordUtil.clickJS(OppurtunitiesObject.proposalStages);
         }
     }
+
     /**
      * Clicking mark as stage button
      *
@@ -248,6 +247,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
             executor.executeScript("arguments[0].click();", element);
         }
     }
+
     /**
      * Clicking mark as stage button
      *
@@ -313,6 +313,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
         setMarkAsStage("stage marked");
         goToAccount("Navigated back to account");
     }
+
     // Leads Mark As Stage
     public static void markAsStage() throws InterruptedException {
         selectStageProposalQuote("proposal stage selected");
@@ -383,7 +384,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
         try {
             KeywordUtil.delay(2000);
             KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunitiesTab, "verify Opportunity Tab");
-            KeywordUtil.click(OppurtunitiesObject.opportunitiesTab,"Clicked on Opportunities Tab");
+            KeywordUtil.click(OppurtunitiesObject.opportunitiesTab, "Clicked on Opportunities Tab");
         } catch (Exception e) {
             KeywordUtil.delay(2000);
             KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunitiesTab, "verify Opportunity Tab");
@@ -398,7 +399,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
     public static void clickOnOpportunityName() {
         try {
             KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityNameInTable, "verify Opportunity Tab");
-            KeywordUtil.click(OppurtunitiesObject.opportunityNameInTable,"Clicked on Opportunities Name");
+            KeywordUtil.click(OppurtunitiesObject.opportunityNameInTable, "Clicked on Opportunities Name");
         } catch (Exception e) {
             KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityNameInTable, "verify Opportunity Tab");
             KeywordUtil.clickJS(OppurtunitiesObject.opportunityNameInTable);
@@ -419,18 +420,16 @@ public class OppurtunitiesUtil extends GlobalUtil {
     public static void verifyOpportunityStage() throws InterruptedException {
         KeywordUtil.delay(5000);
         String stageStatus = KeywordUtil.getVisibleText(OppurtunitiesObject.opportunityStage);
-        if (KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityStage,"Closed Won Stage Displayed")){
-            RunCukesTest.logger.log(LogStatus.PASS,HTMLReportUtil.passStringGreenColor("Verify Status: "+stageStatus));
-        }
-        else{
-            RunCukesTest.logger.log(LogStatus.FAIL,"Status is not showing: "+stageStatus);
+        if (KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityStage, "Closed Won Stage Displayed")) {
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Verify Status: " + stageStatus));
+        } else {
+            RunCukesTest.logger.log(LogStatus.FAIL, "Status is not showing: " + stageStatus);
 
         }
     }
 
 
-
-            //(OppurtunitiesObject.opportunityStage,"Stage status Closed Won"));
+    //(OppurtunitiesObject.opportunityStage,"Stage status Closed Won"));
 
 
     /**
@@ -464,9 +463,11 @@ public class OppurtunitiesUtil extends GlobalUtil {
         enterCloseDate(2024, 1, 2, "Close date entered");
         enterAmount(amount, "Amount entered " + amount);
         setStage(stage, "Stage selected - " + stage);
-       takeScreenshotAndAttachInReport();
+        takeScreenshotAndAttachInReport();
         clickSaveButton("saved");
         KeywordUtil.delay(3000);
+        KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded("DemoOpportunity"), "Verify new opportunity created.");
+        takeScreenshotAndAttachInReport();
     }
 
     /**
@@ -474,11 +475,32 @@ public class OppurtunitiesUtil extends GlobalUtil {
      *
      * @param name   the name
      * @param amount the amount
-     * @param stage  the stage
      */
-    public static void editOpportunityFromOpportunityTab(String name, String amount, String stage) throws InterruptedException {
-     KeywordUtil.waitForVisible(OppurtunitiesObject.editButton);
-     KeywordUtil.click(OppurtunitiesObject.editButton,"Click on edit button.");
+    public static void editOpportunityFromOpportunityTab(String name, String amount) throws InterruptedException {
+        KeywordUtil.waitForVisible(OppurtunitiesObject.editButton);
+        KeywordUtil.click(OppurtunitiesObject.editButton, "Click on edit button.");
+        enterOppurtunityName(name, name + " entered in Opportunity");
+        enterAmount(amount, "Amount entered " + amount);
+        takeScreenshotAndAttachInReport();
+        clickSaveButton("saved");
+        KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded("DemoOpportunityUpdated"), "Verify opportunity is edited.");
+        takeScreenshotAndAttachInReport();
+    }
+    /**
+     * Delete Opportunity from Opportunity tab
+     *
+     */
+    public static void deleteOpportunityFromOpportunityTab() throws InterruptedException {
+        KeywordUtil.waitForVisible(OppurtunitiesObject.opportunitiesTabShowMoreButton);
+        KeywordUtil.click(OppurtunitiesObject.opportunitiesTabShowMoreButton, "Click on opportunities details screen show more button.");
+        KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded("Delete"), "Verify delete option is visible.");
+        takeScreenshotAndAttachInReport();
+        KeywordUtil.click(ForecastingPage.newForecastAdded("Delete"), "Click on delete option.");
+        KeywordUtil.isWebElementVisible(OppurtunitiesObject.deleteOpportunityPopup, "Verify delete opportunity popup is visible on screen.");
+        takeScreenshotAndAttachInReport();
+        KeywordUtil.click(OppurtunitiesObject.deleteButton,"Click on delete button.");
+        KeywordUtil.isWebElementVisible(OppurtunitiesObject.toastMessage, "Success message visible on screen after opportunity is deleted.");
+        takeScreenshotAndAttachInReport();
 
     }
 

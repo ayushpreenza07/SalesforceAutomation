@@ -19,8 +19,12 @@ public class OppurtunitiesObject {
     public static By CloseDate = By.xpath("//input[@name='CloseDate']");
 
     public static By clickOnSave = By.name("SaveEdit");
-    public static By editButton = By.name("Edit");
+    public static By editButton = By.xpath("(//button[@name='Edit'])[1]");
+    public static By deleteButton = By.xpath("//*[@class=\" label bBody\" and text()='Delete']");
+    public static By toastMessage = By.xpath("//span[contains(@class, 'toastMessage')]");
     public static By opportunitiesTabb = By.xpath("//span[@class='slds-truncate'][text()='Opportunities']");
+    public static By deleteOpportunityPopup = By.xpath("//h2[@class=\"title slds-text-heading--medium slds-hyphenate\" and text()='Delete Opportunity']");
+    public static By opportunitiesTabShowMoreButton = By.xpath("//*[@class='slds-button slds-button_icon-border-filled fix-slds-button_icon-border-filled slds-button_last']");
 
     public static By selectOpportunity = By.xpath("(//span[@lwc-47ngqe6rvah])[7]");
 

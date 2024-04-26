@@ -238,15 +238,25 @@ public class SalesForceMarketing {
     }
 
 
+    @And("user clicks on Opportunities Tab")
+    public void userClicksOnOpportunitiesTab() throws InterruptedException {
+        OppurtunitiesUtil.clickOpportunityTab("clicks on Opportunities Tab");
+    }
 
+    @Then("user create new Opportunity")
+    public void userCreateNewOpportunity() throws InterruptedException {
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+    }
 
+    @And("user edit new Opportunity")
+    public void userEditNewOpportunity() throws InterruptedException {
+        OppurtunitiesUtil.editOpportunityFromOpportunityTab("DemoOpportunityUpdated","3004");
 
+    }
 
+    @And("user delete new Opportunity")
+    public void userDeleteNewOpportunity() throws InterruptedException {
+        OppurtunitiesUtil.deleteOpportunityFromOpportunityTab();
 
-
-
-
-
-
-
+    }
 }

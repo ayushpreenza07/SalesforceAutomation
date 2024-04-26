@@ -5,8 +5,8 @@ Feature: Salesforce Marketing CRM
   @MarketingCRM_01
   Scenario Outline:Create and edit comapigns
     Given Read the testdata "<TestData>" and "<SheetName>" from excel file
-    When navigate to Salesforce as "System Admin"
-    And login to Salesforce with "System Admin" credentials
+    When Navigate to Salesforce as "Forecast Admin"
+    And Login to Salesforce with "Forecast Admin" credentials
     And user clicks on the App launcher button
     And user selects the "Marketing CRM Classic"
     And user clicks on Campaigns Tab
@@ -39,6 +39,11 @@ Feature: Salesforce Marketing CRM
     Then user edit the lead
     Then user delete the lead
     Then user remove the filter
+    And user clicks on Opportunities Tab
+    Then user create new Opportunity
+    And user edit new Opportunity
+    And user delete new Opportunity
+
     Examples:
       | TestData  | SheetName  |
       | TestData1 | Salesforce |
