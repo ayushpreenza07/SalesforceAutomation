@@ -122,6 +122,5 @@ public class SalesForceServiceSupportDemo {
     public void create_opportunity() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         OppurtunitiesUtil.createOpportunity_ss(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
-
     }
 }
