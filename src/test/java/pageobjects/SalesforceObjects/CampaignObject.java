@@ -154,7 +154,7 @@ public class CampaignObject {
         return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[8]//span[text()='Show Actions']");
     }
 
-    public static By DeleteShowActionInLeads(String name){
+    public static By deleteShowActionInLeads(String name){
         return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[8]//span[text()='Show more actions']");
     }
 

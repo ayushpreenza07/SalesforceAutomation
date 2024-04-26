@@ -67,6 +67,7 @@ public class ForecastingPage {
     public static By forecastsSettingsOption= By.xpath("//li[@aria-level=\"4\"]/child::div[@title=\"Forecasts Settings\"]//a");
     public static By enableForecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//span[@part='indicator']");
     public static By forecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//label//span[text()='Enable Forecasts']");
+
     public static By newUser = By.xpath("//input[@value='New User']");
     public static By firstName = By.xpath("//input[@id='name_firstName']");
     public static By lastName = By.xpath("//input[@id='name_lastName']");

@@ -1109,8 +1109,8 @@ public class CampaignUtil {
      */
     public static void clickShowActionsInLeadsForDelete(String leadName) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.DeleteShowActionInLeads(leadName));
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.DeleteShowActionInLeads(leadName));
+        KeywordUtil.waitForVisible(CampaignObject.deleteShowActionInLeads(leadName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.deleteShowActionInLeads(leadName));
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
