@@ -10,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobjects.SalesforceObjects.CampaignObject;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
@@ -20,6 +21,8 @@ import java.util.HashMap;
 
 public class SalesForceMarketing {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
+    public static String leadName= KeywordUtil.generateRandomName();
+    public static String leadCompanyName = "TX";
 
 
     @Given("Read the testdata {string} and {string} from excel file")
@@ -182,10 +185,26 @@ public class SalesForceMarketing {
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-
-
-
-
+    @And("Add Lead To Campaign")
+    public static void addLeadToCampaign(){
+        try{
+        CampaignUtil.addLeadToCampaign(dataMap.get("ParentCampaign"),leadName, leadCompanyName);
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        }
+        catch (Exception e){
+            CampaignUtil.verificationMessage();
+        }
+    }
+    @And("Change Lead Status")
+    public static void changeLeadStatus(){
+        try{
+            CampaignUtil.changeLeadStatusToConverted(leadName);
+            //KeywordUtil.takeScreenshotAndAttachInReport();
+        }
+        catch (Exception e){
+            CampaignUtil.verificationMessage();
+        }
+    }
 
 
 
