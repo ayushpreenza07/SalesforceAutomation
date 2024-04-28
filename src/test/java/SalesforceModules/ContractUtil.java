@@ -24,13 +24,14 @@ public class ContractUtil {
      */
     public static void ButtonContract(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.delay(5000);
+            KeywordUtil.delay(10000);
             ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
             KeywordUtil.waitForVisible(ContractObject.contractBtn);
-            KeywordUtil.click(ContractObject.contractBtn, logStep);
+            KeywordUtil.clickJS(ContractObject.contractBtn, logStep);
         }catch(Exception e){
-            KeywordUtil.getDriver().navigate().refresh();
-            ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
+            KeywordUtil.scrollElementIntoViewUsingActions(ContractObject.contractBtn);
+          //  KeywordUtil.getDriver().navigate().refresh();
+           // ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
             KeywordUtil.waitForVisible(ContractObject.contractBtn);
             KeywordUtil.click(ContractObject.contractBtn, logStep);
         }

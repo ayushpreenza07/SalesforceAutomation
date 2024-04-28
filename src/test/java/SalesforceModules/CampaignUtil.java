@@ -1,6 +1,8 @@
 package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
+import io.cucumber.java.en.Then;
+import net.bytebuddy.description.modifier.Ownership;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.xmlbeans.impl.xb.xsdschema.All;
 import org.bouncycastle.operator.KeyWrapper;
@@ -14,6 +16,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.SourceType;
 import org.testng.Assert;
 import pageobjects.SalesforceObjects.CampaignObject;
+import pageobjects.SalesforceObjects.LeadsPage;
 import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import step_definitions.RunCukesTest;
 import utilities.GlobalUtil;
@@ -71,7 +74,7 @@ public class CampaignUtil {
         List<WebElement> campaignNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the parent Campaigns list");
         for (WebElement campaign : campaignNames) {
             if (campaign.getText().equalsIgnoreCase(campaignName)) {
-                KeywordUtil.delay(9000);
+
                 campaign.click();
                 break;
             }
@@ -398,8 +401,8 @@ public class CampaignUtil {
         KeywordUtil.delay(6000);
         List<WebElement> LeadNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Lead members list");
         for (WebElement Lead : LeadNames) {
-            System.out.println(Lead.getText());
-            if (Lead.getText().equals(leadName)) {
+
+            if (Lead.getText().contains(leadName)) {
                 Thread.sleep(8000);
                 Lead.click();
                 break;
@@ -707,7 +710,7 @@ public class CampaignUtil {
     /**
      * getting all the amount in the Amount column
      */
-    public static void getAllmount(){
+    public static void getAllAmount(){
         List<WebElement> allAmount=KeywordUtil.getListElements(CampaignObject.getAllAmount,"getting all Amount name");
         for(WebElement Amount:allAmount){
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the Amount is : " +Amount.getText()));
@@ -732,7 +735,7 @@ public class CampaignUtil {
         clickViewAllButton();
         getAllOpportunitiesName();
         getAllStages();
-        getAllmount();
+        getAllAmount();
         getClosedDate();
     }
 
@@ -765,7 +768,6 @@ public class CampaignUtil {
         List<WebElement> camapignName=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Campaign list");
         for (WebElement campaign : camapignName) {
             if (campaign.getText().equals(campaignName)) {
-                KeywordUtil.delay(10000);
                 campaign.click();
                 break;
             }
@@ -792,7 +794,7 @@ public class CampaignUtil {
      */
 
     public static void selectStatus(){
-        KeywordUtil.click(CampaignObject.statusPopUp,"clcik on the status pop up");
+        KeywordUtil.click(CampaignObject.statusPopUp,"click on the status pop up");
         KeywordUtil.click(CampaignObject.respondedStatus,"selected the responded status");
     }
     /**
@@ -953,6 +955,323 @@ public class CampaignUtil {
         }
     }
 
+
+
+
+    /**
+     * Click on the view all button in the campaign history
+     */
+    public static void clickViewAllInCampaignHistory() {
+        try {
+            KeywordUtil.scrollingToElementofAPage(CampaignObject.campaignHistoryViewAllButton, "scroll to the view All in the campaign History");
+            KeywordUtil.click(CampaignObject.campaignHistoryViewAllButton,"click on the view All button in the campaign History Button");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * getting all the campaign names in campaign history
+     */
+    public static void getAllCampaignNameInCampaignHistory(){
+        List<WebElement> AllCamapigns=KeywordUtil.getListElements(CampaignObject.campaignNameInCampaignHistory,"getting all campaign  name in campaign history");
+        for(WebElement campaign: AllCamapigns){
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the campaign Name is : " +campaign.getText()));
+
+        }
+    }
+
+    /**
+     * getting all the status in campaign history
+     */
+    public static void getStatusInCampaignHistory(){
+        List<WebElement> Allstatus=KeywordUtil.getListElements(CampaignObject.statusInCampaignHistory,"getting status in campaign history");
+        for(WebElement status: Allstatus){
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the status Name is : " +status.getText()));
+
+        }
+    }
+
+    /**
+     * getting memeber status in campaign history
+     */
+    public static void getMemberstatusInCampaignHistory(){
+        List<WebElement> Allmemberstatus=KeywordUtil.getListElements(CampaignObject.memberStatusInCampaignHistory,"getting status in campaign history");
+        for(WebElement memberstatus: Allmemberstatus){
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("the member status Name is : " +memberstatus.getText()));
+
+        }
+    }
+    /**
+     * see the campaign history
+     */
+    public static void seeCampaignHistory(){
+        clickViewAllInCampaignHistory();
+        getAllCampaignNameInCampaignHistory();
+        getStatusInCampaignHistory();
+        getMemberstatusInCampaignHistory();
+    }
+
+
+    /**
+     * click on the new button to create new case in contact
+     */
+    public static void clickNewCaseButton() throws InterruptedException {
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(CampaignObject.newCaseButton);
+            WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.newCaseButton);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Select status In Case
+     */
+    public static void selectStatusInCase(){
+        KeywordUtil.click(CampaignObject.statusButtonInCase,"click on the status dropdown");
+        KeywordUtil.click(CampaignObject.selectStatusInCase("Working"),"click on the working status");
+    }
+
+    /***
+     * click on the case origin in case
+     */
+
+    public static void clickCaseOriginInCase(){
+        KeywordUtil.click(CampaignObject.caseOriginInCase,"click on the case origin dropdown");
+    }
+
+    /**
+     * Select Case origin
+     */
+
+    public static void selectCaseOrigin() {
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(CampaignObject.selectCaseOrigin("Web"));
+            WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.selectCaseOrigin("Web"));
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * clicking on the save button in Case
+     */
+    public static void clickSaveButtonInCase(){
+        KeywordUtil.click(CampaignObject.saveButtonInCase,"click on the save button");
+    }
+    /**
+     * Adding the case in the contact
+     */
+    public static void addCaseInContact() throws InterruptedException {
+        clickNewCaseButton();
+        selectStatusInCase();
+        clickCaseOriginInCase();
+        selectCaseOrigin();
+        clickSaveButtonInCase();
+    }
+
+    /**
+     * click view All Button in Cases to see the case History
+     */
+    public static void clickCaseViewAllButton(){
+    try {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.casesViewAllButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.casesViewAllButton);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }catch (Exception e){
+        System.out.println(e.getMessage());
+    }
+}
+
+    /**
+     * get the cases Name in the case history
+     */
+    public static void getCasesName(){
+        List<WebElement> allCases = KeywordUtil.getListElements(CampaignObject.casesNameInCaseHistory, "Getting case name in case history");
+        for (WebElement currentCase : allCases) {
+            try {
+                String caseName = currentCase.getText();
+                String[] parts = caseName.split(" ");
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("The case name is: " + parts[1]));
+            } catch (Exception e) {
+                RunCukesTest.logger.log(LogStatus.FAIL, "Failed to retrieve case name due to: " + e.getMessage());
+            }
+        }
+
+    }
+
+    /**
+     * getting priorities in case History
+     */
+    public static void getPriorityInCaseHistory(){
+        List<WebElement> allPriority = KeywordUtil.getListElements(CampaignObject.priorityInCaseHistory, "Getting  priority in case history");
+        for (WebElement priority : allPriority) {
+            try {
+                String prioritytext = priority.getText();
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("The priority name is: " + prioritytext));
+            } catch (Exception e) {
+                RunCukesTest.logger.log(LogStatus.FAIL, "Failed to retrieve case name due to: " + e.getMessage());
+            }
+        }
+
+    }
+
+    /**
+     * getting the Status present in the case history
+     */
+    public static void getStatusInCaseHistory(){
+        List<WebElement> allStatus = KeywordUtil.getListElements(CampaignObject.statusInCaseHistory, "Getting  status in case history");
+        for (WebElement status : allStatus) {
+            try {
+                String statustext = status.getText();
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("The status is: " + statustext));
+            } catch (Exception e) {
+                RunCukesTest.logger.log(LogStatus.FAIL, "Failed to retrieve case name due to: " + e.getMessage());
+            }
+        }
+
+    }
+
+    /**
+     * getting the dates present in the case History
+     */
+    public static void getDateInCaseHistory(){
+        List<WebElement> datesOpened = KeywordUtil.getListElements(CampaignObject.dateOpenedInCaseHistory, "Getting date in case history");
+        for (WebElement date : datesOpened){
+            try {
+                String datetext = date.getText();
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.infoStringGreenColor("The  date is: " + datetext));
+            } catch (Exception e) {
+                RunCukesTest.logger.log(LogStatus.FAIL, "Failed to retrieve case name due to: " + e.getMessage());
+            }
+        }
+
+    }
+
+    /**
+     * to see the case History
+     */
+    public static void seeCaseHistory(){
+        clickCaseViewAllButton();
+        getCasesName();
+        getPriorityInCaseHistory();
+        getDateInCaseHistory();
+        getStatusInCaseHistory();
+
+    }
+
+    /**
+     * click on the leads Tab
+     */
+    public static void clickLeadsTab(){
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(CampaignObject.leadsTab);
+            WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.leadsTab);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * enter last name and city name in the leads field
+     * @param lastName enter the last name
+     * @param cityName enter the city
+     */
+    public static void enterLastNameandCityNameInLeads(String lastName,String cityName){
+        KeywordUtil.inputText(LeadsPage.lastName,lastName,"Enter Last Name");
+        KeywordUtil.inputText(LeadsPage.companyName,cityName,"Entered City Name");
+    }
+
+    /**
+     * create the lead
+     * @param lastname enter the last name
+     * @param cityName  enter the city
+     * @throws InterruptedException
+     */
+    public static void createLead(String lastname, String cityName) throws InterruptedException {
+        Leads.clickNewButton();
+        enterLastNameandCityNameInLeads(lastname,cityName);
+        Leads.clickOnSaveButton();
+        verificationMessage();
+
+    }
+
+    /**
+     * click on show Actions button in leads tab for editing the lead
+     * @param contactName enter the lead name
+     * @throws InterruptedException
+     */
+    public static void clickShowActionsInLeads(String contactName) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.clickShowActionsInLeads(contactName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.clickShowActionsInLeads(contactName));
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * edit the lead
+     * @param leadName
+     * @param lastName
+     * @param city
+     * @throws InterruptedException
+     */
+    public static void editLead(String leadName,String lastName, String city) throws InterruptedException {
+      clickShowActionsInLeads(leadName);
+        clickOnShowActionsEditButton();
+      enterLastNameandCityNameInLeads(lastName,city);
+      Leads.clickOnSaveButton();
+      verificationMessage();
+    }
+
+    /**
+     * click on Delete button in show Actions for delete the lead
+     * @throws InterruptedException
+     */
+    public static void clickDeleteButtonInShowActionForLeads() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.leadsShowActionsDeleteButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.leadsShowActionsDeleteButton);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * click on the show Actions for delete the lead
+     * @param leadName enter the lead name
+     * @throws InterruptedException
+     */
+    public static void clickShowActionsInLeadsForDelete(String leadName) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.deleteShowActionInLeads(leadName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.deleteShowActionInLeads(leadName));
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * delete the lead
+     * @param leadName enter the leadName
+     * @throws InterruptedException
+     */
+    public static void deleteLead(String leadName) throws InterruptedException {
+        clickShowActionsInLeadsForDelete(leadName);
+        clickDeleteButtonInShowActionForLeads();
+        clickOnCampaignDelete();
+        verificationMessage();
+
+    }
 
 }
 

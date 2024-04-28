@@ -44,6 +44,7 @@ public class ForecastingPage {
     public static By optionalFilterPage = By.xpath("//*[text()=\"Add optional filters\"]");
     public static By forecastTypeName = By.xpath("//*[text()=\"Name your forecast type\"]");
     public static By forecastTypeNameInputTextField = By.xpath("//input[@name=\"forecastTypeName\"]");
+    public static By forecastTypeDevNameInputTextField = By.xpath("//input[@name=\"forecastTypeDevName\"]");
     public static By forecastTypeSet = By.xpath("//*[text()=\"You've set up your forecast type\"]");
     public static By activateOption = By.xpath("//a[./span[text()='Activate']]");
     public static By appLauncherIcon = By.xpath("//div[@class='appLauncher slds-context-bar__icon-action']//button");
@@ -65,11 +66,8 @@ public class ForecastingPage {
     public static By doneButton = By.xpath("//*[text()=\"Done\"]");
     public static By forecastsSettingsOption= By.xpath("//li[@aria-level=\"4\"]/child::div[@title=\"Forecasts Settings\"]//a");
     public static By enableForecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//span[@part='indicator']");
+    public static By forecastsToggleButton= By.xpath("//div[@class='slds-form-element__control']//label//span[text()='Enable Forecasts']");
 
-
-    public static By quickFind = By.xpath("//input[@placeholder='Quick Find']");
-
-    public static By users = By.xpath("//li[@aria-level=\"2\"]/child::div[@title=\"Users\"]//a");
     public static By newUser = By.xpath("//input[@value='New User']");
     public static By firstName = By.xpath("//input[@id='name_firstName']");
     public static By lastName = By.xpath("//input[@id='name_lastName']");
@@ -87,6 +85,7 @@ public class ForecastingPage {
     public static By allowForecasts = By.id("forecast_enabled");
 
     public static By saveBtn = By.xpath("//input[@value=' Save ']");
+    public static By userCreatedPageDescription = By.xpath("//h2[@class='pageDescription']");
     public static By opportunityAmountTab = By.xpath("//a[@data-label='Opportunity Amount']");
     public static By assignedQuotas = By.xpath("//span[@class='fct-value-quota-width forceOutputCurrency']");
 
@@ -95,10 +94,10 @@ public class ForecastingPage {
     }
 
     public static By userOption(String searchValue) {
-
-        return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark | //li[@aria-level=\"4\"]/child::div[@title='" + searchValue + "']//a//mark");
-
-
+           return By.xpath("//li[@aria-level=\"2\"]/child::div[@title='" + searchValue + "']//a//mark");
+    }
+    public static By menuOption(String searchValue) {
+           return By.xpath("//li[@role='treeitem']/child::div[@title='" + searchValue + "']//a//mark");
     }
 
     public static By assignOption(String roleValue, String actionValue) {
