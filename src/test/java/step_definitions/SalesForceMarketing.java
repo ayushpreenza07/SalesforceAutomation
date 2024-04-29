@@ -259,4 +259,13 @@ public class SalesForceMarketing {
         OppurtunitiesUtil.deleteOpportunityFromOpportunityTab();
 
     }
+
+    @And("Change Opportunity Status")
+    public void changeOpportunityStatus() throws InterruptedException{
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.selectStageProposalQuote("proposal stage selected");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        OppurtunitiesUtil.setMarkAsCurrentStages("stage marked");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+    }
 }

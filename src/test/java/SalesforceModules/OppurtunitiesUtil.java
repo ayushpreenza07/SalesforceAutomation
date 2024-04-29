@@ -267,6 +267,25 @@ public class OppurtunitiesUtil extends GlobalUtil {
         }
     }
 
+/**
+     * Clicking mark Current stage button
+     *
+     * @param logStep the log
+     */
+    public static void setMarkAsCurrentStages(String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(OppurtunitiesObject.markCurrentStages);
+            WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.markCurrentStages);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+            RunCukesTest.logger.log(LogStatus.PASS, logStep);
+        } catch (Exception e) {
+            Assert.fail("stage not marked");
+
+        }
+    }
+
     /**
      * Verify Product
      *
