@@ -1,5 +1,7 @@
 package SalesforceModules;
 
+import com.relevantcodes.extentreports.LogStatus;
+import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -8,7 +10,10 @@ import org.testng.Assert;
 import pageobjects.SalesforceObjects.ContactObject;
 import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import pageobjects.SalesforceObjects.ServiceSupportObject;
+import pageobjects.SalesforceObjects.QuoteObject;
+import step_definitions.RunCukesTest;
 import utilities.GlobalUtil;
+import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
 import java.security.Key;
@@ -22,7 +27,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      *
      * @param logStep the log
      */
-    public static void NewButtonOppurtunity(String logStep){
+    public static void newButtonOppurtunity(String logStep){
         KeywordUtil.waitForVisible(OppurtunitiesObject.createNewOpportunities);
         KeywordUtil.click(OppurtunitiesObject.createNewOpportunities,logStep);
     }
@@ -206,6 +211,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void selectStageProposalQuote(String logStep){
         try {
+            KeywordUtil.delay(2000);
             KeywordUtil.waitForVisible(OppurtunitiesObject.proposalStage);
             KeywordUtil.click(OppurtunitiesObject.proposalStage, logStep);
         }catch (Exception e) {
@@ -229,6 +235,24 @@ public class OppurtunitiesUtil extends GlobalUtil {
         }catch (Exception e) {
             KeywordUtil.waitForVisible(OppurtunitiesObject.markStage);
             WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.markStage);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        }
+    }
+    /**
+     * Clicking mark as stage button
+     *
+     * @param logStep the log
+     */
+    public static void setMarkAsStages(String logStep) throws InterruptedException {
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(OppurtunitiesObject.markStages);
+            KeywordUtil.click(OppurtunitiesObject.markStages, logStep);
+        } catch (Exception e) {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(OppurtunitiesObject.markStages1);
+            WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.markStages1);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
         }
@@ -284,6 +308,21 @@ public class OppurtunitiesUtil extends GlobalUtil {
         setMarkAsStage("stage marked");
         goToAccount("Navigated back to account");
     }
+    /**
+     *Leads Mark As Stage
+     **/
+    public static void markAsStage() throws InterruptedException {
+        selectStageProposalQuote("proposal stage selected");
+        setMarkAsStage("stage marked");
+    }
+
+    /**
+     *Mark As Stage
+     **/
+    public static void markAsStages() throws InterruptedException {
+        //selectStageProposalQuotes("proposal stage selected");
+        setMarkAsStages("stage marked");
+    }
 
     /**
      * selecting closed won after marking opportunity as proposal
@@ -328,7 +367,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void createOpportunity(String name,String amount,String stage) throws InterruptedException {
         clickOpportunityButton("Opportunity button clicked");
-        NewButtonOppurtunity("clicked new button for Opportunity");
+        newButtonOppurtunity("clicked new button for Opportunity");
         enterOppurtunityName(name, name+" entered in Opportunity");
         enterCloseDate(2024,1,2,"Close date entered");
         enterAmount(amount, "Amount entered "+amount);
@@ -488,4 +527,61 @@ public class OppurtunitiesUtil extends GlobalUtil {
         KeywordUtil.clickJS(ServiceSupportObject.getBackToAccount_ss,logStep);
     }
 
+    /**
+     * Click On Opportunity Tab
+     */
+    public static void clickOnOpportunityTab() throws InterruptedException {
+        try {
+            KeywordUtil.delay(2000);
+            KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunitiesTab, "verify Opportunity Tab");
+            KeywordUtil.click(OppurtunitiesObject.opportunitiesTab,"Clicked on Opportunities Tab");
+        } catch (Exception e) {
+            KeywordUtil.delay(2000);
+            KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunitiesTab, "verify Opportunity Tab");
+            KeywordUtil.clickJS(OppurtunitiesObject.opportunitiesTab);
+
+        }
+    }
+
+    /**
+     * Click On Opportunity Name in Opportunity
+     */
+    public static void clickOnOpportunityName() {
+        try {
+            KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityNameInTable, "verify Opportunity Tab");
+            KeywordUtil.click(OppurtunitiesObject.opportunityNameInTable,"Clicked on Opportunities Name");
+        } catch (Exception e) {
+            KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityNameInTable, "verify Opportunity Tab");
+            KeywordUtil.clickJS(OppurtunitiesObject.opportunityNameInTable);
+
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Click On salesforce CPQ
+     */
+    public static void clickOnSalesforceCPQ() {
+        try {
+            KeywordUtil.isWebElementVisible(OppurtunitiesObject.salesForceCPQ, "verify Opportunity Tab");
+            KeywordUtil.clickJS(OppurtunitiesObject.salesForceCPQ);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * Verify opportunityStage
+     */
+    public static void verifyOpportunityStage() throws InterruptedException {
+        KeywordUtil.delay(5000);
+        String stageStatus = KeywordUtil.getVisibleText(OppurtunitiesObject.opportunityStage);
+        if (KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityStage,"Closed Won Stage Displayed")){
+            RunCukesTest.logger.log(LogStatus.PASS,HTMLReportUtil.passStringGreenColor("Verify Status: "+stageStatus));
+        }
+        else{
+            RunCukesTest.logger.log(LogStatus.FAIL,"Status is not showing: "+stageStatus);
+
+        }
+    }
 }

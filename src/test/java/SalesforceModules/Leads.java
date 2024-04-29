@@ -10,6 +10,7 @@ import utilities.ConfigReader;
 import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
+import java.security.Key;
 import java.util.HashMap;
 
 import static org.testng.Assert.assertEquals;
@@ -18,6 +19,10 @@ import static org.testng.Assert.assertEquals;
 public class Leads {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
 
+    /**
+     Click on HamburgerMenu in Leads
+     *  @param logStep the log
+     */
     public static void clickOnHamburgerMenu(String logStep) throws InterruptedException {
         KeywordUtil.delay(2000);
         try {
@@ -29,6 +34,10 @@ public class Leads {
         }
     }
 
+    /**
+     * Enter text in Leads
+     * @param text the text
+     */
     public static void enterText(String text) throws InterruptedException {
         KeywordUtil.delay(1000);
         try {
@@ -41,6 +50,10 @@ public class Leads {
         }
     }
 
+    /**
+     * Verify Page title
+     *
+     */
     public static void verifyPageTitle(){
         String expectedTitle;
         try {
@@ -54,6 +67,10 @@ public class Leads {
         }
         }
 
+    /**
+     * Click New Button
+     *
+     */
     public static void clickNewButton() throws InterruptedException {
 
         try {
@@ -65,8 +82,13 @@ public class Leads {
         }
         }
 
+    /**
+     * Click on save button
+     *
+     */
     public static void clickOnSaveButton(){
         try {
+            KeywordUtil.delay(1000);
             KeywordUtil.waitForVisible(LeadsPage.saveButton);
             KeywordUtil.click(LeadsPage.saveButton, "Clicked on Save Button");
         }
@@ -75,6 +97,10 @@ public class Leads {
         }
      }
 
+    /**
+     * Verify open not contacted section
+     *
+     */
     public static void verifyOpenNotContacted(){
     try {
         String expectedText = KeywordUtil.getVisibleText(LeadsPage.openNotContacted);
@@ -87,52 +113,64 @@ public class Leads {
     }
     }
 
+    /**
+     * Click on converted tab
+     *
+     */
     public static void clickOnConvertedTab () throws InterruptedException {
         try {
-            KeywordUtil.delay(2000);
+        KeywordUtil.delay(2000);
         KeywordUtil.scrollup(LeadsPage.converted);
         KeywordUtil.waitForVisible(LeadsPage.converted);
         KeywordUtil.click(LeadsPage.converted, "Clicked on Converted Tab");
        }
     catch (Throwable e){
         KeywordUtil.delay(2000);
-    KeywordUtil.waitForVisible(LeadsPage.converted);
-    WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.converted);
-    JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-    executor.executeScript("arguments[0].click();", element);
+        KeywordUtil.waitForVisible(LeadsPage.converted);
+        KeywordUtil.clickJS(LeadsPage.converted);
         }
     }
+
+    /**
+     * Click on convertedstatus button
+     *
+     */
     public static void clickOnConvertedStatusButton () throws InterruptedException {
         try {
-            KeywordUtil.delay(2000);
+            KeywordUtil.delay(3000);
             KeywordUtil.scrollup(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.clickJS(LeadsPage.selectConvertedStatusButton, "Clicked on Converted Status Button");
         }
         catch (Throwable e){
             KeywordUtil.delay(4000);
-        KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
-        WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.selectConvertedStatusButton);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
+             KeywordUtil.clickJS(LeadsPage.selectConvertedStatusButton);
         }
     }
+
+    /**
+     * Click on converted button
+     *
+     */
     public static void clickOnConvertedButton () throws InterruptedException {
 
         try {
-            KeywordUtil.delay(2000);
+            KeywordUtil.delay(4000);
             KeywordUtil.waitForVisible(LeadsPage.convertButton);
             KeywordUtil.clickJS(LeadsPage.convertButton, "Clicked on Converted Button");
         }
         catch (Throwable e){
             KeywordUtil.delay(4000);
             KeywordUtil.waitForVisible(LeadsPage.convertButton);
-            WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.convertButton);
-            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-            executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.clickJS(LeadsPage.convertButton);
         }
       }
 
+    /**
+     * Verify converted status message
+     *
+     */
     public static void verifyConvertStatusMessage() throws InterruptedException {
         KeywordUtil.delay(1000);
         try {
@@ -148,6 +186,10 @@ public class Leads {
         }
     }
 
+    /**
+     * Click on existing account radio button
+     *
+     */
     public static void clickOnExistingAccountRadioBtn(){
         KeywordUtil.waitForVisible(LeadsPage.existingAccountSearch);
         KeywordUtil.click(LeadsPage.existingAccountSearch,"Click Existing Account  Radio Button");
@@ -157,6 +199,11 @@ public class Leads {
         KeywordUtil.waitForVisible(LeadsPage.existingAccountList);
         KeywordUtil.click(LeadsPage.existingAccountList,"Click on List");
     }
+
+    /**
+     * Click on existing contact radio button
+     *
+     */
     public static void clickOnExistingContactRadioBtn() throws InterruptedException {
         KeywordUtil.delay(10000);
         try {
@@ -170,9 +217,7 @@ public class Leads {
             KeywordUtil.click(LeadsPage.existingContactList,"Clicked on Contacted list");
         }
         catch (Exception e){
-            WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.existingContactSearch);
-            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-            executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.clickJS(LeadsPage.existingContactSearch);
             KeywordUtil.waitForVisible(LeadsPage.existingContactSearchTextBox);
             KeywordUtil.click(LeadsPage.existingContactSearchTextBox,"Clicked on Contact Search Text Box");
             KeywordUtil.waitForVisible(LeadsPage.existingContactList);
@@ -180,6 +225,11 @@ public class Leads {
 
         }
     }
+
+    /**
+     * Click on existing opportunity radio button
+     *
+     */
     public static void clickOnExistingOpportunityRadioBtn() throws InterruptedException {
         KeywordUtil.delay(10000);
         try {
@@ -188,20 +238,27 @@ public class Leads {
             KeywordUtil.waitForVisible(LeadsPage.opportunityExistingRadioButton);
             KeywordUtil.click(LeadsPage.opportunityExistingRadioButton, "clicked on Existing Opportunity radio button");
         }
-    catch (Exception e){
-        WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.existingOpportunitySearch);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
-        KeywordUtil.waitForVisible(LeadsPage.opportunityExistingRadioButton);
-        KeywordUtil.click(LeadsPage.opportunityExistingRadioButton, "clicked on Existing Opportunity radio button");
+       catch (Exception e){
+           KeywordUtil.clickJS(LeadsPage.existingOpportunitySearch);
+           KeywordUtil.waitForVisible(LeadsPage.opportunityExistingRadioButton);
+           KeywordUtil.click(LeadsPage.opportunityExistingRadioButton, "clicked on Existing Opportunity radio button");
     }
     }
 
+    /**
+     * Click on opportunity name
+     *
+     */
 
     public static void clickOnOpportunityName(){
         KeywordUtil.waitForVisible(LeadsPage.convertOpportunity);
         KeywordUtil.click(LeadsPage.convertOpportunity,"Clicked on Opportunity Titile");
     }
+
+    /**
+     * Verify opportunity account name
+     *
+     */
     public static void verifyOpportunityAccountName() throws InterruptedException {
         KeywordUtil.delay(2000);
         KeywordUtil.waitForVisible(LeadsPage.opportunityAccountName);

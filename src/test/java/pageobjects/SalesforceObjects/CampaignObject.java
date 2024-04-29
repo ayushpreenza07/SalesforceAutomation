@@ -5,20 +5,13 @@ import org.openqa.selenium.WebElement;
 
 public class CampaignObject {
 
-    public static By CampaignTab = By.xpath("//span[@class='slds-truncate'][text()='Campaigns']");
-
-    public static  By CampaignName= By.xpath("//div[@class=\"actionBody\"]//span[text()='Campaign Name']//parent::label//following-sibling::input");
-
-
-    public static By SaveButton= By.xpath("(//span[text()=\"Save\"])[2]");
-
-
+    public static By campaignTab = By.xpath("//span[@class='slds-truncate'][text()='Campaigns']");
+    public static  By campaignName= By.xpath("//div[@class=\"actionBody\"]//span[text()='Campaign Name']//parent::label//following-sibling::input");
+    public static By saveButton= By.xpath("(//span[text()=\"Save\"])[2]");
     public static By successMessage= By.xpath("//span[@class='toastMessage slds-text-heading--small forceActionsText']");
-
     public static By successLeadMessage=By.xpath("//span[@class=\"toastMessage forceActionsText\"]");
 
-
-    public static By parent_compaign_Save_button=By.xpath("//span[normalize-space()='Save']");
+    public static By parentCampaignSavebutton=By.xpath("//span[normalize-space()='Save']");
 
     public static By newContactButton=By.xpath("//div[@title=\"New Contact\"]");
 
@@ -62,7 +55,7 @@ public class CampaignObject {
     public static By saveFilterButton=By.xpath("//button[text()='Save']");
     public static By closeFilterButton=By.xpath("//span[text()='Close Filters']");
 
-    public static By EditContactsShowActions=By.xpath("(//a[@title='Edit'])[2]");
+    public static By editContactsShowActions=By.xpath("(//a[@title='Edit'])[2]");
     public static By removeFiltersInContacts=By.xpath("//button[text()=\"Remove All\"]");
 
 
@@ -109,7 +102,7 @@ public class CampaignObject {
         return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[6]//span[text()='Show Actions']");
     }
 
-    public static By DeleteShowActionInContacts(String name){
+    public static By deleteShowActionInContacts(String name){
         return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[6]//span[text()='Show more actions']");
     }
 }

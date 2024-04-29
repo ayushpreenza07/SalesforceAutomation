@@ -22,15 +22,14 @@ public class ContractUtil {
      *
      * @param logStep the log
      */
-    public static void ButtonContract(String logStep) throws InterruptedException {
+    public static void buttonContract(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.delay(5000);
+            KeywordUtil.delay(10000);
             ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
             KeywordUtil.waitForVisible(ContractObject.contractBtn);
-            KeywordUtil.click(ContractObject.contractBtn, logStep);
+            KeywordUtil.clickJS(ContractObject.contractBtn, logStep);
         }catch(Exception e){
-            KeywordUtil.getDriver().navigate().refresh();
-            ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
+            KeywordUtil.scrollElementIntoViewUsingActions(ContractObject.contractBtn);
             KeywordUtil.waitForVisible(ContractObject.contractBtn);
             KeywordUtil.click(ContractObject.contractBtn, logStep);
         }
@@ -116,7 +115,7 @@ public class ContractUtil {
      */
     public static void createContract(String account) throws InterruptedException {
 
-        ButtonContract("Navigated to contract page");
+        buttonContract("Navigated to contract page");
         newButtonContract("new button clicked for contract");
         enterStartDate(2024,4,10,"Entered start date");
         enterContractTerm(2,"Entered contract term");

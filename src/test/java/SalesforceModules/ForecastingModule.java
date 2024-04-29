@@ -242,7 +242,7 @@ public class ForecastingModule {
         }
     }
 
-    /* Click on Users Options... */
+    /** Click on Users Options... */
     public static void clickUsers(String logstep) throws InterruptedException {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.userOption, "Users Option is visible");
@@ -252,7 +252,7 @@ public class ForecastingModule {
         }
     }
 
-    /* Click on New users button...*/
+    /** Click on New users button...*/
 
     public static void clickOnNewUser(String logStep) throws InterruptedException {
         try {
@@ -267,7 +267,7 @@ public class ForecastingModule {
         }
     }
 
-    /* Enter all New User details.....*/
+    /** Enter all New User details.....*/
 
     public static void enterNewUserDetails(HashMap<String, String> dataMap, String logStep) throws InterruptedException {
         try {
@@ -538,7 +538,7 @@ public class ForecastingModule {
         }
     }
 
-    /* Click on Forecasts Settings option.... */
+    /** Click on Forecasts Settings option.... */
     public static void forecastSettingsOption(String logStep) throws InterruptedException {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.forecastsSettingsOption, "Forecasts settings Option is visible");
@@ -548,7 +548,9 @@ public class ForecastingModule {
         }
     }
 
-    /* Click on Enable Forecasts Toggle button.... */
+    /**
+     *  Click on Enable Forecasts Toggle button....
+     **/
     public static void enableForecasts(String logStep) throws InterruptedException {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.enableForecastsToggleButton, "Forecasts toggle button is visible");
@@ -561,7 +563,7 @@ public class ForecastingModule {
 
     }
 
-    /*
+    /**
 Validating 'Forecast Settings' page should be loaded
  */
     public static void validateForecastSettingsPageShouldBeLoaded() throws InterruptedException {
@@ -572,7 +574,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Clicking on 'Show Actions' Of specific Forecast, We need to pass the Forecast name
      */
     public static void clickOnShowActionsOfForecast(String forecastName) throws InterruptedException
@@ -586,7 +588,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Select 'Activate' From Actions of Forecast
      */
     public static void selectActivateFromActions(){
@@ -600,7 +602,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Click on app launcher icon and search for Forecast application
      */
     public static void clickOnAppLauncherIconAndSearchForForecast() throws InterruptedException {
@@ -617,7 +619,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Validate Forecasting Page is loaded
      */
     public static void validateForecastingPageIsLoaded() throws InterruptedException {
@@ -628,7 +630,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Validate Activated Forecast is available in Forecast page
      */
     public static void validateActivatedForecastIsAvailable(String forecastName) throws InterruptedException {
@@ -639,7 +641,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Select 'Deactivate' From Actions of Forecast
      */
     public static void selectDeactivateFromActions(){
@@ -656,7 +658,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Validate forecast quotas page is loaded
      */
     public static void validateForecastQuotasPageIsLoaded() throws InterruptedException {
@@ -667,7 +669,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Select all role based forecasts
      */
     public static void selectAllRoleBasedForecasts() throws InterruptedException {
@@ -682,7 +684,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Click on Edit Selected Rows
      */
     public static void clickOnEditSelectedRows() throws InterruptedException {
@@ -694,7 +696,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Validate Edit quotas dialog is displayed
      */
     public static void validateEditQuotasDialogIsDisplayed() throws InterruptedException {
@@ -704,7 +706,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Enter Quota Value and click on save
      */
     public static void enterQuotaValueAndClickOnSaveButton(String quotaValue) throws InterruptedException {
@@ -717,7 +719,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Validate Quota saved successfully
      */
     public static void validateQuotasSavedDialogIsDisplayed() throws InterruptedException {
@@ -730,7 +732,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Validate user able to see the edited Quota
      */
     public static void validateUserAbleToSeeTheEditedQuota(String quotaValue) throws InterruptedException {
@@ -743,7 +745,7 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
-    /*
+    /**
     Navigate to forecast type page in Forecasts
      */
     public static void navigateToForecastType(String forecastTypeName) throws InterruptedException {
