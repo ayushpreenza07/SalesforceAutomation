@@ -11,6 +11,9 @@ import step_definitions.RunCukesTest;
 import utilities.*;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 import static mobileutil.MobileKeywords2.click;
 import static utilities.GlobalUtil.getDriver;
@@ -18,6 +21,9 @@ import static utilities.KeywordUtil.*;
 
 
 public class ForecastingModule {
+
+    public static HashMap<String, String> dataMap = new HashMap<String, String>();
+
 
     /**
      * Click on setup menu
@@ -40,19 +46,45 @@ public class ForecastingModule {
     }
 
     /**
+     * close Previous tab in browser
+     *
+     * @throws InterruptedException
+     */
+    public static void closePrevioustab() throws InterruptedException {
+        try {
+            Set<String> all_tabs = GlobalUtil.getDriver().getWindowHandles();
+            Iterator<String> iterator = all_tabs.iterator();
+            String mainTab = iterator.next();
+            String secondTab = iterator.next();
+            GlobalUtil.getDriver().switchTo().window(mainTab);
+            GlobalUtil.getDriver().close();
+            GlobalUtil.getDriver().switchTo().window(secondTab);
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /**
      * Click and insert value in text field
      *
      * @throws InterruptedException
      */
     public static void clickAndEnterValue(String logStep, String searchValue) throws InterruptedException {
         try {
+            Thread.sleep(3000);
             KeywordUtil.waitForVisible(ForecastingPage.setupSearch);
             WebElement searchInput = getDriver().findElement(ForecastingPage.setupSearch);
             searchInput.clear();
             KeywordUtil.inputText(ForecastingPage.setupSearch, searchValue, logStep);
-            KeywordUtil.isWebElementVisible(ForecastingPage.searchSetupOption(searchValue), "Searched option is visible");
-            takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.userOption(searchValue), "Click on " + searchValue + " option.");
+            if (KeywordUtil.isWebElementVisible(ForecastingPage.userOption(searchValue), "")) {
+                KeywordUtil.isWebElementVisible(ForecastingPage.searchSetupOption(searchValue), "Searched option is visible");
+                takeScreenshotAndAttachInReport();
+                KeywordUtil.click(ForecastingPage.userOption(searchValue), "Click on " + searchValue + " option.");
+            } else {
+                KeywordUtil.isWebElementVisible(ForecastingPage.menuOption(searchValue), "Searched option is visible");
+                takeScreenshotAndAttachInReport();
+                KeywordUtil.click(ForecastingPage.menuOption(searchValue), "Click on " + searchValue + " option.");
+            }
             KeywordUtil.isWebElementVisible(ForecastingPage.usersPage, searchValue + " page is visible.");
         } catch (Exception e) {
             catchAssertError(e);
@@ -257,11 +289,19 @@ public class ForecastingModule {
     public static void clickOnNewUser(String logStep) throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "All Users ~ Salesforce - Developer Edition");
-            KeywordUtil.isWebElementVisible(ForecastingPage.newUser, "New User is visible");
-            KeywordUtil.waitForVisible(ForecastingPage.newUser);
-            takeScreenshotAndAttachInReport();
-            KeywordUtil.click(ForecastingPage.newUser, "Click on New User.");
-            GlobalUtil.getDriver().switchTo().defaultContent();
+            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+            if (KeywordUtil.isWebElementVisible(ForecastingPage.forecastTypeLink(dataMap.get("LastName") + "," + " " + dataMap.get("FirstName")), "Verify user is created.")) {
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("User is already created in Forecast user."));
+                GlobalUtil.getDriver().switchTo().defaultContent();
+            } else {
+                KeywordUtil.isWebElementVisible(ForecastingPage.newUser, "New User is visible");
+                KeywordUtil.waitForVisible(ForecastingPage.newUser);
+                takeScreenshotAndAttachInReport();
+                KeywordUtil.click(ForecastingPage.newUser, "Click on New User.");
+                GlobalUtil.getDriver().switchTo().defaultContent();
+                ForecastingModule.enterNewUserDetails("Enter New user details");
+
+            }
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -269,7 +309,7 @@ public class ForecastingModule {
 
     /* Enter all New User details.....*/
 
-    public static void enterNewUserDetails(HashMap<String, String> dataMap, String logStep) throws InterruptedException {
+    public static void enterNewUserDetails(String logStep) throws InterruptedException {
         try {
             KeywordUtil.switchToIFrame(0, "New User ~ Salesforce - Developer Edition");
             KeywordUtil.isWebElementVisible(ForecastingPage.firstName, "First Name field is present");
@@ -284,18 +324,20 @@ public class ForecastingModule {
             KeywordUtil.isWebElementPresent(ForecastingPage.username, "UserName field is present");
             KeywordUtil.inputText(ForecastingPage.username, dataMap.get("n_username"), "Enter Username value");
             KeywordUtil.isWebElementPresent(ForecastingPage.nickname, "Nickname field is present");
-            KeywordUtil.inputText(ForecastingPage.nickname, dataMap.get("Nickname"), "Enter Nickname value");
+            KeywordUtil.inputText(ForecastingPage.nickname, KeywordUtil.generateRandomName(), "Enter Nickname value");
             KeywordUtil.isWebElementPresent(ForecastingPage.companyName, "Company name field is present");
             KeywordUtil.inputText(ForecastingPage.companyName, dataMap.get("CompanyName"), "Enter Company Name");
             KeywordUtil.isWebElementPresent(ForecastingPage.department, "Department field is present");
             KeywordUtil.inputText(ForecastingPage.department, dataMap.get("Department"), "Enter Department Name");
             KeywordUtil.selectOptionFromDropdown(ForecastingPage.role, 2, "Click and select value from Role dropdown.");
-            KeywordUtil.selectOptionFromDropdown(ForecastingPage.userLicense, 6, "Click and select value from user license dropdown");
-            KeywordUtil.selectOptionFromDropdown(ForecastingPage.profile, 1, "Click and select value profile dropdown");
+            KeywordUtil.selectOptionFromDropdown(ForecastingPage.userLicense, 5, "Click and select value from user license dropdown");
+            KeywordUtil.click(ForecastingPage.profile, "Profile is selected in dropdown.");
+            KeywordUtil.scrollingToElementofAPage(ForecastingPage.allowForecasts, "Scroll to Allow forecasting option.");
             KeywordUtil.click(ForecastingPage.allowForecasts, "Click on allow forecasting checkbox.");
             KeywordUtil.isWebElementVisible(ForecastingPage.saveBtn, "Save button is present");
             KeywordUtil.click(ForecastingPage.saveBtn, "Click on save button");
-
+            KeywordUtil.isWebElementVisible(ForecastingPage.userCreatedPageDescription, "User is created successfully.");
+            takeScreenshotAndAttachInReport();
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -306,7 +348,7 @@ public class ForecastingModule {
      *
      * @throws InterruptedException
      */
-    public static void createForecastTypeWithOpportunities() throws InterruptedException {
+    public static void createForecastTypeWithOpportunities(String forecastName) throws InterruptedException {
         try {
             KeywordUtil.scrollDown();
             KeywordUtil.waitForVisible(ForecastingPage.createForcastTypeButton);
@@ -331,7 +373,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on optional Filter Page");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeName);
-            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, KeywordUtil.generateRandomName(), "Enter forecast type name.");
+            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, forecastName, "Enter forecast type name.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on forecast Type Name Page.");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeSet);
@@ -345,7 +387,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.doneButton, "Click on done button.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(KeywordUtil.generateRandomName()), "Verify created new forecast opportunity is visible in forecasts list.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(forecastName), "Verify created new forecast opportunity is visible in forecasts list.");
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -356,7 +398,7 @@ public class ForecastingModule {
      *
      * @throws InterruptedException
      */
-    public static void createForecastTypeWithOpportunitiesandProduct() throws InterruptedException {
+    public static void createForecastTypeWithOpportunitiesandProduct(String forecastName) throws InterruptedException {
         try {
             KeywordUtil.scrollDown();
             KeywordUtil.waitForVisible(ForecastingPage.createForcastTypeButton);
@@ -381,7 +423,8 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on optional Filter Page");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeName);
-            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, KeywordUtil.generateRandomName(), "Enter forecast type name.");
+            KeywordUtil.inputText(ForecastingPage.forecastTypeNameInputTextField, forecastName, "Enter forecast type name.");
+            KeywordUtil.inputText(ForecastingPage.forecastTypeDevNameInputTextField, forecastName, "Enter forecast type developer name.");
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.nextButton, "Click on next button on forecast Type Name Page.");
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeSet);
@@ -395,7 +438,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.click(ForecastingPage.doneButton, "Click on done button.");
             takeScreenshotAndAttachInReport();
-            KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(KeywordUtil.generateRandomName()), "Verify created new forecast opportunity is visible in forecasts list.");
+            KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded(forecastName), "Verify created new forecast opportunity is visible in forecasts list.");
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -551,10 +594,13 @@ public class ForecastingModule {
     /* Click on Enable Forecasts Toggle button.... */
     public static void enableForecasts(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.isWebElementVisible(ForecastingPage.enableForecastsToggleButton, "Forecasts toggle button is visible");
-
-            KeywordUtil.click(ForecastingPage.enableForecastsToggleButton, logStep);
-
+            if (!KeywordUtil.isWebElementVisible(ForecastingPage.forecastsToggleButton, "Verify forecasts toggle button is enabled or not")) {
+                KeywordUtil.isWebElementVisible(ForecastingPage.enableForecastsToggleButton, "Forecasts toggle button is visible");
+                KeywordUtil.click(ForecastingPage.enableForecastsToggleButton, logStep);
+            } else {
+                RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Forecasts toggle button is already enabled."));
+                takeScreenshotAndAttachInReport();
+            }
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -568,15 +614,15 @@ Validating 'Forecast Settings' page should be loaded
         try {
             Thread.sleep(2000);
             KeywordUtil.validatePageShouldBeLoaded("Forecasts Settings");
-        }catch (Exception e){
+        } catch (Exception e) {
             catchAssertError(e);
         }
     }
+
     /*
     Clicking on 'Show Actions' Of specific Forecast, We need to pass the Forecast name
      */
-    public static void clickOnShowActionsOfForecast(String forecastName) throws InterruptedException
-    {
+    public static void clickOnShowActionsOfForecast(String forecastName) throws InterruptedException {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.showActionsButton(forecastName), "Forecasts is available");
             KeywordUtil.scrollElementIntoViewUsingActions(ForecastingPage.showActionsButton(forecastName));
@@ -586,20 +632,21 @@ Validating 'Forecast Settings' page should be loaded
             catchAssertError(e);
         }
     }
+
     /*
     Select 'Activate' From Actions of Forecast
      */
-    public static void selectActivateFromActions(){
+    public static void selectActivateFromActions() {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.activateOption, "Activation option is available");
             KeywordUtil.click(ForecastingPage.activateOption, "Click on Activate option.");
             takeScreenshotAndAttachInReport();
             CampaignUtil.verificationMessage();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             catchAssertError(e);
         }
     }
+
     /*
     Click on app launcher icon and search for Forecast application
      */
@@ -612,37 +659,38 @@ Validating 'Forecast Settings' page should be loaded
             KeywordUtil.delay(3000);
             KeywordUtil.waitForVisible(ForecastingPage.forecastAppOption);
             KeywordUtil.pressEnter(ForecastingPage.forecastAppOption);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             catchAssertError(e);
         }
     }
+
     /*
     Validate Forecasting Page is loaded
      */
     public static void validateForecastingPageIsLoaded() throws InterruptedException {
-        try{
+        try {
             Thread.sleep(6000);
             KeywordUtil.validatePageShouldBeLoaded("Forecasts");
-        }catch (Exception e){
+        } catch (Exception e) {
             catchAssertError(e);
         }
     }
+
     /*
     Validate Activated Forecast is available in Forecast page
      */
     public static void validateActivatedForecastIsAvailable(String forecastName) throws InterruptedException {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.forecastTitle(forecastName));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             catchAssertError(e);
         }
     }
+
     /*
     Select 'Deactivate' From Actions of Forecast
      */
-    public static void selectDeactivateFromActions(){
+    public static void selectDeactivateFromActions() {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.deactivateOption, "Deactivation option is available");
             KeywordUtil.click(ForecastingPage.deactivateOption, "Click on Deactivate option.");
@@ -651,8 +699,108 @@ Validating 'Forecast Settings' page should be loaded
             KeywordUtil.click(ForecastingPage.deactivateButton, "Click on Deactivate button.");
             takeScreenshotAndAttachInReport();
             CampaignUtil.verificationMessage();
+        } catch (Exception e) {
+            catchAssertError(e);
         }
-        catch (Exception e){
+    }
+
+    /*
+    Validate forecast quotas page is loaded
+     */
+    public static void validateForecastQuotasPageIsLoaded() throws InterruptedException {
+        try {
+            KeywordUtil.validatePageShouldBeLoaded("Forecasts Quotas | Salesforce");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /*
+    Select all role based forecasts
+     */
+    public static void selectAllRoleBasedForecasts() throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.showQuotasButton);
+            KeywordUtil.click(ForecastingPage.showQuotasButton, "click on Show Quotas");
+            KeywordUtil.waitForVisible(ForecastingPage.selectAllCheckbox);
+            KeywordUtil.scrollElementIntoViewUsingActions(ForecastingPage.selectAllCheckbox);
+            KeywordUtil.click(ForecastingPage.selectAllCheckbox, "Click on select all Quotas");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /*
+    Click on Edit Selected Rows
+     */
+    public static void clickOnEditSelectedRows() throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.editSelectedRowsButton);
+            KeywordUtil.click(ForecastingPage.editSelectedRowsButton, "Click on Edit Selected Rows");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /*
+    Validate Edit quotas dialog is displayed
+     */
+    public static void validateEditQuotasDialogIsDisplayed() throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.editQuotasDialog);
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /*
+    Enter Quota Value and click on save
+     */
+    public static void enterQuotaValueAndClickOnSaveButton(String quotaValue) throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.quotaInputField);
+            KeywordUtil.inputText(ForecastingPage.quotaInputField, quotaValue, "Enter quota filed value");
+            KeywordUtil.click(ForecastingPage.editQuotaSaveButton, "Click on Save button.");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /*
+    Validate Quota saved successfully
+     */
+    public static void validateQuotasSavedDialogIsDisplayed() throws InterruptedException {
+        try {
+            takeScreenshotAndAttachInReport();
+            CampaignUtil.verificationMessage();
+            KeywordUtil.delay(2000);
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /*
+    Validate user able to see the edited Quota
+     */
+    public static void validateUserAbleToSeeTheEditedQuota(String quotaValue) throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.quotaFieldValue);
+            KeywordUtil.takeScreenshotAndAttachInReport();
+            KeywordUtil.verifyTextContains(ForecastingPage.quotaFieldValue, quotaValue, "Verify quota filed value");
+        } catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+
+    /*
+    Navigate to forecast type page in Forecasts
+     */
+    public static void navigateToForecastType(String forecastTypeName) throws InterruptedException {
+        try {
+            KeywordUtil.waitForVisible(ForecastingPage.forecastTypeLink(forecastTypeName));
+            KeywordUtil.click(ForecastingPage.forecastTypeLink(forecastTypeName), "Click on Forecast type link.");
+            KeywordUtil.delay(2000);
+        } catch (Exception e) {
             catchAssertError(e);
         }
     }

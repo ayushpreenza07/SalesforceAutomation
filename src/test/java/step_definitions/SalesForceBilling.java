@@ -37,4 +37,15 @@ public class SalesForceBilling {
     public void clickOkay() {
         LoginSalesforceUtil.okayLogin();
     }
+
+    @And("edit standard price book")
+    public void editStandardPriceBook() throws InterruptedException {
+
+        SalesForceBillingUtil.editStandardPrice("Standard price edit");
+    }
+
+    @And("search product in products tab")
+    public void searchProductInProductsTab() {
+        SalesForceBillingUtil.searchProduct("INTP");
+    }
 }

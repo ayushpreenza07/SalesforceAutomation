@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class SalesForceForecasting {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
+    public static String forecastName = KeywordUtil.generateRandomName();
 
     public static void main(String[] args) {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
@@ -68,7 +69,6 @@ public class SalesForceForecasting {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Users");
             ForecastingModule.clickUsers("Click on Users option");
             ForecastingModule.clickOnNewUser("Click on new user");
-            ForecastingModule.enterNewUserDetails(dataMap, "Enter New user details");
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -87,6 +87,8 @@ public class SalesForceForecasting {
     @And("Enable Forecast Settings for first-time user logging")
     public void forecastSettings() {
         try {
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            ForecastingModule.closePrevioustab();
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
             ForecastingModule.forecastSettingsOption("Click on Forecasts Settings");
             ForecastingModule.enableForecasts("Click on Forecasts toggle button");
@@ -95,23 +97,23 @@ public class SalesForceForecasting {
         }
     }
 
-    @And("Create  Forecast Type with Opportunities")
+    @And("Create Forecast Type with Opportunities")
     public void createForecastTypeWithOpportunities() {
         try {
             ForecastingModule.clickOnSetup("Setup page is opened");
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-            ForecastingModule.createForecastTypeWithOpportunities();
+            ForecastingModule.createForecastTypeWithOpportunities(forecastName);
         } catch (Exception e) {
             catchAssertError(e);
         }
     }
 
 
-    @And("Create  Forecast Type with Opportunities and Product")
+    @And("Create Forecast Type with Opportunities and Product")
     public void createForecastTypeWithOpportunitiesAndProduct() {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-            ForecastingModule.createForecastTypeWithOpportunitiesandProduct();
+            ForecastingModule.createForecastTypeWithOpportunitiesandProduct(forecastName);
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -163,56 +165,46 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
-    @When("Activate Forecast")
-    public void activateForecast() {
-        try{
-            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
-            ForecastingModule.selectActivateFromActions();
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-    @And("Search For Forecasts application and Navigate To Forecasts page")
-    public void searchForForForecastsApplicationAndNavigateToForecastsPage() {
+    @And("Activate Created Forecast")
+    public void activateCreatedForecast() {
         try {
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
+            ForecastingModule.validateForecastSettingsPageShouldBeLoaded();
+            ForecastingModule.clickOnShowActionsOfForecast(forecastName);
+            ForecastingModule.selectActivateFromActions();
             ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
             ForecastingModule.validateForecastingPageIsLoaded();
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-
-    @Then("Validate Activated Forecast Is Visible")
-    public void validateActivatedForecastIsVisible() {
-        try{
-            ForecastingModule.validateActivatedForecastIsAvailable("testAuto");
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-    @And("Deactivate Forecast")
-    public void deactivateForecast() {
-        try{
-            ForecastingModule.clickOnShowActionsOfForecast("testAuto");
-            ForecastingModule.selectDeactivateFromActions();
-        }
-        catch(Exception e){
-            catchAssertError(e);
-        }
-    }
-    @And("Navigate to forecast settings page In New Window")
-    public void navigateToForecastSettingsPageInNewWindow() {
-        try {
+            ForecastingModule.validateActivatedForecastIsAvailable(forecastName);
+            ForecastingModule.clickOnSetup("Setup page is opened");
             KeywordUtil.switchToWindow();
-            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Settings");
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
+            catchAssertError(e);
+        }
+    }
+    @And("Assign Forecast Quotes To User")
+    public void assignForecastQuotesToUser() {
+        try{
+            ForecastingModule.clickAndEnterValue("Enter the value in search field", "Forecasts Quotas");
+            ForecastingModule.validateForecastQuotasPageIsLoaded();
+            ForecastingModule.selectAllRoleBasedForecasts();
+            ForecastingModule.clickOnEditSelectedRows();
+            ForecastingModule.validateEditQuotasDialogIsDisplayed();
+            ForecastingModule.enterQuotaValueAndClickOnSaveButton("3000");
+            ForecastingModule.validateQuotasSavedDialogIsDisplayed();
+            KeywordUtil.BrowserRefresh();
+            KeywordUtil.delay(3000);
+            ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
+            ForecastingModule.validateForecastingPageIsLoaded();
+            ForecastingModule.navigateToForecastType("Automation");
+            ForecastingModule.validateUserAbleToSeeTheEditedQuota("3,000");
+            ForecastingModule.clickOnSetup("Setup page is opened");
+            KeywordUtil.switchToWindow();
+        }
+        catch (Exception e) {
             catchAssertError(e);
         }
     }
 
-
-}
+    }
 

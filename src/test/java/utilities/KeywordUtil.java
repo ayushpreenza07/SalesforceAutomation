@@ -3,6 +3,7 @@ package utilities;
 import com.google.common.base.Function;
 import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.MobileBy;
+import org.apache.commons.compress.utils.IOUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
@@ -26,11 +27,12 @@ import static utilities.GlobalUtil.getDriver;
  * @author TX
  */
 public class KeywordUtil extends GlobalUtil {
+    private static final long DEFAULT_WAIT_MORE_SECONDS =10 ;
     /**
      * The constant cucumberTagName.
      */
     public static String cucumberTagName;
-    private static final int DEFAULT_WAIT_SECONDS = 30;
+    private static final int DEFAULT_WAIT_SECONDS = 40;
     /**
      * The constant FAIL.
      */
@@ -501,7 +503,7 @@ public class KeywordUtil extends GlobalUtil {
     /**
      * Switch to window boolean.
      *
-     * @return the boolean
+     * @return
      */
 // ......
     public static boolean switchToWindow() {
@@ -509,7 +511,6 @@ public class KeywordUtil extends GlobalUtil {
         ArrayList<String> tabs2 = new ArrayList<String>(getDriver().getWindowHandles());
         getDriver().switchTo().window(tabs2.get(1));
         return true;
-
     }
     // ....
 
@@ -755,6 +756,15 @@ public class KeywordUtil extends GlobalUtil {
     public static void pressEnter(By locator) {
         WebElement elm = waitForVisible(locator);
         elm.sendKeys(Keys.ENTER);
+    }
+    /**
+     * Press Down.
+     *
+     * @param locator the locator
+     */
+    public static void pressDown(By locator) {
+        WebElement elm = waitForVisible(locator);
+        elm.sendKeys(Keys.PAGE_DOWN);
     }
 
     /**
@@ -1013,7 +1023,16 @@ public class KeywordUtil extends GlobalUtil {
 
         return obj == null;
     }
-
+    /**
+     * Using clickJS for identifying the Webelement and click the element using JavaScript
+     * @param locator
+     * @return
+     */
+    public static boolean clickJS(By locator) {
+        WebElement element = KeywordUtil.getDriver().findElement(locator);
+        Object obj = ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", element);
+        return obj == null;
+    }
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     /*
@@ -1245,6 +1264,16 @@ public class KeywordUtil extends GlobalUtil {
         js.executeScript("window.scrollBy(0,600);", locator);
 
     }
+    /**
+     * scroll bar scroll down
+     */
+    public static void scrolldownScrollbar(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", locator);
+
+    }
+
+
 
 
     /**
@@ -1550,7 +1579,7 @@ public class KeywordUtil extends GlobalUtil {
                 imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
 
                 InputStream is = new FileInputStream(imagePath);
-                byte[] imageBytes = org.apache.commons.compress.utils.IOUtils.toByteArray(is);
+                byte[] imageBytes = IOUtils.toByteArray(is);
                 Thread.sleep(2000);
                 String base64 = Base64.getEncoder().encodeToString(imageBytes);
                 pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64," + base64);
@@ -1668,17 +1697,30 @@ class TestStepFailedException extends Exception {
      * @param Element the element
      */
     public static void scrolldown(WebElement Element) {
-        JavascriptExecutor js = (JavascriptExecutor) GlobalUtil.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(0,600);", Element);
     }
-
+    /**
+     * Get Element Text
+     */
     public static String getVisibleText(By locator) {
         KeywordUtil.lastAction = "Get Element text: " + locator.toString();
         LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
         WebElement elm = KeywordUtil.waitForVisible(locator);
         return elm.getText().trim();
     }
-
+    /**
+     * Scroll Element into view using Actions
+     */
+    public static void scrollElementIntoViewUsingActions(By element){
+        try {
+            Actions a = new Actions(getDriver());
+            a.moveToElement(getDriver().findElement(element)).perform();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

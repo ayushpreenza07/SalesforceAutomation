@@ -10,6 +10,7 @@ import utilities.ConfigReader;
 import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
+import java.security.Key;
 import java.util.HashMap;
 
 import static org.testng.Assert.assertEquals;
@@ -67,6 +68,7 @@ public class Leads {
 
     public static void clickOnSaveButton(){
         try {
+            KeywordUtil.delay(1000);
             KeywordUtil.waitForVisible(LeadsPage.saveButton);
             KeywordUtil.click(LeadsPage.saveButton, "Clicked on Save Button");
         }
@@ -89,47 +91,41 @@ public class Leads {
 
     public static void clickOnConvertedTab () throws InterruptedException {
         try {
-            KeywordUtil.delay(2000);
+        KeywordUtil.delay(2000);
         KeywordUtil.scrollup(LeadsPage.converted);
         KeywordUtil.waitForVisible(LeadsPage.converted);
         KeywordUtil.click(LeadsPage.converted, "Clicked on Converted Tab");
        }
     catch (Throwable e){
         KeywordUtil.delay(2000);
-    KeywordUtil.waitForVisible(LeadsPage.converted);
-    WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.converted);
-    JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-    executor.executeScript("arguments[0].click();", element);
+        KeywordUtil.waitForVisible(LeadsPage.converted);
+        KeywordUtil.clickJS(LeadsPage.converted);
         }
     }
     public static void clickOnConvertedStatusButton () throws InterruptedException {
         try {
-            KeywordUtil.delay(2000);
+            KeywordUtil.delay(3000);
             KeywordUtil.scrollup(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.clickJS(LeadsPage.selectConvertedStatusButton, "Clicked on Converted Status Button");
         }
         catch (Throwable e){
             KeywordUtil.delay(4000);
-        KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
-        WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.selectConvertedStatusButton);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
+             KeywordUtil.clickJS(LeadsPage.selectConvertedStatusButton);
         }
     }
     public static void clickOnConvertedButton () throws InterruptedException {
 
         try {
-            KeywordUtil.delay(2000);
+            KeywordUtil.delay(4000);
             KeywordUtil.waitForVisible(LeadsPage.convertButton);
             KeywordUtil.clickJS(LeadsPage.convertButton, "Clicked on Converted Button");
         }
         catch (Throwable e){
             KeywordUtil.delay(4000);
             KeywordUtil.waitForVisible(LeadsPage.convertButton);
-            WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.convertButton);
-            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-            executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.clickJS(LeadsPage.convertButton);
         }
       }
 
@@ -170,9 +166,7 @@ public class Leads {
             KeywordUtil.click(LeadsPage.existingContactList,"Clicked on Contacted list");
         }
         catch (Exception e){
-            WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.existingContactSearch);
-            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-            executor.executeScript("arguments[0].click();", element);
+            KeywordUtil.clickJS(LeadsPage.existingContactSearch);
             KeywordUtil.waitForVisible(LeadsPage.existingContactSearchTextBox);
             KeywordUtil.click(LeadsPage.existingContactSearchTextBox,"Clicked on Contact Search Text Box");
             KeywordUtil.waitForVisible(LeadsPage.existingContactList);
@@ -188,12 +182,10 @@ public class Leads {
             KeywordUtil.waitForVisible(LeadsPage.opportunityExistingRadioButton);
             KeywordUtil.click(LeadsPage.opportunityExistingRadioButton, "clicked on Existing Opportunity radio button");
         }
-    catch (Exception e){
-        WebElement element = KeywordUtil.getDriver().findElement(LeadsPage.existingOpportunitySearch);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
-        KeywordUtil.waitForVisible(LeadsPage.opportunityExistingRadioButton);
-        KeywordUtil.click(LeadsPage.opportunityExistingRadioButton, "clicked on Existing Opportunity radio button");
+       catch (Exception e){
+           KeywordUtil.clickJS(LeadsPage.existingOpportunitySearch);
+           KeywordUtil.waitForVisible(LeadsPage.opportunityExistingRadioButton);
+           KeywordUtil.click(LeadsPage.opportunityExistingRadioButton, "clicked on Existing Opportunity radio button");
     }
     }
 

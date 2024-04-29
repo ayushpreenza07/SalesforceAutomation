@@ -12,7 +12,7 @@ public class ServiceSupportUtil {
      *
      * @param logStep the log
      */
-    public static void ClickServiceSupportButton(String logStep){
+    public static void clickServiceSupportButton(String logStep){
         KeywordUtil.waitForVisible(ServiceSupportObject.clickServiceSupportButton);
         KeywordUtil.click(ServiceSupportObject.clickServiceSupportButton,logStep);
     }
