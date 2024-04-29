@@ -85,7 +85,15 @@ public class ServiceSupportObject {
 
     //Xpaths for creating new opportunity
     public static By createNewOpportunities_ss= By.xpath("//button[@class='slds-button slds-button_neutral' and text()='New Opportunity']");
-    public static By opportunityName_ss=By.xpath("");
+    public static By opportunityName_ss=By.xpath("(//input[@type='text' and @class=' input'])[1]");
+    public static By setStage_ss=By.xpath ("//a[@role='button' and @class='select' and text()='--None--']");
+    public static By saveButton_oppo = By.xpath("(//span[@class=' label bBody' and text()='Save'])[3]");
 
+    //Xpaths for changing opportunity status
+    public static By clickOpportunities_ss =By.xpath("//a[slot[contains(.,'Opportunities')]]");
+    public static By selectOpportunities_ss =By.xpath("//a[slot[contains(.,'DemoOpportunity')]]");
+    public static By proposalStage_ss =By.xpath("(//span[@class='title slds-path__title'])[7]");
+    public static By markStage_ss =By.xpath("//span[@class='uiOutputText']");
+    public static By getBackToAccount_ss =By.xpath("//span[@class='slds-truncate' and text()='Accounts']");
 
 }

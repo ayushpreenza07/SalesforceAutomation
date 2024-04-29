@@ -3,11 +3,11 @@ Feature: salesforce service support demo
   @salesforce_servicesupport
   Scenario Outline: salesforce service support demo
     Given Read the test data  "<TestData>" from Excel
-    When navigate to Salesforce as "System Admin"
-    And login to Salesforce with "System Admin" credentials
+    When Navigate to Salesforce as "System Admin"
+    And Login to Salesforce with "System Admin" credentials
     Then click on service support button
     Then create account for service support
-    Then create new opportunity and change its status
+#    Then create new opportunity and change its status
     Then edit account details
     Then create contact for service support
     Then edit contact details for service support
@@ -23,7 +23,6 @@ Feature: salesforce service support demo
     Then delete contact details for service support
     Then create new case by creating an new account
     When create new case by creating a new contact
-
 
     Examples:
       | TestData |

@@ -66,8 +66,8 @@ Feature: Salesforce Leads
   Scenario: Convert Leads to Opportunities
   Convert Leads to Opportunities: Create New or
   Select Existing Accounts, Contacts, and Opportunities
-    Given navigate to Salesforce as "Leads Admin"
-    And login to Salesforce with "Leads Admin" credentials
+    Given Navigate to Salesforce as "Leads Admin"
+    And Login to Salesforce with "Leads Admin" credentials
     When Click on Hamburger Menu
     And Click on Search <"Leads">
     Then Verify Leads Page

@@ -3,6 +3,7 @@ Feature: salesforce demo
   @salesforceBill
   Scenario Outline: salesforce demo
     Given Read the test data  "<TestData>" from Excel
+
     When navigate to Salesforce as "Billing Admin"
     And login to Salesforce with "Billing Admin" credentials
     And Click on Okay
