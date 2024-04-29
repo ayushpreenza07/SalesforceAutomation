@@ -77,12 +77,49 @@ public class CampaignObject {
 
     public static By enterCampaignName=By.xpath("//input[@title=\"Search Campaigns\"]");
 
-    public static By saveButtonAfterSelectingCampaign=By.xpath("//span[text()='Save']");
+    public static By saveButtonAfterSelectingCampaign=By.xpath("(//span[text()='Save'])[2]");
 
-    public static By statusPopUp=By.xpath("//div[@class=\"uiPopupTrigger\"]");
+    public static By statusPopUp=By.xpath("(//div[@class=\"uiPopupTrigger\"])[5]");
 
     public static By respondedStatus=By.xpath("//a[@title=\"Responded\"]");
 
+    public static By campaignHistoryViewAllButton=By.xpath("//span[@title=\"Campaign History\"]//ancestor::div[@class=\"container forceRelatedListSingleContainer\"]//div[@class=\"slds-card__footer\"]//span[text()='View All']");
+
+    public static By campaignNameInCampaignHistory=By.xpath("//table[@role=\"grid\"]//tr//th[@scope=\"row\"]//span[@class=\"slds-grid slds-grid--align-spread\"]");
+
+    public static By statusInCampaignHistory=By.xpath("//table[@role=\"grid\"]//tr//th[@scope=\"row\"]//following-sibling::td[3]//span[@class=\"slds-grid slds-grid--align-spread\"]");
+
+    public static By memberStatusInCampaignHistory=By.xpath("//table[@role=\"grid\"]//tr//th[@scope=\"row\"]//following-sibling::td[5]//span[@class=\"slds-grid slds-grid--align-spread\"]");
+
+
+    public static By newCaseButton=By.xpath("//button[@name=\"NewCase\"]");
+
+    public static By statusButtonInCase=By.xpath("//button[@data-value=\"New\"]");
+
+    public static By caseOriginInCase=By.xpath("//label[text()='Case Origin']//ancestor::div[1]//following-sibling::div[1]//button");
+
+    public static By saveButtonInCase=By.xpath("//button[@class='slds-button slds-button_brand'][text()='Save']");
+
+    public static By casesViewAllButton=By.xpath("(//span[@title=\"Cases\"]//ancestor::div//a[@class=\"slds-card__footer\"]//span[text()='View All'])[2]");
+
+    public static By casesNameInCaseHistory=By.xpath("//table[@role=\"grid\"]//th[@data-label=\"Case\"]");
+
+    public static By priorityInCaseHistory=By.xpath("//table[@role=\"grid\"]//td[@data-label=\"Priority\"]");
+
+    public static By dateOpenedInCaseHistory=By.xpath("//table[@role=\"grid\"]//td[@data-label=\"Date/Time Opened\"]");
+
+    public static By statusInCaseHistory=By.xpath("//table[@role=\"grid\"]//td[@data-label=\"Status\"]");
+    public static By leadsTab=By.xpath("//span[@class='slds-truncate'][text()='Leads']");
+
+    public static By leadsShowActionsDeleteButton=By.xpath("//a[@title='Delete']");
+
+    public static By selectStatusInCase(String status){
+        return By.xpath("//span[text()='"+status+"']");
+    }
+
+    public static By selectCaseOrigin(String caseName){
+        return By.xpath("//lightning-base-combobox-item[contains(@data-value,'"+caseName+"')]");
+    }
 
     public static By clickCampaign(String campaignName){
         return By.xpath("//table[@role=\"grid\"]//tr//th[@scope=\"row\" ]//a[text()='"+campaignName+"']");
@@ -105,6 +142,19 @@ public class CampaignObject {
     public static By deleteShowActionInContacts(String name){
         return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[6]//span[text()='Show more actions']");
     }
+
+    public static By clickShowActionsInLeads(String name){
+        return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[8]//span[text()='Show Actions']");
+    }
+
+    public static By deleteShowActionInLeads(String name){
+        return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[8]//span[text()='Show more actions']");
+    }
+
+
+
+
+
 }
 
 
