@@ -344,7 +344,7 @@ public class CampaignUtil {
      */
     public static void verificationMessage() {
         KeywordUtil.waitForVisible(CampaignObject.successMessage);
-        KeywordUtil.isWebElementPresent(CampaignObject.successMessage,"Validate success message is available");
+        Assert.assertTrue(KeywordUtil.isWebElementPresent(CampaignObject.successMessage,"Validate success message is available"),"Unable to see the success message");
         String gettext = KeywordUtil.getElementText(CampaignObject.successMessage);
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user has got the message  : " + gettext));
 
