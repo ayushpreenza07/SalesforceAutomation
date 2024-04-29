@@ -266,7 +266,6 @@ public class SalesForceMarketing {
     public static void addLeadToCampaign() {
         try {
             CampaignUtil.addLeadToCampaign(dataMap.get("ParentCampaign"), leadName, leadCompanyName);
-            KeywordUtil.takeScreenshotAndAttachInReport();
         } catch (Exception e) {
             CampaignUtil.verificationMessage();
         }
@@ -276,7 +275,6 @@ public class SalesForceMarketing {
     public static void changeLeadStatus() {
         try {
             CampaignUtil.changeLeadStatusToConverted(leadName);
-            //KeywordUtil.takeScreenshotAndAttachInReport();
         } catch (Exception e) {
             CampaignUtil.verificationMessage();
         }

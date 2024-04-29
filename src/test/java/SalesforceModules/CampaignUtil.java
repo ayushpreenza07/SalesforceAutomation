@@ -864,7 +864,7 @@ public class CampaignUtil {
             KeywordUtil.isWebElementVisible(CampaignObject.LeadField(leadName),"Validate lead name is visible");
             KeywordUtil.waitForVisible(CampaignObject.nextButton);
             KeywordUtil.click(CampaignObject.nextButton, "Click on next button");
-            KeywordUtil.delay(2000);
+            KeywordUtil.delay(4000);
             KeywordUtil.waitForVisible(CampaignObject.submitButton);
             KeywordUtil.click(CampaignObject.submitButton, "Click on submit button");
             KeywordUtil.isWebElementVisible(CampaignObject.leadAddedSuccessMessage,"Success message is visible");

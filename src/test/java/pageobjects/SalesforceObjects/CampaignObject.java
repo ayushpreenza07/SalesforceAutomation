@@ -140,7 +140,7 @@ public class CampaignObject {
 
     public static By selectListViewCampaignsDropDown = By.xpath("//button[@title='Select a List View: Campaigns']");
 
-    public static By searchListInputField = By.xpath("//input[@name='Campaign-search-input']");
+    public static By searchListInputField = By.xpath("//input[@name='Campaign-search-input' and @placeholder='Search this list...']");
 
     public static By nextButton = By.xpath("//button[text()='Next']");
 
