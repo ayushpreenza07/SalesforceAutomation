@@ -32,8 +32,8 @@ public class CampaignUtil {
      */
     public static void clickCampaignTab(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.CampaignTab);
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.CampaignTab);
+        KeywordUtil.waitForVisible(CampaignObject.campaignTab);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.campaignTab);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -45,9 +45,9 @@ public class CampaignUtil {
      * @throws InterruptedException the interrupted exception
      */
     public static void entercampaignName(String campaignName, String logStep) {
-        KeywordUtil.waitForVisible(CampaignObject.CampaignName);
-        KeywordUtil.inputText(CampaignObject.CampaignName, campaignName, logStep);
-        KeywordUtil.click(CampaignObject.CampaignName, "click on the Campaign name filed");
+        KeywordUtil.waitForVisible(CampaignObject.campaignName);
+        KeywordUtil.inputText(CampaignObject.campaignName, campaignName, logStep);
+        KeywordUtil.click(CampaignObject.campaignName, "click on the Campaign name filed");
     }
 
     /**
@@ -84,8 +84,8 @@ public class CampaignUtil {
      */
 
     public static void parentClickSaveButton(){
-        KeywordUtil.waitForVisible(CampaignObject.parent_compaign_Save_button);
-        KeywordUtil.click(CampaignObject.parent_compaign_Save_button,"click on the save button");
+        KeywordUtil.waitForVisible(CampaignObject.parentCampaignSavebutton);
+        KeywordUtil.click(CampaignObject.parentCampaignSavebutton,"click on the save button");
     }
 
     /**
@@ -119,8 +119,8 @@ public class CampaignUtil {
      */
     public static void clickSaveButton(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.SaveButton);
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.SaveButton);
+        KeywordUtil.waitForVisible(CampaignObject.saveButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.saveButton);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -267,8 +267,8 @@ public class CampaignUtil {
      */
     public static void clickOnContactShowActionsEditButton() throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.EditContactsShowActions);
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.EditContactsShowActions);
+        KeywordUtil.waitForVisible(CampaignObject.editContactsShowActions);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.editContactsShowActions);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -549,8 +549,8 @@ public class CampaignUtil {
      */
     public static void clickDeleteShowActionsInContacts(String contactName) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.DeleteShowActionInContacts(contactName));
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.DeleteShowActionInContacts(contactName));
+        KeywordUtil.waitForVisible(CampaignObject.deleteShowActionInContacts(contactName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.deleteShowActionInContacts(contactName));
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -656,7 +656,7 @@ public class CampaignUtil {
      * @throws InterruptedException
      */
     public static void createOpportunityInContact(String name, String amount, String stage) throws InterruptedException {
-        OppurtunitiesUtil.NewButtonOppurtunity("clicked new button for Opportunity");
+        OppurtunitiesUtil.newButtonOppurtunity("clicked new button for Opportunity");
         OppurtunitiesUtil.enterOppurtunityName(name, name+" entered in Opportunity");
         OppurtunitiesUtil.enterCloseDate(2024,1,2,"Close date entered");
         OppurtunitiesUtil.enterAmount(amount, "Amount entered "+amount);

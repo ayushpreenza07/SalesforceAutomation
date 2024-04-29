@@ -24,7 +24,6 @@ Feature: salesforce service support demo
     Then create new case by creating an new account
     When create new case by creating a new contact
 
-
     Examples:
       | TestData |
       | TestData1 |
