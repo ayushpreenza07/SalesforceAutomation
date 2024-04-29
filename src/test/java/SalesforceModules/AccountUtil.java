@@ -133,7 +133,6 @@ public class AccountUtil extends GlobalUtil {
         clickNewButton("Clicked new button for accounts");
         enterAccountName(name,name+" entered name");
         enterPhoneNumber(phone, phone+" entered phone");
-//        accountNumberField(accountNumber,accountNumber+" account number entered");
         clickSaveButton("clicked save button");
     }
     /**
