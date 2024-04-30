@@ -33,8 +33,8 @@ public class SalesForceBilling {
         SalesForceBillingUtil.addStandardPrice("Added standard price");
     }
 
-    @And("click okay")
-    public void clickOkay() {
+    @And("Click on Okay")
+    public void click_Okay() {
         LoginSalesforceUtil.okayLogin();
     }
 

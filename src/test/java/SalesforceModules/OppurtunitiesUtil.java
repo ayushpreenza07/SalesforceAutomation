@@ -11,7 +11,11 @@ import pageobjects.SalesforceObjects.ContactObject;
 import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import pageobjects.SalesforceObjects.ServiceSupportObject;
 import pageobjects.SalesforceObjects.QuoteObject;
+
+import pageobjects.SalesforceObjects.ServiceSupportObject;
+
 import pageobjects.SalesforceObjects.*;
+
 import step_definitions.RunCukesTest;
 import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
@@ -20,6 +24,7 @@ import utilities.KeywordUtil;
 import java.security.Key;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 
 import static utilities.KeywordUtil.catchAssertError;
 import static utilities.KeywordUtil.takeScreenshotAndAttachInReport;
@@ -120,7 +125,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void enterOppurtunityName(String name, String logStep){
         KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityName);
-        KeywordUtil.inputText(OppurtunitiesObject.opportunityName, name,logStep);
+        KeywordUtil.inputText(OppurtunitiesObject.opportunityName, name, logStep);
     }
 
     /**
@@ -618,14 +623,103 @@ public class OppurtunitiesUtil extends GlobalUtil {
 
         }
     }
+    /**
+     * Click On Opportunity New
+     */
+    public static void clickNewButton(String logStep) throws InterruptedException {
 
+
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(ServiceSupportObject.newTab);
+            WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.newTab);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    /**
+     * Entering New Opportunity Details
+     */
+    public static void createOpportunityDetails(String name, String amount, String stage) throws InterruptedException {
+        enterOppurtunityName(name, name + " entered in Opportunity");
+        enterCloseDate(2024, 3, 5, "Close date entered");
+        enterAmount(amount, "Amount entered " + amount);
+        setStage(stage, "Stage selected - " + stage);
+        clickSaveButton("saved");
+        KeywordUtil.delay(3000);
+    }
+
+    /**
+     * verify opportunity Title
+     */
+    public static void verifyOpportunityName(){
+        String nameTitle=KeywordUtil.getVisibleText(OppurtunitiesObject.opportunityNameInTable);
+
+        boolean opportunityTitle= KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityNameInTable, "verify Opportunity Tab");
+
+        if (opportunityTitle){
+            RunCukesTest.logger.log(LogStatus.PASS,HTMLReportUtil.passStringGreenColor("Opportunity Tile is:"+nameTitle));
+        }
+        else{
+            RunCukesTest.logger.log(LogStatus.FAIL,HTMLReportUtil.failStringRedColor("Opportunity Tile is:"+nameTitle));
+        }
+    }
+    /**
+     * Clicked on Dropown
+     */
+
+    public static void clickDropDown(String logStep) throws InterruptedException {
+
+        try {
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityDropdown);
+            WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.opportunityDropdown);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Clicked on Dropown Edit
+     */
+
+    public static void clickOnDropDownEdit(String logStep) throws InterruptedException {
+
+        try {
+            KeywordUtil.delay(4000);
+            KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityDropdownEdit);
+            KeywordUtil.click(OppurtunitiesObject.opportunityDropdownEdit,"Clicked on Dropdown Edit");
+
+        } catch (Exception e) {
+            KeywordUtil.delay(4000);
+            KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityDropdownEdit);
+            WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.opportunityDropdownEdit);
+            JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", element);
+        }
+    }
+    /**
+     * Entering change Opportunity Details
+     */
+    public static void changeOpportunityDetails(String name,String stage) throws InterruptedException {
+        KeywordUtil.delay(2000);
+        enterOppurtunityName(name, name + " entered in Opportunity");
+        KeywordUtil.delay(3000);
+        setStage(stage, "Stage selected - " + stage);
+        clickSaveButton("saved");
+        KeywordUtil.delay(3000);
+    }
     /**
      * Click on the Opportunity Tab
      *
      * @param logStep the log step
      * @throws InterruptedException the interrupted exception
      */
-    public static void clickOpportunityTab(String logStep) throws InterruptedException {
+    public static void clickOpportunityTab(String logStep){
         try {
             KeywordUtil.delay(3000);
             KeywordUtil.waitForVisible(OppurtunitiesObject.opportunitiesTabb);
@@ -688,6 +782,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
         KeywordUtil.click(OppurtunitiesObject.deleteButton,"Click on delete button.");
         KeywordUtil.isWebElementVisible(OppurtunitiesObject.toastMessage, "Success message visible on screen after opportunity is deleted.");
         takeScreenshotAndAttachInReport();
+
 
     }
 

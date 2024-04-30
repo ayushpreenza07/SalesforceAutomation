@@ -74,6 +74,10 @@ public class SalesForceCPQ {
                 baseUrl = ConfigReader.getValue("Billing_URL");
                 break;
 
+            case "Billing Opportunity":
+                baseUrl = ConfigReader.getValue("Billing_URL_OPP");
+                break;
+
             // Add cases for other user types as needed
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
@@ -108,6 +112,10 @@ public class SalesForceCPQ {
             case "Billing Admin":
                 username = ConfigReader.getValue("salesforceUsernameBilling");
                 password = ConfigReader.getValue("salesforcePasswordBilling");
+                break;
+            case "Billing Opportunity":
+                username = ConfigReader.getValue("BillingUsername");
+                password = ConfigReader.getValue("BillingPassword");
                 break;
 
             // Add cases for other user types as needed
