@@ -860,8 +860,8 @@ public class CampaignUtil {
             KeywordUtil.inputText(CampaignObject.leadCompanyNameInputField,companyName, "Enter Lead company name");
             KeywordUtil.waitForVisible(CampaignObject.saveNewLeadButton);
             KeywordUtil.click(CampaignObject.saveNewLeadButton, "Click on save button");
-            KeywordUtil.waitForVisible(CampaignObject.LeadField(leadName));
-            KeywordUtil.isWebElementVisible(CampaignObject.LeadField(leadName),"Validate lead name is visible");
+            KeywordUtil.waitForVisible(CampaignObject.leadField(leadName));
+            KeywordUtil.isWebElementVisible(CampaignObject.leadField(leadName),"Validate lead name is visible");
             KeywordUtil.waitForVisible(CampaignObject.nextButton);
             KeywordUtil.click(CampaignObject.nextButton, "Click on next button");
             KeywordUtil.delay(4000);

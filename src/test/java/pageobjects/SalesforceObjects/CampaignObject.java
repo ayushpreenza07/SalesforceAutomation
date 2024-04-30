@@ -201,7 +201,7 @@ public class CampaignObject {
     public static By deleteShowActionInLeads(String name){
         return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[8]//span[text()='Show more actions']");
     }
-    public static By LeadField(String leadName){
+    public static By leadField(String leadName){
         return By.xpath("//a[@aria-labelledby='assistiveTextForPill']//span[text()='"+leadName+"']");
     }
 
