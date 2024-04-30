@@ -45,6 +45,7 @@ Feature: Salesforce Marketing CRM
     Then user create new Opportunity
     And user edit new Opportunity
     And user delete new Opportunity
+    And Change Opportunity Status
 
     Examples:
       | TestData  | SheetName  |

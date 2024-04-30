@@ -37,6 +37,7 @@ public class OppurtunitiesObject {
 
     public static By markStages = By.xpath("//div/div[2]/button/span");
     public static By markStages1 = By.xpath("(//div/div[2]/button/span)[2]");
+    public static By markCurrentStages = By.xpath("//button//span[text()='Mark as Current Stage']");
 
     public static By markStageAsComplete = By.xpath("//div[2]/button/span[@class='uiOutputText']");
 

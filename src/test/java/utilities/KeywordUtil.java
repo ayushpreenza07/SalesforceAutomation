@@ -1575,6 +1575,7 @@ public class KeywordUtil extends GlobalUtil {
 
     public static void takeScreenshotAndAttachInReport() {
         try {
+            Thread.sleep(3000);
             if (ConfigReader.getValue("screenshotFlag").equalsIgnoreCase("true")) {
                 String imagePath, pathForLogger;
                 String scFileName = "ScreenShot_" + System.currentTimeMillis();

@@ -133,38 +133,38 @@ public class SalesForceMarketing {
 
     @Then("user selects the filter")
     public void selectFilter() throws InterruptedException {
-        CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"), dataMap.get("ContactLastName"));
+        CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"),dataMap.get("ContactLastName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user edit the contact")
     public void edit_Contact() throws InterruptedException {
-        CampaignUtil.editContact(KeywordUtil.generateRandomString(4) + "@gmail.com", dataMap.get("ContactLastName"));
+        CampaignUtil.editContact(KeywordUtil.generateRandomString(4) + "@gmail.com",dataMap.get("ContactLastName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user Delete the contact")
     public void deleteContact() throws InterruptedException {
-        CampaignUtil.deleteContact(dataMap.get("ContactLastName"));
-        KeywordUtil.takeScreenshotAndAttachInReport();
+       CampaignUtil.deleteContact(dataMap.get("ContactLastName"));
+       KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user remove the filter")
     public void removeFilter() throws InterruptedException {
-        CampaignUtil.removeFilter();
+         CampaignUtil.removeFilter();
     }
 
     @Then("user create new contact in Contact")
     public void createNewContact() throws InterruptedException {
-        CampaignUtil.createContactInContactTab(dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com");
+        CampaignUtil.createContactInContactTab( dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com");
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user create new opportunity in Contact")
     public void createOpportunityInContact() throws InterruptedException {
-        CampaignUtil.createOpportunityInContact(dataMap.get("OpportunityName"), dataMap.get("Amount"), dataMap.get("Stage"));
+         CampaignUtil.createOpportunityInContact(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
 
@@ -179,13 +179,13 @@ public class SalesForceMarketing {
     }
 
     @Then("user added Contact to campaign")
-    public void addContactToCampaign() {
+    public  void addContactToCampaign(){
         CampaignUtil.addContactToCampaign(dataMap.get("ParentCampaign"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user is able to see the campaign History")
-    public void seeCampaignHistory() {
+    public  void seeCampaignHistory(){
         CampaignUtil.seeCampaignHistory();
         KeywordUtil.takeScreenshotAndAttachInReport();
         GlobalUtil.getDriver().navigate().back();
@@ -199,7 +199,7 @@ public class SalesForceMarketing {
     }
 
     @Then("user able to see the case history")
-    public void seeCaseHistory() {
+    public void seeCaseHistory(){
         CampaignUtil.seeCaseHistory();
         KeywordUtil.takeScreenshotAndAttachInReport();
         GlobalUtil.getDriver().navigate().back();
@@ -208,27 +208,27 @@ public class SalesForceMarketing {
     }
 
     @Then("user click on the lead Tab")
-    public void clickOnLeadTab() {
-        CampaignUtil.clickLeadsTab();
+    public void clickOnLeadTab(){
+     CampaignUtil.clickLeadsTab();
     }
 
     @Then("user create new lead")
     public static void createLead() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
-        CampaignUtil.createLead(dataMap.get("LastName"), dataMap.get("CityName"));
+        CampaignUtil.createLead(dataMap.get("LastName"),dataMap.get("CityName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user selects the filter in Lead")
     public void searchLeadUsingFilter() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
-        CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"), dataMap.get("LastName"));
+        CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"),dataMap.get("LastName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("user edit the lead")
     public void editLead() throws InterruptedException {
-        CampaignUtil.editLead(dataMap.get("LastName"), dataMap.get("LastName"), dataMap.get("CityName"));
+        CampaignUtil.editLead(dataMap.get("LastName"),dataMap.get("LastName"),dataMap.get("CityName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
@@ -246,12 +246,12 @@ public class SalesForceMarketing {
 
     @Then("user create new Opportunity")
     public void userCreateNewOpportunity() throws InterruptedException {
-        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"), dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
     }
 
     @And("user edit new Opportunity")
     public void userEditNewOpportunity() throws InterruptedException {
-        OppurtunitiesUtil.editOpportunityFromOpportunityTab("DemoOpportunityUpdated", "3004");
+        OppurtunitiesUtil.editOpportunityFromOpportunityTab("DemoOpportunityUpdated","3004");
 
     }
 
@@ -259,6 +259,15 @@ public class SalesForceMarketing {
     public void userDeleteNewOpportunity() throws InterruptedException {
         OppurtunitiesUtil.deleteOpportunityFromOpportunityTab();
 
+    }
+
+    @And("Change Opportunity Status")
+    public void changeOpportunityStatus() throws InterruptedException{
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.selectStageProposalQuote("proposal stage selected");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        OppurtunitiesUtil.setMarkAsCurrentStages("stage marked");
+        KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
 
