@@ -3,8 +3,8 @@ Feature: salesforce demo
   @BillOpportunity  @salesforce @Web
   Scenario: salesforce Billing
 
-    Given navigate to Salesforce as "Billing Opportunity"
-    And login to Salesforce with "Billing Opportunity" credentials
+    Given Navigate to Salesforce as "Billing Opportunity"
+    And Login to Salesforce with "Billing Opportunity" credentials
     And Click on Okay
     When Click on Hamburger Menu
     And Click on Search "Salesforce Billing"

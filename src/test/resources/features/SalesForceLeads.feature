@@ -16,8 +16,8 @@ Feature: Salesforce Leads
   Activate Order (Change Status Draft to Activate )
 
 
-    Given navigate to Salesforce as "System Admin"
-    And login to Salesforce with "System Admin" credentials
+    Given Navigate to Salesforce as "System Admin"
+    And Login to Salesforce with "System Admin" credentials
     When Click on Hamburger Menu
     And Click on Search <"Leads">
     Then Verify Leads Page

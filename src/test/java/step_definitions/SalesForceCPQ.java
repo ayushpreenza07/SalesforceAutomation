@@ -56,7 +56,7 @@ public class SalesForceCPQ {
     }
 
 
-    @When("^navigate to Salesforce as \"([^\"]*)\"$")
+    @When("^Navigate to Salesforce as \"([^\"]*)\"$")
     public void navigateToUrlAccordingToUserType(String userType) throws Exception {
 
         String baseUrl = "";
@@ -92,7 +92,7 @@ public class SalesForceCPQ {
 
     }
 
-    @When("^login to Salesforce with \"([^\"]*)\" credentials$")
+    @When("^Login to Salesforce with \"([^\"]*)\" credentials$")
     public void loginToSalesforceAccordingToUserType(String userType) throws Exception {
         String username = "";
         String password = "";
