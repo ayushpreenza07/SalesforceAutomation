@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import pageobjects.SalesforceObjects.QuoteObject;
+import pageobjects.SalesforceObjects.ServiceSupportObject;
 import step_definitions.RunCukesTest;
 import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
@@ -200,10 +201,12 @@ public class QuoteUtil {
      * @param logStep the log
      * @param type the Types name
      */
-    public static void selectType(String type, String logStep){
+    public static void selectType(String type, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(QuoteObject.selectTypes);
+        KeywordUtil.delay(3000);
         KeywordUtil.click(QuoteObject.selectTypes,logStep);
+        KeywordUtil.delay(3000);
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+type+"')]";
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
@@ -708,4 +711,212 @@ public class QuoteUtil {
         RunCukesTest.logger.log(LogStatus.FAIL,"Status is not showing: "+approvedText);
     }
     }
+
+    /**
+     * Create new quote combining all methods in service support module
+     * @param name,opportunityName the log
+     *
+     */
+    public static void createNewQuote_servicesupport(String name, String opportunityName, String type) throws Exception {
+        openaccount_ss("Opened the account");
+        clickQuoteButton_ss("Navigated to quote");
+        clickNewButton_ss("Clicked new button");
+        checkPrimary("primary checkbox marked");
+        selectOpportunity_ss(opportunityName,opportunityName+" entered opportunities name");
+        selectAccount_ss(name,name+" entered account name");
+        selectType_ss(type,"selected type");
+        clickSaveButton("clicked save button");
+        addDiscountProduct();
+    }
+
+    /**
+     * open account to create quote in ss module
+     *
+     * @param logStep the log
+     */
+    public static void openaccount_ss(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.openaccount_ss);
+        KeywordUtil.click(ServiceSupportObject.openaccount_ss,logStep);
+    }
+
+    /**
+     * click Quote button in ss module
+     *
+     * @param logStep the log
+     */
+    public static void clickQuoteButton_ss(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.clickQuotes_ss);
+        KeywordUtil.click(ServiceSupportObject.clickQuotes_ss,logStep);
+    }
+
+    /**
+     * click New button in ss module
+     *
+     * @param logStep the log
+     */
+    public static void clickNewButton_ss(String logStep){
+        KeywordUtil.waitForVisible(ServiceSupportObject.newQuoteButton_ss);
+        KeywordUtil.click(ServiceSupportObject.newQuoteButton_ss,logStep);
+    }
+
+    /**
+     * Select the opportunity field for new quote in ss module
+     *
+     * @param logStep the log
+     * @param oppurt the opportunity name
+     */
+
+    public static void selectOpportunity_ss(String oppurt, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(ServiceSupportObject.searchOppo_quote_ss);
+        KeywordUtil.click(ServiceSupportObject.searchOppo_quote_ss,logStep);
+        KeywordUtil.inputText(ServiceSupportObject.searchOppo_quote_ss,"De",logStep);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        String opponame = "(//lightning-base-combobox-formatted-text[contains(@title,'De')])[1]";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(opponame)).isDisplayed();
+
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such opportunity present");
+        }else {
+            KeywordUtil.click(By.xpath(opponame), "opportunity selected");
+        }
+    }
+
+    /**
+     * Select the Account field for new quote.
+     *
+     * @param logStep the log
+     * @param account the account name
+     */
+    public static void selectAccount_ss(String account, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(ServiceSupportObject.searchAccounts_quote_ss);
+        KeywordUtil.click(ServiceSupportObject.searchAccounts_quote_ss,logStep);
+        KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss,"TX",logStep);
+        KeywordUtil.delay(5000);
+        Thread.sleep(5000);
+        String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'TX')])[5]";
+
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(accname)).isDisplayed();
+
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such account present");
+        }else {
+            KeywordUtil.click(By.xpath(accname), "account selected");
+        }
+    }
+
+    /**
+     * Select the Types field for new quote in service support module
+     *
+     * @param logStep the log
+     * @param type the Types name
+     */
+    public static void selectType_ss(String type, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(QuoteObject.selectTypes);
+        KeywordUtil.clickJS(QuoteObject.selectTypes,logStep);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        String type_ss = "(//lightning-base-combobox-item[contains(@data-value,'"+type+"')])[1]";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(type_ss)).isDisplayed();
+
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such type present");
+        }else {
+            KeywordUtil.click(By.xpath(type_ss), "type selected");
+        }
+    }
+
+    /**
+     * Navigate to quote and change status to In Review in service support module
+     *
+     * @param status the status
+     * @param logStep the log
+     *
+     */
+    public static void goToQuoteAndChangeStatus_InReview_ss(String status,String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(ServiceSupportObject.editQuote_ss);
+        KeywordUtil.click(ServiceSupportObject.editQuote_ss,logStep);
+        selectStatus_ss(status,"selected status");
+        clickSaveButton("clicked save button");
+
+    }
+
+    /**
+     * Navigate to quote and change status to Approved in service support module
+     *
+     * @param status the status
+     * @param logStep the log
+     *
+     */
+    public static void goToQuoteAndChangeStatus_Approved_ss(String status,String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(ServiceSupportObject.editQuote_again_ss);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        KeywordUtil.clickJS(ServiceSupportObject.editQuote_again_ss,logStep);
+        selectStatus_Approved_ss(status,"selected status");
+        clickSaveButton("clicked save button");
+    }
+
+    /**
+     * Select the status field as In Review for new quote in service support module
+     *
+     * @param logStep the log
+     * @param status the status name
+     */
+    public static void selectStatus_ss(String status, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(ServiceSupportObject.selectStatus_ss);
+        KeywordUtil.click(ServiceSupportObject.selectStatus_ss,logStep);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        String status_ss = "(//lightning-base-combobox-item[contains(@data-value,'"+status+"')])";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(status_ss)).isDisplayed();
+
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such status present");
+        }else {
+            KeywordUtil.click(By.xpath(status_ss), "status selected");
+        }
+    }
+
+    /**
+     * Select the status field as Approved for new quote in service support module
+     *
+     * @param logStep the log
+     * @param status the status name
+     */
+    public static void selectStatus_Approved_ss(String status, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(ServiceSupportObject.selectStatus_Approved_ss);
+        KeywordUtil.click(ServiceSupportObject.selectStatus_Approved_ss,logStep);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        String status_ss = "(//lightning-base-combobox-item[contains(@data-value,'"+status+"')])";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(status_ss)).isDisplayed();
+
+        }catch (Exception e){}
+
+        if(!flag){
+            System.out.println("no such status present");
+        }else {
+            KeywordUtil.click(By.xpath(status_ss), "status selected");
+        }
+    }
+
 }

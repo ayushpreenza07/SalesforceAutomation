@@ -96,4 +96,23 @@ public class ServiceSupportObject {
     public static By markStage_ss =By.xpath("//span[@class='uiOutputText']");
     public static By getBackToAccount_ss =By.xpath("//span[@class='slds-truncate' and text()='Accounts']");
 
+    //Xpaths for creating new quote
+    public static By openaccount_ss =By.xpath("//span//a[@title='TXTest']");
+    public static By clickQuotes_ss =By.xpath("//a[slot[contains(.,'Quotes')]]");
+    public static By newQuoteButton_ss =By.xpath("(//button[@class='slds-button slds-button_neutral' and text()='New'])[2]");
+    public static By searchAccounts_quote_ss =By.xpath("(//input[@placeholder='Search Accounts...'])[1]");
+    public static By searchOppo_quote_ss =By.xpath("//input[@placeholder='Search Opportunities...']");
+
+    //Xpaths for reviewing quote
+
+    public static By editQuote_ss=By.xpath("//button[@class='slds-button slds-button_neutral' and text()='Edit']");
+    public static By selectStatus_ss=By.xpath("//button[@class='slds-combobox__input slds-input_faux fix-slds-input_faux slds-combobox__input-value' and @data-value='Draft']");
+
+    //Xpaths for approving quote
+    public static By editQuote_again_ss=By.xpath("//button[@class='slds-button slds-button_neutral slds-kx-is-animating-from-click' and text()='Edit']");
+    public static By selectStatus_Approved_ss=By.xpath("//button[@class='slds-combobox__input slds-input_faux fix-slds-input_faux slds-combobox__input-value' and @data-value='In Review']");
+
+    //Xpaths for creating orders
+    public static By checkbox_Orders_ss=By.xpath("//input[@type='checkbox' and @name='SBQQ__Ordered__c'])[2]");
+
 }
