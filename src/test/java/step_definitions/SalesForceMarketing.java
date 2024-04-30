@@ -21,6 +21,9 @@ import java.util.HashMap;
 public class SalesForceMarketing {
    public static HashMap<String, String> dataMap = new HashMap<String, String>();
 
+    public static String leadName = KeywordUtil.generateRandomName();
+    public static String leadCompanyName = "TX";
+
     @Given("Read the testdata {string} and {string} from excel file")
     public void readTheTestdataFromExcelFile(String arg1, String arg2) {
         try {
@@ -252,5 +255,33 @@ public class SalesForceMarketing {
     public void userDeleteNewOpportunity() throws InterruptedException {
         OppurtunitiesUtil.deleteOpportunityFromOpportunityTab();
 
+    }
+
+    @And("Change Opportunity Status")
+    public void changeOpportunityStatus() throws InterruptedException{
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.selectStageProposalQuote("proposal stage selected");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        OppurtunitiesUtil.setMarkAsCurrentStages("stage marked");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+    }
+
+
+    @And("Add Lead To Campaign")
+    public static void addLeadToCampaign() {
+        try {
+            CampaignUtil.addLeadToCampaign(dataMap.get("ParentCampaign"), leadName, leadCompanyName);
+        } catch (Exception e) {
+            CampaignUtil.verificationMessage();
+        }
+    }
+
+    @And("Change Lead Status")
+    public static void changeLeadStatus() {
+        try {
+            CampaignUtil.changeLeadStatusToConverted(leadName);
+        } catch (Exception e) {
+            CampaignUtil.verificationMessage();
+        }
     }
 }
