@@ -29,6 +29,8 @@ Feature: Salesforce Marketing CRM
     Then user create new opportunity in Contact
     Then user is able to see the opportunity
     Then user added Contact to campaign
+    And Add Lead To Campaign
+    And Change Lead Status
     Then user is able to see the campaign History
     Then user added case in the contact
     Then user able to see the case history

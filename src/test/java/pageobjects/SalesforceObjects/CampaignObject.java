@@ -113,6 +113,57 @@ public class CampaignObject {
 
     public static By leadsShowActionsDeleteButton=By.xpath("//a[@title='Delete']");
 
+    public static By addLeadLink = By.xpath("//a[@title='Add Leads']");
+
+    public static By addLeadToCampaignDialogHeader = By.xpath("//h2[text()='Add Leads to Campaign']");
+
+    public static By searchLeadsInputField = By.xpath("//input[@title='Search Leads']");
+
+    public static By newLeadOption = By.xpath("//span[@title='New Lead']");
+
+    public static By newLeadHeader = By.xpath("//h2[text()='New Lead']");
+
+    public static By leadLastNameInputField = By.xpath("//label[./span[text()='Last Name']]/following-sibling::input");
+
+    public static By leadCompanyNameInputField = By.xpath("//label[./span[text()='Company']]/following-sibling::input");
+
+    public static By saveNewLeadButton = By.xpath("//button[@title='Save']");
+
+    public static By allActiveCampaignsOption = By.xpath("//a[./span[normalize-space()='All Active Campaigns']]");
+
+    public static By selectListViewCampaignsDropDown = By.xpath("//button[@title='Select a List View: Campaigns']");
+
+    public static By searchListInputField = By.xpath("//input[@name='Campaign-search-input' and @placeholder='Search this list...']");
+
+    public static By nextButton = By.xpath("//button[text()='Next']");
+
+    public static By submitButton = By.xpath("//button[text()='Submit']");
+
+    public static By leadAddedSuccessMessage = By.className("toastTitle slds-text-heading--small");
+
+    public static By viewAllCampaignMembers = By.xpath("//span[./span[text()='Campaign Members'] and text()='View All']");
+
+    public static By searchButtonField = By.xpath("//button[text()='Search...']");
+
+    public static By searchInputField = By.xpath("//input[@placeholder='Search...']");
+
+    public static By workingContactedField = By.xpath("//a[@title='Working - Contacted']");
+
+    public static By markAsCurrentStatusButton= By.xpath("//button[./span[text()='Mark as Current Status']]");
+
+    public static By closedNotConvertedField = By.xpath("//a[./span[text()='Closed - Not Converted']]");
+
+    public static By convertedField  = By.xpath("//a[./span[text()='Converted']]");
+
+    public static By selectConvertedStatus = By.xpath("//button[./span[text()='Select Converted Status']]");
+
+    public static By convertLeadHeader = By.xpath("//h2[normalize-space()='Convert Lead']");
+
+    public static By convertButton = By.xpath("//button[text()='Convert']");
+
+    public static By yourLeadHasBeenConvertedDialogHeader = By.xpath("//h2[text()='Your lead has been converted']");
+
+
     public static By selectStatusInCase(String status){
         return By.xpath("//span[text()='"+status+"']");
     }
@@ -149,6 +200,21 @@ public class CampaignObject {
 
     public static By deleteShowActionInLeads(String name){
         return By.xpath("//table[@role=\"grid\"]//tbody//tr//a[@title='"+name+"']//ancestor::th//following-sibling::td[8]//span[text()='Show more actions']");
+    }
+    public static By leadField(String leadName){
+        return By.xpath("//a[@aria-labelledby='assistiveTextForPill']//span[text()='"+leadName+"']");
+    }
+
+    public static By campaignMember(String memberName){
+        return By.xpath("(//th[.//a[@title='Lead']]/following-sibling::td//a[@title='"+ memberName +"'])[1]");
+    }
+
+    public static By leadLink(String leadName){
+        return By.xpath("//mark[text()='"+ leadName +"']");
+    }
+
+    public static By leadPageHeader(String leadName){
+        return By.xpath("//lightning-formatted-name[text()='"+ leadName +"']");
     }
 
 
