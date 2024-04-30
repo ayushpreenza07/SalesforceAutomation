@@ -218,6 +218,7 @@ public class SalesForceLeads {
     public void click_on_mark_as_current_status_button() {
         clickOnMarkStatusAsComplete("ClickOnMarkStatus As Complete");
     }
+
     @Then("Verify order status should be activated")
     public void verify_order_status_should_be_activated() {
         verifyOnOrderActivated("Verified MarkStatus As Activated");

@@ -10,7 +10,6 @@ import utilities.KeywordUtil;
 
 public class SalesForceBilling {
 
-
     @And("go to salesforce cpq")
     public void goToSalesforceCpq() {
         AccountUtil.clickSlideShowButton("Clicked menu button");

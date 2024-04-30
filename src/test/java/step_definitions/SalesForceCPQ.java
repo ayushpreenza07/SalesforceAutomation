@@ -152,13 +152,11 @@ public class SalesForceCPQ {
 
     @When("^verify if document generated$")
     public void verify_doc_generated() throws Exception{
-
         OppurtunitiesUtil.verifyDocumentGenerated("verify document generated");
     }
 
     @When("^Go to quote and change its status to approve$")
     public void change_quote_status() throws Exception{
-
         QuoteUtil.changeQuoteStatusAndGoToOpportunity("Quote status changed to approved and navigated back to opportunity");
     }
 

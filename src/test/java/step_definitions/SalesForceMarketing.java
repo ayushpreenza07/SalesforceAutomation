@@ -21,8 +21,6 @@ import java.util.HashMap;
 public class SalesForceMarketing {
    public static HashMap<String, String> dataMap = new HashMap<String, String>();
 
-
-
     @Given("Read the testdata {string} and {string} from excel file")
     public void readTheTestdataFromExcelFile(String arg1, String arg2) {
         try {
@@ -71,7 +69,6 @@ public class SalesForceMarketing {
         } catch (Exception e) {
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user has got the message  : " + e.getMessage()));
         }
-
     }
 
     @And("user selects the parent Campaign")
@@ -82,7 +79,6 @@ public class SalesForceMarketing {
 
 
     }
-
 
     @Then("user selects the edit button")
     public void campaign_Edit() throws InterruptedException {
@@ -174,7 +170,6 @@ public class SalesForceMarketing {
         CampaignUtil.seeOpportunityInContact();
         KeywordUtil.takeScreenshotAndAttachInReport();
         GlobalUtil.getDriver().navigate().back();
-
     }
 
     @Then("user added Contact to campaign")
@@ -202,7 +197,6 @@ public class SalesForceMarketing {
         CampaignUtil.seeCaseHistory();
         KeywordUtil.takeScreenshotAndAttachInReport();
         GlobalUtil.getDriver().navigate().back();
-
 
     }
 
