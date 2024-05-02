@@ -1,6 +1,9 @@
 package step_definitions;
 
-import SalesforceModules.*;
+import SalesforceModules.AccountUtil;
+import SalesforceModules.CampaignUtil;
+import SalesforceModules.LoginSalesforceUtil;
+import SalesforceModules.OppurtunitiesUtil;
 import com.relevantcodes.extentreports.LogStatus;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,8 +20,9 @@ import java.security.Key;
 import java.util.HashMap;
 
 public class SalesForceMarketing {
-   public static HashMap<String, String> dataMap = new HashMap<String, String>();
-
+    public static HashMap<String, String> dataMap = new HashMap<String, String>();
+    public static String leadName = KeywordUtil.generateRandomName();
+    public static String leadCompanyName = "TX";
 
 
     @Given("Read the testdata {string} and {string} from excel file")
@@ -77,7 +81,6 @@ public class SalesForceMarketing {
         CampaignUtil.addParentCampaign(dataMap.get("CampaignName"), dataMap.get("ParentCampaign"));
         KeywordUtil.takeScreenshotAndAttachInReport();
         CampaignUtil.verificationMessage();
-
 
     }
 
@@ -272,5 +275,25 @@ public class SalesForceMarketing {
         KeywordUtil.waitForVisible(QuoteObject.quotesBtn);
         KeywordUtil.click(QuoteObject.quotesBtn,"Click on quotas");
         QuoteUtil.createNewQuoteForMarketing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+}
+
+
+    @And("Add Lead To Campaign")
+    public static void addLeadToCampaign() {
+        try {
+            CampaignUtil.addLeadToCampaign(dataMap.get("ParentCampaign"), leadName, leadCompanyName);
+        } catch (Exception e) {
+            CampaignUtil.verificationMessage();
+        }
+    }
+
+    @And("Change Lead Status")
+    public static void changeLeadStatus() {
+        try {
+            CampaignUtil.changeLeadStatusToConverted(leadName);
+        } catch (Exception e) {
+            CampaignUtil.verificationMessage();
+        }
     }
 }

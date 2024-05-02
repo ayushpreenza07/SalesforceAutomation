@@ -19,7 +19,7 @@ public class ContactUtil {
      *
      * @param logStep the log
      */
-    public static void NewButtonContact(String logStep) throws InterruptedException {
+    public static void newButtonContact(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ContactObject.newContactButton);
         KeywordUtil.click(ContactObject.newContactButton,logStep);
@@ -150,7 +150,7 @@ public class ContactUtil {
      */
     public static void createContact(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
         clickContactButton("Navigated to Contacts");
-        NewButtonContact("New contact button clicked");
+        newButtonContact("New contact button clicked");
         setSalutation(salutation,salutation+"Set Salutation");
         enterLastContactName(lastname,lastname+" lastname set");
         enterEmail(email,email+" email entered");

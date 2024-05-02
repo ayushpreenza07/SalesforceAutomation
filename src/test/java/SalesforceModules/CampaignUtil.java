@@ -5,6 +5,9 @@ import io.cucumber.java.en.Then;
 import net.bytebuddy.description.modifier.Ownership;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.xmlbeans.impl.xb.xsdschema.All;
+import org.bouncycastle.operator.KeyWrapper;
+import org.checkerframework.checker.units.qual.C;
+import org.checkerframework.checker.units.qual.K;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +24,7 @@ import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
 import java.security.Key;
+import java.security.KeyException;
 import java.util.List;
 
 public class CampaignUtil {
@@ -32,8 +36,8 @@ public class CampaignUtil {
      */
     public static void clickCampaignTab(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.CampaignTab);
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.CampaignTab);
+        KeywordUtil.waitForVisible(CampaignObject.campaignTab);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.campaignTab);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -45,9 +49,9 @@ public class CampaignUtil {
      * @throws InterruptedException the interrupted exception
      */
     public static void entercampaignName(String campaignName, String logStep) {
-        KeywordUtil.waitForVisible(CampaignObject.CampaignName);
-        KeywordUtil.inputText(CampaignObject.CampaignName, campaignName, logStep);
-        KeywordUtil.click(CampaignObject.CampaignName, "click on the Campaign name filed");
+        KeywordUtil.waitForVisible(CampaignObject.campaignName);
+        KeywordUtil.inputText(CampaignObject.campaignName, campaignName, logStep);
+        KeywordUtil.click(CampaignObject.campaignName, "click on the Campaign name filed");
     }
 
     /**
@@ -84,8 +88,8 @@ public class CampaignUtil {
      */
 
     public static void parentClickSaveButton(){
-        KeywordUtil.waitForVisible(CampaignObject.parent_compaign_Save_button);
-        KeywordUtil.click(CampaignObject.parent_compaign_Save_button,"click on the save button");
+        KeywordUtil.waitForVisible(CampaignObject.parentCampaignSavebutton);
+        KeywordUtil.click(CampaignObject.parentCampaignSavebutton,"click on the save button");
     }
 
     /**
@@ -119,8 +123,8 @@ public class CampaignUtil {
      */
     public static void clickSaveButton(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.SaveButton);
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.SaveButton);
+        KeywordUtil.waitForVisible(CampaignObject.saveButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.saveButton);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -267,8 +271,8 @@ public class CampaignUtil {
      */
     public static void clickOnContactShowActionsEditButton() throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.EditContactsShowActions);
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.EditContactsShowActions);
+        KeywordUtil.waitForVisible(CampaignObject.editContactsShowActions);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.editContactsShowActions);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -339,6 +343,8 @@ public class CampaignUtil {
      *retriving the text from all alert that we are getting after creating, editing, and deletign the Campaign and Contact
      */
     public static void verificationMessage() {
+        KeywordUtil.waitForVisible(CampaignObject.successMessage);
+        Assert.assertTrue(KeywordUtil.isWebElementPresent(CampaignObject.successMessage,"Validate success message is available"),"Unable to see the success message");
         String gettext = KeywordUtil.getElementText(CampaignObject.successMessage);
         RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user has got the message  : " + gettext));
 
@@ -549,8 +555,8 @@ public class CampaignUtil {
      */
     public static void clickDeleteShowActionsInContacts(String contactName) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.DeleteShowActionInContacts(contactName));
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.DeleteShowActionInContacts(contactName));
+        KeywordUtil.waitForVisible(CampaignObject.deleteShowActionInContacts(contactName));
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.deleteShowActionInContacts(contactName));
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
     }
@@ -656,7 +662,7 @@ public class CampaignUtil {
      * @throws InterruptedException
      */
     public static void createOpportunityInContact(String name, String amount, String stage) throws InterruptedException {
-        OppurtunitiesUtil.NewButtonOppurtunity("clicked new button for Opportunity");
+        OppurtunitiesUtil.newButtonOppurtunity("clicked new button for Opportunity");
         OppurtunitiesUtil.enterOppurtunityName(name, name+" entered in Opportunity");
         OppurtunitiesUtil.enterCloseDate(2024,1,2,"Close date entered");
         OppurtunitiesUtil.enterAmount(amount, "Amount entered "+amount);
@@ -804,6 +810,145 @@ public class CampaignUtil {
             selectStatus();
             clickSaveButtonForContactToCampaign();
             verificationMessage();
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    /*
+    Navigate To Campaign page
+     */
+    public static void navigateToCampaignPage(String campaignName){
+        try{
+            KeywordUtil.click(CampaignObject.selectListViewCampaignsDropDown,"clicking on view all campaigns dropdown");
+            KeywordUtil.waitForVisible(CampaignObject.allActiveCampaignsOption);
+            KeywordUtil.click(CampaignObject.allActiveCampaignsOption,"click on all active campaigns");
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(CampaignObject.searchListInputField);
+            KeywordUtil.clearInput(CampaignObject.searchListInputField);
+            KeywordUtil.inputText(CampaignObject.searchListInputField,campaignName,"searching for campaign");
+            KeywordUtil.pressEnter(CampaignObject.searchListInputField);
+            KeywordUtil.delay(2000);
+            KeywordUtil.click(CampaignObject.clickCampaign(campaignName), "click on campaign");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    /*
+    Add lead to Campaign
+     */
+    public static void addLeadToCampaign(String campaignName, String leadName, String companyName) throws InterruptedException  {
+        try {
+            KeywordUtil.waitForVisible(CampaignObject.selectListViewCampaignsDropDown);
+            navigateToCampaignPage(campaignName);
+            KeywordUtil.delay(3000);
+            KeywordUtil.scrollDown();
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(CampaignObject.addLeadLink);
+            KeywordUtil.scrollElementIntoViewUsingActions(CampaignObject.addLeadLink);
+            KeywordUtil.click(CampaignObject.addLeadLink,"click on campaign link");
+            KeywordUtil.isWebElementVisible(CampaignObject.addLeadToCampaignDialogHeader,"Add Lead To Campaign Dialog is visible");
+            KeywordUtil.waitForVisible(CampaignObject.searchLeadsInputField);
+            KeywordUtil.click(CampaignObject.searchLeadsInputField,"click on Search Leads");
+            KeywordUtil.waitForVisible(CampaignObject.newLeadOption);
+            KeywordUtil.click(CampaignObject.newLeadOption,"click on new lead option");
+            KeywordUtil.isWebElementVisible(CampaignObject.newLeadHeader,"Validate dialog is visible");
+            KeywordUtil.waitForVisible(CampaignObject.leadLastNameInputField);
+            KeywordUtil.inputText(CampaignObject.leadLastNameInputField,leadName,"enter lead last name");
+            KeywordUtil.waitForVisible(CampaignObject.leadCompanyNameInputField);
+            KeywordUtil.inputText(CampaignObject.leadCompanyNameInputField,companyName, "Enter Lead company name");
+            KeywordUtil.waitForVisible(CampaignObject.saveNewLeadButton);
+            KeywordUtil.click(CampaignObject.saveNewLeadButton, "Click on save button");
+            KeywordUtil.waitForVisible(CampaignObject.leadField(leadName));
+            KeywordUtil.isWebElementVisible(CampaignObject.leadField(leadName),"Validate lead name is visible");
+            KeywordUtil.waitForVisible(CampaignObject.nextButton);
+            KeywordUtil.click(CampaignObject.nextButton, "Click on next button");
+            KeywordUtil.delay(4000);
+            KeywordUtil.waitForVisible(CampaignObject.submitButton);
+            KeywordUtil.click(CampaignObject.submitButton, "Click on submit button");
+            KeywordUtil.isWebElementVisible(CampaignObject.leadAddedSuccessMessage,"Success message is visible");
+            KeywordUtil.scrollDown();
+            KeywordUtil.delay(2000);
+            validateLeadIsAddedSuccessfully(leadName);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    /*
+    Validate Lead is added successfully
+     */
+    public static void validateLeadIsAddedSuccessfully(String leadName){
+        try{
+            KeywordUtil.waitForVisible(CampaignObject.viewAllCampaignMembers);
+            KeywordUtil.click(CampaignObject.viewAllCampaignMembers,"click on view all campaign members");
+            KeywordUtil.delay(2000);
+            KeywordUtil.isWebElementPresent(CampaignObject.campaignMember(leadName),"validate Lead is visible ");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    /*
+    change lead Status To Converted
+     */
+
+    public static void changeLeadStatusToConverted(String leadName){
+        try{
+            KeywordUtil.BrowserRefresh();
+            KeywordUtil.delay(3000);
+            searchAndNavigateToLeadPage(leadName);
+            //Change lead status to Working contacted field
+            KeywordUtil.waitForVisible(CampaignObject.workingContactedField);
+            KeywordUtil.clickJS(CampaignObject.workingContactedField, "Clicked on Converted Tab");
+            KeywordUtil.delay(2000);
+            KeywordUtil.waitForVisible(CampaignObject.markAsCurrentStatusButton);
+            KeywordUtil.clickJS(CampaignObject.markAsCurrentStatusButton,"click on mark as status button");
+            verificationMessage();
+            KeywordUtil.delay(3000);
+            //Change lead status to closed not converted
+            KeywordUtil.waitForVisible(CampaignObject.closedNotConvertedField);
+            KeywordUtil.clickJS(CampaignObject.closedNotConvertedField,"click on closed not converted field");
+            KeywordUtil.waitForVisible(CampaignObject.markAsCurrentStatusButton);
+            KeywordUtil.clickJS(CampaignObject.markAsCurrentStatusButton,"click on mark as current status button");
+            verificationMessage();
+            KeywordUtil.delay(5000);
+            // change lease status to converted
+            KeywordUtil.waitForVisible(CampaignObject.convertedField);
+            KeywordUtil.clickJS(CampaignObject.convertedField,"click on converted field");
+            KeywordUtil.delay(2000);
+            KeywordUtil.waitForVisible(CampaignObject.selectConvertedStatus);
+            KeywordUtil.clickJS(CampaignObject.selectConvertedStatus,"click on converted status button");
+            KeywordUtil.delay(3000);
+            KeywordUtil.isWebElementPresent(CampaignObject.convertLeadHeader,"Validate convert lead header");
+            KeywordUtil.waitForVisible(CampaignObject.convertLeadHeader);
+            KeywordUtil.delay(3000);
+            KeywordUtil.waitForVisible(CampaignObject.convertButton);
+            KeywordUtil.click(CampaignObject.convertButton,"Click on convert button");
+            KeywordUtil.delay(2000);
+            KeywordUtil.waitForVisible(CampaignObject.yourLeadHasBeenConvertedDialogHeader);
+            KeywordUtil.isWebElementPresent(CampaignObject.yourLeadHasBeenConvertedDialogHeader,"Validate convert lead header");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    /*
+    Search and Navigate to lead page
+     */
+    public static void searchAndNavigateToLeadPage(String leadName){
+        try{
+            KeywordUtil.waitForVisible(CampaignObject.searchButtonField);
+            KeywordUtil.click(CampaignObject.searchButtonField,"click on search button");
+            KeywordUtil.waitForVisible(CampaignObject.searchInputField);
+            KeywordUtil.inputText(CampaignObject.searchInputField, leadName, "Enter Lead name");
+            KeywordUtil.delay(2000);
+            KeywordUtil.waitForVisible(CampaignObject.leadLink(leadName));
+            KeywordUtil.click(CampaignObject.leadLink(leadName),"click on lead link");
+            KeywordUtil.delay(5000);
+            boolean status=KeywordUtil.isWebElementPresent(CampaignObject.leadPageHeader(leadName),"Validate lead page should be loaded");
+            Assert.assertTrue(status, "Lead page should be loaded");
         }
         catch (Exception e){
             System.out.println(e.getMessage());

@@ -59,6 +59,7 @@ Feature: Salesforce Leads
     And Click on Order Number
     And Click on Activated
     And Click on MarkAsCurrentStatus Button
+    Then Verify order status should be activated
 
 
   @salesforce @LeadsTest  @Web

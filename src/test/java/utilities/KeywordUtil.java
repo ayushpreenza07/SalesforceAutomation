@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+
 import static utilities.GlobalUtil.getDriver;
 
 /**
@@ -65,6 +66,8 @@ public class KeywordUtil extends GlobalUtil {
      * The Rt.
      */
     static Runtime rt = Runtime.getRuntime();
+
+
 
     /**
      * On execution finish.
@@ -152,8 +155,9 @@ public class KeywordUtil extends GlobalUtil {
      *
      * @throws InterruptedException the interrupted exception
      */
+
     public static void scrollDown() {
-        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0, 250)");
+        ((JavascriptExecutor) getDriver()).executeScript("window.scrollBy(0, 350)");
     }
 
     /**

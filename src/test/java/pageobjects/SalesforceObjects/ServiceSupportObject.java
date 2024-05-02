@@ -85,7 +85,32 @@ public class ServiceSupportObject {
 
     //Xpaths for creating new opportunity
     public static By createNewOpportunities_ss= By.xpath("//button[@class='slds-button slds-button_neutral' and text()='New Opportunity']");
-    public static By opportunityName_ss=By.xpath("");
+    public static By opportunityName_ss=By.xpath("(//input[@type='text' and @class=' input'])[1]");
+    public static By setStage_ss=By.xpath ("//a[@role='button' and @class='select' and text()='--None--']");
+    public static By saveButton_oppo = By.xpath("(//span[@class=' label bBody' and text()='Save'])[3]");
 
+    //Xpaths for changing opportunity status
+    public static By clickOpportunities_ss =By.xpath("//a[slot[contains(.,'Opportunities')]]");
+    public static By selectOpportunities_ss =By.xpath("//a[slot[contains(.,'DemoOpportunity')]]");
+    public static By proposalStage_ss =By.xpath("(//span[@class='title slds-path__title'])[7]");
+    public static By markStage_ss =By.xpath("//span[@class='uiOutputText']");
+    public static By getBackToAccount_ss =By.xpath("//span[@class='slds-truncate' and text()='Accounts']");
+
+    //Xpaths for creating new quote
+    public static By openaccount_ss =By.xpath("//span//a[@title='TXTest']");
+    public static By clickQuotes_ss =By.xpath("//a[slot[contains(.,'Quotes')]]");
+    public static By newQuoteButton_ss =By.xpath("(//button[@class='slds-button slds-button_neutral' and text()='New'])[2]");
+    public static By searchAccounts_quote_ss =By.xpath("(//input[@placeholder='Search Accounts...'])[1]");
+    public static By searchOppo_quote_ss =By.xpath("//input[@placeholder='Search Opportunities...']");
+
+    //Xpaths for reviewing quote
+    public static By editQuote_ss=By.xpath("//button[@class='slds-button slds-button_neutral' and text()='Edit']");
+    public static By selectStatus_ss  =By.xpath("//label[text()='Status']/following-sibling::div//button[@role='combobox']");
+
+    //Xpaths for approving quote
+    public static By editQuote_again_ss=By.xpath("//button[@class='slds-button slds-button_neutral slds-kx-is-animating-from-click' and text()='Edit']");
+
+    //Xpaths for creating orders
+    public static By checkbox_Orders_ss=By.xpath("//input[@type='checkbox' and @name='SBQQ__Ordered__c'])[2]");
 
 }

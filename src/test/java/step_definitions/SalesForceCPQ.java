@@ -55,7 +55,6 @@ public class SalesForceCPQ {
 
     }
 
-
     @When("^Navigate to Salesforce as \"([^\"]*)\"$")
     public void navigateToUrlAccordingToUserType(String userType) throws Exception {
 
@@ -72,6 +71,10 @@ public class SalesForceCPQ {
                 break;
             case "Billing Admin":
                 baseUrl = ConfigReader.getValue("Billing_URL");
+                break;
+
+            case "Billing Opportunity":
+                baseUrl = ConfigReader.getValue("Billing_URL_OPP");
                 break;
 
             // Add cases for other user types as needed
@@ -108,6 +111,10 @@ public class SalesForceCPQ {
             case "Billing Admin":
                 username = ConfigReader.getValue("salesforceUsernameBilling");
                 password = ConfigReader.getValue("salesforcePasswordBilling");
+                break;
+            case "Billing Opportunity":
+                username = ConfigReader.getValue("BillingUsername");
+                password = ConfigReader.getValue("BillingPassword");
                 break;
 
             // Add cases for other user types as needed
