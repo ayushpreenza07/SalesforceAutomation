@@ -571,6 +571,20 @@ public class QuoteUtil {
         addDiscountProduct();
     }
     /**
+     * Create new quote for Marketing
+     * @param name,opportunityName the log
+     *
+     */
+    public static void createNewQuoteForMarketing(String name, String opportunityName, String type) throws Exception {
+        newButtonQuote("Clicked new button");
+        checkPrimary("primary checkbox marked");
+        selectOpportunity(opportunityName,opportunityName+" entered opportunities name");
+        selectAccount(name,name+" entered account name");
+        selectType(type,"selected type");
+        clickSaveButton("clicked save button");
+        addDiscountProduct();
+    }
+    /**
      * Selecting Opportunity and type and click on save button
      *
      * @param opportunityName the account name

@@ -46,7 +46,7 @@ Feature: Salesforce Marketing CRM
     And user edit new Opportunity
     And user delete new Opportunity
     And Change Opportunity Status
-
+    And user create Quotas an add Product
     Examples:
       | TestData  | SheetName  |
       | TestData1 | Salesforce |

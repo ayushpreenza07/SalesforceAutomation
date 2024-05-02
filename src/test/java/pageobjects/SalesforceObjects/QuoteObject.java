@@ -5,22 +5,23 @@ import org.openqa.selenium.By;
 public class QuoteObject {
 
     //Creating New Quotes
-    public static By clickOnQuotes =By.xpath("//SPAN[@class='slds-truncate'][text()='Quotes']");
+        public static By clickOnQuotes =By.xpath("//SPAN[@class='slds-truncate'][text()='Quotes']");
     public static By clickOnQuotesTab =By.xpath("//div[@class='slds-context-bar']//a[@title='Quotes']");
-    public static By newQuoteButton = By.xpath("(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1]");
+        public static By    newQuoteButton = By.xpath("(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1] | //*[@class='slds-truncate' and text()='New']");
     public static By searchOpportunities =By.xpath("//input[@class='slds-combobox__input slds-input' and @placeholder='Search Opportunities...']");
     public static By selectOppurtunity = By.xpath("//lightning-base-combobox-formatted-text[contains(@title,'asz')]");
     public static By selectOppurtunityLeads = By.xpath("//div[@role='listbox']//ul/li[2]//span[2]/span[2]/span");
 
     public static By selectAccount = By. xpath("//lightning-base-combobox-formatted-text[contains(@title,'asd')]");
     public static By quoteBtn = By.xpath("(//a[@class='flex-wrap-ie11'])[6]");
+    public static By quotesBtn = By.xpath("(//*[@class=\"menu-button-item slds-dropdown-trigger slds-dropdown-trigger_click\"])[2]/button");
     public static By quoteCardBtn = By.xpath("//h2[@class='slds-card__header-title']/a/span[@title='Quotes']");
 
     public static By searchAccounts =By.xpath("(//input[@placeholder='Search Accounts...'])[1]");
     public static By selectTypes =By.xpath("//button[@class='slds-combobox__input slds-input_faux fix-slds-input_faux slds-combobox__input-value' and span[text()='Quote']]");
 
     public static By selectType = By.xpath("//lightning-base-combobox-item[contains(@data-value,'Quote')]");
-    public static By saveButton = By.xpath("//button[@class='slds-button slds-button_brand' and text()='Save']");
+    public static By saveButton = By.xpath("//button[@class='slds-button slds-button_brand' and text()='Save'] | //*[@class='style-scope sb-pricebook-dialog' and text()='Save']");
     public static By priceSaveButton=By.xpath("(//div[@class='sbDialog style-scope sb-dialog']/footer[@id='footer']//paper-button)[17]");
 
     //Change Owner
