@@ -1,6 +1,7 @@
 package step_definitions;
 
 import SalesforceModules.*;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import SalesforceModules.AccountUtil;
 import SalesforceModules.EditandDeleteUtil;
@@ -122,6 +123,19 @@ public class SalesForceServiceSupportDemo {
     public void create_opportunity() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         OppurtunitiesUtil.createOpportunity_ss(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+    }
+
+    @When("^create new quote in service support$")
+    public void create_new_quote() throws Exception{
+        QuoteUtil.createNewQuote_servicesupport(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
+    @And("create an order and activate in service support")
+    public void createAnOrderAndActivate_ss() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.goToQuoteAndChangeStatus_InReview_ss((dataMap.get("InReviewStatus")),"Quote status is changed to In Review");
+        QuoteUtil.goToQuoteAndChangeStatus_Approved_ss((dataMap.get("ApprovedStatus")),"Quote status is changed to Approved");
+
     }
 
 }

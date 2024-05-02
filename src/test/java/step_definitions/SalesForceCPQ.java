@@ -55,7 +55,6 @@ public class SalesForceCPQ {
 
     }
 
-
     @When("^Navigate to Salesforce as \"([^\"]*)\"$")
     public void navigateToUrlAccordingToUserType(String userType) throws Exception {
 

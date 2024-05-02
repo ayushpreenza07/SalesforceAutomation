@@ -81,7 +81,6 @@ public class SalesForceMarketing {
         KeywordUtil.takeScreenshotAndAttachInReport();
         CampaignUtil.verificationMessage();
 
-
     }
 
 

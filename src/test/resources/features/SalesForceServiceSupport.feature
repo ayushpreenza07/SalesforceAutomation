@@ -4,10 +4,12 @@ Feature: salesforce service support demo
   Scenario Outline: salesforce service support demo
     Given Read the test data  "<TestData>" from Excel
     When Navigate to Salesforce as "System Admin"
-    And Login to Salesforce with "System Admin" credentials
+    And  Login to Salesforce with "System Admin" credentials
     Then click on service support button
     Then create account for service support
-#    Then create new opportunity and change its status
+    Then create new opportunity and change its status
+    Then create new quote in service support
+    And  create an order and activate in service support
     Then edit account details
     Then create contact for service support
     Then edit contact details for service support
