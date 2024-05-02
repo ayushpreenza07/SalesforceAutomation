@@ -148,6 +148,7 @@ public class SalesForceForecasting {
         }
 
     }
+
     @And("Navigate to forecast settings page")
     public void navigateToForecastSettingsPage() {
         try {
@@ -156,6 +157,7 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
+
     @Then("Validate Forecast settings page is loaded")
     public void validateForecastSettingsPageIsLoaded() {
         try {
@@ -165,6 +167,7 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
+
     @And("Activate Created Forecast")
     public void activateCreatedForecast() {
         try {
@@ -182,6 +185,7 @@ public class SalesForceForecasting {
             catchAssertError(e);
         }
     }
+
     @And("Assign Forecast Quotes To User")
     public void assignForecastQuotesToUser() {
         try{

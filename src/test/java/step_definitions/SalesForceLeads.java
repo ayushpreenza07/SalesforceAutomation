@@ -29,6 +29,7 @@ public class SalesForceLeads {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
         KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
+
     @Given("login to salesforce URL")
     public void login_to_salesforce_url() {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
@@ -39,6 +40,7 @@ public class SalesForceLeads {
     public void click_on_hamburger_menu() throws InterruptedException {
         Leads.clickOnHamburgerMenu("User Clicked on Hamburger Menu");
     }
+
     @When("Click on Search <{string}>")
     public void click_on_search(String string) throws InterruptedException {
         Leads.enterText("Leads");
@@ -65,14 +67,17 @@ public class SalesForceLeads {
     public void click_on_save_button() {
         Leads.clickOnSaveButton();
     }
+
     @Then("Verify New with Open Status")
     public void verify_new_with_open_status() {
         Leads.verifyOpenNotContacted();
     }
+
     @When("Click on Converted Tab")
     public void click_on_converted_tab() throws InterruptedException {
         Leads.clickOnConvertedTab();
     }
+
     @When("Click on Select Convert Status")
     public void click_on_select_convert_status() throws InterruptedException {
         Leads.clickOnConvertedStatusButton();
@@ -144,6 +149,7 @@ public class SalesForceLeads {
     public void verify_product_added_in_the_quote() {
         QuoteUtil.verifyProductTitle();
     }
+
     @When ("click on Generate Document")
     public void click_on_Generate_Document() throws InterruptedException {
         QuoteUtil.clickGenerateDocument("generated Document");
@@ -159,14 +165,17 @@ public class SalesForceLeads {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
         clickOnEditStatus(dataMap.get("QuoteType"),"Clicked on Change Status");
     }
+
     @When("Click on Edit Quote")
     public void click_on_edit() throws InterruptedException {
         clickOnEdit("Clicked on Edit Button");
     }
+
     @When("Change the Quote status Review to Approved")
     public void change_the_status_review_to_approved() throws InterruptedException {
         clickOnEditStatusReviewToApprove(dataMap.get("QuoteType"),"Changed Status Review to Approved");
     }
+
     @Then("Verify the Quote Status should be Approved")
     public void verify_status_should_be_approved() {
         verifyApprovedStatus();
@@ -176,6 +185,7 @@ public class SalesForceLeads {
     public void click_on_sales_force_cpq() {
         clickOnSalesforceCPQ();
     }
+
      @When("Click on Opportunity Tab")
     public void click_on_opportunity_tab() throws InterruptedException {
         OppurtunitiesUtil.clickOnOpportunityTab();
@@ -183,13 +193,14 @@ public class SalesForceLeads {
 
     @When("Click on Opporunity Name")
     public void click_On_Opportunity_Name(){
-
         OppurtunitiesUtil.clickOnOpportunityName();
     }
+
     @When("Select Close Tab and change the Status to Closed Won")
     public void select_close_tab_and_change_the_status_to_closed_won() {
         OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
     }
+
     @Then("Verify Stage should be Closed Won")
     public void verify_stage_should_be_closed_won() throws InterruptedException {
         verifyOpportunityStage();
@@ -206,21 +217,24 @@ public class SalesForceLeads {
     public void click_on_orders_from_rhs() {
         clickOnOrderTab("Clicked on Order Tab");
     }
+
     @Then("Click on Order Number")
     public void click_on_order_number() {
         clickOnOrderNumber("Clicked on Order Number");
     }
+
     @Then("Click on Activated")
     public void click_on_activated() {
         clickOnOrderActivated("Clicked on Order Activated");
     }
+
     @Then("Click on MarkAsCurrentStatus Button")
     public void click_on_mark_as_current_status_button() {
         clickOnMarkStatusAsComplete("ClickOnMarkStatus As Complete");
     }
+
     @Then("Verify order status should be activated")
     public void verify_order_status_should_be_activated() {
         verifyOnOrderActivated("Verified MarkStatus As Activated");
     }
-
 }

@@ -414,7 +414,6 @@ public class OppurtunitiesUtil extends GlobalUtil {
         setStage(stage, "Stage selected - "+stage);
         clickSaveButton("saved");
         KeywordUtil.delay(3000);
-//        backToAccount("Navigated back to account");
         markStage();
     }
 
@@ -783,7 +782,5 @@ public class OppurtunitiesUtil extends GlobalUtil {
         KeywordUtil.isWebElementVisible(OppurtunitiesObject.toastMessage, "Success message visible on screen after opportunity is deleted.");
         takeScreenshotAndAttachInReport();
 
-
     }
-
 }
