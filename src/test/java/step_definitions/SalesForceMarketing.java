@@ -1,9 +1,6 @@
 package step_definitions;
 
-import SalesforceModules.AccountUtil;
-import SalesforceModules.CampaignUtil;
-import SalesforceModules.LoginSalesforceUtil;
-import SalesforceModules.OppurtunitiesUtil;
+import SalesforceModules.*;
 import com.relevantcodes.extentreports.LogStatus;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -276,7 +273,7 @@ public class SalesForceMarketing {
         KeywordUtil.click(QuoteObject.quotesBtn,"Click on quotas");
         QuoteUtil.createNewQuoteForMarketing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
     }
-}
+
 
 
     @And("Add Lead To Campaign")
