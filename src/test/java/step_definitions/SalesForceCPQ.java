@@ -188,6 +188,7 @@ public class SalesForceCPQ {
     @Then("Change Opportunity Status to Close Won after Quote Approve")
     public void changeOpportunityStatusToCloseWonAfterQuoteApprove() throws InterruptedException {
         ContractUtil.navigateToOpportunity(dataMap.get("OpportunityName"), "Clicked on opportunity after creating contract");
+        KeywordUtil.takeScreenshotAndAttachInReport();
         OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
     }
 
