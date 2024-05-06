@@ -6,6 +6,7 @@ import io.appium.java_client.MobileBy;
 import org.apache.commons.compress.utils.IOUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.server.DriverFactory;
 import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import step_definitions.RunCukesTest;
@@ -1277,7 +1278,16 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
-
+    /*** Clicks on a WebElement using the Action class.
+     ** @param locator WebElement to click.
+     *  @param logStep the log.
+     */
+    public static void clickUsingAction(By locator, String logStep) {
+            WebDriver driver = getDriver();
+            WebElement element = getDriver().findElement(locator);
+            Actions actions = new Actions(driver);
+            actions.click(element).build().perform();
+        }
 
 
     /**

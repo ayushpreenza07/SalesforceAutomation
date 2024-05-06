@@ -890,11 +890,11 @@ public class QuoteUtil {
     public static void selectStatus_ss(String status, String logStep) throws InterruptedException {
         boolean flag = false;
         int size = 0;
-        KeywordUtil.delay(3000);
+        KeywordUtil.delay(8000);
         KeywordUtil.waitForVisible(ServiceSupportObject.selectStatus_ss);
         KeywordUtil.click(ServiceSupportObject.selectStatus_ss,logStep);
         KeywordUtil.delay(3000);
-        Thread.sleep(3000);
+        Thread.sleep(000);
         String status_ss = "//lightning-base-combobox-item//span[@title='"+status+"']";
         try{
             size = KeywordUtil.getDriver().findElements(By.xpath(status_ss)).size();
@@ -907,6 +907,61 @@ public class QuoteUtil {
             System.out.println(size);
         }else {
             KeywordUtil.click(By.xpath(status_ss), "status selected");
+        }
+    }
+
+    /**
+     * Navigate to quote and create order for service support
+     *
+     * @param logStep the log
+     *
+     */
+    public static void goToQuoteAndCreateOrder_ss(String logStep) throws InterruptedException {
+
+        KeywordUtil.delay(8000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.editQuote_again_ss);
+        KeywordUtil.click(ServiceSupportObject.editQuote_again_ss, "Open edit button");
+        KeywordUtil.delay(5000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.checkbox_Orders_ss);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+
+        KeywordUtil.hoverOnElement(ServiceSupportObject.checkbox_Orders_ss);
+        KeywordUtil.clickUsingAction(ServiceSupportObject.checkbox_Orders_ss, "Order button clicked");
+
+        KeywordUtil.delay(3000);
+        clickSaveButton("clicked save button");
+
+        KeywordUtil.waitForClickable(ServiceSupportObject.openOrder);
+        WebElement order = KeywordUtil.getDriver().findElement(ServiceSupportObject.openOrder);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", order);
+    }
+
+    /**
+     * Activating order for service support module
+     *
+     */
+    public static void activateOrder_ss() throws InterruptedException {
+
+        KeywordUtil.waitForClickable(ServiceSupportObject.viewOrder);
+        WebElement order = KeywordUtil.getDriver().findElement(ServiceSupportObject.viewOrder);
+        JavascriptExecutor executor_ss = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor_ss.executeScript("arguments[0].click();", order);
+
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        KeywordUtil.waitForVisible(QuoteObject.activatedTab);
+        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.activatedTab);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", quote);
+
+        try {
+            KeywordUtil.waitForVisible(QuoteObject.markCurrentStatus);
+            KeywordUtil.click(QuoteObject.markCurrentStatus, "Activated status Marked");
+        }catch (Exception e){
+            WebElement markStatus = KeywordUtil.getDriver().findElement(QuoteObject.markCurrentStatus);
+            executor.executeScript("arguments[0].click();", markStatus);
         }
     }
 

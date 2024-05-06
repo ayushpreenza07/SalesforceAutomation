@@ -111,6 +111,8 @@ public class ServiceSupportObject {
     public static By editQuote_again_ss=By.xpath("//button[@class='slds-button slds-button_neutral slds-kx-is-animating-from-click' and text()='Edit']");
 
     //Xpaths for creating orders
-    public static By checkbox_Orders_ss=By.xpath("//input[@type='checkbox' and @name='SBQQ__Ordered__c'])[2]");
+    public static By checkbox_Orders_ss=By.xpath("//div[@class='windowViewMode-normal oneRecordActionWrapper isModal active lafPageHost']//input[@name='SBQQ__Ordered__c']");
+    public static By openOrder=By.xpath("//a[slot[contains(.,'Orders')]]");
+    public static By viewOrder=By.xpath("//a[@class='flex-wrap-ie11 slds-truncate']");
 
 }
