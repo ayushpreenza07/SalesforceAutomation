@@ -1,15 +1,13 @@
 package step_definitions;
 
-import SalesforceModules.AccountUtil;
-import SalesforceModules.CampaignUtil;
-import SalesforceModules.LoginSalesforceUtil;
-import SalesforceModules.OppurtunitiesUtil;
+import SalesforceModules.*;
 import com.relevantcodes.extentreports.LogStatus;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
@@ -268,6 +266,14 @@ public class SalesForceMarketing {
         OppurtunitiesUtil.setMarkAsCurrentStages("stage marked");
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
+
+    @And("user create Quotas an add Product")
+    public void userCreateQuotas() throws Exception {
+        KeywordUtil.waitForVisible(QuoteObject.quotesBtn);
+        KeywordUtil.click(QuoteObject.quotesBtn,"Click on quotas");
+        QuoteUtil.createNewQuoteForMarketing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
 
 
     @And("Add Lead To Campaign")
