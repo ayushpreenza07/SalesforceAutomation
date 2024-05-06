@@ -135,7 +135,8 @@ public class SalesForceServiceSupportDemo {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         QuoteUtil.goToQuoteAndChangeStatus_InReview_ss((dataMap.get("InReviewStatus")),"Quote status is changed to In Review");
         QuoteUtil.goToQuoteAndChangeStatus_Approved_ss((dataMap.get("ApprovedStatus")),"Quote status is changed to Approved");
-
+        QuoteUtil.goToQuoteAndCreateOrder_ss("Order generated and activated");
+        QuoteUtil.activateOrder_ss();
     }
 
 }
