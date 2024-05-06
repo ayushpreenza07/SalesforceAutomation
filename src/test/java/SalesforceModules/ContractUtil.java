@@ -116,11 +116,16 @@ public class ContractUtil {
     public static void createContract(String account) throws InterruptedException {
 
         buttonContract("Navigated to contract page");
+        KeywordUtil.takeScreenshotAndAttachInReport();
         newButtonContract("new button clicked for contract");
+        KeywordUtil.takeScreenshotAndAttachInReport();
         enterStartDate(2024,4,10,"Entered start date");
         enterContractTerm(2,"Entered contract term");
         QuoteUtil.selectAccount(account,"Account selected");
+        KeywordUtil.takeScreenshotAndAttachInReport();
         QuoteUtil.clickSaveButton("Save button clicked for new contract");
         KeywordUtil.delay(3000);
+        KeywordUtil.takeScreenshotAndAttachInReport();
+
     }
 }
