@@ -48,6 +48,7 @@ Feature: Salesforce Marketing CRM
     And Change Opportunity Status
     And user create Quotas an add Product
     And Create new contract
+    Then Change Opportunity Status to Close Won after Quote Approve
 
     Examples:
       | TestData  | SheetName  |

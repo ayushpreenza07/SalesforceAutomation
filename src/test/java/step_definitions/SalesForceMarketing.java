@@ -260,6 +260,7 @@ public class SalesForceMarketing {
 
     @And("Change Opportunity Status")
     public void changeOpportunityStatus() throws InterruptedException{
+        OppurtunitiesUtil.clickOpportunityTab("clicks on Opportunities Tab");
         OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
         OppurtunitiesUtil.selectStageProposalQuote("proposal stage selected");
         KeywordUtil.takeScreenshotAndAttachInReport();
