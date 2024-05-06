@@ -376,11 +376,13 @@ public class OppurtunitiesUtil extends GlobalUtil {
         WebElement element1 = KeywordUtil.getDriver().findElement(OppurtunitiesObject.closedStatus);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element1);
+        KeywordUtil.takeScreenshotAndAttachInReport();
 
         //clicking on mark stage button
         KeywordUtil.waitForClickable(OppurtunitiesObject.selectClosedStage);
         WebElement element2 = KeywordUtil.getDriver().findElement(OppurtunitiesObject.selectClosedStage);
         executor.executeScript("arguments[0].click();", element2);
+        KeywordUtil.takeScreenshotAndAttachInReport();
 
         //select closed won value from dropdown
         KeywordUtil.waitForVisible(OppurtunitiesObject.selectClosedStageDropdown);
@@ -395,6 +397,8 @@ public class OppurtunitiesUtil extends GlobalUtil {
             KeywordUtil.waitForVisible(OppurtunitiesObject.saveClosedWon);
             KeywordUtil.click(OppurtunitiesObject.saveClosedWon, logStep);
         }
+        KeywordUtil.takeScreenshotAndAttachInReport();
+
     }
 
     /**
