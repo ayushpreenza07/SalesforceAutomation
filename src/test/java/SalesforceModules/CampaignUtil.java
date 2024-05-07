@@ -662,7 +662,7 @@ public class CampaignUtil {
      * @throws InterruptedException
      */
     public static void createOpportunityInContact(String name, String amount, String stage) throws InterruptedException {
-        OppurtunitiesUtil.newButtonOppurtunity("clicked new button for Opportunity");
+         CampaignUtil.clickNewButtonForCreateOpportunityInConatct();
         OppurtunitiesUtil.enterOppurtunityName(name, name+" entered in Opportunity");
         OppurtunitiesUtil.enterCloseDate(2024,1,2,"Close date entered");
         OppurtunitiesUtil.enterAmount(amount, "Amount entered "+amount);
@@ -767,7 +767,7 @@ public class CampaignUtil {
 
         List<WebElement> camapignName=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Campaign list");
         for (WebElement campaign : camapignName) {
-            if (campaign.getText().equals(campaignName)) {
+            if (campaign.getText().contains(campaignName)) {
                 campaign.click();
                 break;
             }
@@ -850,6 +850,7 @@ public class CampaignUtil {
             KeywordUtil.click(CampaignObject.addLeadLink,"click on campaign link");
             KeywordUtil.isWebElementVisible(CampaignObject.addLeadToCampaignDialogHeader,"Add Lead To Campaign Dialog is visible");
             KeywordUtil.waitForVisible(CampaignObject.searchLeadsInputField);
+            KeywordUtil.click(CampaignObject.searchLeadsInputField,"click on Search Leads");
             KeywordUtil.click(CampaignObject.searchLeadsInputField,"click on Search Leads");
             KeywordUtil.waitForVisible(CampaignObject.newLeadOption);
             KeywordUtil.click(CampaignObject.newLeadOption,"click on new lead option");
@@ -1271,6 +1272,19 @@ public class CampaignUtil {
         clickOnCampaignDelete();
         verificationMessage();
 
+    }
+
+    /**
+     * click on the new button for create opportunity in contact
+     * @throws InterruptedException
+     */
+
+    public static void clickNewButtonForCreateOpportunityInConatct() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(CampaignObject.newButtonForCreateOpportunityInContact);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.newButtonForCreateOpportunityInContact);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
     }
 
 }

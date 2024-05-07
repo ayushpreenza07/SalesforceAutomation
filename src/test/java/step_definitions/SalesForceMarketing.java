@@ -177,7 +177,7 @@ public class SalesForceMarketing {
 
     @Then("user added Contact to campaign")
     public  void addContactToCampaign(){
-        CampaignUtil.addContactToCampaign(dataMap.get("ParentCampaign"));
+        CampaignUtil.addContactToCampaign(dataMap.get("CampaignName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
@@ -293,5 +293,10 @@ public class SalesForceMarketing {
         } catch (Exception e) {
             CampaignUtil.verificationMessage();
         }
+    }
+
+    @And("user create Quotas an add Product in marketing")
+    public void createQuoteAndAddproduct(){
+
     }
 }

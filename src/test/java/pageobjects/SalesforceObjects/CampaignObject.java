@@ -77,9 +77,9 @@ public class CampaignObject {
 
     public static By enterCampaignName=By.xpath("//input[@title=\"Search Campaigns\"]");
 
-    public static By saveButtonAfterSelectingCampaign=By.xpath("(//span[text()='Save'])[2]");
+    public static By saveButtonAfterSelectingCampaign=By.xpath("//span[text()='Save']");
 
-    public static By statusPopUp=By.xpath("(//div[@class=\"uiPopupTrigger\"])[5]");
+    public static By statusPopUp=By.xpath("//a[@class=\"select\"]");
 
     public static By respondedStatus=By.xpath("//a[@title=\"Responded\"]");
 
@@ -162,6 +162,9 @@ public class CampaignObject {
     public static By convertButton = By.xpath("//button[text()='Convert']");
 
     public static By yourLeadHasBeenConvertedDialogHeader = By.xpath("//h2[text()='Your lead has been converted']");
+
+    public static By newButtonForCreateOpportunityInContact=By.xpath("//ul[@class=\"slds-button-group-list\"]//button[@name=\"New\"]");
+
 
 
     public static By selectStatusInCase(String status){

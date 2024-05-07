@@ -350,13 +350,13 @@ public class QuoteUtil {
 
         //switching to iframe to click on JS path buttons
         KeywordUtil.switchToIFrame(3,"Edit Quote IFrame");
-        KeywordUtil.delay(5000);
+        KeywordUtil.delay(10000);
 
         // click on edit lines button using JS path
         WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#pricebookDialog').shadowRoot.querySelector('#dialog > paper-button > sb-i18n')");
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", saveOnEditLines);
-        KeywordUtil.delay(2000);
+        KeywordUtil.delay(10000);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>Clicked on Edit Line Save Button</font> page"));
 
@@ -582,7 +582,23 @@ public class QuoteUtil {
         selectAccount(name,name+" entered account name");
         selectType(type,"selected type");
         clickSaveButton("clicked save button");
-        addDiscountProduct();
+        //addDiscountProduct();
+       addDiscountProductInQuote("5");
+    }
+
+
+
+    public static void addDiscountProductInQuote(String discount){
+        try {
+            JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+
+            QuoteUtil.clickEditLines("click on the edit lines");
+            KeywordUtil.switchToIFrame(3,"Edit Quote IFrame");
+            KeywordUtil.delay(5000);
+            System.out.println("switched to frame successfully");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     /**
      * Selecting Opportunity and type and click on save button

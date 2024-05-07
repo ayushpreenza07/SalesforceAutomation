@@ -29,4 +29,17 @@ public class BillingObject {
 
     public static By searchProduct = By.xpath("//input[@placeholder='Search this list...']");
 
+    public static By viewAll= By.xpath("//button[@class='slds-button' and @type='button' and text()='View All']");
+    public static By salesforceBilling= By.xpath("//p[@class='slds-truncate' and text()='Salesforce Billing']");
+    public static By accountNameLink= By.xpath("//a[@title='TXTest' and text()='TXTest']");
+    public static By NewBtnContactsOfAccount= By.xpath("//button[@class='slds-button slds-button_neutral' and @name='NewContact' and text()='New']");
+    public static By newContactBtnOnExistAccount= By.xpath("//button[@class='slds-button slds-button_neutral' and text()='New Contact']");
+    public static By salutationOfNewContactOnExistAccount= By.xpath("//div[@class='windowViewMode-normal active lafPageHost']//a[@class='select']");
+    public static By lastNameOfNewContactOnExistAccount= By.xpath("//input[@class='lastName compoundBLRadius compoundBRRadius form-element__row input' and @placeholder='Last Name' and @type='text']");
+    public static By phoneNumberOfNewContactOnExistAccount= By.xpath("//input[@class=' input' and @type='tel']");
+    public static By emailOfNewContactOnExistAccount= By.xpath("//input[@class=' input' and @type='text' and @inputmode='email']");
+    public static By saveButtonOfNewContact= By.xpath("//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']//span[@class=' label bBody' and text()='Save']");
+    public static By newBtnOfContactsTab= By.xpath("(//div[@title='New'])[1]");
+
+
 }

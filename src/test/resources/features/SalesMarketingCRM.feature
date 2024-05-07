@@ -9,7 +9,7 @@ Feature: Salesforce Marketing CRM
     And Login to Salesforce with "Forecast Admin" credentials
     And user clicks on the App launcher button
     And user selects the "Marketing CRM Classic"
-    And user clicks on Campaigns Tab
+   And user clicks on Campaigns Tab
     Then user create new Campaign
     And user clicks on Campaigns Tab
     Then user selects the edit button
@@ -20,7 +20,7 @@ Feature: Salesforce Marketing CRM
     And user clicks on the Campaign
     Then user create contact in Campaign
     Then user Add the leads in campaign
-     And user clicks on the Contact tab
+    And user clicks on the Contact tab
     Then user selects the filter
     Then user edit the contact
     Then user Delete the contact
@@ -29,18 +29,21 @@ Feature: Salesforce Marketing CRM
     Then user create new opportunity in Contact
     Then user is able to see the opportunity
     Then user added Contact to campaign
+    Then user is able to see the campaign History
+   Then user added case in the contact
+   Then user able to see the case history
+   And user click on the lead Tab
+   Then user create new lead
+   And user click on the lead Tab
+   Then user selects the filter in Lead
+   Then user edit the lead
+   Then user delete the lead
+   Then user remove the filter
+    And user clicks on Campaigns Tab
     And Add Lead To Campaign
     And Change Lead Status
-    Then user is able to see the campaign History
-    Then user added case in the contact
-    Then user able to see the case history
-    And user click on the lead Tab
-    Then user create new lead
-    And user click on the lead Tab
-    Then user selects the filter in Lead
-    Then user edit the lead
-    Then user delete the lead
-    Then user remove the filter
+    When Click on Opportunity Tab in converted popUp
+    Then Verify the Opportunity AccountName
     And user clicks on Opportunities Tab
     Then user create new Opportunity
     And user edit new Opportunity
@@ -49,6 +52,7 @@ Feature: Salesforce Marketing CRM
     And user create Quotas an add Product
     And Create new contract
     Then Change Opportunity Status to Close Won after Quote Approve
+    Then create an order and activate
 
     Examples:
       | TestData  | SheetName  |
