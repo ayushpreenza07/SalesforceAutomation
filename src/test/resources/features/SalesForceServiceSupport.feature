@@ -10,6 +10,7 @@ Feature: salesforce service support demo
     Then create new opportunity and change its status
     Then create new quote in service support
     And  create an order and activate in service support
+    Then user added contact to campaign in service support
     Then edit account details
     Then create contact for service support
     Then edit contact details for service support
