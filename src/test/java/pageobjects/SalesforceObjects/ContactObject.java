@@ -7,7 +7,7 @@ public class ContactObject {
     public static By contactButton = By.xpath("(//span[contains(text(),'Contacts')])[1]");
 
     public static By newContactButton = By.xpath("(//BUTTON[@class='slds-button slds-button_neutral'][text()='New'])[1]");
-//    public static By newContactButton = By.xpath("(//a[@title='New'])[2]");
+//  public static By newContactButton = By.xpath("(//a[@title='New'])[2]");
     public static By firstName = By.xpath("//input[@name='firstName']");
     public static By lastName = By.xpath("//input[@name='lastName']");
 

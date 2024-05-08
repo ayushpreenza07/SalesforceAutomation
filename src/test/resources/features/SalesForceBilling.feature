@@ -1,6 +1,6 @@
 Feature: salesforce demo
 
-  @salesforceBill
+#  @salesforceBill
   Scenario Outline: salesforce demo
     Given Read the test data  "<TestData>" from Excel
     When Navigate to Salesforce as "Billing Admin"
@@ -14,6 +14,21 @@ Feature: salesforce demo
     And go to products tab
     And search product in products tab
 
+    Examples:
+      | TestData |
+      | TestData1 |
+
+  @salesforceBill
+  Scenario Outline: salesforce demo
+    Given Read the test data  "<TestData>" from Excel
+    When Navigate to Salesforce as "BillingAnother Admin"
+    And Login to Salesforce with "BillingAnother Admin" credentials
+    And click okay
+    And user clicks on the App launcher button
+    And Click on view all
+    And Click on salesforce Billing
+    And Create customer account
+    And Create contact link existing and New Contact
     Examples:
       | TestData |
       | TestData1 |

@@ -1579,7 +1579,8 @@ public class KeywordUtil extends GlobalUtil {
                 imagePath = HTMLReportUtil.testFailTakeScreenshot(screenshotFilePath);
 
                 InputStream is = new FileInputStream(imagePath);
-                byte[] imageBytes = IOUtils.toByteArray(is);
+                // byte[] imageBytes = IOUtils.toByteArray(is);
+                byte[] imageBytes = org.apache.commons.compress.utils.IOUtils.toByteArray(is);
                 Thread.sleep(2000);
                 String base64 = Base64.getEncoder().encodeToString(imageBytes);
                 pathForLogger = RunCukesTest.logger.addBase64ScreenShot("data:image/png;base64," + base64);
