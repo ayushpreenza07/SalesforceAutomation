@@ -15,9 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.SourceType;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.CampaignObject;
-import pageobjects.SalesforceObjects.LeadsPage;
-import pageobjects.SalesforceObjects.OppurtunitiesObject;
+import pageobjects.SalesforceObjects.*;
 import step_definitions.RunCukesTest;
 import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
@@ -662,7 +660,7 @@ public class CampaignUtil {
      * @throws InterruptedException
      */
     public static void createOpportunityInContact(String name, String amount, String stage) throws InterruptedException {
-         CampaignUtil.clickNewButtonForCreateOpportunityInConatct();
+        OppurtunitiesUtil.newButtonOppurtunity("clicked new button for Opportunity");
         OppurtunitiesUtil.enterOppurtunityName(name, name+" entered in Opportunity");
         OppurtunitiesUtil.enterCloseDate(2024,1,2,"Close date entered");
         OppurtunitiesUtil.enterAmount(amount, "Amount entered "+amount);
@@ -767,7 +765,7 @@ public class CampaignUtil {
 
         List<WebElement> camapignName=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Campaign list");
         for (WebElement campaign : camapignName) {
-            if (campaign.getText().contains(campaignName)) {
+            if (campaign.getText().equals(campaignName)) {
                 campaign.click();
                 break;
             }
@@ -779,7 +777,7 @@ public class CampaignUtil {
      */
     public static void clickSaveButtonForContactToCampaign(){
         try {
-            KeywordUtil.delay(3000);
+            KeywordUtil.delay(5000);
             KeywordUtil.waitForVisible(CampaignObject.saveButtonAfterSelectingCampaign);
             WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.saveButtonAfterSelectingCampaign);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
@@ -850,7 +848,6 @@ public class CampaignUtil {
             KeywordUtil.click(CampaignObject.addLeadLink,"click on campaign link");
             KeywordUtil.isWebElementVisible(CampaignObject.addLeadToCampaignDialogHeader,"Add Lead To Campaign Dialog is visible");
             KeywordUtil.waitForVisible(CampaignObject.searchLeadsInputField);
-            KeywordUtil.click(CampaignObject.searchLeadsInputField,"click on Search Leads");
             KeywordUtil.click(CampaignObject.searchLeadsInputField,"click on Search Leads");
             KeywordUtil.waitForVisible(CampaignObject.newLeadOption);
             KeywordUtil.click(CampaignObject.newLeadOption,"click on new lead option");
@@ -1274,17 +1271,55 @@ public class CampaignUtil {
 
     }
 
-    /**
-     * click on the new button for create opportunity in contact
-     * @throws InterruptedException
-     */
 
-    public static void clickNewButtonForCreateOpportunityInConatct() throws InterruptedException {
+    /**
+     * Create campaign for the existing contact in service support
+     *
+     * @param campaignName the campaignName
+     *
+     */
+    public static void addContactToCampaign_ss(String campaignName) throws InterruptedException {
+        try {
+        ContactUtil.clickContactTab_cnt("Navigated to contact");
+        openContact("Open the contact");
+        clickAddtoCampaign("click Add to Campaign button");
+        enterCampaignNameInSearchBox(campaignName);
+        selectCampaign(campaignName);
+        clickNextButton();
+        selectStatus();
+        clickSaveButtonForContactToCampaign();
+        verificationMessage();
+    }
+        catch (Exception e){
+        System.out.println(e.getMessage());
+    }
+    }
+
+    /**
+     * Open contact from the list for service support module
+     *
+     * @param logStep the log
+     */
+    public static void openContact(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(CampaignObject.newButtonForCreateOpportunityInContact);
-        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.newButtonForCreateOpportunityInContact);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        KeywordUtil.waitForVisible(ServiceSupportObject.openContact);
+        WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.openContact);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * Click Add to campiagn from the list for service support module
+     *
+     * @param logStep the logStep
+     */
+    public static void clickAddtoCampaign(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.addtoCampaign);
+        WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.addtoCampaign);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+
     }
 
 }
