@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import SalesforceModules.AccountUtil;
 import SalesforceModules.EditandDeleteUtil;
 import SalesforceModules.ServiceSupportUtil;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.codehaus.groovy.ast.stmt.CaseStatement;
 import org.testng.Assert;
@@ -137,6 +138,12 @@ public class SalesForceServiceSupportDemo {
         QuoteUtil.goToQuoteAndChangeStatus_Approved_ss((dataMap.get("ApprovedStatus")),"Quote status is changed to Approved");
         QuoteUtil.goToQuoteAndCreateOrder_ss("Order generated and activated");
         QuoteUtil.activateOrder_ss();
+    }
+
+    @Then("user added contact to campaign in service support")
+    public  void addContactToCampaign_ss() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        CampaignUtil.addContactToCampaign_ss(dataMap.get("ParentCampaign"));
     }
 
 }

@@ -79,7 +79,7 @@ public class CampaignObject {
 
     public static By saveButtonAfterSelectingCampaign=By.xpath("(//span[text()='Save'])[2]");
 
-    public static By statusPopUp=By.xpath("(//div[@class=\"uiPopupTrigger\"])[5]");
+    public static By statusPopUp=By.xpath("//a[@class='select']");
 
     public static By respondedStatus=By.xpath("//a[@title=\"Responded\"]");
 

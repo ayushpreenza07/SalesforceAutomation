@@ -115,4 +115,7 @@ public class ServiceSupportObject {
     public static By openOrder=By.xpath("//a[slot[contains(.,'Orders')]]");
     public static By viewOrder=By.xpath("//a[@class='flex-wrap-ie11 slds-truncate']");
 
+    //Xpaths for adding contact to campaign
+    public static By openContact=By.xpath("//a[@class='displayLabel slds-truncate' and @title='Shruthi Dharnaik']");
+    public static By addtoCampaign=By.xpath("//a//div[@title='Add to Campaign']");
 }
