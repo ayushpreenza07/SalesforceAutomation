@@ -943,7 +943,7 @@ public class QuoteUtil {
      *
      */
     public static void activateOrder_ss() throws InterruptedException {
-
+        KeywordUtil.delay(3000);
         KeywordUtil.waitForClickable(ServiceSupportObject.viewOrder);
         WebElement order = KeywordUtil.getDriver().findElement(ServiceSupportObject.viewOrder);
         JavascriptExecutor executor_ss = (JavascriptExecutor)KeywordUtil.getDriver();
@@ -963,6 +963,45 @@ public class QuoteUtil {
             WebElement markStatus = KeywordUtil.getDriver().findElement(QuoteObject.markCurrentStatus);
             executor.executeScript("arguments[0].click();", markStatus);
         }
+
     }
 
+    /**
+     * Select the status field as Draft for order in service support module
+     *
+     * @param logStep the log
+     * @param status the status name
+     */
+    public static void changeStatusAsDraft_ss(String status, String logStep) throws InterruptedException {
+        boolean flag = false;
+        int size = 0;
+
+        // Edit order status to draft
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForClickable(ServiceSupportObject.editButton);
+        WebElement order_status = KeywordUtil.getDriver().findElement(ServiceSupportObject.editButton);
+        JavascriptExecutor executor_draft = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor_draft.executeScript("arguments[0].click();", order_status);
+
+        KeywordUtil.delay(8000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.selectStatus_ss);
+        KeywordUtil.click(ServiceSupportObject.selectStatus_ss,logStep);
+        KeywordUtil.delay(3000);
+        Thread.sleep(000);
+        String changeStatus_ss = "//lightning-base-combobox-item//span[@title='"+status+"']";
+        try{
+            size = KeywordUtil.getDriver().findElements(By.xpath(changeStatus_ss)).size();
+
+        }catch (Exception e){}
+
+        if(size==0){
+            KeywordUtil.takeScreenshotAndAttachInReport();
+            System.out.println("no such status present");
+            System.out.println(size);
+        }else {
+            KeywordUtil.click(By.xpath(changeStatus_ss), "status changed as draft");
+        }
+
+        CasesUtil.clickSaveButton_ss("Saved");
+    }
 }

@@ -55,9 +55,25 @@ public class EditandDeleteUtil extends GlobalUtil {
      *  @param phone the phone
      */
     public static void editAccountDetails(String phone) throws InterruptedException {
+        clickAccountsTab("Click accounts tab");
+        clickOpenAccount("Click open account");
         clickEditButton("Clicked edit button for accounts");
         editPhoneNumber(phone, phone+" entered phone");
         clickSaveButton("clicked save button");
+    }
+
+
+    /**
+     * click Open Accounts
+     *
+     * @param logStep the log
+     */
+    public static void clickOpenAccount(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.openaccount_ss);
+        WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.openaccount_ss);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
     }
 
     /**

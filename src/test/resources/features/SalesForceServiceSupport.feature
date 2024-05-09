@@ -25,7 +25,7 @@ Feature: salesforce service support demo
     Then delete account
     Then delete contact details for service support
     Then create new case by creating an new account
-    When create new case by creating a new contact
+    Then create new case by creating a new contact
 
     Examples:
       | TestData |
