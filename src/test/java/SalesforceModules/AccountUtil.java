@@ -1,9 +1,8 @@
-package utilities.Salesforce;
+package SalesforceModules;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import pageobjects.SalesforceObjects.AccountObject;
-import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.GlobalUtil;
 import utilities.KeywordUtil;
 
@@ -36,11 +35,21 @@ public class AccountUtil extends GlobalUtil {
         KeywordUtil.click(AccountObject.newAccountButton,logStep);
     }
 
+    /**
+     * click New Slide Show Button.
+     *
+     * @param logStep the log
+     */
     public static void clickSlideShowButton(String logStep){
         KeywordUtil.waitForVisible(AccountObject.slideButton);
         KeywordUtil.click(AccountObject.slideButton,logStep);
     }
 
+    /**
+     * click Cpq Button.
+     *
+     * @param logStep the log
+     */
     public static void clickCpqButton(String logStep){
         KeywordUtil.waitForVisible(AccountObject.cpqButton);
         KeywordUtil.click(AccountObject.cpqButton,logStep);
@@ -88,29 +97,55 @@ public class AccountUtil extends GlobalUtil {
         KeywordUtil.waitForVisible(AccountObject.saveButton);
         KeywordUtil.click(AccountObject.saveButton,logStep);
 
-//        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
-//        executor.executeScript("arguments[0].click();", KeywordUtil.getDriver().findElement(AccountObject.saveButton));
     }
 
+    /**
+     * Enter billing address
+     *
+     * @param logStep the log
+     */
     public static void enterBillingAddress(String address, String logStep){
         KeywordUtil.waitForVisible(AccountObject.billingAddress);
         KeywordUtil.inputText(AccountObject.billingAddress,address,logStep);
     }
 
+    /**
+     * Enter shipping address.
+     *
+     * @param logStep the log
+     */
     public static void enterShippingAddress(String address, String logStep){
         KeywordUtil.waitForVisible(AccountObject.shippingAddress);
         KeywordUtil.inputText(AccountObject.shippingAddress,address,logStep);
     }
 
 
-    public static void createNewAccount(String name, String accountNumber, String phone) throws InterruptedException {
+    /**
+     * Create New Account
+     *
+     *  @param name the name
+     *  @param phone the phone
+     */
+    public static void createNewAccount(String name, String phone) throws InterruptedException {
         clickSlideShowButton("Clicked menu button");
         clickCpqButton("Navigated to Salesforce cpq");
         clickAccountsTab("Navigated to accounts");
         clickNewButton("Clicked new button for accounts");
         enterAccountName(name,name+" entered name");
         enterPhoneNumber(phone, phone+" entered phone");
-        accountNumberField(accountNumber,accountNumber+" account number entered");
+        clickSaveButton("clicked save button");
+    }
+    /**
+     * Create New Account for service support module
+     *
+     *  @param name the name
+     *  @param phone the phone
+     */
+    public static void createNewAccount_ss(String name, String phone) throws InterruptedException {
+        clickAccountsTab("Navigated to accounts");
+        clickNewButton("Clicked new button for accounts");
+        enterAccountName(name,name+" entered name");
+        enterPhoneNumber(phone, phone+" entered phone");
         clickSaveButton("clicked save button");
     }
 

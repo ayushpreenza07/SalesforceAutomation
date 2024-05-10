@@ -1,14 +1,13 @@
-package utilities.Salesforce;
+package SalesforceModules;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import pageobjects.SalesforceObjects.AccountObject;
 import pageobjects.SalesforceObjects.ContactObject;
+import pageobjects.SalesforceObjects.ServiceSupportObject;
 import utilities.KeywordUtil;
 
-import java.security.Key;
 import java.util.HashMap;
 
 public class ContactUtil {
@@ -20,7 +19,7 @@ public class ContactUtil {
      *
      * @param logStep the log
      */
-    public static void NewButtonContact(String logStep) throws InterruptedException {
+    public static void newButtonContact(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ContactObject.newContactButton);
         KeywordUtil.click(ContactObject.newContactButton,logStep);
@@ -60,6 +59,12 @@ public class ContactUtil {
         KeywordUtil.inputText(ContactObject.phoneField, phone,logStep);
     }
 
+    /**
+     * Enter email field for new contact.
+     *
+     * @param logStep the log
+     * @param email the contact name
+     */
     public static void enterEmail(String email, String logStep){
         KeywordUtil.waitForVisible(ContactObject.emailField);
         if(email.contains("@") && email.contains(".")) {
@@ -79,6 +84,11 @@ public class ContactUtil {
         KeywordUtil.click(ContactObject.saveButton,logStep);
     }
 
+    /**
+     * click Contact button.
+     *
+     * @param logStep the log
+     */
     public static void clickContactButton(String logStep) throws InterruptedException {
         KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(ContactObject.contactButton);
@@ -87,6 +97,11 @@ public class ContactUtil {
         executor.executeScript("arguments[0].click();", element);
     }
 
+    /**
+     * Go to backToAccount
+     *
+     * @param logStep the log
+     */
     public static void backToAccount(String logStep) throws InterruptedException {
         try {
             KeywordUtil.delay(5000);
@@ -100,11 +115,20 @@ public class ContactUtil {
             executor.executeScript("arguments[0].click();", element);
         }
     }
-    public static void setSalutation(String salutation, String logStep){
+
+    /**
+     * Go to setSalutation
+     *
+     * @param salutation the salutation
+     * @param logStep the log
+     */
+    public static void setSalutation(String salutation, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(ContactObject.salutationButton);
         KeywordUtil.click(ContactObject.salutationButton,logStep);
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+salutation+"')]";
+        KeywordUtil.delay(2000);
+        System.out.println(xpath);
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
         }catch (Exception e){}
@@ -116,14 +140,64 @@ public class ContactUtil {
         }
     }
 
+    /**
+     * Create contact
+     *
+     * @param salutation the salutation
+     * @param lastname the lastname
+     * @param email the email
+     * @param phoneNumber the phoneNumber
+     */
     public static void createContact(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
         clickContactButton("Navigated to Contacts");
-        NewButtonContact("New contact button clicked");
+        newButtonContact("New contact button clicked");
         setSalutation(salutation,salutation+"Set Salutation");
         enterLastContactName(lastname,lastname+" lastname set");
         enterEmail(email,email+" email entered");
         enterPhoneContact(phoneNumber,phoneNumber+" phone number entered");
         clickSaveButton("save button clicked");
-        backToAccount("Navigated back to account");
     }
+
+    /**
+     * click Contact button for service support.
+     *
+     * @param logStep the log
+     */
+    public static void clickContactTab_cnt(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(ContactObject.contactButton);
+        WebElement element = KeywordUtil.getDriver().findElement(ContactObject.contactButton);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+    /**
+     * click new button for creating new contact for service support.
+     *
+     * @param logStep the log
+     */
+    public static void newButtonContact_ss(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.newContactButton_ss);
+        KeywordUtil.click(ServiceSupportObject.newContactButton_ss,logStep);
+    }
+
+    /**
+     * Create contact for service support
+     *
+     * @param salutation the salutation
+     * @param lastname the lastname
+     * @param email the email
+     * @param phoneNumber the phoneNumber
+     */
+    public static void createContactforServiceSupport(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
+        clickContactTab_cnt("Navigated to contact");
+        newButtonContact_ss("New contact button clicked");
+        setSalutation(salutation,salutation+"Set Salutation");
+        enterLastContactName(lastname,lastname+" lastname set");
+        enterEmail(email,email+" email entered");
+        enterPhoneContact(phoneNumber,phoneNumber+" phone number entered");
+        clickSaveButton("save button clicked");
+    }
+
 }
