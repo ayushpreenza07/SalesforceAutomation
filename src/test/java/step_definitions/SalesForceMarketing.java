@@ -35,34 +35,25 @@ public class SalesForceMarketing {
 
     }
 
-    @Given("User navigate to the salesforce application")
-    public void user_navigate_to_application() {
-        KeywordUtil.navigateToUrl(dataMap.get("URL"));
-    }
-
-    @When("User login into the application")
-    public void login_into_application() {
-        LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"), dataMap.get("Password"));
-    }
 
     @And("User clicks on the App launcher button")
-    public void user_clicks_on_app_launcher() {
+    public void userClicksOnAppLauncher() {
         AccountUtil.clickSlideShowButton("User clicked on the App launcher");
 
     }
 
     @And("User selects the {string}")
-    public void select_option(String option) {
+    public void selectOption(String option) {
         CampaignUtil.selectOption(option);
     }
 
     @And("User clicks on Campaigns Tab")
-    public void clicks_Campaigns() throws InterruptedException {
+    public void clicksCampaigns() throws InterruptedException {
         CampaignUtil.clickCampaignTab("click on the campaign tab");
     }
 
     @Then("User create new Campaign")
-    public void create_New_Campaign() {
+    public void createNewCampaign() {
         try {
             CampaignUtil.createCampaign(dataMap.get("CampaignName"));
             CampaignUtil.verificationMessage();
@@ -74,7 +65,7 @@ public class SalesForceMarketing {
     }
 
     @And("User selects the parent Campaign")
-    public void Select_Parent_Campaign() throws InterruptedException {
+    public void SelectParentCampaign() throws InterruptedException {
         CampaignUtil.addParentCampaign(dataMap.get("CampaignName"), dataMap.get("ParentCampaign"));
         KeywordUtil.takeScreenshotAndAttachInReport();
         CampaignUtil.verificationMessage();
@@ -83,47 +74,47 @@ public class SalesForceMarketing {
 
 
     @Then("User selects the edit button")
-    public void campaign_Edit() throws InterruptedException {
+    public void campaignEdit() throws InterruptedException {
         CampaignUtil.editCampaignName(dataMap.get("CampaignName"), dataMap.get("EditCampaignName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("User selects the Delete button")
-    public void campaign_Delete() throws InterruptedException {
+    public void campaignDelete() throws InterruptedException {
         CampaignUtil.deleteCampaign(dataMap.get("EditCampaignName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("User selects the parent comapaign")
-    public void select_ParentCampaign() throws InterruptedException {
+    public void selectParentCampaign() throws InterruptedException {
         System.out.println(dataMap.get("ParentCampaign"));
         CampaignUtil.addParentCampaign(dataMap.get("CampaignName"), dataMap.get("ParentCampaign"));
     }
 
     @And("User clicks on the Campaign")
-    public void click_Campaign() throws InterruptedException {
+    public void clickCampaign() throws InterruptedException {
         CampaignUtil.clickCampaignName(dataMap.get("CampaignName"));
         KeywordUtil.delay(6000);
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @Then("User create contact in Campaign")
-    public void create_Contact() throws InterruptedException {
+    public void createContact() throws InterruptedException {
         CampaignUtil.addContactInCampaign(dataMap.get("Salutation"), dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com", dataMap.get("Phone"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
     @And("User Add the leads in campaign")
-    public void click_addLeads() throws InterruptedException {
+    public void clickaddLeads() throws InterruptedException {
         CampaignUtil.addLeads(dataMap.get("LeadName"));
 
     }
 
     @Then("User clicks on the Contact tab")
-    public void click_contactTab() throws InterruptedException {
+    public void clickcontactTab() throws InterruptedException {
         CampaignUtil.clickContactTab();
 
     }
@@ -135,7 +126,7 @@ public class SalesForceMarketing {
     }
 
     @Then("User edit the contact")
-    public void edit_Contact() throws InterruptedException {
+    public void editContact() throws InterruptedException {
         CampaignUtil.editContact(KeywordUtil.generateRandomString(4) + "@gmail.com",dataMap.get("ContactLastName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
