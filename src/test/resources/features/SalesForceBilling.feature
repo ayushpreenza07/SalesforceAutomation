@@ -4,8 +4,8 @@ Feature: salesforce demo
   Scenario Outline: salesforce demo
     Given Read the test data  "<TestData>" from Excel
 
-    When navigate to Salesforce as "Billing Admin"
-    And login to Salesforce with "Billing Admin" credentials
+    When Navigate to Salesforce as "Billing Admin"
+    And Login to Salesforce with "Billing Admin" credentials
     And Click on Okay
     And go to salesforce cpq
     And go to products tab
@@ -25,7 +25,7 @@ Feature: salesforce demo
     When Navigate to Salesforce as "BillingAnother Admin"
     And Login to Salesforce with "BillingAnother Admin" credentials
     And Click on Okay
-    And user clicks on the App launcher button
+    And User clicks on the App launcher button
     And Click on view all
     And Click on salesforce Billing
     And Create customer account

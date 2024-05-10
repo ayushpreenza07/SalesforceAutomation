@@ -2,6 +2,7 @@ package pageobjects.SalesforceObjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class CampaignObject {
 
@@ -162,6 +163,12 @@ public class CampaignObject {
     public static By convertButton = By.xpath("//button[text()='Convert']");
 
     public static By yourLeadHasBeenConvertedDialogHeader = By.xpath("//h2[text()='Your lead has been converted']");
+
+    public static By editQuoteButton=By.xpath("//a[@title=\"Edit\"]");
+
+
+    @FindBy(xpath = "//div[@class=\"windowViewMode-normal oneContent active lafPageHost\"]//iframe")
+    public static WebElement activeIframe;
 
 
     public static By selectStatusInCase(String status){

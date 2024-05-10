@@ -7,52 +7,55 @@ Feature: Salesforce Marketing CRM
     Given Read the testdata "<TestData>" and "<SheetName>" from excel file
     When Navigate to Salesforce as "Forecast Admin"
     And Login to Salesforce with "Forecast Admin" credentials
-    And user clicks on the App launcher button
-    And user selects the "Marketing CRM Classic"
-   And user clicks on Campaigns Tab
-    Then user create new Campaign
-    And user clicks on Campaigns Tab
-    Then user selects the edit button
-    Then user selects the Delete button
-    Then user create new Campaign
-    And user clicks on Campaigns Tab
-    Then user selects the parent Campaign
-    And user clicks on the Campaign
-    Then user create contact in Campaign
-    Then user Add the leads in campaign
-    And user clicks on the Contact tab
-    Then user selects the filter
-    Then user edit the contact
-    Then user Delete the contact
-    Then user remove the filter
-    Then user create new contact in Contact
-    Then user create new opportunity in Contact
-    Then user is able to see the opportunity
-    Then user added Contact to campaign
-    Then user is able to see the campaign History
-   Then user added case in the contact
-   Then user able to see the case history
-   And user click on the lead Tab
-   Then user create new lead
-   And user click on the lead Tab
-   Then user selects the filter in Lead
-   Then user edit the lead
-   Then user delete the lead
-   Then user remove the filter
-    And user clicks on Campaigns Tab
-    And Add Lead To Campaign
-    And Change Lead Status
-    When Click on Opportunity Tab in converted popUp
+    And User clicks on the App launcher button
+    And User selects the "Marketing CRM Classic"
+   And User clicks on Campaigns Tab
+    Then User create new Campaign
+    And User clicks on Campaigns Tab
+    Then User selects the edit button
+    Then User selects the Delete button
+    Then User create new Campaign
+    And User clicks on Campaigns Tab
+    Then User selects the parent Campaign
+    And User clicks on the Campaign
+   Then User create contact in Campaign
+   Then User Add the leads in campaign
+   And User clicks on the Contact tab
+   Then User selects the filter
+   Then User edit the contact
+   Then User delete the contact
+   Then User remove the filter
+   Then User create new contact in Contact
+   Then User create new opportunity in Contact
+   Then User is able to see the opportunity
+   Then User added Contact to campaign
+   Then User is able to see the campaign History
+   Then User added case in the contact
+   Then User able to see the case history
+   And User click on the lead Tab
+   Then User create new lead
+   And User click on the lead Tab
+   Then User selects the filter in Lead
+   Then User edit the lead
+   Then User delete the lead
+   Then User remove the filter
+   And User clicks on Campaigns Tab
+   And Add Lead To Campaign
+   And Change Lead Status
+   When Click on Opportunity Tab in converted popUp
     Then Verify the Opportunity AccountName
-    And user clicks on Opportunities Tab
-    Then user create new Opportunity
-    And user edit new Opportunity
-    And user delete new Opportunity
+   And User clicks on Opportunities Tab
+    Then User create new Opportunity
+    And User edit new Opportunity
+    And User delete new Opportunity
     And Change Opportunity Status
-    And user create Quotas an add Product
+    And User create Quotas an add Product
+    Then Generate document
+    Then Verify if product added
+    And verify if document generated
     And Create new contract
     Then Change Opportunity Status to Close Won after Quote Approve
-    Then create an order and activate
+    And  Create an order
 
     Examples:
       | TestData  | SheetName  |

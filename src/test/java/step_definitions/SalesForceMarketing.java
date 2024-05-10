@@ -35,45 +35,45 @@ public class SalesForceMarketing {
 
     }
 
-    @Given("user navigate to the salesforce application")
+    @Given("User navigate to the salesforce application")
     public void user_navigate_to_application() {
         KeywordUtil.navigateToUrl(dataMap.get("URL"));
     }
 
-    @When("user login into the application")
+    @When("User login into the application")
     public void login_into_application() {
         LoginSalesforceUtil.loginToSalesforce(dataMap.get("Username"), dataMap.get("Password"));
     }
 
-    @And("user clicks on the App launcher button")
+    @And("User clicks on the App launcher button")
     public void user_clicks_on_app_launcher() {
-        AccountUtil.clickSlideShowButton("user clicked on the App launcher");
+        AccountUtil.clickSlideShowButton("User clicked on the App launcher");
 
     }
 
-    @And("user selects the {string}")
+    @And("User selects the {string}")
     public void select_option(String option) {
         CampaignUtil.selectOption(option);
     }
 
-    @And("user clicks on Campaigns Tab")
+    @And("User clicks on Campaigns Tab")
     public void clicks_Campaigns() throws InterruptedException {
         CampaignUtil.clickCampaignTab("click on the campaign tab");
     }
 
-    @Then("user create new Campaign")
+    @Then("User create new Campaign")
     public void create_New_Campaign() {
         try {
             CampaignUtil.createCampaign(dataMap.get("CampaignName"));
             CampaignUtil.verificationMessage();
             KeywordUtil.takeScreenshotAndAttachInReport();
         } catch (Exception e) {
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("user has got the message  : " + e.getMessage()));
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("User has got the message  : " + e.getMessage()));
         }
 
     }
 
-    @And("user selects the parent Campaign")
+    @And("User selects the parent Campaign")
     public void Select_Parent_Campaign() throws InterruptedException {
         CampaignUtil.addParentCampaign(dataMap.get("CampaignName"), dataMap.get("ParentCampaign"));
         KeywordUtil.takeScreenshotAndAttachInReport();
@@ -82,84 +82,84 @@ public class SalesForceMarketing {
     }
 
 
-    @Then("user selects the edit button")
+    @Then("User selects the edit button")
     public void campaign_Edit() throws InterruptedException {
         CampaignUtil.editCampaignName(dataMap.get("CampaignName"), dataMap.get("EditCampaignName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user selects the Delete button")
+    @Then("User selects the Delete button")
     public void campaign_Delete() throws InterruptedException {
         CampaignUtil.deleteCampaign(dataMap.get("EditCampaignName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user selects the parent comapaign")
+    @Then("User selects the parent comapaign")
     public void select_ParentCampaign() throws InterruptedException {
         System.out.println(dataMap.get("ParentCampaign"));
         CampaignUtil.addParentCampaign(dataMap.get("CampaignName"), dataMap.get("ParentCampaign"));
     }
 
-    @And("user clicks on the Campaign")
+    @And("User clicks on the Campaign")
     public void click_Campaign() throws InterruptedException {
         CampaignUtil.clickCampaignName(dataMap.get("CampaignName"));
         KeywordUtil.delay(6000);
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user create contact in Campaign")
+    @Then("User create contact in Campaign")
     public void create_Contact() throws InterruptedException {
         CampaignUtil.addContactInCampaign(dataMap.get("Salutation"), dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com", dataMap.get("Phone"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @And("user Add the leads in campaign")
+    @And("User Add the leads in campaign")
     public void click_addLeads() throws InterruptedException {
         CampaignUtil.addLeads(dataMap.get("LeadName"));
 
     }
 
-    @Then("user clicks on the Contact tab")
+    @Then("User clicks on the Contact tab")
     public void click_contactTab() throws InterruptedException {
         CampaignUtil.clickContactTab();
 
     }
 
-    @Then("user selects the filter")
+    @Then("User selects the filter")
     public void selectFilter() throws InterruptedException {
         CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"),dataMap.get("ContactLastName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user edit the contact")
+    @Then("User edit the contact")
     public void edit_Contact() throws InterruptedException {
         CampaignUtil.editContact(KeywordUtil.generateRandomString(4) + "@gmail.com",dataMap.get("ContactLastName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user Delete the contact")
+    @Then("User delete the contact")
     public void deleteContact() throws InterruptedException {
        CampaignUtil.deleteContact(dataMap.get("ContactLastName"));
        KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user remove the filter")
+    @Then("User remove the filter")
     public void removeFilter() throws InterruptedException {
          CampaignUtil.removeFilter();
     }
 
-    @Then("user create new contact in Contact")
+    @Then("User create new contact in Contact")
     public void createNewContact() throws InterruptedException {
         CampaignUtil.createContactInContactTab( dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com");
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user create new opportunity in Contact")
+    @Then("User create new opportunity in Contact")
     public void createOpportunityInContact() throws InterruptedException {
          CampaignUtil.createOpportunityInContact(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
         CampaignUtil.verificationMessage();
@@ -167,7 +167,7 @@ public class SalesForceMarketing {
 
     }
 
-    @Then("user is able to see the opportunity")
+    @Then("User is able to see the opportunity")
     public void seeOpportunityInContact() throws InterruptedException {
         CampaignUtil.seeOpportunityInContact();
         KeywordUtil.takeScreenshotAndAttachInReport();
@@ -175,27 +175,27 @@ public class SalesForceMarketing {
 
     }
 
-    @Then("user added Contact to campaign")
+    @Then("User added Contact to campaign")
     public  void addContactToCampaign(){
         CampaignUtil.addContactToCampaign(dataMap.get("CampaignName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user is able to see the campaign History")
+    @Then("User is able to see the campaign History")
     public  void seeCampaignHistory(){
         CampaignUtil.seeCampaignHistory();
         KeywordUtil.takeScreenshotAndAttachInReport();
         GlobalUtil.getDriver().navigate().back();
     }
 
-    @Then("user added case in the contact")
+    @Then("User added case in the contact")
     public void addCase() throws InterruptedException {
         CampaignUtil.addCaseInContact();
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user able to see the case history")
+    @Then("User able to see the case history")
     public void seeCaseHistory(){
         CampaignUtil.seeCaseHistory();
         KeywordUtil.takeScreenshotAndAttachInReport();
@@ -204,55 +204,55 @@ public class SalesForceMarketing {
 
     }
 
-    @Then("user click on the lead Tab")
+    @Then("User click on the lead Tab")
     public void clickOnLeadTab(){
      CampaignUtil.clickLeadsTab();
     }
 
-    @Then("user create new lead")
+    @Then("User create new lead")
     public static void createLead() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
         CampaignUtil.createLead(dataMap.get("LastName"),dataMap.get("CityName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user selects the filter in Lead")
+    @Then("User selects the filter in Lead")
     public void searchLeadUsingFilter() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData2");
         CampaignUtil.selectFilterInContacts(dataMap.get("FieldValue"),dataMap.get("LastName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user edit the lead")
+    @Then("User edit the lead")
     public void editLead() throws InterruptedException {
         CampaignUtil.editLead(dataMap.get("LastName"),dataMap.get("LastName"),dataMap.get("CityName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @Then("user delete the lead")
+    @Then("User delete the lead")
     public void deleteLead() throws InterruptedException {
         CampaignUtil.deleteLead(dataMap.get("LastName"));
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
 
-    @And("user clicks on Opportunities Tab")
+    @And("User clicks on Opportunities Tab")
     public void userClicksOnOpportunitiesTab() throws InterruptedException {
         OppurtunitiesUtil.clickOpportunityTab("clicks on Opportunities Tab");
     }
 
-    @Then("user create new Opportunity")
+    @Then("User create new Opportunity")
     public void userCreateNewOpportunity() throws InterruptedException {
-        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName")+KeywordUtil.generateRandomString(4),dataMap.get("Amount"), dataMap.get("Stage"));
     }
 
-    @And("user edit new Opportunity")
+    @And("User edit new Opportunity")
     public void userEditNewOpportunity() throws InterruptedException {
         OppurtunitiesUtil.editOpportunityFromOpportunityTab("DemoOpportunityUpdated","3004");
 
     }
 
-    @And("user delete new Opportunity")
+    @And("User delete new Opportunity")
     public void userDeleteNewOpportunity() throws InterruptedException {
         OppurtunitiesUtil.deleteOpportunityFromOpportunityTab();
 
@@ -268,7 +268,7 @@ public class SalesForceMarketing {
         KeywordUtil.takeScreenshotAndAttachInReport();
     }
 
-    @And("user create Quotas an add Product")
+    @And("User create Quotas an add Product")
     public void userCreateQuotas() throws Exception {
         KeywordUtil.waitForVisible(QuoteObject.quotesBtn);
         KeywordUtil.click(QuoteObject.quotesBtn,"Click on quotas");
@@ -295,8 +295,10 @@ public class SalesForceMarketing {
         }
     }
 
-    @And("user create Quotas an add Product in marketing")
-    public void createQuoteAndAddproduct(){
-
+    @And("Create an order")
+    public void createOrder(){
+        CampaignUtil.createOrder();
     }
+
+
 }

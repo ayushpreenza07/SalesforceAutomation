@@ -241,7 +241,7 @@ public class SalesForceBillingUtil {
         KeywordUtil.delay(5000);
         KeywordUtil.click(BillingObject.accountNameLink, "Clicked on name link");
         KeywordUtil.delay(3000);
-        KeywordUtil.click(BillingObject.NewBtnContactsOfAccount, "Clicked on New button of account name contacts");
+        KeywordUtil.click(BillingObject.newBtnContactsOfAccount, "Clicked on New button of account name contacts");
         ContactUtil.setSalutation(salutation, salutation + "Set Salutation");
         ContactUtil.enterLastContactName(lastname, lastname + " lastname set");
         ContactUtil.enterEmail(email, email + " email entered");
