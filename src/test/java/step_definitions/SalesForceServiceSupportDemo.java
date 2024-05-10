@@ -10,6 +10,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.codehaus.groovy.ast.stmt.CaseStatement;
 import org.testng.Assert;
+import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.GlobalUtil;
@@ -138,6 +139,8 @@ public class SalesForceServiceSupportDemo {
         QuoteUtil.goToQuoteAndChangeStatus_Approved_ss((dataMap.get("ApprovedStatus")),"Quote status is changed to Approved");
         QuoteUtil.goToQuoteAndCreateOrder_ss("Order generated and activated");
         QuoteUtil.activateOrder_ss();
+        QuoteUtil.changeStatusAsDraft_ss((dataMap.get("changeStatusAsDraft")),"change order status as Draft ");
+
     }
 
     @Then("user added contact to campaign in service support")

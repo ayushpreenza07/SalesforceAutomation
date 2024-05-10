@@ -165,7 +165,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * @param stage the stage
      * @param logStep the log
      */
-    public static void setStage(String stage, String logStep){
+    public static void setStage(String stage, String logStep) throws InterruptedException {
         boolean flag = false;
         KeywordUtil.waitForVisible(OppurtunitiesObject.Stage);
         KeywordUtil.click(OppurtunitiesObject.Stage,logStep);
