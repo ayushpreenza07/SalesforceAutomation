@@ -2,12 +2,12 @@ package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
 import org.bouncycastle.operator.KeyWrapper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pageobjects.SalesforceObjects.CampaignObject;
 import pageobjects.SalesforceObjects.QuoteObject;
 import pageobjects.SalesforceObjects.ServiceSupportObject;
 import step_definitions.RunCukesTest;
@@ -16,6 +16,7 @@ import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class QuoteUtil {
 
@@ -325,7 +326,8 @@ public class QuoteUtil {
             KeywordUtil.waitForVisible(QuoteObject.saveDocument);
             KeywordUtil.click(QuoteObject.saveDocument,logStep);
         }catch(Exception e){
-            KeywordUtil.switchToIFrame(3,"Edit Quote IFrame");
+            WebElement iframe=CampaignObject.activeIframe;
+            GlobalUtil.getDriver().switchTo().frame(iframe);
             KeywordUtil.delay(5000);
 
             WebElement saveDocument = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbDocGenPreview > div.sbPageTitle > div > div.sbPageTitleRight > div > button:nth-child(4)\")");
@@ -347,19 +349,16 @@ public class QuoteUtil {
      */
     public static void enterDiscount(String discount,String product,String logStep) throws InterruptedException {
         KeywordUtil.delay(10000);
-
         //switching to iframe to click on JS path buttons
         KeywordUtil.switchToIFrame(3,"Edit Quote IFrame");
         KeywordUtil.delay(5000);
-
         // click on edit lines button using JS path
-        WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#pricebookDialog').shadowRoot.querySelector('#dialog > paper-button > sb-i18n')");
-        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+      WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#pricebookDialog').shadowRoot.querySelector('#dialog > paper-button > sb-i18n')");
+       JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", saveOnEditLines);
         KeywordUtil.delay(2000);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>Clicked on Edit Line Save Button</font> page"));
-
         //add discount using JS path
         WebElement addDiscount = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#quoteInformation > div > sb-field-set-table').shadowRoot.querySelector('#firstColumn').shadowRoot.querySelector('#g > div > sb-field-set-table-item:nth-child(2)').shadowRoot.querySelector('#field').shadowRoot.querySelector('#f > sb-input').shadowRoot.querySelector('#myinput')");
         JavascriptExecutor js = (JavascriptExecutor)KeywordUtil.getDriver();
@@ -367,7 +366,6 @@ public class QuoteUtil {
         KeywordUtil.delay(2000);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>Adding Discount</font>"));
-
         //click on quick save button using JS path
         WebElement quickSave = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(9)').shadowRoot.querySelector('#mainButton');");
         executor.executeScript("arguments[0].click();", quickSave);
@@ -380,7 +378,6 @@ public class QuoteUtil {
         KeywordUtil.delay(2000);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>Adding product</font>"));
-
         //click on search and enter your product using JS path
         WebElement searchProduct = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#headersearch').shadowRoot.querySelector('#typeahead').shadowRoot.querySelector('#itemLabel')");
         executor.executeScript("arguments[0].value='"+product+"';", searchProduct);
@@ -391,7 +388,6 @@ public class QuoteUtil {
         KeywordUtil.delay(5000);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>click on search and enter your product</font> "));
-
         //click on search icon button using JS path
         WebElement searchIcon = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").shadowRoot.querySelector(\"#content > sb-product-lookup\").shadowRoot.querySelector(\"#headersearch\").shadowRoot.querySelector(\"#search\")");
         executor.executeScript("arguments[0].click();", searchIcon);
@@ -404,20 +400,17 @@ public class QuoteUtil {
         KeywordUtil.delay(5000);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>check first checkbox after searching</font> page"));
-
         //select product using JS path
         WebElement select = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-product-lookup').shadowRoot.querySelector('#plSelect')");
         executor.executeScript("arguments[0].click();",select);
         KeywordUtil.delay(8000);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>select product</font> page"));
-
         //clicking save button using JS path
         WebElement save = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(13)').shadowRoot.querySelector('#mainButton')");
         executor.executeScript("arguments[0].click();",save);
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>clicked save button</font> page"));
-
         //switching back to parent frame
         KeywordUtil.getDriver().switchTo().parentFrame();
     }
@@ -582,7 +575,71 @@ public class QuoteUtil {
         selectAccount(name,name+" entered account name");
         selectType(type,"selected type");
         clickSaveButton("clicked save button");
-        addDiscountProduct();
+       addDiscountProductInQuote("5","2FAUSBKEY");
+    }
+
+
+
+    public static void addDiscountProductInQuote(String discount,String product){
+        try {
+
+            QuoteUtil.clickEditLines("click on the edit lines");
+            JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+            WebElement iframe= CampaignObject.activeIframe;
+            GlobalUtil.getDriver().switchTo().frame(iframe);
+            System.out.println("Successfully switched to the iframe.");
+            KeywordUtil.delay(10000);
+            // click on edit lines button using JS path
+            WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').querySelector('#content > sb-line-editor').querySelector('#pricebookDialog').querySelector(\"#footer>paper-button\")");
+            executor.executeScript("arguments[0].click();", saveOnEditLines);
+            KeywordUtil.delay(2000);
+            RunCukesTest.logger.log(LogStatus.PASS,
+                    HTMLReportUtil.passStringGreenColor(" <font color='green'>Clicked on Edit Line Save Button</font> page"));
+
+            //click on add product button using JS path
+            WebElement addProducts = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").querySelector(\"#content >sb-line-editor\").querySelector('#actions > sb-custom-action:nth-child(1)').querySelector('#mainButton')");
+            executor.executeScript("arguments[0].click();", addProducts);
+            KeywordUtil.delay(2000);
+            RunCukesTest.logger.log(LogStatus.PASS,
+                    HTMLReportUtil.passStringGreenColor(" <font color='green'>Adding product</font>"));
+            //click on search and enter your product using JS path
+            WebElement searchProduct = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').querySelector('#content > sb-product-lookup').querySelector('#headersearch').querySelector(\"#typeahead\").querySelector('#itemLabel')");
+            executor.executeScript("arguments[0].value='"+product+"';", searchProduct);
+            executor.executeScript("arguments[0].click();", searchProduct);
+            KeywordUtil.delay(2000);
+            Actions action = new Actions(KeywordUtil.getDriver());
+            action.sendKeys(Keys.ENTER).build().perform();
+            KeywordUtil.delay(5000);
+            RunCukesTest.logger.log(LogStatus.PASS,
+                    HTMLReportUtil.passStringGreenColor(" <font color='green'>click on search and enter your product</font> "));
+            //click on search icon button using JS path
+            WebElement searchIcon = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").querySelector(\"#content > sb-product-lookup\").querySelector(\"#headersearch\").querySelector(\"#search\")");
+            executor.executeScript("arguments[0].click();", searchIcon);
+            KeywordUtil.delay(5000);
+            RunCukesTest.logger.log(LogStatus.PASS,
+                    HTMLReportUtil.passStringGreenColor(" <font color='green'>click on search icon button</font> page"));
+            //check first checkbox after searching using JS path
+            WebElement checkBox = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').querySelector('#content > sb-product-lookup').querySelector('#lookupLayout').querySelector('#tableRow').querySelector('#selection').querySelector('#g > div > sb-table-cell-select').querySelector('#checkbox').querySelector('#checkboxContainer')");
+            executor.executeScript("arguments[0].click();", checkBox);
+            KeywordUtil.delay(5000);
+            RunCukesTest.logger.log(LogStatus.PASS,
+                    HTMLReportUtil.passStringGreenColor(" <font color='green'>check first checkbox after searching</font> page"));
+            //select product using JS path
+            WebElement select = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').querySelector('#content > sb-product-lookup').querySelector('#plSelect')");
+            executor.executeScript("arguments[0].click();",select);
+            KeywordUtil.delay(8000);
+            RunCukesTest.logger.log(LogStatus.PASS,
+                    HTMLReportUtil.passStringGreenColor(" <font color='green'>select product</font> page"));
+            //clicking save button using JS path
+            WebElement save = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').querySelector('#content > sb-line-editor').querySelector('#actions > sb-custom-action:nth-child(13)').querySelector('#mainButton')");
+            executor.executeScript("arguments[0].click();",save);
+            RunCukesTest.logger.log(LogStatus.PASS,
+                    HTMLReportUtil.passStringGreenColor(" <font color='green'>clicked save button</font> page"));
+            //switching back to parent frame
+            KeywordUtil.getDriver().switchTo().parentFrame();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     /**
      * Selecting Opportunity and type and click on save button

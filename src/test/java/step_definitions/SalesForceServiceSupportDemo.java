@@ -36,7 +36,7 @@ public class SalesForceServiceSupportDemo {
 
     @When("^edit account details")
     public void edit_account_details() throws Exception{
-        dataMap= SalesForceCPQ.dataMap;
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         EditandDeleteUtil.editAccountDetails(dataMap.get("Phone"));
     }
 

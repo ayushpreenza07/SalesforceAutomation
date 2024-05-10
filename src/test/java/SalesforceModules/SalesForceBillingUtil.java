@@ -171,4 +171,172 @@ public class SalesForceBillingUtil {
         clickSaveButton("List price saved");
     }
 
+
+    /**
+     * Click on view all link
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void viewAll(String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(BillingObject.viewAll);
+        KeywordUtil.click(BillingObject.viewAll, logStep);
+    }
+    /**
+     * Clicking on salesforce billing option
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void salesforceBilling(String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(BillingObject.salesforceBilling);
+        KeywordUtil.click(BillingObject.salesforceBilling, logStep);
+    }
+    /**
+     * select the salutation value from dropdown
+     * @param salutation
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void setSalutationForNewContact(String salutation, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(BillingObject.salutationOfNewContactOnExistAccount);
+        KeywordUtil.click(BillingObject.salutationOfNewContactOnExistAccount, logStep);
+        String xpath = "//li/a[contains(@title,'" + salutation + "')]";
+        KeywordUtil.delay(2000);
+        System.out.println(xpath);
+        try {
+            flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
+        } catch (Exception e) {
+        }
+        if (!flag) {
+            Assert.fail("No such salutation is present");
+        } else {
+            KeywordUtil.click(By.xpath(xpath), "salutation selected");
+        }
+    }
+    /**
+     * Creating new customer account
+     * @param name
+     * @param phone
+     * @throws InterruptedException
+     */
+    public static void createCustomerAccount(String name, String phone) throws InterruptedException {
+        KeywordUtil.waitForVisible(AccountObject.accountsTab);
+        KeywordUtil.delay(3000);
+        AccountUtil.clickAccountsTab("Navigated to accounts");
+        AccountUtil.clickNewButton("Clicked new button for accounts");
+        AccountUtil.enterAccountName(name, "Entered account name");
+        AccountUtil.enterPhoneNumber(phone, "Entered phone number");
+        AccountUtil.clickSaveButton("clicked on save button");
+    }
+    /**
+     * creating contact from existing link account
+     * @param salutation
+     * @param lastname
+     * @param email
+     * @param phoneNumber
+     * @throws InterruptedException
+     */
+    public static void createContactLinkExisting(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
+        AccountUtil.clickAccountsTab("Navigated to accounts");
+        KeywordUtil.delay(5000);
+        KeywordUtil.click(BillingObject.accountNameLink, "Clicked on name link");
+        KeywordUtil.delay(3000);
+        KeywordUtil.click(BillingObject.newBtnContactsOfAccount, "Clicked on New button of account name contacts");
+        ContactUtil.setSalutation(salutation, salutation + "Set Salutation");
+        ContactUtil.enterLastContactName(lastname, lastname + " lastname set");
+        ContactUtil.enterEmail(email, email + " email entered");
+        ContactUtil.enterPhoneContact(phoneNumber, phoneNumber + " phone number entered");
+        ContactUtil.clickSaveButton("save button clicked");
+        KeywordUtil.delay(3000);
+    }
+    /***
+     * Entering last name of contact
+     * @param lastname
+     * @param logStep
+     */
+    public static void enterLastNameOfContact(String lastname, String logStep) {
+        KeywordUtil.waitForVisible(BillingObject.lastNameOfNewContactOnExistAccount);
+        KeywordUtil.inputText(BillingObject.lastNameOfNewContactOnExistAccount, lastname, logStep);
+    }
+    /**
+     * Entering phone number for contact
+     * @param phone
+     * @param logStep
+     */
+    public static void enterPhoneNumberOfContact(String phone, String logStep) {
+        KeywordUtil.waitForVisible(BillingObject.phoneNumberOfNewContactOnExistAccount);
+        KeywordUtil.inputText(BillingObject.phoneNumberOfNewContactOnExistAccount, phone, logStep);
+    }
+    /**
+     * entering email id for contact
+     * @param email
+     * @param logStep
+     */
+    public static void enterEmailOfContact(String email, String logStep){
+        KeywordUtil.waitForVisible(BillingObject.emailOfNewContactOnExistAccount);
+        if(email.contains("@") && email.contains(".")) {
+            KeywordUtil.inputText(BillingObject.emailOfNewContactOnExistAccount, email, logStep);
+        }else{
+            Assert.fail("invalid email format");
+        }
+    }
+    /**
+     * creating another contact from link account existing
+     * @param salutation
+     * @param lastname
+     * @param email
+     * @param phoneNumber
+     * @throws InterruptedException
+     */
+    public static void createAnotherContactFromLinkExisting(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
+        KeywordUtil.waitForVisible(BillingObject.newContactBtnOnExistAccount);
+        KeywordUtil.click(BillingObject.newContactBtnOnExistAccount, "Clicked on New Contact button");
+        KeywordUtil.delay(3000);
+        setSalutationForNewContact(salutation,salutation+"Set Salutation");
+        enterLastNameOfContact(lastname,lastname+" lastname entered");
+        enterEmailOfContact(email,email+" email entered");
+        enterPhoneNumberOfContact(phoneNumber,phoneNumber+" phone number entered");
+        KeywordUtil.click(BillingObject.saveButtonOfNewContact,"Clicked on save button");
+    }
+    /**
+     * Clicking on New button
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void newButtonOfContactsTab(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(BillingObject.newBtnOfContactsTab);
+        KeywordUtil.click(BillingObject.newBtnOfContactsTab,logStep);
+    }
+    /**
+     * Creating New contacts By creating new Account
+     * @param salutation
+     * @param name
+     * @param accountName_ss
+     * @param phoneNumber_ss
+     * @throws InterruptedException
+     */
+    public static void createNewContactOfContacts(String salutation, String name, String accountName_ss, String phoneNumber_ss) throws InterruptedException {
+        ContactUtil.clickContactButton("Click on Contact Tab");
+        KeywordUtil.delay(3000);
+        newButtonOfContactsTab("Clicked on New button after clicked on Contacts tab");
+        KeywordUtil.delay(3000);
+        ContactUtil.setSalutation(salutation, salutation + "Set Salutation");
+        ContactUtil.enterLastContactName(name, "Entered last name");
+        KeywordUtil.scrollingToElementofAPage(ServiceSupportObject.searchAccountsForAccountName,"scrolling down for Accounts Search");
+        KeywordUtil.waitForVisible(ServiceSupportObject.searchAccountsForAccountName);
+        KeywordUtil.click(ServiceSupportObject.searchAccountsForAccountName, "Click on search accounts");
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.newAccountOption);
+        KeywordUtil.click(ServiceSupportObject.newAccountOption, "Click on New Account option");
+        KeywordUtil.delay(3000);
+        CasesUtil.enterAccountNameForServiceSupport(accountName_ss, "Entered Account Name");
+        CasesUtil.enterPhoneNumberForServiceSupport(phoneNumber_ss, "Entered Phone Number");
+        CasesUtil.saveBtnOfNewAccount_ss("clicked save button");
+        ContactUtil.clickSaveButton("Clicked on Save button");
+    }
+
 }
+
+
+

@@ -1,7 +1,9 @@
 package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en_scouse.An;
 import net.bytebuddy.description.modifier.Ownership;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.xmlbeans.impl.xb.xsdschema.All;
@@ -1321,6 +1323,34 @@ public class CampaignUtil {
         executor.executeScript("arguments[0].click();", element);
 
     }
+
+
+  public static void createQuote(String opportunityName, String name, String type){
+        try {
+            QuoteUtil.newButtonQuote("Clicked new button");
+            QuoteUtil.checkPrimary("primary checkbox marked");
+            QuoteUtil.selectOpportunity(opportunityName, opportunityName + " entered opportunities name");
+            QuoteUtil.selectAccount(name, name + " entered account name");
+            QuoteUtil.selectType(type, "selected type");
+            QuoteUtil.clickSaveButton("clicked save button");
+        }catch(Exception e){
+            e.getMessage();
+        }
+  }
+
+  public static void clickOnEditQuote(){
+        try {
+            KeywordUtil.scrollingToElementofAPage(CampaignObject.editQuoteButton,"scroll to the edit quote button");
+            KeywordUtil.click(CampaignObject.editQuoteButton, "click on the edit quote button");
+
+        }catch (Exception e){
+
+        }
+  }
+
+  public static void createOrder(){
+      clickOnEditQuote();
+  }
 
 }
 

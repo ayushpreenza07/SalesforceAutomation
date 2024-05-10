@@ -167,10 +167,13 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void setStage(String stage, String logStep) throws InterruptedException {
         boolean flag = false;
+        String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+stage+"')]";
+
+        try{
+        KeywordUtil.scrollingToElementofAPage(OppurtunitiesObject.Stage,"scrolloing to the stage");
         KeywordUtil.waitForVisible(OppurtunitiesObject.Stage);
         KeywordUtil.click(OppurtunitiesObject.Stage,logStep);
-        String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+stage+"')]";
-        try{
+
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
         }catch (Exception e){}
 

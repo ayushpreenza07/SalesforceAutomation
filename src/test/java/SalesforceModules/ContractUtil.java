@@ -97,8 +97,8 @@ public class ContractUtil {
         String xpath = "//a[@title='"+opportunity+"']";
         System.out.println(xpath);
         try {
-            KeywordUtil.waitForVisible(KeywordUtil.getDriver().findElement(By.xpath(xpath)));
-            KeywordUtil.click(KeywordUtil.getDriver().findElement(By.xpath(xpath)), logStep);
+            KeywordUtil.waitForVisible(By.xpath("//li//a[@title='"+opportunity+"']"));
+            KeywordUtil.click(By.xpath("//li//a[@title='"+opportunity+"']"), logStep);
         }catch (Exception e){
             WebElement element = KeywordUtil.getDriver().findElement(By.xpath(xpath));
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
