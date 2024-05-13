@@ -30,8 +30,10 @@ Feature: salesforce demo
     And Click on salesforce Billing
     And Create customer account
     And Create contact link existing and New Contact
-    Then edit account details
-    Then delete account
+    Then Edit account details
+    Then Delete account
+    And Create new quote and add product in billing section
+    And Delete Quote in billing section
 
     Examples:
       | TestData |

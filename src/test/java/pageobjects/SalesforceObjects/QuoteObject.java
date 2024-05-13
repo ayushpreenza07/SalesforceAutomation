@@ -67,4 +67,13 @@ public class QuoteObject {
     public static  By clickReviewStatusDropDown=By.xpath("(//*[@data-value='In Review'])[1]");
 
     public static By statusApproved=By.xpath("(//*[@data-value='Approved'])[1]");
+
+    //Creating xpaths for billing section
+    public static By clickOnNew=By.xpath("//a[@title='New']");
+    public static By dropdownInQuotesTab=By.xpath("//span[@class='slds-assistive-text' and text()='Show more actions']");
+    public static By editLines_b=By.xpath("//a//span[@class='slds-truncate' and text()='Edit Lines']");
+    public static By dropdownToDelete=By.xpath("//span[@class='slds-assistive-text' and text()='Show Actions']");
+    public static By deleteButton=By.xpath("//a[@title='Delete']");
+    public static By deleteButtonClicked=By.xpath("//span[text()='Delete']");
+
 }
