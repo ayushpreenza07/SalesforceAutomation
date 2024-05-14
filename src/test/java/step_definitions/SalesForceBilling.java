@@ -1,9 +1,6 @@
 package step_definitions;
 
-import SalesforceModules.AccountUtil;
-import SalesforceModules.CampaignUtil;
-import SalesforceModules.LoginSalesforceUtil;
-import SalesforceModules.SalesForceBillingUtil;
+import SalesforceModules.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import utilities.ConfigReader;
@@ -74,6 +71,17 @@ public class SalesForceBilling {
         SalesForceBillingUtil.createContactLinkExisting(dataMap.get("Salutation"), dataMap.get("ContactLastName"), dataMap.get("ContactEmail"), dataMap.get("Phone"));
         SalesForceBillingUtil.createAnotherContactFromLinkExisting(dataMap.get("Salutation"), dataMap.get("ContactLastname1"), dataMap.get("ContactEmail1"), dataMap.get("ContactPhone1"));
         SalesForceBillingUtil.createNewContactOfContacts(dataMap.get("Salutation1"), dataMap.get("ContactLastName2"), dataMap.get("AccountName1"), dataMap.get("ContactPhone2"));
+    }
+
+    @When("^Create new quote and add product in billing section$")
+    public void create_new_quote_billing() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.createNewQuote_billing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
+    @And("^Delete Quote in billing section$")
+    public void delete_quote_billing() throws Exception{
+        QuoteUtil.deleteQuote_billing("Deleted the Quote in billing section");
     }
 }
 

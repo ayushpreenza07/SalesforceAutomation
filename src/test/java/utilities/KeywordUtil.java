@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.server.DriverFactory;
 import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
+import pageobjects.SalesforceObjects.QuoteObject;
 import step_definitions.RunCukesTest;
 
 import java.io.*;
@@ -311,6 +312,22 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     /**
+     * click JS useable method
+     *
+     * @param logStep the log
+     */
+    public static void clickJS_component(By locator, String logStep) throws InterruptedException {
+        KeywordUtil.delay(10000);
+        KeywordUtil.lastAction = "Double click: " + locator.toString();
+        LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
+        WebElement element = getDriver().findElement(locator);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", element);
+    }
+
+
+
+    /**
      * Wait for visible ignore stale element web element.
      *
      * @param locator the locator
@@ -580,6 +597,27 @@ public class KeywordUtil extends GlobalUtil {
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
 
             return elm.isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
+
+    /**
+     * Is web element displayed
+     *
+     * @param element the element
+     * @param logStep the log step
+     * @return boolean
+     */
+    public static boolean isElementDisplayed(String element, String logStep) {
+        try {
+            KeywordUtil.lastAction = "Check Element visible: " + element;
+            getDriver().findElement(By.xpath(element));
+            LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
+
+            return  getDriver().findElement(By.xpath(element)).isDisplayed();
         } catch (Exception e) {
             return false;
         }
@@ -1736,6 +1774,8 @@ class TestStepFailedException extends Exception {
             e.printStackTrace();
         }
     }
+
+
 
 
 }

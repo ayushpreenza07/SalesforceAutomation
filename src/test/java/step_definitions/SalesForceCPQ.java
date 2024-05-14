@@ -84,7 +84,6 @@ public class SalesForceCPQ {
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
         }
-
         KeywordUtil.navigateToUrl(baseUrl);
     }
 
