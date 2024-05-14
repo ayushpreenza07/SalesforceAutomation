@@ -21,6 +21,8 @@ import java.util.List;
 public class QuoteUtil {
 
     static HashMap<String, String> map = new HashMap<>();
+    static String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'TX')])[1]";
+
 
     /**
      * click on new button for creating new Quote.
@@ -1103,9 +1105,7 @@ public class QuoteUtil {
      */
     public static void clickQuoteButton_billing(String logStep) throws InterruptedException {
         KeywordUtil.delay(8000);
-        WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.clickOnQuotes);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+        KeywordUtil.clickJS_component(QuoteObject.clickOnQuotes,"clicked on Quotes tab");
     }
 
     /**
@@ -1115,9 +1115,8 @@ public class QuoteUtil {
      */
     public static void newButtonQuote_billing(String logStep) throws InterruptedException {
         KeywordUtil.delay(4000);
-        WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.clickOnNew);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+        KeywordUtil.clickJS_component(QuoteObject.clickOnNew,"clicked on new button");
+
     }
 
     /**
@@ -1133,10 +1132,9 @@ public class QuoteUtil {
         KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss, "TX", logStep);
         KeywordUtil.delay(5000);
         Thread.sleep(5000);
-        String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'TX')])[1]";
 
         try {
-            flag = KeywordUtil.getDriver().findElement(By.xpath(accname)).isDisplayed();
+            flag = KeywordUtil.isElementDisplayed(accname,"xpath displayed");
 
         } catch (Exception e) {
         }
@@ -1155,9 +1153,7 @@ public class QuoteUtil {
      */
     public static void clickEditLines_billing(String logStep) throws InterruptedException {
         KeywordUtil.delay(10000);
-        WebElement element = KeywordUtil.getDriver().findElement(QuoteObject.dropdownInQuotesTab);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab,"clicked");
         KeywordUtil.delay(10000);
         KeywordUtil.waitForClickable(QuoteObject.editLines_b);
         KeywordUtil.click(QuoteObject.editLines_b, logStep);
