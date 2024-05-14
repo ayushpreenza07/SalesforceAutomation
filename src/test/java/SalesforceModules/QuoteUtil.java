@@ -1253,4 +1253,138 @@ public class QuoteUtil {
         KeywordUtil.click(QuoteObject.deleteButtonClicked, logStep);
     }
 
-}
+    /**
+     * Create new quote combining all methods in billing section
+     *
+     * @param name,opportunityName the log
+     */
+    public static void searchEditQuote_billing(String name, String opportunityName, String type) throws Exception {
+        clickQuoteButton_billing("Navigated to quote");
+        KeywordUtil.clickJS_component(QuoteObject.openQuote,"Open the quote");
+        changeDiscountProduct_billing();
+    }
+
+    /**
+     * Click edit lines and change discount for billing section
+     */
+    public static void changeDiscountProduct_billing() throws InterruptedException {
+        clickEditLines_billing("Edit Lines clicked");
+        enterDiscount_billing("8", "PANEL-BUY", "Entered discount");
+    }
+
+    /**
+     * Navigate to quote and change status to In Review in billing
+     *
+     * @param status  the status
+     * @param logStep the log
+     */
+    public static void goToQuoteAndChangeStatus_InReview_billing(String status, String logStep) throws InterruptedException {
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab, "Click on the dropdown");
+        KeywordUtil.waitForVisible(QuoteObject.editQuote);
+        KeywordUtil.click(QuoteObject.editQuote, logStep);
+        selectStatus_ss(status, "selected status");
+        clickSaveButton("clicked save button");
+    }
+
+    /**
+     * Navigate to quote and change status to Approved in billing
+     *
+     * @param status  the status
+     * @param logStep the log
+     */
+    public static void goToQuoteAndChangeStatus_Approved_billing(String status, String logStep) throws InterruptedException {
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab, "Click on the dropdown");
+        KeywordUtil.waitForVisible(QuoteObject.editQuote);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        KeywordUtil.clickJS(QuoteObject.editQuote, logStep);
+        selectStatus_ss(status, "selected status");
+        clickSaveButton("clicked save button");
+    }
+
+    /**
+     * Navigate to quote and create order for billing module
+     *
+     * @param logStep the log
+     */
+    public static void goToQuoteAndCreateOrder_billing(String logStep) throws InterruptedException {
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab, "Click on the dropdown");
+        KeywordUtil.delay(8000);
+        KeywordUtil.waitForVisible(QuoteObject.editQuote);
+        KeywordUtil.click(QuoteObject.editQuote, "Open edit button");
+        KeywordUtil.delay(5000);
+        KeywordUtil.waitForVisible(QuoteObject.editQuote);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+
+        KeywordUtil.hoverOnElement(ServiceSupportObject.checkbox_Orders_ss);
+        KeywordUtil.clickUsingAction(ServiceSupportObject.checkbox_Orders_ss, "Order button clicked");
+
+        KeywordUtil.delay(3000);
+        clickSaveButton("clicked save button");
+        KeywordUtil.clickJS_component(QuoteObject.clickOnOrders,"Click on Orders tab");
+        KeywordUtil.clickJS_component(QuoteObject.dropDownOrders,"Click on dropdownOption");
+        KeywordUtil.clickJS_component(QuoteObject.allOrders,"Select All Orders");
+        KeywordUtil.clickJS_component(QuoteObject.openOrders_b,"Open Order");
+
+    }
+    /**
+     * Activating order for billing module
+     */
+    public static void activateOrder_billing() throws InterruptedException {
+
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        KeywordUtil.waitForVisible(QuoteObject.activatedTab);
+        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.activatedTab);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", quote);
+
+        try {
+            KeywordUtil.waitForVisible(QuoteObject.markCurrentStatus);
+            KeywordUtil.click(QuoteObject.markCurrentStatus, "Activated status Marked");
+        } catch (Exception e) {
+            WebElement markStatus = KeywordUtil.getDriver().findElement(QuoteObject.markCurrentStatus);
+            executor.executeScript("arguments[0].click();", markStatus);
+        }
+    }
+
+    /**
+     * Select the status field as Draft for order in billing module
+     *
+     * @param logStep the log
+     * @param status  the status name
+     */
+    public static void changeStatusAsDraft_billing(String status, String logStep) throws InterruptedException {
+        boolean flag = false;
+        int size = 0;
+
+        // Edit order status to draft
+        KeywordUtil.clickJS_component(QuoteObject.clickOnOrders,"Click on Orders tab");
+        KeywordUtil.clickJS_component(QuoteObject.dropdownToDelete,"Click on dropdown option");
+        KeywordUtil.clickJS_component(QuoteObject.editOrdersTab,"Click on edit button");
+
+
+        KeywordUtil.delay(8000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.selectStatus_ss);
+        KeywordUtil.click(ServiceSupportObject.selectStatus_ss, logStep);
+        KeywordUtil.delay(3000);
+        Thread.sleep(000);
+        String changeStatus_ss = "//lightning-base-combobox-item//span[@title='" + status + "']";
+        try {
+            size = KeywordUtil.getDriver().findElements(By.xpath(changeStatus_ss)).size();
+
+        } catch (Exception e) {
+        }
+
+        if (size == 0) {
+            KeywordUtil.takeScreenshotAndAttachInReport();
+            System.out.println("no such status present");
+            System.out.println(size);
+        } else {
+            KeywordUtil.click(By.xpath(changeStatus_ss), "status changed as draft");
+        }
+
+        CasesUtil.clickSaveButton_ss("Saved");
+    }
+    }

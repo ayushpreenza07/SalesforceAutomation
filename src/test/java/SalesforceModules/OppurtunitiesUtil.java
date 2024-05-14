@@ -806,7 +806,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
 
     /**
      * Change mark stage to proposal stage and make stage as current stage
-     * under billing section
+     * in billing section
      *
      */
 
@@ -816,7 +816,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
     }
 
     /**
-     * Verify Product under billing section
+     * Verify Product in billing section
      *
      *
      * @param logStep the log
@@ -829,4 +829,15 @@ public class OppurtunitiesUtil extends GlobalUtil {
             Assert.fail("product not added");
         }
     }
+    /**
+     * Open the Opportunity in billing module
+     *
+     *
+     * @param logStep the log
+     */
+    public static void openOpportunity_billing(String logStep) throws InterruptedException {
+        OppurtunitiesUtil.clickOnOpportunityTab();
+        KeywordUtil.clickJS_component(OppurtunitiesObject.selectOpportunity_b,"Open the opportunity");
+    }
+
 }

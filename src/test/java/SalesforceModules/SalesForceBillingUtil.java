@@ -187,6 +187,7 @@ public class SalesForceBillingUtil {
      * @throws InterruptedException
      */
     public static void salesforceBilling(String logStep) throws InterruptedException {
+        KeywordUtil.delay(5000);
         KeywordUtil.waitForVisible(BillingObject.salesforceBilling);
         KeywordUtil.click(BillingObject.salesforceBilling, logStep);
     }

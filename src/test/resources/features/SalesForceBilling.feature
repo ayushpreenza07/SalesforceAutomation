@@ -1,23 +1,23 @@
 Feature: salesforce demo
 
-  @salesforceBill
-  Scenario Outline: salesforce demo
-    Given Read the test data  "<TestData>" from Excel
+#  @salesforceBill
+#  Scenario Outline: salesforce demo
+#    Given Read the test data  "<TestData>" from Excel
+#
+#    When Navigate to Salesforce as "Billing Admin"
+#    And Login to Salesforce with "Billing Admin" credentials
+#    And Click on Okay
+#    And go to salesforce cpq
+#    And go to products tab
+#    And Create new product
+#    And add price book and standard price
+#    And edit standard price book
+#    And go to products tab
+#    And search product in products tab
 
-    When Navigate to Salesforce as "Billing Admin"
-    And Login to Salesforce with "Billing Admin" credentials
-    And Click on Okay
-    And go to salesforce cpq
-    And go to products tab
-    And Create new product
-    And add price book and standard price
-    And edit standard price book
-    And go to products tab
-    And search product in products tab
-
-    Examples:
-      | TestData |
-      | TestData1 |
+#    Examples:
+#      | TestData |
+#      | TestData1 |
 
   @salesforceBill
   Scenario Outline: salesforce demo
@@ -35,8 +35,11 @@ Feature: salesforce demo
     And Create new quote and add product in billing section
     And Delete Quote in billing section
     And Search Opportunity to change status and verify the added quotes
+    And Search quote to edit
+    And Create an order and activate in billing section
+    And Create new contract in billing section
+    Then Change Opportunity Status to Close Won
 
     Examples:
       | TestData |
-
       | TestData1 |
