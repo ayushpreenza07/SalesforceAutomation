@@ -83,5 +83,10 @@ public class SalesForceBilling {
     public void delete_quote_billing() throws Exception{
         QuoteUtil.deleteQuote_billing("Deleted the Quote in billing section");
     }
+
+    @And("^Search Opportunity to change status and verify the added quotes$")
+    public void search_oppo_billing() throws Exception{
+        OppurtunitiesUtil.searchOppoAndVerifyAddedProductsInQuotes_billing("Deleted the Quote in billing section");
+    }
 }
 

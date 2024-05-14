@@ -790,4 +790,43 @@ public class OppurtunitiesUtil extends GlobalUtil {
         takeScreenshotAndAttachInReport();
 
     }
+
+    /**
+     * Search Oppo to change status in billing section
+     *
+     * @param logStep the log
+     */
+    public static void searchOppoAndVerifyAddedProductsInQuotes_billing(String logStep) throws Exception {
+        KeywordUtil.clickJS_component(OppurtunitiesObject.opportunitiesTab, "Click on opportunities tab");
+        KeywordUtil.clickJS_component(OppurtunitiesObject.selectOpportunity_b, "Open Demo Opportunity");
+        markStage_billing();
+        KeywordUtil.clickJS_component(OppurtunitiesObject.viewAll_b,"Clicked on viewAll under products section");
+        verifyProduct_billing("Verify products are available");
+    }
+
+    /**
+     * Change mark stage to proposal stage and make stage as current stage
+     * under billing section
+     *
+     */
+
+    public static void markStage_billing() throws InterruptedException {
+        selectStageProposalQuote("proposal stage selected");
+        setMarkAsCurrentStages("Stage marked as current stage");
+    }
+
+    /**
+     * Verify Product under billing section
+     *
+     *
+     * @param logStep the log
+     */
+    public static void verifyProduct_billing(String logStep){
+        try{
+            KeywordUtil.waitForVisible(OppurtunitiesObject.displayProducts);
+            System.out.println("Products are displayed");
+        }catch (Exception e){
+            Assert.fail("product not added");
+        }
+    }
 }

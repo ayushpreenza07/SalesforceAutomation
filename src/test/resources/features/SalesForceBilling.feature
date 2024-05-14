@@ -34,7 +34,9 @@ Feature: salesforce demo
     Then Delete account
     And Create new quote and add product in billing section
     And Delete Quote in billing section
+    And Search Opportunity to change status and verify the added quotes
 
     Examples:
       | TestData |
+
       | TestData1 |

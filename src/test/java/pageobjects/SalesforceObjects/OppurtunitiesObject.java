@@ -61,4 +61,9 @@ public class OppurtunitiesObject {
     public static By opportunityStage=By.xpath("//*/div[1]/div/div/table/tbody/tr[1]/td[5]/span/span[1]");
     public static By opportunityDropdownEdit=By.xpath("//li[@class='uiMenuItem']/a[@title='Edit']");
     public static By opportunityDropdown=By.xpath("(//div[@class='forceVirtualActionMarker forceVirtualAction']/a)[1]");
+
+    //xpaths for billing section
+    public static By selectOpportunity_b = By.xpath("//a[@title='DemoOpportunity']");
+    public static By viewAll_b = By.xpath("//div//a//div//span[@class='view-all-label' and text()='View All']");
+    public static By displayProducts=By.xpath("//span//a[@title='SolarBots']");
   }
