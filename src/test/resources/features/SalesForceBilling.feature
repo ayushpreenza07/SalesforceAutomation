@@ -34,6 +34,11 @@ Feature: salesforce demo
     Then Delete account
     And Create new quote and add product in billing section
     And Delete Quote in billing section
+    And Search Opportunity to change status and verify the added quotes
+    And Search quote to edit
+    And Create an order and activate in billing section
+    And Create new contract in billing section
+    Then Change Opportunity Status to Close Won
 
     Examples:
       | TestData |

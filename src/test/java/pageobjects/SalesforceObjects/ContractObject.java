@@ -14,5 +14,10 @@ public class ContractObject {
 
     public static By contractTerm = By.xpath("//input[@name='ContractTerm']");
 
+    //Xpaths for creating contract in billing section
+
+    public static By contractDropDownBtn = By.xpath("(//span[@class='slds-assistive-text' and text()='Show actions for this object'])[1]");
+    public static By newContractButton = By.xpath("//div[@title='New' and @class='forceActionLink' and text()='New']");
+
 
 }

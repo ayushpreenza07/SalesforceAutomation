@@ -128,4 +128,26 @@ public class ContractUtil {
         KeywordUtil.takeScreenshotAndAttachInReport();
 
     }
+
+    /**
+     * Create contract in billing section
+     *
+     * @param account the log
+     */
+    public static void createContract_billing(String account) throws InterruptedException {
+        KeywordUtil.clickJS_component(OppurtunitiesObject.opportunitiesTab,"Click on Opportunity");
+        KeywordUtil.clickJS_component(OppurtunitiesObject.selectOpportunity_b,"Open Opportunity");
+        KeywordUtil.delay(5000);
+        KeywordUtil.clickJS_component(ContractObject.contractDropDownBtn,"Click on drop down");
+        KeywordUtil.clickJS_component(ContractObject.newContractButton,"Click new button");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        enterStartDate(2024,4,10,"Entered start date");
+        enterContractTerm(2,"Entered contract term");
+        QuoteUtil.selectAccount(account,"Account selected");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        QuoteUtil.clickSaveButton("Save button clicked for new contract");
+        KeywordUtil.delay(3000);
+        KeywordUtil.takeScreenshotAndAttachInReport();
+
+    }
 }

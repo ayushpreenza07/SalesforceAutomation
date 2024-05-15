@@ -75,5 +75,13 @@ public class QuoteObject {
     public static By dropdownToDelete=By.xpath("//span[@class='slds-assistive-text' and text()='Show Actions']");
     public static By deleteButton=By.xpath("//a[@title='Delete']");
     public static By deleteButtonClicked=By.xpath("//span[text()='Delete']");
+    public static By openQuote=By.xpath("//th//span//a[@target='_blank']");
+    public static By editQuote=By.xpath("//span[@class='slds-truncate' and text()='Edit']");
 
+    public static By clickOnOrders =By.xpath("//SPAN[@class='slds-truncate'][text()='Orders']");
+    public static By dropDownOrders =By.xpath("//button[@title='Select a List View: Orders']");
+    public static By allOrders =By.xpath("//span[@class=' virtualAutocompleteOptionText' and text()='All Orders']");
+    public static By openOrders_b =By.xpath("(//span[@class='slds-grid slds-grid--align-spread forceInlineEditCell'])/a[1]");
+    public static By dropdownInOrdersTab=By.xpath("(//span[@class='slds-assistive-text' and text()='Show more actions'])[2]");
+    public static By editOrdersTab=By.xpath("//ul//a//div[@title='Edit']");
 }

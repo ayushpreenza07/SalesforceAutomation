@@ -2,7 +2,9 @@ package step_definitions;
 
 import SalesforceModules.*;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.KeywordUtil;
@@ -83,5 +85,39 @@ public class SalesForceBilling {
     public void delete_quote_billing() throws Exception{
         QuoteUtil.deleteQuote_billing("Deleted the Quote in billing section");
     }
+
+    @And("^Search Opportunity to change status and verify the added quotes$")
+    public void search_oppo_billing() throws Exception{
+        OppurtunitiesUtil.searchOppoAndVerifyAddedProductsInQuotes_billing("Deleted the Quote in billing section");
+    }
+
+    @And("^Search quote to edit$")
+    public void search_edit_quote_billing() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.searchEditQuote_billing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
+    @And("Create an order and activate in billing section")
+    public void createAnOrderAndActivate_billing() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.goToQuoteAndChangeStatus_InReview_billing((dataMap.get("InReviewStatus")), "Quote status is changed to In Review");
+        QuoteUtil.goToQuoteAndChangeStatus_Approved_billing((dataMap.get("ApprovedStatus")), "Quote status is changed to Approved");
+        QuoteUtil.goToQuoteAndCreateOrder_billing("Order generated and activated");
+        QuoteUtil.activateOrder_billing();
+        QuoteUtil.changeStatusAsDraft_billing((dataMap.get("changeStatusAsDraft")), "change order status as Draft ");
+            }
+
+    @When("^Create new contract in billing section$")
+    public void createNewContract() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        ContractUtil.createContract_billing(dataMap.get("AccountName"));
+    }
+
+    @Then("Change Opportunity Status to Close Won")
+    public void changeOpportunityStatusToCloseWon() throws InterruptedException {
+        OppurtunitiesUtil.openOpportunity_billing("Open opportunity");
+        OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
+    }
+
 }
 
