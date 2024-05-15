@@ -1254,7 +1254,7 @@ public class QuoteUtil {
     }
 
     /**
-     * Create new quote combining all methods in billing section
+     * Search and Edit quote combining all methods in billing section
      *
      * @param name,opportunityName the log
      */

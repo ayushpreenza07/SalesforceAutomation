@@ -108,7 +108,7 @@ public class SalesForceBilling {
             }
 
     @When("^Create new contract in billing section$")
-    public void create_new_contract() throws Exception{
+    public void createNewContract() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         ContractUtil.createContract_billing(dataMap.get("AccountName"));
     }
