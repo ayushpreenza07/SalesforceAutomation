@@ -1478,7 +1478,7 @@ public class QuoteUtil {
     public static void activateOrderFromAccountPage() throws InterruptedException {
         AccountUtil.clickAccountsTab("Click account tab");
         KeywordUtil.clickJS_component(ServiceSupportObject.openaccount_ss, "Open accounts");
-        KeywordUtil.clickJS_component(QuoteObject.orders_o, "Click on orders");
+        KeywordUtil.clickJS_component(ServiceSupportObject.openOrder, "Click on orders");
         KeywordUtil.clickJS_component(QuoteObject.viewOrder, "Open order");
 
         KeywordUtil.delay(3000);
