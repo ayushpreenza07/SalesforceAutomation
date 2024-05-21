@@ -15,6 +15,7 @@ import utilities.GlobalUtil;
 import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
 
+import java.security.Key;
 import java.util.HashMap;
 import java.util.List;
 
@@ -928,6 +929,36 @@ public class QuoteUtil {
         }
     }
 
+
+    /**
+     * Select the Account field for new quote in account page
+     *
+     * @param logStep the log
+     * @param account the account name
+     */
+    public static void selectAccountPage(String account, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(ServiceSupportObject.searchAccounts_quote_ss);
+        KeywordUtil.click(ServiceSupportObject.searchAccounts_quote_ss, logStep);
+        KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss, "TX", logStep);
+        KeywordUtil.delay(5000);
+        Thread.sleep(5000);
+        String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'TX')])[3]";
+
+        try {
+            flag = KeywordUtil.getDriver().findElement(By.xpath(accname)).isDisplayed();
+
+        } catch (Exception e) {
+        }
+
+        if (!flag) {
+            System.out.println("no such account present");
+        } else {
+            KeywordUtil.click(By.xpath(accname), "account selected");
+        }
+
+    }
+
     /**
      * Navigate to quote and change status to In Review in service support module
      *
@@ -1387,4 +1418,119 @@ public class QuoteUtil {
 
         CasesUtil.clickSaveButton_ss("Saved");
     }
+
+    /**
+     * Create new quote combining all methods
+     *
+     * @param name,opportunityName the log
+     */
+    public static void createNewQuoteAccountPage(String name, String opportunityName, String type) throws Exception {
+        AccountUtil.clickAccountsTab("Click account tab");
+        openaccount_ss("Open TXTest");
+        KeywordUtil.clickJS_component(ServiceSupportObject.clickQuotes_ss,"");
+        newButtonQuote("Clicked new button");
+        checkPrimary("primary checkbox marked");
+        selectOpportunity_ss(opportunityName, opportunityName + " entered opportunities name");
+        selectAccountPage(name, name + " entered account name");
+        selectType_ss(type, "selected type");
+        clickSaveButton("clicked save button");
+        addDiscountProduct();
     }
+
+    /**
+     * Goto Account details page and open quote
+     *
+     * @param logStep the log
+     */
+    public static void goToAccountDetailsPage(String logStep) throws Exception {
+        AccountUtil.clickAccountsTab("Click account tab");
+        KeywordUtil.clickJS_component(ServiceSupportObject.openaccount_ss, "Open accounts");
+        KeywordUtil.delay(3000);
+        KeywordUtil.clickJS_component(ServiceSupportObject.clickQuotes_ss, "Click on Quotes");
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab_o, "Click on dropdown for Quotes ");
+        KeywordUtil.clickJS_component(QuoteObject.editQuote_o, "Edit the Quote");
+    }
+
+    /**
+     * Navigate to quote and change status to Approved in Account to Order Gen
+     *
+     * @param status  the status
+     * @param logStep the log
+     */
+    public static void goToQuoteAndChangeStatus_Approved_AccountPage(String status, String logStep) throws InterruptedException {
+        selectStatus_ss(status, "selected status");
+
+        KeywordUtil.delay(5000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.checkbox_Orders_ss);
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+
+        KeywordUtil.hoverOnElement(ServiceSupportObject.checkbox_Orders_ss);
+        KeywordUtil.clickUsingAction(ServiceSupportObject.checkbox_Orders_ss, "Order button clicked");
+
+        KeywordUtil.delay(3000);
+        clickSaveButton("clicked save button");
+    }
+
+    /**
+     * Activating order for service support module
+     */
+    public static void activateOrderFromAccountPage() throws InterruptedException {
+        AccountUtil.clickAccountsTab("Click account tab");
+        KeywordUtil.clickJS_component(ServiceSupportObject.openaccount_ss, "Open accounts");
+        KeywordUtil.clickJS_component(ServiceSupportObject.openOrder, "Click on orders");
+        KeywordUtil.clickJS_component(QuoteObject.viewOrder, "Open order");
+
+        KeywordUtil.delay(3000);
+        Thread.sleep(3000);
+        KeywordUtil.waitForVisible(QuoteObject.activatedTab);
+        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.activatedTab);
+        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", quote);
+
+        try {
+            KeywordUtil.waitForVisible(QuoteObject.markCurrentStatus);
+            KeywordUtil.click(QuoteObject.markCurrentStatus, "Activated status Marked");
+        } catch (Exception e) {
+            WebElement markStatus = KeywordUtil.getDriver().findElement(QuoteObject.markCurrentStatus);
+            executor.executeScript("arguments[0].click();", markStatus);
+        }
+
+    }
+
+    /**
+     * Select the status field as Draft for order in Account to Order Gen
+     *
+     * @param logStep the log
+     * @param status  the status name
+     */
+    public static void changeStatusAsDraftFromAccountPage(String status, String logStep) throws InterruptedException {
+        boolean flag = false;
+        int size = 0;
+
+        // Edit order status to draft
+        KeywordUtil.clickJS_component(QuoteObject.editButton_o,"Open ");
+
+        KeywordUtil.delay(8000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.selectStatus_ss);
+        KeywordUtil.click(ServiceSupportObject.selectStatus_ss, logStep);
+        KeywordUtil.delay(3000);
+        Thread.sleep(000);
+        String changeStatus_ss = "//lightning-base-combobox-item//span[@title='" + status + "']";
+        try {
+            size = KeywordUtil.getDriver().findElements(By.xpath(changeStatus_ss)).size();
+
+        } catch (Exception e) {
+        }
+
+        if (size == 0) {
+            KeywordUtil.takeScreenshotAndAttachInReport();
+            System.out.println("no such status present");
+            System.out.println(size);
+        } else {
+            KeywordUtil.click(By.xpath(changeStatus_ss), "status changed as draft");
+        }
+
+        CasesUtil.clickSaveButton_ss("Saved");
+    }
+}

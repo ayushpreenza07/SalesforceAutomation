@@ -84,4 +84,13 @@ public class QuoteObject {
     public static By openOrders_b =By.xpath("(//span[@class='slds-grid slds-grid--align-spread forceInlineEditCell'])/a[1]");
     public static By dropdownInOrdersTab=By.xpath("(//span[@class='slds-assistive-text' and text()='Show more actions'])[2]");
     public static By editOrdersTab=By.xpath("//ul//a//div[@title='Edit']");
+
+    //xpaths for Acc_to_order gen flow
+    public static By dropdownInQuotesTab_o=By.xpath("//table[@aria-label='Quotes']//td[7]//span[text()='Show Actions']");
+    public static By editQuote_o=By.xpath("//a[@title='Edit']");
+    public static By orders_o = By.xpath("(//a[slot[contains(.,'Orders')]])[2]");
+    public static By dropdownInOrdersTab_o=By.xpath("//table[@aria-label='Orders']//td[7]//span[text()='Show Actions']");
+    public static By viewOrder = By.xpath("(//a[@class='flex-wrap-ie11 slds-truncate'])[3]");
+    public static By editButton_o = By.xpath("(//button[@class='slds-button slds-button_neutral' and @name='Edit'])[2]");
+
 }

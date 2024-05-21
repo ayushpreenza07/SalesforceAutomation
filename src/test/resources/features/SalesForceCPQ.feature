@@ -8,6 +8,8 @@ Feature: salesforce demo
     Then create new account
     And create contact
     Then create opportunity and change its status
+    And create new quote and add product in account details page
+    And  Create an order and activate in account details page
     And create new quote and add product
     Then Generate document
     Then Verify if product added
