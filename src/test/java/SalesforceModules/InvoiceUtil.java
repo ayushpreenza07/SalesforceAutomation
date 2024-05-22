@@ -29,7 +29,7 @@ public class InvoiceUtil {
     }
 
     /**
-     * Select the contact for new case
+     * Setting the tax status for generated invoice
      *
      * @param logStep the log
      * @param status the status
@@ -53,7 +53,7 @@ public class InvoiceUtil {
             System.out.println("no such status present");
             System.out.println(size);
         } else {
-            KeywordUtil.click(By.xpath(changeStatus_ss), "status changed as draft");
+            KeywordUtil.click(By.xpath(changeStatus_ss), "status changed as --None--");
         }
     }
         /**
@@ -81,7 +81,7 @@ public class InvoiceUtil {
             System.out.println("no such status present");
             System.out.println(size);
         } else {
-            KeywordUtil.click(By.xpath(xpath), "status changed as posted");
+            KeywordUtil.click(By.xpath(xpath), "status changed as Posted");
         }
 
     }
@@ -99,7 +99,7 @@ public class InvoiceUtil {
         QuoteUtil.clickSaveButton("clicked save button");
         KeywordUtil.clickJS_component(InvoiceObject.relatedTab,"Open Order");
         KeywordUtil.clickJS_component(InvoiceObject.invoices,"Click on Invoice");
-        KeywordUtil.clickJS_component(InvoiceObject.openInvoices,"Click on Invoice");
+        KeywordUtil.clickJS_component(InvoiceObject.openInvoices,"Open the Invoice");
 
         //code for tax info boxes
         KeywordUtil.delay(3000);
@@ -111,7 +111,7 @@ public class InvoiceUtil {
 
         //select status as posted
         KeywordUtil.delay(2000);
-        setPostedStatus(postedStatus,"select status as posted");
+        setPostedStatus(postedStatus,"select status as Posted");
         QuoteUtil.clickSaveButton("clicked save button");
     }
 
@@ -179,7 +179,7 @@ public class InvoiceUtil {
             System.out.println("no such status present");
             System.out.println(size);
         } else {
-            KeywordUtil.click(By.xpath(xpath), "status changed as posted");
+            KeywordUtil.click(By.xpath(xpath), "status changed as Credit Cards");
         }
 
     }
