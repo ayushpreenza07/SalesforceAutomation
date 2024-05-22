@@ -39,6 +39,8 @@ Feature: salesforce demo
     And Create an order and activate in billing section
     And Create new contract in billing section
     Then Change Opportunity Status to Close Won
+    Then Generate invoice in billing section
+    Then Payments using cards
 
     Examples:
       | TestData |

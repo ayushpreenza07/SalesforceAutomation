@@ -98,7 +98,7 @@ public class SalesForceBilling {
     }
 
     @And("Create an order and activate in billing section")
-    public void createAnOrderAndActivate_billing() throws InterruptedException {
+    public void create_An_Order_And_Activate_billing() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
         QuoteUtil.goToQuoteAndChangeStatus_InReview_billing((dataMap.get("InReviewStatus")), "Quote status is changed to In Review");
         QuoteUtil.goToQuoteAndChangeStatus_Approved_billing((dataMap.get("ApprovedStatus")), "Quote status is changed to Approved");
@@ -117,6 +117,20 @@ public class SalesForceBilling {
     public void changeOpportunityStatusToCloseWon() throws InterruptedException {
         OppurtunitiesUtil.openOpportunity_billing("Open opportunity");
         OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
+    }
+
+    @Then("Generate invoice in billing section")
+    public void generate_Invoices_In_Billing() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        InvoiceUtil.openOrdersBilling("Open the order for generating invoice");
+        InvoiceUtil.generateInvoiceBilling(dataMap.get("TaxStatus"),dataMap.get("PostedStatus"),"Generate Invoice");
+    }
+
+    @Then("Payments using cards")
+    public void payments_Using_Cards() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        InvoiceUtil.paymentsBilling(dataMap.get("PaymentsAccount"),"5000",dataMap.get("PaymentType"),dataMap.get("InvoiceNumber"),"Make payments");
+
     }
 
 }
