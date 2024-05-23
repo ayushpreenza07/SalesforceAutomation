@@ -41,5 +41,12 @@ public class BillingObject {
     public static By saveButtonOfNewContact= By.xpath("//button[@class='slds-button slds-button_brand cuf-publisherShareButton undefined uiButton']//span[@class=' label bBody' and text()='Save']");
     public static By newBtnOfContactsTab= By.xpath("(//div[@title='New'])[1]");
 
+    //xpaths for adding new cases
+    public static By newBtnOfCases= By.xpath("(//div[@class='listWrapper']//article[@aria-label='Cases']//div[@class='slds-media slds-media--center slds-has-flexi-truncate']//button[@name='NewCase'])[2]");
+    public static By dropdownOfCases= By.xpath("//article[@class='slds-card slds-card_boundary' and @aria-label='Cases']//button[@class='slds-button slds-button_icon-border slds-button_icon-x-small']");
+    public static By dropdownEditOption= By.xpath("//div[@class='forceActionLink' and @role='button' and text()='Edit']");
+    public static By editOrigin = By.xpath("//button[@data-value='Phone']");
+    public static By dropdownDeleteOption= By.xpath("//div[@class='forceActionLink' and text()='Delete']");
+    public static By webCompany= By.xpath("//input[@class='slds-input' and @name='SuppliedCompany']");
 
 }

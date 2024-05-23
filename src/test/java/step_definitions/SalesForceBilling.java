@@ -113,6 +113,26 @@ public class SalesForceBilling {
         ContractUtil.createContract_billing(dataMap.get("AccountName"));
     }
 
+    @And("Create new case")
+    public void createNewCaseForAccount() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.createNewCase(dataMap.get("CaseOrigin"),"Case origin value selected");
+    }
+    @And("Edit new case")
+    public void editCreatedNewCaseForAccount() throws InterruptedException{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.editCreatedNewCase(dataMap.get("EditCaseOrigin"));
+    }
+    @And("Update new case")
+    public void updateCreatedNewCaseForAccount() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.updateCreatedNewCase(dataMap.get("WebCompany"));
+    }
+    @And("Delete new case")
+    public void deleteCreatedNewCaseForAccount() throws InterruptedException {
+        SalesForceBillingUtil.deleteCreatedNewCase("Clicked on delete option");
+    }
+
     @Then("Change Opportunity Status to Close Won")
     public void changeOpportunityStatusToCloseWon() throws InterruptedException {
         OppurtunitiesUtil.openOpportunity_billing("Open opportunity");
