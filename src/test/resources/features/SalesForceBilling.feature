@@ -41,6 +41,7 @@ Feature: salesforce demo
     Then Change Opportunity Status to Close Won
     Then Generate invoice in billing section
     Then Payments using cards
+    Then Create bundle product and add feature and Options
 
     Examples:
       | TestData |

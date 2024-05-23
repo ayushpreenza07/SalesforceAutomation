@@ -133,5 +133,11 @@ public class SalesForceBilling {
 
     }
 
+    @Then("Create bundle product and add feature and Options")
+    public void create_Bundle_Features_Options() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        InvoiceUtil.createBundleFeaturesOptions("Create Bundle Products, add features");
+    }
+
 }
 

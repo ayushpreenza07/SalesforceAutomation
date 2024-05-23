@@ -229,7 +229,68 @@ public class InvoiceUtil {
         selectInvoices(invoice,"select invoice");
         KeywordUtil.takeScreenshotAndAttachInReport();
         QuoteUtil.clickSaveButton("clicked save button");
+    }
 
+    /**
+     * Select the SKU for the options
+     *
+     * @param logStep the log
+     * @param optionalSKU the optionalSKU
+     */
+    public static void selectOptionalSKU(String optionalSKU, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(InvoiceObject.selectOptionalSKU);
+        KeywordUtil.click(InvoiceObject.selectOptionalSKU, logStep);
+        KeywordUtil.inputText(InvoiceObject.selectOptionalSKU, "Sam", logStep);
+        KeywordUtil.delay(5000);
+        Thread.sleep(5000);
+        String accname = "//lightning-base-combobox-formatted-text[contains(@title,'Samsung')]";
+
+        try {
+            flag = KeywordUtil.getDriver().findElement(By.xpath(accname)).isDisplayed();
+
+        } catch (Exception e) {
+        }
+
+        if (!flag) {
+            System.out.println("no such account present");
+        } else {
+            KeywordUtil.click(By.xpath(accname), "account selected");
+        }
+    }
+
+    /**
+     * To create Bundle Products, add features and Options to products
+     *
+     *
+     * @param logStep the log
+     */
+    public static void createBundleFeaturesOptions(String logStep) throws InterruptedException {
+        KeywordUtil.clickJS_component(InvoiceObject.clickOnProducts, "Click on Products tab");
+        KeywordUtil.clickJS_component(InvoiceObject.clickOnSamsungPowerBank, "Click on Samsung Power Bank");
+        KeywordUtil.clickJS_component(InvoiceObject.clickOnRelatedTab, "Click on Samsung Power Bank");
+
+        //adding new features
+        KeywordUtil.clickJS_component(InvoiceObject.newFeatureButton, "Click on New button on Features");
+        KeywordUtil.click(InvoiceObject.featureName, logStep);
+        KeywordUtil.inputText(InvoiceObject.featureName, "StorageComponent", "Add feature name");
+        KeywordUtil.click(InvoiceObject.numberValue, "Add the number");
+        KeywordUtil.inputText(InvoiceObject.numberValue, "10", "Added number");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        CasesUtil.clickSaveButton_ss("Saving features");
+
+        //adding new options
+        KeywordUtil.clickJS_component(InvoiceObject.optionsButton, "Click on New button on Options");
+        KeywordUtil.delay(3000);
+        KeywordUtil.click(InvoiceObject.numberValue, logStep);
+        KeywordUtil.inputText(InvoiceObject.numberValue, "3", logStep);
+        KeywordUtil.delay(3000);
+        selectOptionalSKU("Samsung", "select the Optional SKU");
+        KeywordUtil.clickJS_component(InvoiceObject.selectedCheckBox, "Tick the selected checkbox");
+        KeywordUtil.clickJS_component(InvoiceObject.requiredCheckBox, "Tick the required checkbox");
+        KeywordUtil.clickJS_component(InvoiceObject.bundledCheckBox, "Tick the bundled checkbox");
+        KeywordUtil.takeScreenshotAndAttachInReport();
+        CasesUtil.clickSaveButton_ss("Saving Options");
     }
 
 }
