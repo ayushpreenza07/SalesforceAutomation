@@ -7,7 +7,7 @@ public class OppurtunitiesObject {
 
     public static By opportunitiesTab =By.xpath("//div[@class='slds-context-bar']//a[@title='Opportunities']");
 
-    public static By createNewOpportunities = By.xpath("(//button[@name='New'] | //*[text()='New'])[3]");
+    public static By createNewOpportunities = By.xpath("//button[@name='New'] | //*[text()='New']");
 
     public static By opportunityName = By.xpath("//input[@name='Name']");
 

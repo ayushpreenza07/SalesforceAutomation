@@ -20,6 +20,7 @@ public class SalesForceMarketing {
     public static HashMap<String, String> dataMap = new HashMap<String, String>();
     public static String leadName = KeywordUtil.generateRandomName();
     public static String leadCompanyName = "TX";
+    public static String opportunityName="";
 
 
     @Given("Read the testdata {string} and {string} from excel file")
@@ -234,7 +235,8 @@ public class SalesForceMarketing {
 
     @Then("User create new Opportunity")
     public void userCreateNewOpportunity() throws InterruptedException {
-        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName")+KeywordUtil.generateRandomString(4),dataMap.get("Amount"), dataMap.get("Stage"));
+        opportunityName=dataMap.get("OpportunityName")+KeywordUtil.generateRandomString(4);
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(opportunityName,dataMap.get("Amount"), dataMap.get("Stage"));
     }
 
     @And("User edit new Opportunity")
@@ -252,7 +254,7 @@ public class SalesForceMarketing {
     @And("Change Opportunity Status")
     public void changeOpportunityStatus() throws InterruptedException{
         OppurtunitiesUtil.clickOpportunityTab("clicks on Opportunities Tab");
-        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(opportunityName,dataMap.get("Amount"), dataMap.get("Stage"));
         OppurtunitiesUtil.selectStageProposalQuote("proposal stage selected");
         KeywordUtil.takeScreenshotAndAttachInReport();
         OppurtunitiesUtil.setMarkAsCurrentStages("stage marked");
@@ -263,10 +265,8 @@ public class SalesForceMarketing {
     public void userCreateQuotas() throws Exception {
         KeywordUtil.waitForVisible(QuoteObject.quotesBtn);
         KeywordUtil.click(QuoteObject.quotesBtn,"Click on quotas");
-        QuoteUtil.createNewQuoteForMarketing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+        QuoteUtil.createNewQuoteForMarketing(dataMap.get("AccountName"), opportunityName, dataMap.get("QuoteType"));
     }
-
-
 
     @And("Add Lead To Campaign")
     public static void addLeadToCampaign() {
@@ -286,9 +286,17 @@ public class SalesForceMarketing {
         }
     }
 
-    @And("Create an order")
-    public void createOrder(){
-        CampaignUtil.createOrder();
+    @And("Create an order and activate in marketing crm")
+    public void create_order_And_Activate() {
+        try {
+
+            CampaignUtil.goToQuoteAndChangeStatus_Approved_ss(("Approved"), "Quote status is changed to Approved");
+            CampaignUtil.goToQuoteAndCreateOrder_ss("Order generated and activated");
+            CampaignUtil.activateOrder_ss();
+            KeywordUtil.takeScreenshotAndAttachInReport();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
 
