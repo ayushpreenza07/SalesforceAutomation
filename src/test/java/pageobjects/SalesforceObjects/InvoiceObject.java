@@ -6,7 +6,7 @@ public class InvoiceObject {
 
     //Xpaths for generating the Invoices in billing module
     public static By ordersTab = By.xpath("//BUTTON[@class='slds-button slds-button_brand'][text()='Save']");
-    public static By vieworder = By.xpath("//a[@title='00000112']");
+    public static By vieworder = By.xpath("//a[@title='00000120']");
     public static By detailsTab = By.xpath("(//a[@class='slds-tabs_default__link' and text()='Details'])");
     public static By billNowEditButton = By.xpath("//button[@class='test-id__inline-edit-trigger slds-shrink-none inline-edit-trigger slds-button slds-button_icon-bare' and @title='Edit Bill Now']");
     public static By billNowButton = By.xpath("//input[@name='blng__BillNow__c']");
