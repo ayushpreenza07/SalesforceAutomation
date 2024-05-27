@@ -391,7 +391,7 @@ public class SalesForceBillingUtil {
      * @throws InterruptedException
      */
     public static void clickOnDropdown(String logStep) throws InterruptedException {
-       // KeywordUtil.scrollingToElementofAPage(BillingObject.dropdownOfCases,"Scrolling to the dropdown");
+        KeywordUtil.scrollingToElementofAPage(BillingObject.dropdownOfCases,"Scrolling to the dropdown");
         KeywordUtil.waitForVisible(BillingObject.dropdownOfCases);
         KeywordUtil.click(BillingObject.dropdownOfCases, logStep);
         KeywordUtil.delay(3000);
