@@ -104,8 +104,8 @@ public class SalesForceBilling {
         QuoteUtil.goToQuoteAndChangeStatus_InReview_billing("In Review", "Quote status is changed to In Review");
         QuoteUtil.goToQuoteAndChangeStatus_Approved_billing("Approved", "Quote status is changed to Approved");
         QuoteUtil.goToQuoteAndCreateOrder_billing("Order generated and activated");
-//        QuoteUtil.activateOrder_billing();
-//        QuoteUtil.changeStatusAsDraft_billing((dataMap.get("changeStatusAsDraft")), "change order status as Draft ");
+        QuoteUtil.activateOrder_billing();
+       QuoteUtil.changeStatusAsDraft_billing((dataMap.get("changeStatusAsDraft")), "change order status as Draft ");
             }
 
     @When("^Create new contract in billing section$")

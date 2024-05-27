@@ -1311,8 +1311,8 @@ public class QuoteUtil {
      */
     public static void goToQuoteAndChangeStatus_InReview_billing(String status, String logStep) throws InterruptedException {
         KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab_b, "Click on the dropdown");
-        KeywordUtil.waitForVisible(QuoteObject.editQuote_b);
-        KeywordUtil.click(QuoteObject.editQuote_b, logStep);
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteBilling);
+        KeywordUtil.click(QuoteObject.editQuoteBilling, logStep);
         selectStatus_ss(status, "selected status");
         clickSaveButton("clicked save button");
     }
@@ -1325,10 +1325,10 @@ public class QuoteUtil {
      */
     public static void goToQuoteAndChangeStatus_Approved_billing(String status, String logStep) throws InterruptedException {
         KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab_b, "Click on the dropdown");
-        KeywordUtil.waitForVisible(QuoteObject.editQuote_bb);
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteBillingSection);
         KeywordUtil.delay(3000);
         Thread.sleep(3000);
-        KeywordUtil.clickJS(QuoteObject.editQuote_bb, logStep);
+        KeywordUtil.clickJS(QuoteObject.editQuoteBillingSection, logStep);
         selectStatus_ss(status, "selected status");
         clickSaveButton("clicked save button");
     }
@@ -1341,10 +1341,10 @@ public class QuoteUtil {
     public static void goToQuoteAndCreateOrder_billing(String logStep) throws InterruptedException {
         KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab_b, "Click on the dropdown");
         KeywordUtil.delay(8000);
-        KeywordUtil.waitForVisible(QuoteObject.editQuote_bbb);
-        KeywordUtil.click(QuoteObject.editQuote_bbb, "Open edit button");
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteAgainInBilling);
+        KeywordUtil.click(QuoteObject.editQuoteAgainInBilling, "Open edit button");
         KeywordUtil.delay(5000);
-        KeywordUtil.waitForVisible(QuoteObject.editQuote_bbb);
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteAgainInBilling);
         KeywordUtil.delay(3000);
         Thread.sleep(3000);
 

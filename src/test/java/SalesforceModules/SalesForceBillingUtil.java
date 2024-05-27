@@ -368,7 +368,7 @@ public class SalesForceBillingUtil {
      */
     public static void clickOnNewBtnOfCases(String logStep) throws InterruptedException {
         KeywordUtil.delay(2000);
-      //  KeywordUtil.scrollingToElementofAPage(BillingObject.newBtnOfCases,"Scrolling to the case");
+        KeywordUtil.scrollingToElementofAPage(BillingObject.newBtnOfCases,"Scrolling to the case");
         KeywordUtil.waitForVisible(BillingObject.newBtnOfCases);
         KeywordUtil.click(BillingObject.newBtnOfCases, logStep);
     }

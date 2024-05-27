@@ -79,9 +79,9 @@ public class QuoteObject {
     public static By openQuote=By.xpath("//th//span//a[@target='_blank']");
     public static By editQuote=By.xpath("//span[@class='slds-truncate' and text()='Edit']");
 
-    public static By editQuote_b=By.xpath("//a[@title='Edit']");
-    public static By editQuote_bb=By.xpath ("(//div[@class='forceActionLink' and @role='button' and text()='Edit'])[2]");
-    public static By editQuote_bbb=By.xpath ("(//a[@title='Edit'])[3]");
+    public static By editQuoteBilling=By.xpath("//a[@title='Edit']");
+    public static By editQuoteBillingSection=By.xpath ("(//div[@class='forceActionLink' and @role='button' and text()='Edit'])[2]");
+    public static By editQuoteAgainInBilling=By.xpath ("(//a[@title='Edit'])[3]");
     public static By clickOnOrders =By.xpath("//SPAN[@class='slds-truncate'][text()='Orders']");
     public static By dropDownOrders =By.xpath("//button[@title='Select a List View: Orders']");
     public static By allOrders =By.xpath("//span[@class=' virtualAutocompleteOptionText' and text()='All Orders']");
