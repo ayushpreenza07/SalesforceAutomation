@@ -30,6 +30,10 @@ Feature: salesforce demo
     And Click on salesforce Billing
     And Create customer account
     And Create contact link existing and New Contact
+    And Create new case
+    And Edit new case
+    And Update new case
+    And Delete new case
     Then Edit account details
     Then Delete account
     And Create new quote and add product in billing section
@@ -39,6 +43,9 @@ Feature: salesforce demo
     And Create an order and activate in billing section
     And Create new contract in billing section
     Then Change Opportunity Status to Close Won
+    Then Generate invoice in billing section
+    Then Payments using cards
+    Then Create bundle product and add feature and Options
 
     Examples:
       | TestData |

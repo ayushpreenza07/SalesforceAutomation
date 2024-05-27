@@ -22,7 +22,7 @@ import java.util.List;
 public class QuoteUtil {
 
     static HashMap<String, String> map = new HashMap<>();
-    static String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'TX')])[1]";
+    static String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'Bill')])[1]";
 
 
     /**
@@ -1160,7 +1160,7 @@ public class QuoteUtil {
         boolean flag = false;
         KeywordUtil.waitForVisible(ServiceSupportObject.searchAccounts_quote_ss);
         KeywordUtil.click(ServiceSupportObject.searchAccounts_quote_ss, logStep);
-        KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss, "TX", logStep);
+        KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss, "Bill", logStep);
         KeywordUtil.delay(5000);
         Thread.sleep(5000);
 
@@ -1310,9 +1310,9 @@ public class QuoteUtil {
      * @param logStep the log
      */
     public static void goToQuoteAndChangeStatus_InReview_billing(String status, String logStep) throws InterruptedException {
-        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab, "Click on the dropdown");
-        KeywordUtil.waitForVisible(QuoteObject.editQuote);
-        KeywordUtil.click(QuoteObject.editQuote, logStep);
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab_b, "Click on the dropdown");
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteBilling);
+        KeywordUtil.click(QuoteObject.editQuoteBilling, logStep);
         selectStatus_ss(status, "selected status");
         clickSaveButton("clicked save button");
     }
@@ -1324,11 +1324,11 @@ public class QuoteUtil {
      * @param logStep the log
      */
     public static void goToQuoteAndChangeStatus_Approved_billing(String status, String logStep) throws InterruptedException {
-        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab, "Click on the dropdown");
-        KeywordUtil.waitForVisible(QuoteObject.editQuote);
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab_b, "Click on the dropdown");
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteBillingSection);
         KeywordUtil.delay(3000);
         Thread.sleep(3000);
-        KeywordUtil.clickJS(QuoteObject.editQuote, logStep);
+        KeywordUtil.clickJS(QuoteObject.editQuoteBillingSection, logStep);
         selectStatus_ss(status, "selected status");
         clickSaveButton("clicked save button");
     }
@@ -1339,12 +1339,12 @@ public class QuoteUtil {
      * @param logStep the log
      */
     public static void goToQuoteAndCreateOrder_billing(String logStep) throws InterruptedException {
-        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab, "Click on the dropdown");
+        KeywordUtil.clickJS_component(QuoteObject.dropdownInQuotesTab_b, "Click on the dropdown");
         KeywordUtil.delay(8000);
-        KeywordUtil.waitForVisible(QuoteObject.editQuote);
-        KeywordUtil.click(QuoteObject.editQuote, "Open edit button");
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteAgainInBilling);
+        KeywordUtil.click(QuoteObject.editQuoteAgainInBilling, "Open edit button");
         KeywordUtil.delay(5000);
-        KeywordUtil.waitForVisible(QuoteObject.editQuote);
+        KeywordUtil.waitForVisible(QuoteObject.editQuoteAgainInBilling);
         KeywordUtil.delay(3000);
         Thread.sleep(3000);
 

@@ -70,7 +70,8 @@ public class QuoteObject {
 
     //Creating xpaths for billing section
     public static By clickOnNew=By.xpath("//a[@title='New']");
-    public static By dropdownInQuotesTab=By.xpath("//span[@class='slds-assistive-text' and text()='Show more actions']");
+    public static By dropdownInQuotesTab=By.xpath("(//span[@class='slds-assistive-text' and text()='Show more actions'])");
+    public static By dropdownInQuotesTab_b=By.xpath("//span[@class='slds-assistive-text' and text()='Show Actions']");
     public static By editLines_b=By.xpath("//a//span[@class='slds-truncate' and text()='Edit Lines']");
     public static By dropdownToDelete=By.xpath("//span[@class='slds-assistive-text' and text()='Show Actions']");
     public static By deleteButton=By.xpath("//a[@title='Delete']");
@@ -78,6 +79,9 @@ public class QuoteObject {
     public static By openQuote=By.xpath("//th//span//a[@target='_blank']");
     public static By editQuote=By.xpath("//span[@class='slds-truncate' and text()='Edit']");
 
+    public static By editQuoteBilling=By.xpath("//a[@title='Edit']");
+    public static By editQuoteBillingSection=By.xpath ("(//div[@class='forceActionLink' and @role='button' and text()='Edit'])[2]");
+    public static By editQuoteAgainInBilling=By.xpath ("(//a[@title='Edit'])[3]");
     public static By clickOnOrders =By.xpath("//SPAN[@class='slds-truncate'][text()='Orders']");
     public static By dropDownOrders =By.xpath("//button[@title='Select a List View: Orders']");
     public static By allOrders =By.xpath("//span[@class=' virtualAutocompleteOptionText' and text()='All Orders']");

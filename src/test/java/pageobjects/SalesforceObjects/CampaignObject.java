@@ -166,10 +166,17 @@ public class CampaignObject {
 
     public static By editQuoteButton=By.xpath("//a[@title=\"Edit\"]");
 
+    public static By editQuote=By.xpath("//button[@title=\"Edit Status\"]");
+    public static By editQuoteDraft=By.xpath("//button[@data-value=\"Draft\"]");
+
+    public static By editQuoteAgain=By.xpath("(//button[@name=\"Edit\"])[2]");
+    public static By saveEditQuote=By.xpath("//button[@name='SaveEdit']");
+   public static By viewOrder=By.xpath ("(//a[@class='flex-wrap-ie11 slds-truncate'])[3]");
+    public static By saveOrderButton=By.xpath("//button[@name=\"SaveEdit\"]");
+
 
     @FindBy(xpath = "//div[@class=\"windowViewMode-normal oneContent active lafPageHost\"]//iframe")
     public static WebElement activeIframe;
-
 
     public static By selectStatusInCase(String status){
         return By.xpath("//span[text()='"+status+"']");
@@ -223,11 +230,6 @@ public class CampaignObject {
     public static By leadPageHeader(String leadName){
         return By.xpath("//lightning-formatted-name[text()='"+ leadName +"']");
     }
-
-
-
-
-
 }
 
 

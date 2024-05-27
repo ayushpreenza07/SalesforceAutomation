@@ -188,6 +188,7 @@ public class SalesForceBillingUtil {
      */
     public static void salesforceBilling(String logStep) throws InterruptedException {
         KeywordUtil.delay(5000);
+        KeywordUtil.scrollingToElementofAPage(BillingObject.salesforceBilling,"Scrolling to the billing");
         KeywordUtil.waitForVisible(BillingObject.salesforceBilling);
         KeywordUtil.click(BillingObject.salesforceBilling, logStep);
     }
@@ -335,6 +336,136 @@ public class SalesForceBillingUtil {
         CasesUtil.enterPhoneNumberForServiceSupport(phoneNumber_ss, "Entered Phone Number");
         CasesUtil.saveBtnOfNewAccount_ss("clicked save button");
         ContactUtil.clickSaveButton("Clicked on Save button");
+    }
+
+    /**
+     * Setting the caseEditOrgin
+     * @param origin
+     * @param logStep
+     * @throws InterruptedException
+     */
+
+    public static void setCaseEditOrigin(String origin, String logStep) throws InterruptedException {
+        boolean flag = false;
+        KeywordUtil.waitForVisible(BillingObject.editOrigin);
+        KeywordUtil.click(BillingObject.editOrigin,logStep);
+        KeywordUtil.delay(2000);
+        String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+origin+"')]";
+        try{
+            flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
+        }catch (Exception e){}
+        if(!flag){
+            Assert.fail("No such case origin is present");
+        }else {
+            KeywordUtil.click(By.xpath(xpath), "case origin selected");
+        }
+    }
+
+    /**
+     * Clicking new button on Cases
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void clickOnNewBtnOfCases(String logStep) throws InterruptedException {
+        KeywordUtil.delay(2000);
+        KeywordUtil.scrollingToElementofAPage(BillingObject.newBtnOfCases,"Scrolling to the case");
+        KeywordUtil.waitForVisible(BillingObject.newBtnOfCases);
+        KeywordUtil.click(BillingObject.newBtnOfCases, logStep);
+    }
+
+    /**
+     * Create new case
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void createNewCase(String origin, String logStep) throws InterruptedException {
+        clickOnNewBtnOfCases("Clicked on New button of cases");
+        KeywordUtil.delay(2000);
+        CasesUtil.setCaseOrigin(origin, "Case origin value selected");
+        CasesUtil.clickSaveButton("Click on save button");
+    }
+
+    /**
+     * Click on DropDown
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void clickOnDropdown(String logStep) throws InterruptedException {
+        KeywordUtil.scrollingToElementofAPage(BillingObject.dropdownOfCases,"Scrolling to the dropdown");
+        KeywordUtil.waitForVisible(BillingObject.dropdownOfCases);
+        KeywordUtil.click(BillingObject.dropdownOfCases, logStep);
+        KeywordUtil.delay(3000);
+    }
+
+    /**
+     * Click on Edit Option
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void clickOnEditOption(String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(BillingObject.dropdownEditOption);
+        KeywordUtil.clickJS(BillingObject.dropdownEditOption, logStep);
+        KeywordUtil.delay(2000);
+    }
+
+    /**
+     * Click on Delete Option
+     * @param logStep
+     * @throws InterruptedException
+     */
+    public static void clickOnDeleteOption(String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(BillingObject.dropdownDeleteOption);
+        KeywordUtil.clickJS(BillingObject.dropdownDeleteOption, logStep);
+        KeywordUtil.delay(2000);
+    }
+
+    /**
+     * Edit Create New case
+     * @param origin
+     * @throws InterruptedException
+     */
+    public static void editCreatedNewCase(String origin) throws InterruptedException {
+        clickOnDropdown("Click on dropdown");
+        clickOnEditOption("Click on edit option");
+        KeywordUtil.scrollingToElementofAPage(BillingObject.editOrigin,"Scroll till origin");
+        setCaseEditOrigin(origin, "Other value of case origin is selected");
+        CasesUtil.clickSaveButton("Click on save button");
+    }
+
+    /**
+     * Input the webCompany
+     * @param company the Company
+     * @param logStep the logStep
+     * @throws InterruptedException
+     */
+    public static void webCompany(String company, String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(BillingObject.webCompany);
+        KeywordUtil.inputText(BillingObject.webCompany, company, logStep);
+    }
+
+    /**
+     * UpdateCreate New Case
+     * @param Company the Company
+     *
+     * @throws InterruptedException
+     */
+    public static void updateCreatedNewCase(String Company) throws InterruptedException{
+        clickOnDropdown("Click on dropdown");
+        clickOnEditOption("Click on edit option");
+        webCompany(Company,"Enter web company value");
+        CasesUtil.clickSaveButton("Click on save button");
+    }
+
+    /**
+     * Delete the Created case
+     *
+     * @param logStep the logStep
+     * @throws InterruptedException
+     */
+    public static void deleteCreatedNewCase(String logStep) throws InterruptedException{
+        clickOnDropdown("Click on dropdown");
+        KeywordUtil.clickJS_component(BillingObject.caseDropDown,"");
+        clickOnDeleteOption("Click on delete option");
     }
 
 }
