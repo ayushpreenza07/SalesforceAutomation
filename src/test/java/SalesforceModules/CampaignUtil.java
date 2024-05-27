@@ -1273,7 +1273,6 @@ public class CampaignUtil {
 
     }
 
-
     /**
      * Create campaign for the existing contact in service support
      *
@@ -1324,33 +1323,94 @@ public class CampaignUtil {
 
     }
 
+    /**
+     * Change status as Approved in marketing module
+     *
+     * @param status the status
+     * @param logStep the logStep
+     */
+    public static void goToQuoteAndChangeStatus_Approved_ss(String status,String logStep) throws InterruptedException {
+        KeywordUtil.waitForVisible(CampaignObject.editQuote);
+        KeywordUtil.delay(3000);
+        KeywordUtil.scrollingToElementofAPage(CampaignObject.editQuote,"click on the order quote button");
+        KeywordUtil.clickJS(CampaignObject.editQuote,logStep);
+        KeywordUtil.clickJS(CampaignObject.editQuoteDraft,"click on the draft button");
+        selectStatus_ss(status,"selected status");
+        KeywordUtil.click(CampaignObject.saveOrderButton,"click on the save button");
+        KeywordUtil.delay(6000);
+    }
 
-  public static void createQuote(String opportunityName, String name, String type){
-        try {
-            QuoteUtil.newButtonQuote("Clicked new button");
-            QuoteUtil.checkPrimary("primary checkbox marked");
-            QuoteUtil.selectOpportunity(opportunityName, opportunityName + " entered opportunities name");
-            QuoteUtil.selectAccount(name, name + " entered account name");
-            QuoteUtil.selectType(type, "selected type");
-            QuoteUtil.clickSaveButton("clicked save button");
-        }catch(Exception e){
-            e.getMessage();
+    /**
+     * Create order in marketing module
+     *
+     *
+     */
+    public static void goToQuoteAndCreateOrder_ss(String logStep) throws InterruptedException {
+        KeywordUtil.click(CampaignObject.editQuoteAgain,"clcik on the edit quote again");
+        KeywordUtil.delay(6000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.checkbox_Orders_ss);
+        KeywordUtil.delay(3000);
+
+        KeywordUtil.scrollingToElementofAPage(ServiceSupportObject.checkbox_Orders_ss,"scrolling to the order checkbox");
+        KeywordUtil.clickUsingAction(ServiceSupportObject.checkbox_Orders_ss, "Order button clicked");
+        KeywordUtil.delay(8000);
+        KeywordUtil.click(CampaignObject.saveEditQuote,"click on save button present on edit quote");
+        KeywordUtil.delay(8000);
+        KeywordUtil.waitForClickable(ServiceSupportObject.openOrder);
+        WebElement order = KeywordUtil.getDriver().findElement(ServiceSupportObject.openOrder);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", order);
+    }
+
+    /**
+     * Select status in marketing module
+     *
+     * @param status the status
+     * @param logStep the logStep
+     */
+    public static void selectStatus_ss(String status, String logStep) throws InterruptedException {
+        boolean flag = false;
+        int size = 0;
+        Thread.sleep(7000);
+        String status_ss = "//lightning-base-combobox-item//span[@title='"+status+"']";
+        try{
+            size = KeywordUtil.getDriver().findElements(By.xpath(status_ss)).size();
+        }catch (Exception e){}
+        if(size==0){
+            KeywordUtil.takeScreenshotAndAttachInReport();
+            System.out.println("no such status present");
+            System.out.println(size);
+        }else {
+            KeywordUtil.click(By.xpath(status_ss), "status selected");
         }
-  }
+    }
 
-  public static void clickOnEditQuote(){
+    /**
+     * Activate order in marketing module
+     *
+     *
+     */
+    public static void activateOrder_ss() throws InterruptedException {
+        KeywordUtil.delay(3000);
+        KeywordUtil.waitForClickable(CampaignObject.viewOrder);
+        WebElement order = KeywordUtil.getDriver().findElement(CampaignObject.viewOrder);
+        JavascriptExecutor executor_ss = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor_ss.executeScript("arguments[0].click();", order);
+        KeywordUtil.delay(300);
+        Thread.sleep(3000);
+        KeywordUtil.waitForVisible(QuoteObject.activatedTab);
+        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.activatedTab);
+        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+        executor.executeScript("arguments[0].click();", quote);
         try {
-            KeywordUtil.scrollingToElementofAPage(CampaignObject.editQuoteButton,"scroll to the edit quote button");
-            KeywordUtil.click(CampaignObject.editQuoteButton, "click on the edit quote button");
-
+            KeywordUtil.waitForVisible(QuoteObject.markCurrentStatus);
+            KeywordUtil.click(QuoteObject.markCurrentStatus, "Activated status Marked");
         }catch (Exception e){
-
+            WebElement markStatus = KeywordUtil.getDriver().findElement(QuoteObject.markCurrentStatus);
+            executor.executeScript("arguments[0].click();", markStatus);
         }
-  }
+    }
 
-  public static void createOrder(){
-      clickOnEditQuote();
-  }
 
 }
 

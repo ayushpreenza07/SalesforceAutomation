@@ -84,7 +84,6 @@ public class SalesForceCPQ {
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
         }
-
         KeywordUtil.navigateToUrl(baseUrl);
     }
 
@@ -146,6 +145,21 @@ public class SalesForceCPQ {
     @When("^create opportunity and change its status$")
     public void create_opportunity() throws Exception{
         OppurtunitiesUtil.createOpportunity(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
+
+    }
+
+    @When("^create new quote and add product in account details page$")
+    public void create_new_quote_accountpage() throws Exception{
+        QuoteUtil.createNewQuoteAccountPage(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
+    @And("Create an order and activate in account details page")
+    public void createAnOrderAndActivate_accountpage() throws Exception {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.goToAccountDetailsPage("Go to account details page");
+        QuoteUtil.goToQuoteAndChangeStatus_Approved_AccountPage((dataMap.get("ApprovedStatus")),"Quote status is changed to Approved");
+        QuoteUtil.activateOrderFromAccountPage();
+        QuoteUtil.changeStatusAsDraftFromAccountPage((dataMap.get("changeStatusAsDraft")),"change order status as Draft ");
 
     }
 
