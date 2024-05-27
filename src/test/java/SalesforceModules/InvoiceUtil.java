@@ -10,6 +10,8 @@ import utilities.KeywordUtil;
 
 public class InvoiceUtil {
 
+   static String optionalskus = "//lightning-base-combobox-formatted-text[contains(@title,'Samsung')]";
+   static String accPayments = "//lightning-base-combobox-formatted-text[contains(@title,'Bill')]";
 
     /**Pre-requisite- Order has to be placed with product whose type is one-time off.
      * Pre-requisite- Order has to be placed with product whose type is Recurring.
@@ -129,10 +131,9 @@ public class InvoiceUtil {
         KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss, "Bill", logStep);
         KeywordUtil.delay(5000);
         Thread.sleep(5000);
-        String accname = "//lightning-base-combobox-formatted-text[contains(@title,'Bill')]";
 
         try {
-            flag = KeywordUtil.getDriver().findElement(By.xpath(accname)).isDisplayed();
+            flag = KeywordUtil.getDriver().findElement(By.xpath(accPayments)).isDisplayed();
 
         } catch (Exception e) {
         }
@@ -140,7 +141,7 @@ public class InvoiceUtil {
         if (!flag) {
             System.out.println("no such account present");
         } else {
-            KeywordUtil.click(By.xpath(accname), "account selected");
+            KeywordUtil.click(By.xpath(accPayments), "account selected");
         }
     }
 
@@ -244,10 +245,9 @@ public class InvoiceUtil {
         KeywordUtil.inputText(InvoiceObject.selectOptionalSKU, "Sam", logStep);
         KeywordUtil.delay(5000);
         Thread.sleep(5000);
-        String accname = "//lightning-base-combobox-formatted-text[contains(@title,'Samsung')]";
 
         try {
-            flag = KeywordUtil.getDriver().findElement(By.xpath(accname)).isDisplayed();
+            flag = KeywordUtil.getDriver().findElement(By.xpath(optionalskus)).isDisplayed();
 
         } catch (Exception e) {
         }
@@ -255,7 +255,7 @@ public class InvoiceUtil {
         if (!flag) {
             System.out.println("no such account present");
         } else {
-            KeywordUtil.click(By.xpath(accname), "account selected");
+            KeywordUtil.click(By.xpath(optionalskus), "account selected");
         }
     }
 

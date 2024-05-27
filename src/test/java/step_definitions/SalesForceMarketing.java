@@ -287,7 +287,7 @@ public class SalesForceMarketing {
     }
 
     @And("Create an order and activate in marketing crm")
-    public void create_order_And_Activate() {
+    public void createOrderAndActivate() {
         try {
 
             CampaignUtil.goToQuoteAndChangeStatus_Approved_ss(("Approved"), "Quote status is changed to Approved");

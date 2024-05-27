@@ -188,6 +188,7 @@ public class SalesForceBillingUtil {
      */
     public static void salesforceBilling(String logStep) throws InterruptedException {
         KeywordUtil.delay(5000);
+        KeywordUtil.scrollingToElementofAPage(BillingObject.salesforceBilling,"Scrolling to the billing");
         KeywordUtil.waitForVisible(BillingObject.salesforceBilling);
         KeywordUtil.click(BillingObject.salesforceBilling, logStep);
     }
@@ -367,7 +368,7 @@ public class SalesForceBillingUtil {
      */
     public static void clickOnNewBtnOfCases(String logStep) throws InterruptedException {
         KeywordUtil.delay(2000);
-        KeywordUtil.scrollingToElementofAPage(BillingObject.newBtnOfCases,"Scrolling to the case");
+      //  KeywordUtil.scrollingToElementofAPage(BillingObject.newBtnOfCases,"Scrolling to the case");
         KeywordUtil.waitForVisible(BillingObject.newBtnOfCases);
         KeywordUtil.click(BillingObject.newBtnOfCases, logStep);
     }
@@ -390,7 +391,7 @@ public class SalesForceBillingUtil {
      * @throws InterruptedException
      */
     public static void clickOnDropdown(String logStep) throws InterruptedException {
-        KeywordUtil.scrollingToElementofAPage(BillingObject.dropdownOfCases,"Scrolling to the dropdown");
+       // KeywordUtil.scrollingToElementofAPage(BillingObject.dropdownOfCases,"Scrolling to the dropdown");
         KeywordUtil.waitForVisible(BillingObject.dropdownOfCases);
         KeywordUtil.click(BillingObject.dropdownOfCases, logStep);
         KeywordUtil.delay(3000);
@@ -433,13 +434,13 @@ public class SalesForceBillingUtil {
 
     /**
      * Input the webCompany
-     * @param Company the Company
+     * @param company the Company
      * @param logStep the logStep
      * @throws InterruptedException
      */
-    public static void webCompany(String Company, String logStep) throws InterruptedException {
+    public static void webCompany(String company, String logStep) throws InterruptedException {
         KeywordUtil.waitForVisible(BillingObject.webCompany);
-        KeywordUtil.inputText(BillingObject.webCompany, Company, logStep);
+        KeywordUtil.inputText(BillingObject.webCompany, company, logStep);
     }
 
     /**
@@ -463,6 +464,7 @@ public class SalesForceBillingUtil {
      */
     public static void deleteCreatedNewCase(String logStep) throws InterruptedException{
         clickOnDropdown("Click on dropdown");
+        KeywordUtil.clickJS_component(BillingObject.caseDropDown,"");
         clickOnDeleteOption("Click on delete option");
     }
 

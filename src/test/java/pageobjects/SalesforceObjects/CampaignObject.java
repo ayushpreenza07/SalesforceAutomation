@@ -171,7 +171,6 @@ public class CampaignObject {
 
     public static By editQuoteAgain=By.xpath("(//button[@name=\"Edit\"])[2]");
     public static By saveEditQuote=By.xpath("//button[@name='SaveEdit']");
-   // public static By viewOrder=By.xpath("//table[@role=\"grid\"]//tbody//tr[@class=\"slds-hint-parent\"]//th[@data-label=\"Order Number\"]");
    public static By viewOrder=By.xpath ("(//a[@class='flex-wrap-ie11 slds-truncate'])[3]");
     public static By saveOrderButton=By.xpath("//button[@name=\"SaveEdit\"]");
 

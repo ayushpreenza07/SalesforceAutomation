@@ -100,11 +100,12 @@ public class SalesForceBilling {
     @And("Create an order and activate in billing section")
     public void create_An_Order_And_Activate_billing() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        QuoteUtil.goToQuoteAndChangeStatus_InReview_billing((dataMap.get("InReviewStatus")), "Quote status is changed to In Review");
-        QuoteUtil.goToQuoteAndChangeStatus_Approved_billing((dataMap.get("ApprovedStatus")), "Quote status is changed to Approved");
+        QuoteUtil.clickQuoteButton_billing("Navigated to quote");
+        QuoteUtil.goToQuoteAndChangeStatus_InReview_billing("In Review", "Quote status is changed to In Review");
+        QuoteUtil.goToQuoteAndChangeStatus_Approved_billing("Approved", "Quote status is changed to Approved");
         QuoteUtil.goToQuoteAndCreateOrder_billing("Order generated and activated");
-        QuoteUtil.activateOrder_billing();
-        QuoteUtil.changeStatusAsDraft_billing((dataMap.get("changeStatusAsDraft")), "change order status as Draft ");
+//        QuoteUtil.activateOrder_billing();
+//        QuoteUtil.changeStatusAsDraft_billing((dataMap.get("changeStatusAsDraft")), "change order status as Draft ");
             }
 
     @When("^Create new contract in billing section$")
