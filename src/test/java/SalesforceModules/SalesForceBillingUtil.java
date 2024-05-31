@@ -82,11 +82,11 @@ public class SalesForceBillingUtil {
     /**
      * Creating new product
      */
-    public static void newProduct() throws Exception {
+    public static void newProduct(String productName, String productCode, String productFamily, String logStep) throws Exception {
         AccountUtil.clickNewButton("New button clicked");
-        enterProductName("IntelPro");
-        enterProductCode("INTP");
-        setProductFamily("Hardware Family selected");
+        enterProductName(productName);
+        enterProductCode(productCode);
+        setProductFamily(productFamily);
         checkActive("Active checkbox");
         clickSaveButton("Product saved");
     }
@@ -105,8 +105,6 @@ public class SalesForceBillingUtil {
      * @param logstep the log
      */
     public static void addStandardPrice(String logstep) throws InterruptedException {
-
-            KeywordUtil.delay(5000);
             ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0, 800)");
             KeywordUtil.waitForVisible(BillingObject.addStandardPrice);
             KeywordUtil.click(BillingObject.addStandardPrice, logstep);
@@ -128,7 +126,7 @@ public class SalesForceBillingUtil {
             WebElement lastElement = elements.get(elements.size() - 1);
             lastElement.click();
         } else {
-            System.out.println("No elements found!");
+        Assert.fail("No elements found!");
         }
 
         KeywordUtil.waitForVisible(BillingObject.editButton);
@@ -187,7 +185,7 @@ public class SalesForceBillingUtil {
      * @throws InterruptedException
      */
     public static void salesforceBilling(String logStep) throws InterruptedException {
-        KeywordUtil.delay(5000);
+
         KeywordUtil.scrollingToElementofAPage(BillingObject.salesforceBilling,"Scrolling to the billing");
         KeywordUtil.waitForVisible(BillingObject.salesforceBilling);
         KeywordUtil.click(BillingObject.salesforceBilling, logStep);
@@ -200,11 +198,11 @@ public class SalesForceBillingUtil {
      */
     public static void setSalutationForNewContact(String salutation, String logStep) throws InterruptedException {
         boolean flag = false;
-        KeywordUtil.waitForVisible(BillingObject.salutationOfNewContactOnExistAccount);
+        KeywordUtil.waitForElementPresence(BillingObject.salutationOfNewContactOnExistAccount);
         KeywordUtil.click(BillingObject.salutationOfNewContactOnExistAccount, logStep);
         String xpath = "//li/a[contains(@title,'" + salutation + "')]";
-        KeywordUtil.delay(2000);
-        System.out.println(xpath);
+
+
         try {
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
         } catch (Exception e) {
@@ -222,8 +220,8 @@ public class SalesForceBillingUtil {
      * @throws InterruptedException
      */
     public static void createCustomerAccount(String name, String phone) throws InterruptedException {
-        KeywordUtil.waitForVisible(AccountObject.accountsTab);
-        KeywordUtil.delay(3000);
+        KeywordUtil.waitForElementPresence(AccountObject.accountsTab);
+
         AccountUtil.clickAccountsTab("Navigated to accounts");
         AccountUtil.clickNewButton("Clicked new button for accounts");
         AccountUtil.enterAccountName(name, "Entered account name");
@@ -240,17 +238,18 @@ public class SalesForceBillingUtil {
      */
     public static void createContactLinkExisting(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
         AccountUtil.clickAccountsTab("Navigated to accounts");
-        KeywordUtil.delay(5000);
+
         KeywordUtil.click(BillingObject.accountNameLink, "Clicked on name link");
-        KeywordUtil.delay(3000);
+
         KeywordUtil.click(BillingObject.newBtnContactsOfAccount, "Clicked on New button of account name contacts");
         ContactUtil.setSalutation(salutation, salutation + "Set Salutation");
         ContactUtil.enterLastContactName(lastname, lastname + " lastname set");
         ContactUtil.enterEmail(email, email + " email entered");
         ContactUtil.enterPhoneContact(phoneNumber, phoneNumber + " phone number entered");
         ContactUtil.clickSaveButton("save button clicked");
-        KeywordUtil.delay(3000);
+
     }
+
     /***
      * Entering last name of contact
      * @param lastname
@@ -260,6 +259,7 @@ public class SalesForceBillingUtil {
         KeywordUtil.waitForVisible(BillingObject.lastNameOfNewContactOnExistAccount);
         KeywordUtil.inputText(BillingObject.lastNameOfNewContactOnExistAccount, lastname, logStep);
     }
+
     /**
      * Entering phone number for contact
      * @param phone
@@ -269,6 +269,7 @@ public class SalesForceBillingUtil {
         KeywordUtil.waitForVisible(BillingObject.phoneNumberOfNewContactOnExistAccount);
         KeywordUtil.inputText(BillingObject.phoneNumberOfNewContactOnExistAccount, phone, logStep);
     }
+
     /**
      * entering email id for contact
      * @param email
@@ -282,6 +283,7 @@ public class SalesForceBillingUtil {
             Assert.fail("invalid email format");
         }
     }
+
     /**
      * creating another contact from link account existing
      * @param salutation
@@ -293,23 +295,24 @@ public class SalesForceBillingUtil {
     public static void createAnotherContactFromLinkExisting(String salutation, String lastname, String email, String phoneNumber) throws InterruptedException {
         KeywordUtil.waitForVisible(BillingObject.newContactBtnOnExistAccount);
         KeywordUtil.click(BillingObject.newContactBtnOnExistAccount, "Clicked on New Contact button");
-        KeywordUtil.delay(3000);
+
         setSalutationForNewContact(salutation,salutation+"Set Salutation");
         enterLastNameOfContact(lastname,lastname+" lastname entered");
         enterEmailOfContact(email,email+" email entered");
         enterPhoneNumberOfContact(phoneNumber,phoneNumber+" phone number entered");
         KeywordUtil.click(BillingObject.saveButtonOfNewContact,"Clicked on save button");
     }
+
     /**
      * Clicking on New button
      * @param logStep
      * @throws InterruptedException
      */
     public static void newButtonOfContactsTab(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(BillingObject.newBtnOfContactsTab);
+        KeywordUtil.waitForElementPresence(BillingObject.newBtnOfContactsTab);
         KeywordUtil.click(BillingObject.newBtnOfContactsTab,logStep);
     }
+
     /**
      * Creating New contacts By creating new Account
      * @param salutation
@@ -320,18 +323,14 @@ public class SalesForceBillingUtil {
      */
     public static void createNewContactOfContacts(String salutation, String name, String accountName_ss, String phoneNumber_ss) throws InterruptedException {
         ContactUtil.clickContactButton("Click on Contact Tab");
-        KeywordUtil.delay(3000);
         newButtonOfContactsTab("Clicked on New button after clicked on Contacts tab");
-        KeywordUtil.delay(3000);
         ContactUtil.setSalutation(salutation, salutation + "Set Salutation");
         ContactUtil.enterLastContactName(name, "Entered last name");
         KeywordUtil.scrollingToElementofAPage(ServiceSupportObject.searchAccountsForAccountName,"scrolling down for Accounts Search");
         KeywordUtil.waitForVisible(ServiceSupportObject.searchAccountsForAccountName);
         KeywordUtil.click(ServiceSupportObject.searchAccountsForAccountName, "Click on search accounts");
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.newAccountOption);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.newAccountOption);
         KeywordUtil.click(ServiceSupportObject.newAccountOption, "Click on New Account option");
-        KeywordUtil.delay(3000);
         CasesUtil.enterAccountNameForServiceSupport(accountName_ss, "Entered Account Name");
         CasesUtil.enterPhoneNumberForServiceSupport(phoneNumber_ss, "Entered Phone Number");
         CasesUtil.saveBtnOfNewAccount_ss("clicked save button");
@@ -349,7 +348,7 @@ public class SalesForceBillingUtil {
         boolean flag = false;
         KeywordUtil.waitForVisible(BillingObject.editOrigin);
         KeywordUtil.click(BillingObject.editOrigin,logStep);
-        KeywordUtil.delay(2000);
+
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+origin+"')]";
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
@@ -367,7 +366,7 @@ public class SalesForceBillingUtil {
      * @throws InterruptedException
      */
     public static void clickOnNewBtnOfCases(String logStep) throws InterruptedException {
-        KeywordUtil.delay(2000);
+
         KeywordUtil.scrollingToElementofAPage(BillingObject.newBtnOfCases,"Scrolling to the case");
         KeywordUtil.waitForVisible(BillingObject.newBtnOfCases);
         KeywordUtil.click(BillingObject.newBtnOfCases, logStep);
@@ -380,7 +379,7 @@ public class SalesForceBillingUtil {
      */
     public static void createNewCase(String origin, String logStep) throws InterruptedException {
         clickOnNewBtnOfCases("Clicked on New button of cases");
-        KeywordUtil.delay(2000);
+
         CasesUtil.setCaseOrigin(origin, "Case origin value selected");
         CasesUtil.clickSaveButton("Click on save button");
     }
@@ -394,7 +393,7 @@ public class SalesForceBillingUtil {
         KeywordUtil.scrollingToElementofAPage(BillingObject.dropdownOfCases,"Scrolling to the dropdown");
         KeywordUtil.waitForVisible(BillingObject.dropdownOfCases);
         KeywordUtil.click(BillingObject.dropdownOfCases, logStep);
-        KeywordUtil.delay(3000);
+
     }
 
     /**
@@ -405,7 +404,7 @@ public class SalesForceBillingUtil {
     public static void clickOnEditOption(String logStep) throws InterruptedException {
         KeywordUtil.waitForVisible(BillingObject.dropdownEditOption);
         KeywordUtil.clickJS(BillingObject.dropdownEditOption, logStep);
-        KeywordUtil.delay(2000);
+
     }
 
     /**
@@ -416,7 +415,7 @@ public class SalesForceBillingUtil {
     public static void clickOnDeleteOption(String logStep) throws InterruptedException {
         KeywordUtil.waitForVisible(BillingObject.dropdownDeleteOption);
         KeywordUtil.clickJS(BillingObject.dropdownDeleteOption, logStep);
-        KeywordUtil.delay(2000);
+
     }
 
     /**

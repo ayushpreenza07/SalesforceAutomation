@@ -27,7 +27,8 @@ public class SalesForceBilling {
 
     @And("Create new product")
     public void createNewProduct() throws Exception {
-        SalesForceBillingUtil.newProduct();
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.newProduct(dataMap.get("ProductName_new"),dataMap.get("ProductCode"),dataMap.get("ProductFamily"),dataMap.get("CheckActive"));
     }
 
     @And("add price book and standard price")
@@ -49,7 +50,8 @@ public class SalesForceBilling {
 
     @And("search product in products tab")
     public void searchProductInProductsTab() {
-        SalesForceBillingUtil.searchProduct("INTP");
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.searchProduct(dataMap.get("searchProduct"));
     }
 
 
@@ -111,7 +113,7 @@ public class SalesForceBilling {
     @When("^Create new contract in billing section$")
     public void createNewContract() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        ContractUtil.createContract_billing(dataMap.get("AccountName"));
+        ContractUtil.createContract_billing(dataMap.get("AccountName"),dataMap.get("Term"));
     }
 
     @And("Create new case")
@@ -150,14 +152,14 @@ public class SalesForceBilling {
     @Then("Payments using cards")
     public void payments_Using_Cards() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        InvoiceUtil.paymentsBilling(dataMap.get("PaymentsAccount"),"5000",dataMap.get("PaymentType"),dataMap.get("InvoiceNumber"),"Make payments");
+        InvoiceUtil.paymentsBilling(dataMap.get("PaymentsAccount"),dataMap.get("Amount"),dataMap.get("PaymentType"),dataMap.get("InvoiceNumber"),"Make payments");
 
     }
 
     @Then("Create bundle product and add feature and Options")
     public void create_Bundle_Features_Options() throws InterruptedException {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        InvoiceUtil.createBundleFeaturesOptions("Create Bundle Products, add features");
+        InvoiceUtil.createBundleFeaturesOptions(dataMap.get("SKU"),"Create Bundle Products, add features");
     }
 
 }

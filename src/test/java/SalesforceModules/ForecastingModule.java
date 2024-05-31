@@ -71,8 +71,8 @@ public class ForecastingModule {
      */
     public static void clickAndEnterValue(String logStep, String searchValue) throws InterruptedException {
         try {
-            Thread.sleep(3000);
-            KeywordUtil.waitForVisible(ForecastingPage.setupSearch);
+
+            KeywordUtil.waitForElementPresence(ForecastingPage.setupSearch);
             WebElement searchInput = getDriver().findElement(ForecastingPage.setupSearch);
             searchInput.clear();
             KeywordUtil.inputText(ForecastingPage.setupSearch, searchValue, logStep);
@@ -494,7 +494,7 @@ public class ForecastingModule {
                 KeywordUtil.isWebElementVisible(ForecastingPage.showQuotasUncheckedCheckbox, "Show quotas checkbox is not checked.");
                 takeScreenshotAndAttachInReport();
                 KeywordUtil.click(ForecastingPage.showQuotasUncheckedCheckbox, "Click on Show quotas checkbox.");
-                Thread.sleep(2000);
+                KeywordUtil.waitForElementPresence(ForecastingPage.showQuotasCheckbox);
                 KeywordUtil.isWebElementVisible(ForecastingPage.showQuotasCheckbox, "Show quotas checkbox is checked.");
                 takeScreenshotAndAttachInReport();
             }
@@ -521,7 +521,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.showingDateRangeOnForecastsPage, "Verify date range filter is visible.");
             KeywordUtil.click(ForecastingPage.showingDateRangeOnForecastsPage, "Click on date range filter.");
-            Thread.sleep(2000);
+
             KeywordUtil.selectValueFromDropdown(ForecastingPage.dateOfStartPeriod, "March FY 2023", "Select value from start date.");
             KeywordUtil.click(ForecastingPage.dateOfStartPeriod, "Click on date range filter.");
             KeywordUtil.click(ForecastingPage.startDateAndMonth("March FY 2023"), "Select value from date range filter.");
@@ -564,7 +564,7 @@ public class ForecastingModule {
             takeScreenshotAndAttachInReport();
             KeywordUtil.isWebElementVisible(ForecastingPage.showingDateRangeOnForecastsPage, "Verify date range filter is visible.");
             KeywordUtil.click(ForecastingPage.showingDateRangeOnForecastsPage, "Click on date range filter.");
-            Thread.sleep(2000);
+
             KeywordUtil.selectValueFromDropdown(ForecastingPage.dateOfStartPeriod, "March FY 2023", "Select value from start date.");
             KeywordUtil.click(ForecastingPage.dateOfStartPeriod, "Click on date range filter.");
             KeywordUtil.click(ForecastingPage.startDateAndMonth("March FY 2023"), "Select value from date range filter.");
@@ -666,8 +666,7 @@ public class ForecastingModule {
             KeywordUtil.click(ForecastingPage.appLauncherIcon, "Click on App Launcher Icon.");
             KeywordUtil.waitForVisible(ForecastingPage.searchAppInput);
             KeywordUtil.inputText(ForecastingPage.searchAppInput, "Forecasts", "Search for Forecast");
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(ForecastingPage.forecastAppOption);
+            KeywordUtil.waitForElementPresence(ForecastingPage.forecastAppOption);
             KeywordUtil.pressEnter(ForecastingPage.forecastAppOption);
         } catch (Exception e) {
             catchAssertError(e);
@@ -679,7 +678,6 @@ public class ForecastingModule {
      */
     public static void validateForecastingPageIsLoaded() throws InterruptedException {
         try {
-            Thread.sleep(6000);
             KeywordUtil.validatePageShouldBeLoaded("Forecasts");
         } catch (Exception e) {
             catchAssertError(e);
@@ -706,8 +704,7 @@ public class ForecastingModule {
         try {
             KeywordUtil.isWebElementVisible(ForecastingPage.deactivateOption, "Deactivation option is available");
             KeywordUtil.click(ForecastingPage.deactivateOption, "Click on Deactivate option.");
-            KeywordUtil.delay(2000);
-            KeywordUtil.waitForVisible(ForecastingPage.deactivateButton);
+            KeywordUtil.waitForElementPresence(ForecastingPage.deactivateButton);
             KeywordUtil.click(ForecastingPage.deactivateButton, "Click on Deactivate button.");
             takeScreenshotAndAttachInReport();
             CampaignUtil.verificationMessage();
@@ -790,7 +787,6 @@ public class ForecastingModule {
         try {
             takeScreenshotAndAttachInReport();
             CampaignUtil.verificationMessage();
-            KeywordUtil.delay(2000);
         } catch (Exception e) {
             catchAssertError(e);
         }
@@ -816,7 +812,6 @@ public class ForecastingModule {
         try {
             KeywordUtil.waitForVisible(ForecastingPage.forecastTypeLink(forecastTypeName));
             KeywordUtil.click(ForecastingPage.forecastTypeLink(forecastTypeName), "Click on Forecast type link.");
-            KeywordUtil.delay(2000);
         } catch (Exception e) {
             catchAssertError(e);
         }

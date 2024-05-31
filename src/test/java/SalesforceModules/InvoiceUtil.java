@@ -6,9 +6,14 @@ import pageobjects.SalesforceObjects.InvoiceObject;
 import pageobjects.SalesforceObjects.OppurtunitiesObject;
 import pageobjects.SalesforceObjects.QuoteObject;
 import pageobjects.SalesforceObjects.ServiceSupportObject;
+import utilities.ExcelDataUtil;
 import utilities.KeywordUtil;
 
+import java.util.HashMap;
+
 public class InvoiceUtil {
+    static HashMap<String, String> map = new HashMap<>();
+
 
    static String optionalskus = "//lightning-base-combobox-formatted-text[contains(@title,'Samsung')]";
    static String accPayments = "//lightning-base-combobox-formatted-text[contains(@title,'Bill')]";
@@ -25,7 +30,7 @@ public class InvoiceUtil {
         KeywordUtil.clickJS_component(QuoteObject.clickOnOrders,"Click on Orders tab");
         KeywordUtil.clickJS_component(QuoteObject.dropDownOrders,"Click on dropdownOption");
         KeywordUtil.clickJS_component(QuoteObject.allOrders,"Select All Orders");
-        KeywordUtil.delay(2000);
+        KeywordUtil.waitForElementPresence(InvoiceObject.vieworder);
         KeywordUtil.clickJS_component(InvoiceObject.vieworder,"Open Order");
 
     }
@@ -39,10 +44,9 @@ public class InvoiceUtil {
     public static void setTaxInfo(String status, String logStep) throws InterruptedException {
         boolean flag = false;
         int size = 0;
-        KeywordUtil.waitForVisible(InvoiceObject.selectTaxstatus);
+        KeywordUtil.waitForElementPresence(InvoiceObject.selectTaxstatus);
         KeywordUtil.click(InvoiceObject.selectTaxstatus, logStep);
-        KeywordUtil.delay(3000);
-        Thread.sleep(000);
+
         String changeStatus_ss = "//div[label[text()='Tax Status']]/div//span[@class='slds-truncate'][contains(text(),'"+status+"')]";
         try {
             size = KeywordUtil.getDriver().findElements(By.xpath(changeStatus_ss)).size();
@@ -52,8 +56,8 @@ public class InvoiceUtil {
 
         if (size == 0) {
             KeywordUtil.takeScreenshotAndAttachInReport();
-            System.out.println("no such status present");
-            System.out.println(size);
+            Assert.fail("no such status present");
+
         } else {
             KeywordUtil.click(By.xpath(changeStatus_ss), "status changed as --None--");
         }
@@ -67,10 +71,8 @@ public class InvoiceUtil {
     public static void setPostedStatus(String status, String logStep) throws InterruptedException {
         boolean flag = false;
         int size = 0;
-        KeywordUtil.delay(4000);
-        KeywordUtil.waitForVisible(InvoiceObject.selectstatus);
+        KeywordUtil.waitForElementPresence(InvoiceObject.selectstatus);
         KeywordUtil.click(InvoiceObject.selectstatus,logStep);
-        KeywordUtil.delay(3000);
         String xpath   ="(//lightning-base-combobox-item[@class='slds-media slds-listbox__option slds-media_center slds-media_small slds-listbox__option_plain'][contains(@data-value,'"+status+"')])[1]";
         try {
             size = KeywordUtil.getDriver().findElements(By.xpath(xpath)).size();
@@ -80,8 +82,8 @@ public class InvoiceUtil {
 
         if (size == 0) {
             KeywordUtil.takeScreenshotAndAttachInReport();
-            System.out.println("no such status present");
-            System.out.println(size);
+           Assert.fail("no such status present");
+
         } else {
             KeywordUtil.click(By.xpath(xpath), "status changed as Posted");
         }
@@ -104,15 +106,14 @@ public class InvoiceUtil {
         KeywordUtil.clickJS_component(InvoiceObject.openInvoices,"Open the Invoice");
 
         //code for tax info boxes
-        KeywordUtil.delay(3000);
+        KeywordUtil.waitForElementPresence(InvoiceObject.checkboxForTaxInfo);
         KeywordUtil.clickJS_component(InvoiceObject.checkboxForTaxInfo,"edit button on tax info");
-        KeywordUtil.delay(3000);
         setTaxInfo(taxStatus,"select tax status as None");
-        KeywordUtil.delay(3000);
+        KeywordUtil.waitForElementPresence(InvoiceObject.taxMessage);
         KeywordUtil.clearInput(InvoiceObject.taxMessage);
 
         //select status as posted
-        KeywordUtil.delay(2000);
+
         setPostedStatus(postedStatus,"select status as Posted");
         QuoteUtil.clickSaveButton("clicked save button");
     }
@@ -129,8 +130,6 @@ public class InvoiceUtil {
         KeywordUtil.waitForVisible(ServiceSupportObject.searchAccounts_quote_ss);
         KeywordUtil.click(ServiceSupportObject.searchAccounts_quote_ss, logStep);
         KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss, "Bill", logStep);
-        KeywordUtil.delay(5000);
-        Thread.sleep(5000);
 
         try {
             flag = KeywordUtil.getDriver().findElement(By.xpath(accPayments)).isDisplayed();
@@ -139,7 +138,7 @@ public class InvoiceUtil {
         }
 
         if (!flag) {
-            System.out.println("no such account present");
+            Assert.fail("no such account present");
         } else {
             KeywordUtil.click(By.xpath(accPayments), "account selected");
         }
@@ -167,7 +166,6 @@ public class InvoiceUtil {
         int size = 0;
         KeywordUtil.waitForVisible(InvoiceObject.paymenttype);
         KeywordUtil.click(InvoiceObject.paymenttype,logStep);
-        KeywordUtil.delay(3000);
         String xpath ="//lightning-base-combobox-item[contains(@data-value,'"+paymentType+"')]";
         try {
             size = KeywordUtil.getDriver().findElements(By.xpath(xpath)).size();
@@ -177,8 +175,8 @@ public class InvoiceUtil {
 
         if (size == 0) {
             KeywordUtil.takeScreenshotAndAttachInReport();
-            System.out.println("no such status present");
-            System.out.println(size);
+            Assert.fail("no such status present");
+
         } else {
             KeywordUtil.click(By.xpath(xpath), "status changed as Credit Cards");
         }
@@ -196,8 +194,6 @@ public class InvoiceUtil {
         KeywordUtil.waitForVisible(InvoiceObject.selectInvoices);
         KeywordUtil.click(InvoiceObject.selectInvoices, logStep);
         KeywordUtil.inputText(InvoiceObject.selectInvoices, "INV", logStep);
-        KeywordUtil.delay(5000);
-        Thread.sleep(5000);
         String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'INV')])[1]";
 
         try {
@@ -207,7 +203,7 @@ public class InvoiceUtil {
         }
 
         if (!flag) {
-            System.out.println("no such account present");
+            Assert.fail("no such account present");
         } else {
             KeywordUtil.click(By.xpath(accname), "account selected");
         }
@@ -240,11 +236,9 @@ public class InvoiceUtil {
      */
     public static void selectOptionalSKU(String optionalSKU, String logStep) throws InterruptedException {
         boolean flag = false;
-        KeywordUtil.waitForVisible(InvoiceObject.selectOptionalSKU);
+        KeywordUtil.waitForElementPresence(InvoiceObject.selectOptionalSKU);
         KeywordUtil.click(InvoiceObject.selectOptionalSKU, logStep);
         KeywordUtil.inputText(InvoiceObject.selectOptionalSKU, "Sam", logStep);
-        KeywordUtil.delay(5000);
-        Thread.sleep(5000);
 
         try {
             flag = KeywordUtil.getDriver().findElement(By.xpath(optionalskus)).isDisplayed();
@@ -253,7 +247,7 @@ public class InvoiceUtil {
         }
 
         if (!flag) {
-            System.out.println("no such account present");
+         Assert.fail("no such account present");
         } else {
             KeywordUtil.click(By.xpath(optionalskus), "account selected");
         }
@@ -265,7 +259,7 @@ public class InvoiceUtil {
      *
      * @param logStep the log
      */
-    public static void createBundleFeaturesOptions(String logStep) throws InterruptedException {
+    public static void createBundleFeaturesOptions(String sku, String logStep) throws InterruptedException {
         KeywordUtil.clickJS_component(InvoiceObject.clickOnProducts, "Click on Products tab");
         KeywordUtil.clickJS_component(InvoiceObject.clickOnSamsungPowerBank, "Click on Samsung Power Bank");
         KeywordUtil.clickJS_component(InvoiceObject.clickOnRelatedTab, "Click on Samsung Power Bank");
@@ -275,17 +269,17 @@ public class InvoiceUtil {
         KeywordUtil.click(InvoiceObject.featureName, logStep);
         KeywordUtil.inputText(InvoiceObject.featureName, "StorageComponent", "Add feature name");
         KeywordUtil.click(InvoiceObject.numberValue, "Add the number");
-        KeywordUtil.inputText(InvoiceObject.numberValue, "10", "Added number");
+        map = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        KeywordUtil.inputText(InvoiceObject.numberValue, map.get("Number"), "Added number");
         KeywordUtil.takeScreenshotAndAttachInReport();
         CasesUtil.clickSaveButton_ss("Saving features");
 
         //adding new options
         KeywordUtil.clickJS_component(InvoiceObject.optionsButton, "Click on New button on Options");
-        KeywordUtil.delay(3000);
+        KeywordUtil.waitForElementPresence(InvoiceObject.numberValue);
         KeywordUtil.click(InvoiceObject.numberValue, logStep);
-        KeywordUtil.inputText(InvoiceObject.numberValue, "3", logStep);
-        KeywordUtil.delay(3000);
-        selectOptionalSKU("Samsung", "select the Optional SKU");
+        KeywordUtil.inputText(InvoiceObject.numberValue, map.get("Number"), logStep);
+        selectOptionalSKU(sku, "select the Optional SKU");
         KeywordUtil.clickJS_component(InvoiceObject.selectedCheckBox, "Tick the selected checkbox");
         KeywordUtil.clickJS_component(InvoiceObject.requiredCheckBox, "Tick the required checkbox");
         KeywordUtil.clickJS_component(InvoiceObject.bundledCheckBox, "Tick the bundled checkbox");

@@ -24,9 +24,9 @@ public class ContractUtil {
      */
     public static void buttonContract(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.delay(10000);
+
             ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
-            KeywordUtil.waitForVisible(ContractObject.contractBtn);
+            KeywordUtil.waitForElementPresence(ContractObject.contractBtn);
             KeywordUtil.clickJS(ContractObject.contractBtn, logStep);
         }catch(Exception e){
             KeywordUtil.scrollElementIntoViewUsingActions(ContractObject.contractBtn);
@@ -41,8 +41,7 @@ public class ContractUtil {
      * @param logStep the log
      */
     public static void newButtonContract(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ContractObject.newContract);
+        KeywordUtil.waitForElementPresence(ContractObject.newContract);
         KeywordUtil.click(ContractObject.newContract,logStep);
     }
 
@@ -82,7 +81,7 @@ public class ContractUtil {
      *
      * @param term the log
      */
-    public static void enterContractTerm(int term, String logStep){
+    public static void enterContractTerm(String term, String logStep){
         KeywordUtil.waitForVisible(ContractObject.contractTerm);
         KeywordUtil.inputText(ContractObject.contractTerm, String.valueOf(term),logStep);
     }
@@ -95,7 +94,7 @@ public class ContractUtil {
      */
     public static void navigateToOpportunity(String opportunity,String logStep) throws InterruptedException {
         String xpath = "//a[@title='"+opportunity+"']";
-        System.out.println(xpath);
+
         try {
             KeywordUtil.waitForVisible(By.xpath("//li//a[@title='"+opportunity+"']"));
             KeywordUtil.click(By.xpath("//li//a[@title='"+opportunity+"']"), logStep);
@@ -104,7 +103,7 @@ public class ContractUtil {
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
         }
-        KeywordUtil.delay(5000);
+
     }
 
 
@@ -113,18 +112,17 @@ public class ContractUtil {
      *
      * @param account the log
      */
-    public static void createContract(String account) throws InterruptedException {
+    public static void createContract(String account, String term) throws InterruptedException {
 
         buttonContract("Navigated to contract page");
         KeywordUtil.takeScreenshotAndAttachInReport();
         newButtonContract("new button clicked for contract");
         KeywordUtil.takeScreenshotAndAttachInReport();
         enterStartDate(2024,4,10,"Entered start date");
-        enterContractTerm(2,"Entered contract term");
+        enterContractTerm( term,"Entered contract term");
         QuoteUtil.selectAccount(account,"Account selected");
         KeywordUtil.takeScreenshotAndAttachInReport();
         QuoteUtil.clickSaveButton("Save button clicked for new contract");
-        KeywordUtil.delay(3000);
         KeywordUtil.takeScreenshotAndAttachInReport();
 
     }
@@ -134,19 +132,18 @@ public class ContractUtil {
      *
      * @param account the log
      */
-    public static void createContract_billing(String account) throws InterruptedException {
+    public static void createContract_billing(String account, String term) throws InterruptedException {
         KeywordUtil.clickJS_component(OppurtunitiesObject.opportunitiesTab,"Click on Opportunity");
         KeywordUtil.clickJS_component(OppurtunitiesObject.selectOpportunity_b,"Open Opportunity");
-        KeywordUtil.delay(5000);
+        KeywordUtil.waitForElementPresence(ContractObject.contractDropDownBtn);
         KeywordUtil.clickJS_component(ContractObject.contractDropDownBtn,"Click on drop down");
         KeywordUtil.clickJS_component(ContractObject.newContractButton,"Click new button");
         KeywordUtil.takeScreenshotAndAttachInReport();
         enterStartDate(2024,4,10,"Entered start date");
-        enterContractTerm(2,"Entered contract term");
+        enterContractTerm(term,"Entered contract term");
         QuoteUtil.selectAccount(account,"Account selected");
         KeywordUtil.takeScreenshotAndAttachInReport();
         QuoteUtil.clickSaveButton("Save button clicked for new contract");
-        KeywordUtil.delay(3000);
         KeywordUtil.takeScreenshotAndAttachInReport();
 
     }
