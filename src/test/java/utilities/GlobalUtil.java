@@ -2,7 +2,6 @@ package utilities;
 
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
-import jirautil.JiraUtil;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
 
@@ -96,9 +95,6 @@ public class GlobalUtil {
 	 */
 	public static TestLinkUtil testlinkapi;
 	/**
-	 * The constant jiraapi.
-	 */
-	public static JiraUtil jiraapi;
 	/**
 	 * The constant errorMsg.
 	 */

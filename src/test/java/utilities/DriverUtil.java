@@ -402,12 +402,11 @@ public class DriverUtil {
     public static WebDriver getBrowser(String exeEnv, String browserName) {
         if (exeEnv.equalsIgnoreCase("Window")) {
             if (browserName.equalsIgnoreCase("Chrome")) {
-                String chromeDriverPath = "src/main/resources/Config/chromedriver.exe";
-                System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-//                WebDriverManager.chromedriver().setup();
+
+                WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("--disable-notifications");
-//                options.addArguments("load-extension=C:\\Users\\Gurdev\\Downloads\\v5.4 2\\build");
+//
                 GlobalUtil.setDriver(new ChromeDriver(options));
             } else if (browserName.equalsIgnoreCase("IE")) {
                 WebDriverManager.iedriver().setup();

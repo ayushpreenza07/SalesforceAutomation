@@ -5,7 +5,6 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import jirautil.JiraUtil;
 import mantisutil.ConnectMantis;
 import org.apache.commons.io.FileUtils;
 import org.testng.ITestContext;
@@ -86,50 +85,6 @@ public class RunCukesTest extends AbstractTestNGCucumberTests {
 
 			if (executionEnv == null)
 				executionEnv = ConfigReader.getValue("defaultExecutionEnvironment");
-
-//			// testlink config
-//			if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Testlink")) {
-//				TestLinkUtil.DEV_KEY = GlobalUtil.getCommonSettings().getTestlinkAPIKey();
-//				TestLinkUtil.SERVER_URL = "http://" + GlobalUtil.getCommonSettings().getTestLinkHostName()
-//						+ "/testlink-1.9.16/lib/api/xmlrpc/v1/xmlrpc.php";
-//				TestLinkUtil.projectName = GlobalUtil.getCommonSettings().getTestlinkProjectName();
-//				TestLinkUtil.testPlanName = GlobalUtil.getCommonSettings().getTestlinkPlanName();
-//				TestLinkUtil.buildName = GlobalUtil.getCommonSettings().getBuildNumber();
-//				TestLinkUtil.needUpdate = GlobalUtil.getCommonSettings().getTestlinkTool();
-//				GlobalUtil.testlinkapi = new TestLinkUtil();
-//			}
-//
-//			if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-//				// Jira Test management config
-//				JiraUtil.JIRA_CYCLE_ID = GlobalUtil.getCommonSettings().getJiraCycleID();
-//				JiraUtil.JIRA_PROJECT_ID = GlobalUtil.getCommonSettings().getJiraProjectID();
-//				JiraUtil.ZEPHYR_URL = ConfigReader.getValue("zephyr_url");
-//				JiraUtil.ZAPI_ACCESS_KEY = ConfigReader.getValue("zapi_access_key");
-//				JiraUtil.ZAPI_SECRET_KEY = ConfigReader.getValue("zapi_secret_key");
-//
-//				// remaing details will instailized when Jira is selected a bug
-//				// tracking tool
-//			} else
-//				GlobalUtil.getCommonSettings().setTestlinkTool("NO");
-//
-//			// setting up of Bug tracking "MANTIS" tool configuration
-//			if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Mantis")) {
-//				ConnectMantis.MANTIS_URL = "http://" + GlobalUtil.getCommonSettings().getbugToolHostName()
-//						+ "/bugTool/api/soap/bugToolconnect.php";
-//				ConnectMantis.MANTIS_USER = GlobalUtil.getCommonSettings().getbugToolUserName();
-//				ConnectMantis.MANTIS_PWD = GlobalUtil.getCommonSettings().getbugToolPassword();
-//				ConnectMantis.MANTIS_PROJET = GlobalUtil.getCommonSettings().getbugToolProjectName();
-//			}
-//
-//			// setting up of Bug tracking "Jira" tool configuration
-//			if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
-//				JiraUtil.JIRA_URL = GlobalUtil.getCommonSettings().getbugToolHostName();
-//				JiraUtil.USERNAME = GlobalUtil.getCommonSettings().getbugToolUserName();
-//				JiraUtil.PASSWORD = GlobalUtil.getCommonSettings().getbugToolPassword();
-//				JiraUtil.JIRA_PROJECT = GlobalUtil.getCommonSettings().getbugToolProjectName();
-//				GlobalUtil.jiraapi = new JiraUtil();
-//			} else
-//				GlobalUtil.getCommonSettings().setbugTool("NO");
 
 			if (url == null) {
 				url = ConfigReader.getValue("BASE_URL");
