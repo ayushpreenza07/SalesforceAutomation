@@ -83,7 +83,7 @@ public class ContractUtil {
      */
     public static void enterContractTerm(String term, String logStep){
         KeywordUtil.waitForVisible(ContractObject.contractTerm);
-        KeywordUtil.inputText(ContractObject.contractTerm, String.valueOf(term),logStep);
+        KeywordUtil.inputText(ContractObject.contractTerm, term,logStep);
     }
 
     /**
