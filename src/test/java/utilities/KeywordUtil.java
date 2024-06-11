@@ -15,6 +15,7 @@ import step_definitions.RunCukesTest;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -1286,6 +1287,18 @@ public class KeywordUtil extends GlobalUtil {
      */
     public static void delay(long time) throws InterruptedException {
         Thread.sleep(time);
+    }
+
+    public static void waitForElementPresence(By locator) {
+        try {
+
+            WebDriverWait wait = new WebDriverWait(getDriver(),Long.valueOf(ConfigReader.getValue("explicitWaitTime")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void scrollup(By converted) {

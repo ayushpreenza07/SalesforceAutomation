@@ -129,12 +129,7 @@ public class Hooks {
                     if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote")) {
                         osName = GlobalUtil.getCommonSettings().getRemoteOS();
                     }
-                    bugID = GlobalUtil.jiraapi.reportIssue(scenario.getName(),
-                            "Automated on OS: " + osName + ",\n Automated on Browser: "
-                                    + GlobalUtil.getCommonSettings().getBrowser() + ",\n Build Name: "
-                                    + GlobalUtil.getCommonSettings().getBuildNumber() + ". \n\n\n\n"
-                                    + GlobalUtil.errorMsg,
-                            imagePath);
+
                 }
 
                 // updating the results in Testmangement tool
@@ -145,10 +140,7 @@ public class Hooks {
                                             + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
                                     TestLinkAPIResults.TEST_PASSED);
                 }
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
-                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
-                }
+
 
                 if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
                     KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_FAILED);
@@ -165,9 +157,7 @@ public class Hooks {
                 GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
                         TestLinkAPIResults.TEST_PASSED);
             }
-//            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-//                GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
-//            }
+
 
             if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
                 KeywordUtil.markTestAsPassedInBrowserStackWeb(BSTACK_PASSED);
@@ -206,11 +196,7 @@ public class Hooks {
                     if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote")) {
                         osName = GlobalUtil.getCommonSettings().getRemoteOS();
                     }
-                    bugID = GlobalUtil.jiraapi.reportIssue(scenario.getName(),
-                            "Automated on OS: " + osName + "on Build Name: "
-                                    + GlobalUtil.getCommonSettings().getBuildNumber() + ". \n\n\n\n"
-                                    + GlobalUtil.errorMsg,
-                            "RestAPI");
+
                 }
 
                 // updating the results in Test mangement tool
@@ -221,10 +207,7 @@ public class Hooks {
                                             + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
                                     TestLinkAPIResults.TEST_PASSED);
                 }
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
-                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
-                }
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -236,9 +219,6 @@ public class Hooks {
             if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
                 GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
                         TestLinkAPIResults.TEST_PASSED);
-            }
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
             }
         }
 
@@ -282,13 +262,6 @@ public class Hooks {
                             screenshotFilePath);
                 }
 
-                if (GlobalUtil.getCommonSettings().getBugToolName().equalsIgnoreCase("Jira")) {
-                    bugID = GlobalUtil.jiraapi.reportIssue(scenario.getName(),
-                            "Automated on Android Device Version: " + GlobalUtil.getCommonSettings().getAndroidVersion()
-                                    + ",\n Build Name: " + GlobalUtil.getCommonSettings().getBuildNumber()
-                                    + ". \n\n\n\n" + GlobalUtil.errorMsg,
-                            screenshotFilePath);
-                }
 
                 // updating the results in Testmangement tool
                 if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("TestLink")) {
@@ -298,10 +271,7 @@ public class Hooks {
                                             + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID,
                                     TestLinkAPIResults.TEST_PASSED);
                 }
-                if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                    GlobalUtil.jiraapi.updateJiraTestResults(testName, "Please find the BUGID in "
-                            + GlobalUtil.getCommonSettings().getBugToolName() + " : " + bugID, "Fail");
-                }
+
 
                 if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
                     KeywordUtil.markTestAsPassedInBrowserStackMobile(BSTACK_FAILED);
@@ -318,10 +288,6 @@ public class Hooks {
                 GlobalUtil.testlinkapi.updateTestLinkResult(testName, "This test is passed",
                         TestLinkAPIResults.TEST_PASSED);
             }
-            if (GlobalUtil.getCommonSettings().getManageToolName().equalsIgnoreCase("Jira")) {
-                GlobalUtil.jiraapi.updateJiraTestResults(testName, "This test is passed", "Pass");
-            }
-
             if (GlobalUtil.getCommonSettings().getExecutionEnv().equalsIgnoreCase("Remote"))
                 KeywordUtil.markTestAsPassedInBrowserStackMobile(BSTACK_PASSED);
         }

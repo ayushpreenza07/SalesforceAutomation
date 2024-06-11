@@ -124,7 +124,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * @param logStep the logStep
      */
     public static void enterOppurtunityName(String name, String logStep){
-        KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityName);
+        KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunityName);
         KeywordUtil.inputText(OppurtunitiesObject.opportunityName, name, logStep);
     }
 
@@ -191,12 +191,10 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void backToAccount(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.delay(5000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.backToAccount);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.backToAccount);
             KeywordUtil.click(OppurtunitiesObject.backToAccount, logStep);
         }catch(Throwable e) {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.backToAccount);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.backToAccount);
             WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.backToAccount);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -210,8 +208,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void openOpportunity(String logStep) throws InterruptedException {
-        KeywordUtil.delay(2000);
-        KeywordUtil.waitForVisible(OppurtunitiesObject.selectOpportunity);
+        KeywordUtil.waitForElementPresence(OppurtunitiesObject.selectOpportunity);
         KeywordUtil.click(OppurtunitiesObject.selectOpportunity,logStep);
     }
 
@@ -223,8 +220,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void selectStageProposalQuote(String logStep){
         try {
-            KeywordUtil.delay(2000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.proposalStage);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.proposalStage);
             KeywordUtil.click(OppurtunitiesObject.proposalStage, logStep);
         }catch (Exception e) {
             KeywordUtil.waitForVisible(OppurtunitiesObject.proposalStage);
@@ -236,8 +232,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
 
     public static void selectStageProposalQuotes(String logStep) {
         try {
-            KeywordUtil.delay(2000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.proposalStages);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.proposalStages);
             KeywordUtil.click(OppurtunitiesObject.proposalStages, logStep);
         } catch (Exception e) {
             KeywordUtil.waitForVisible(OppurtunitiesObject.proposalStages);
@@ -270,12 +265,10 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void setMarkAsStages(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.markStages);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.markStages);
             KeywordUtil.click(OppurtunitiesObject.markStages, logStep);
         } catch (Exception e) {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.markStages1);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.markStages1);
             WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.markStages1);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -289,8 +282,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void setMarkAsCurrentStages(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.markCurrentStages);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.markCurrentStages);
             WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.markCurrentStages);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -420,7 +412,6 @@ public class OppurtunitiesUtil extends GlobalUtil {
         enterAmount(amount, "Amount entered "+amount);
         setStage(stage, "Stage selected - "+stage);
         clickSaveButton("saved");
-        KeywordUtil.delay(3000);
         markStage();
     }
 
@@ -437,9 +428,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
         enterOppurtunityName_ss(name, name+" entered in Opportunity");
         setStage_ss(stage, "Stage selected - "+stage);
         enterCloseDate(2024,1,2,"Close date entered");
-        KeywordUtil.delay(2000);
         clickSaveButton_oppo("saved");
-        KeywordUtil.delay(3000);
         markStage_ss();
 
     }
@@ -475,7 +464,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
         boolean flag = false;
         KeywordUtil.waitForVisible(ServiceSupportObject.setStage_ss);
         KeywordUtil.click(ServiceSupportObject.setStage_ss,logStep);
-        System.out.println(stage);
+
         Thread.sleep(3000);
         String xpath ="//a[text()='"+stage+"']";
         try{
@@ -495,7 +484,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void clickSaveButton_oppo(String logStep){
-        KeywordUtil.waitForVisible(ServiceSupportObject.saveButton_oppo);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.saveButton_oppo);
         KeywordUtil.click(ServiceSupportObject.saveButton_oppo,logStep);
     }
 
@@ -506,12 +495,9 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void openOpportunity_ss(String logStep) throws InterruptedException {
-        KeywordUtil.delay(5000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.clickOpportunities_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.clickOpportunities_ss);
         KeywordUtil.click(ServiceSupportObject.clickOpportunities_ss,logStep);
-        Thread.sleep(3000);
-        KeywordUtil.delay(2000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.selectOpportunities_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.selectOpportunities_ss);
         KeywordUtil.clickJS(ServiceSupportObject.selectOpportunities_ss,logStep);
     }
 
@@ -578,11 +564,11 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void clickOnOpportunityTab() throws InterruptedException {
         try {
-            KeywordUtil.delay(2000);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunitiesTab);
             KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunitiesTab, "verify Opportunity Tab");
             KeywordUtil.click(OppurtunitiesObject.opportunitiesTab, "Clicked on Opportunities Tab");
         } catch (Exception e) {
-            KeywordUtil.delay(2000);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunitiesTab);
             KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunitiesTab, "verify Opportunity Tab");
             KeywordUtil.clickJS(OppurtunitiesObject.opportunitiesTab);
 
@@ -620,7 +606,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * Verify opportunityStage
      */
     public static void verifyOpportunityStage() throws InterruptedException {
-        KeywordUtil.delay(5000);
+        KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunityStage);
         String stageStatus = KeywordUtil.getVisibleText(OppurtunitiesObject.opportunityStage);
         if (KeywordUtil.isWebElementVisible(OppurtunitiesObject.opportunityStage, "Closed Won Stage Displayed")) {
             RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("Verify Status: " + stageStatus));
@@ -636,8 +622,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
 
 
         try {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(ServiceSupportObject.newTab);
+            KeywordUtil.waitForElementPresence(ServiceSupportObject.newTab);
             WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.newTab);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -654,7 +639,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
         enterAmount(amount, "Amount entered " + amount);
         setStage(stage, "Stage selected - " + stage);
         clickSaveButton("saved");
-        KeywordUtil.delay(3000);
+
     }
 
     /**
@@ -679,8 +664,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
     public static void clickDropDown(String logStep) throws InterruptedException {
 
         try {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityDropdown);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunityDropdown);
             WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.opportunityDropdown);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -696,13 +680,11 @@ public class OppurtunitiesUtil extends GlobalUtil {
     public static void clickOnDropDownEdit(String logStep) throws InterruptedException {
 
         try {
-            KeywordUtil.delay(4000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityDropdownEdit);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunityDropdownEdit);
             KeywordUtil.click(OppurtunitiesObject.opportunityDropdownEdit,"Clicked on Dropdown Edit");
 
         } catch (Exception e) {
-            KeywordUtil.delay(4000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.opportunityDropdownEdit);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunityDropdownEdit);
             WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.opportunityDropdownEdit);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -712,12 +694,10 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * Entering change Opportunity Details
      */
     public static void changeOpportunityDetails(String name,String stage) throws InterruptedException {
-        KeywordUtil.delay(2000);
+
         enterOppurtunityName(name, name + " entered in Opportunity");
-        KeywordUtil.delay(3000);
         setStage(stage, "Stage selected - " + stage);
         clickSaveButton("saved");
-        KeywordUtil.delay(3000);
     }
     /**
      * Click on the Opportunity Tab
@@ -727,8 +707,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
      */
     public static void clickOpportunityTab(String logStep){
         try {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(OppurtunitiesObject.opportunitiesTabb);
+            KeywordUtil.waitForElementPresence(OppurtunitiesObject.opportunitiesTabb);
             WebElement element = KeywordUtil.getDriver().findElement(OppurtunitiesObject.opportunitiesTabb);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -752,7 +731,6 @@ public class OppurtunitiesUtil extends GlobalUtil {
         setStage(stage, "Stage selected - " + stage);
         takeScreenshotAndAttachInReport();
         clickSaveButton("saved");
-        KeywordUtil.delay(3000);
         KeywordUtil.isWebElementVisible(ForecastingPage.newForecastAdded("DemoOpportunity"), "Verify new opportunity created.");
         takeScreenshotAndAttachInReport();
     }

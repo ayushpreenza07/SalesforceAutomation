@@ -54,13 +54,15 @@ public class SalesForceServiceSupportDemo {
 
     @When("^Edit contact details for service support")
     public void edit_contact_details() throws Exception{
-        EditandDeleteUtil.editContactDetails("Anjali");
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        EditandDeleteUtil.editContactDetails(dataMap.get("ContactName"));
     }
 
     @When("^Filter contact details for service support")
     public void filter_contact_details() throws Exception{
         EditandDeleteUtil.clickContactTab_cnt();
-        EditandDeleteUtil.selectFilterInContacts_cnt("Name","Rahul");
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        EditandDeleteUtil.selectFilterInContacts_cnt("Name",dataMap.get("ContactLastName"));
 
     }
 
@@ -90,7 +92,7 @@ public class SalesForceServiceSupportDemo {
     @When("^Create new case by searching contact and account")
     public void create_new_Cases_bysearching_account_contact() throws Exception {
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        CasesUtil.createNewCasebySearchingContact_Account(("Anjali"), dataMap.get("AccountName"), dataMap.get("status"), dataMap.get("origin"));
+        CasesUtil.createNewCasebySearchingContact_Account(dataMap.get("ContactName"), dataMap.get("AccountName"), dataMap.get("status"), dataMap.get("origin"));
 
     }
 
