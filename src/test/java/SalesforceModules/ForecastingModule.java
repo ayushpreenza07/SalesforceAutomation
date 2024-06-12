@@ -1,8 +1,6 @@
 package SalesforceModules;
 
 import com.relevantcodes.extentreports.LogStatus;
-import mobileutil.MobileKeywords2;
-import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -12,10 +10,10 @@ import utilities.*;
 
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
+
 import java.util.Set;
 
-import static mobileutil.MobileKeywords2.click;
+
 import static utilities.GlobalUtil.getDriver;
 import static utilities.KeywordUtil.*;
 
