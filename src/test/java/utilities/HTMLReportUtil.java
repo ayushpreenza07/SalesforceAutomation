@@ -57,22 +57,6 @@ public class HTMLReportUtil {
 		return relative;
 	}
 
-	/**
-	 * Test fail mobile take screenshot string.
-	 *
-	 * @param imagePath the image path
-	 * @return the string
-	 * @throws IOException the io exception
-	 */
-	public static String testFailMobileTakeScreenshot(String imagePath) throws IOException {
-
-		File src = ((TakesScreenshot) GlobalUtil.getMDriver()).getScreenshotAs(OutputType.FILE);
-		File des = new File(imagePath);
-
-		FileUtils.copyFile(src, des);
-		LogUtil.infoLog(HTMLReportUtil.class, des.toString());
-		return des.getAbsolutePath();
-	}
 
 	/**
 	 * Fail string red color string.
