@@ -7,13 +7,13 @@ public class OppurtunitiesObject {
 
     public static By opportunitiesTab =By.xpath("//div[@class='slds-context-bar']//a[@title='Opportunities']");
 
-    public static By createNewOpportunities = By.xpath("//button[@name='New'] | //*[text()='New']");
+    public static By createNewOpportunities = By.xpath("//button[@name='New']");
 
     public static By opportunityName = By.xpath("//input[@name='Name']");
 
     public static By Stage = By.xpath("//button[@data-value='--None--']");
 
-    public static By opportunitiesBtn = By.xpath("(//a[@class='flex-wrap-ie11'])[5]");
+    public static By opportunitiesBtn = By.xpath("//a[contains(@href,'Opportunities')]");
 
     public static By backToAccount = By.xpath("(//li[@class='slds-breadcrumb__item slds-line-height--reset'])[4]");
     public static By CloseDate = By.xpath("//input[@name='CloseDate']");
@@ -26,7 +26,7 @@ public class OppurtunitiesObject {
     public static By deleteOpportunityPopup = By.xpath("//h2[@class=\"title slds-text-heading--medium slds-hyphenate\" and text()='Delete Opportunity']");
     public static By opportunitiesTabShowMoreButton = By.xpath("//*[@class='slds-button slds-button_icon-border-filled fix-slds-button_icon-border-filled slds-button_last']");
 
-    public static By selectOpportunity = By.xpath("//span[text()='DemoOpportunity1']");
+    public static By selectOpportunity = By.xpath("//slot[text()='DemoOpportunity1']");
 
     public static By getBackToAccount = By.xpath("(//SPAN[@lwc-47ngqe6rvah])[8]");
 

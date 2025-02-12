@@ -415,26 +415,33 @@ public class DriverUtil {
             } else if (browserName.equalsIgnoreCase("Firefox")) {
                 WebDriverManager.firefoxdriver().setup();
                 GlobalUtil.setDriver(new FirefoxDriver());
-
                 //For Mac Operating System
-            } else if (exeEnv.equalsIgnoreCase("MAC")) {
-                if (browserName.equalsIgnoreCase("CHROME")) {
-                    WebDriverManager.chromedriver().setup();
-                    GlobalUtil.setDriver(new ChromeDriver());
-                } else if (browserName.equalsIgnoreCase("IE")) {
-                    WebDriverManager.iedriver().setup();
-                    GlobalUtil.setDriver(new InternetExplorerDriver());
-                } else if (browserName.equalsIgnoreCase("Firefox")) {
-                    WebDriverManager.firefoxdriver().setup();
-                    GlobalUtil.setDriver(new FirefoxDriver());
-                } else if (browserName.equalsIgnoreCase("Safari")) {
-                    GlobalUtil.setDriver(new SafariDriver());
-                }
             }
 
             GlobalUtil.getDriver().manage().window().maximize();
             LogUtil.infoLog(DriverUtil.class,
                     GlobalUtil.getCommonSettings().getBrowser() + " : Browser Launched and Maximized.");
+        }
+        else if (exeEnv.equalsIgnoreCase("MAC")) {
+            if (browserName.equalsIgnoreCase("CHROME")) {
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions options = new ChromeOptions();
+                options.addArguments("--disable-notifications");
+                GlobalUtil.setDriver(new ChromeDriver(options));
+            } else if (browserName.equalsIgnoreCase("IE")) {
+                WebDriverManager.iedriver().setup();
+                GlobalUtil.setDriver(new InternetExplorerDriver());
+            } else if (browserName.equalsIgnoreCase("Firefox")) {
+                WebDriverManager.firefoxdriver().setup();
+                GlobalUtil.setDriver(new FirefoxDriver());
+            } else if (browserName.equalsIgnoreCase("Safari")) {
+                GlobalUtil.setDriver(new SafariDriver());
+            }
+
+            GlobalUtil.getDriver().manage().window().maximize();
+            LogUtil.infoLog(DriverUtil.class,
+                    GlobalUtil.getCommonSettings().getBrowser() + " : Browser Launched and Maximized.");
+
         }
         return GlobalUtil.getDriver();
     }

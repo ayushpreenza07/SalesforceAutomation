@@ -154,9 +154,10 @@ public class OppurtunitiesUtil extends GlobalUtil {
      *
      * @param logStep the log
      */
-    public static void clickOpportunityButton(String logStep){
+    public static void clickOpportunityButton(String logStep) throws InterruptedException {
+        KeywordUtil.delay(3000);
         KeywordUtil.waitForVisible(OppurtunitiesObject.opportunitiesBtn);
-        KeywordUtil.click(OppurtunitiesObject.opportunitiesBtn,logStep);
+        KeywordUtil.clickJS(OppurtunitiesObject.opportunitiesBtn,logStep);
     }
 
     /**
@@ -212,7 +213,7 @@ public class OppurtunitiesUtil extends GlobalUtil {
     public static void openOpportunity(String logStep) throws InterruptedException {
         KeywordUtil.delay(2000);
         KeywordUtil.waitForVisible(OppurtunitiesObject.selectOpportunity);
-        KeywordUtil.click(OppurtunitiesObject.selectOpportunity,logStep);
+        KeywordUtil.clickJS(OppurtunitiesObject.selectOpportunity,logStep);
     }
 
     /**

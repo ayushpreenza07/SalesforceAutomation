@@ -98,7 +98,7 @@ public class ServiceSupportObject {
 
     //Xpaths for creating new quote
     public static By openaccount_ss =By.xpath("//span//a[@title='TXTest']");
-    public static By clickQuotes_ss =By.xpath("//a[slot[contains(.,'Quotes')]]");
+    public static By clickQuotes_ss =By.xpath("(//a[contains(@href,'Quotes')])[1]");
     public static By newQuoteButton_ss =By.xpath("(//button[@class='slds-button slds-button_neutral' and text()='New'])[2]");
     public static By searchAccounts_quote_ss =By.xpath("(//input[@placeholder='Search Accounts...'])[1]");
     public static By searchOppo_quote_ss =By.xpath("//input[@placeholder='Search Opportunities...']");
@@ -111,7 +111,7 @@ public class ServiceSupportObject {
     public static By editQuote_again_ss=By.xpath("//button[@class='slds-button slds-button_neutral slds-kx-is-animating-from-click' and text()='Edit']");
 
     //Xpaths for creating orders
-    public static By checkbox_Orders_ss=By.xpath("//div[@class='windowViewMode-normal oneRecordActionWrapper isModal active lafPageHost']//input[@name='SBQQ__Ordered__c']");
+    public static By checkbox_Orders_ss=By.xpath("(//span[@lwc-16hle61jt7i][text()='Ordered'])[2]");
     public static By openOrder=By.xpath("//a[slot[contains(.,'Orders')]]");
     public static By viewOrder=By.xpath("//a[@class='flex-wrap-ie11 slds-truncate']");
 
