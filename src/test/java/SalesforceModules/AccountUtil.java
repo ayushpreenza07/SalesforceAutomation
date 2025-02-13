@@ -18,8 +18,7 @@ public class AccountUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void clickAccountsTab(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(AccountObject.accountsTab);
+        KeywordUtil.waitForElementPresence(AccountObject.accountsTab);
         WebElement element = KeywordUtil.getDriver().findElement(AccountObject.accountsTab);
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);

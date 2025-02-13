@@ -24,9 +24,8 @@ public class Leads {
      *  @param logStep the log
      */
     public static void clickOnHamburgerMenu(String logStep) throws InterruptedException {
-        KeywordUtil.delay(2000);
         try {
-            KeywordUtil.waitForVisible(LeadsPage.hamburgerMenu);
+            KeywordUtil.waitForElementPresence(LeadsPage.hamburgerMenu);
             KeywordUtil.click(LeadsPage.hamburgerMenu, logStep);
         }
         catch (Exception e){
@@ -39,10 +38,10 @@ public class Leads {
      * @param text the text
      */
     public static void enterText(String text) throws InterruptedException {
-        KeywordUtil.delay(1000);
+        KeywordUtil.waitForElementPresence(LeadsPage.searchText);
         try {
             KeywordUtil.inputText(LeadsPage.searchText, text, "User Entered Text");
-            KeywordUtil.delay(2000);
+            KeywordUtil.waitForElementPresence(LeadsPage.searchText);
             KeywordUtil.pressEnter(LeadsPage.searchText);
         }
         catch (Exception e){
@@ -88,8 +87,7 @@ public class Leads {
      */
     public static void clickOnSaveButton(){
         try {
-            KeywordUtil.delay(1000);
-            KeywordUtil.waitForVisible(LeadsPage.saveButton);
+            KeywordUtil.waitForElementPresence(LeadsPage.saveButton);
             KeywordUtil.click(LeadsPage.saveButton, "Clicked on Save Button");
         }
         catch (Exception e){
@@ -119,14 +117,13 @@ public class Leads {
      */
     public static void clickOnConvertedTab () throws InterruptedException {
         try {
-        KeywordUtil.delay(2000);
+        KeywordUtil.waitForElementPresence(LeadsPage.converted);
         KeywordUtil.scrollup(LeadsPage.converted);
         KeywordUtil.waitForVisible(LeadsPage.converted);
         KeywordUtil.click(LeadsPage.converted, "Clicked on Converted Tab");
        }
     catch (Throwable e){
-        KeywordUtil.delay(2000);
-        KeywordUtil.waitForVisible(LeadsPage.converted);
+        KeywordUtil.waitForElementPresence(LeadsPage.converted);
         KeywordUtil.clickJS(LeadsPage.converted);
         }
     }
@@ -137,14 +134,13 @@ public class Leads {
      */
     public static void clickOnConvertedStatusButton () throws InterruptedException {
         try {
-            KeywordUtil.delay(3000);
+            KeywordUtil.waitForElementPresence(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.scrollup(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
             KeywordUtil.clickJS(LeadsPage.selectConvertedStatusButton, "Clicked on Converted Status Button");
         }
         catch (Throwable e){
-            KeywordUtil.delay(4000);
-            KeywordUtil.waitForVisible(LeadsPage.selectConvertedStatusButton);
+            KeywordUtil.waitForElementPresence(LeadsPage.selectConvertedStatusButton);
              KeywordUtil.clickJS(LeadsPage.selectConvertedStatusButton);
         }
     }
@@ -156,13 +152,11 @@ public class Leads {
     public static void clickOnConvertedButton () throws InterruptedException {
 
         try {
-            KeywordUtil.delay(4000);
-            KeywordUtil.waitForVisible(LeadsPage.convertButton);
+            KeywordUtil.waitForElementPresence(LeadsPage.convertButton);
             KeywordUtil.clickJS(LeadsPage.convertButton, "Clicked on Converted Button");
         }
         catch (Throwable e){
-            KeywordUtil.delay(4000);
-            KeywordUtil.waitForVisible(LeadsPage.convertButton);
+            KeywordUtil.waitForElementPresence(LeadsPage.convertButton);
             KeywordUtil.clickJS(LeadsPage.convertButton);
         }
       }
@@ -172,11 +166,10 @@ public class Leads {
      *
      */
     public static void verifyConvertStatusMessage() throws InterruptedException {
-        KeywordUtil.delay(1000);
         try {
-            KeywordUtil.waitForVisible(LeadsPage.convertStatusMessage);
+            KeywordUtil.waitForElementPresence(LeadsPage.convertStatusMessage);
             String statusMessage = KeywordUtil.getElementText(LeadsPage.convertStatusMessage);
-            System.out.println("statusMessage: " + statusMessage);
+            HTMLReportUtil.passStringGreenColor("statusMessage: " + statusMessage );
             assertEquals(statusMessage, "Your lead has been converted");
             RunCukesTest.logger.log(LogStatus.PASS,
                     HTMLReportUtil.passStringGreenColor("verified <font color='green'>" + statusMessage + "</font> page"));
@@ -205,7 +198,7 @@ public class Leads {
      *
      */
     public static void clickOnExistingContactRadioBtn() throws InterruptedException {
-        KeywordUtil.delay(10000);
+        KeywordUtil.waitForElementPresence(LeadsPage.existingContactSearch);
         try {
             KeywordUtil.scrolldown(LeadsPage.existingContactSearch);
             KeywordUtil.scrollingToElementofAPage(LeadsPage.existingContactSearch,"");
@@ -231,9 +224,9 @@ public class Leads {
      *
      */
     public static void clickOnExistingOpportunityRadioBtn() throws InterruptedException {
-        KeywordUtil.delay(10000);
+
         try {
-            KeywordUtil.waitForVisible(LeadsPage.existingOpportunitySearch);
+            KeywordUtil.waitForElementPresence(LeadsPage.existingOpportunitySearch);
             KeywordUtil.click(LeadsPage.existingOpportunitySearch, "Click Existing Opportunity Radio Button");
             KeywordUtil.waitForVisible(LeadsPage.opportunityExistingRadioButton);
             KeywordUtil.click(LeadsPage.opportunityExistingRadioButton, "clicked on Existing Opportunity radio button");
@@ -260,8 +253,7 @@ public class Leads {
      *
      */
     public static void verifyOpportunityAccountName() throws InterruptedException {
-        KeywordUtil.delay(2000);
-        KeywordUtil.waitForVisible(LeadsPage.opportunityAccountName);
+        KeywordUtil.waitForElementPresence(LeadsPage.opportunityAccountName);
         boolean addedMessage = KeywordUtil.isWebElementVisible(LeadsPage.opportunityAccountName, "verify AccountName");
         if (addedMessage) {
             String accountTitle = KeywordUtil.getVisibleText(LeadsPage.opportunityAccountName);

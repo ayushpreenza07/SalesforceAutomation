@@ -84,7 +84,6 @@ public class SalesForceCPQ {
             default:
                 throw new IllegalArgumentException("Invalid user type: " + userType);
         }
-
         KeywordUtil.navigateToUrl(baseUrl);
     }
 
@@ -149,6 +148,21 @@ public class SalesForceCPQ {
 
     }
 
+    @When("^create new quote and add product in account details page$")
+    public void create_new_quote_accountpage() throws Exception{
+        QuoteUtil.createNewQuoteAccountPage(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
+    @And("Create an order and activate in account details page")
+    public void createAnOrderAndActivate_accountpage() throws Exception {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.goToAccountDetailsPage("Go to account details page");
+        QuoteUtil.goToQuoteAndChangeStatus_Approved_AccountPage((dataMap.get("ApprovedStatus")),"Quote status is changed to Approved");
+        QuoteUtil.activateOrderFromAccountPage();
+        QuoteUtil.changeStatusAsDraftFromAccountPage((dataMap.get("changeStatusAsDraft")),"change order status as Draft ");
+
+    }
+
     @When("^create new quote and add product$")
     public void create_new_quote() throws Exception{
         QuoteUtil.createNewQuote(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
@@ -180,7 +194,7 @@ public class SalesForceCPQ {
     @When("^Create new contract$")
     public void create_new_contract() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        ContractUtil.createContract(dataMap.get("AccountName"));
+        ContractUtil.createContract(dataMap.get("AccountName"),dataMap.get("Term"));
     }
 
     @When("navigate to setup screen")

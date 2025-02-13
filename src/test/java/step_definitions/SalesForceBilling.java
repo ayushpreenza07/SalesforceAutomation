@@ -1,11 +1,10 @@
 package step_definitions;
 
-import SalesforceModules.AccountUtil;
-import SalesforceModules.CampaignUtil;
-import SalesforceModules.LoginSalesforceUtil;
-import SalesforceModules.SalesForceBillingUtil;
+import SalesforceModules.*;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageobjects.SalesforceObjects.QuoteObject;
 import utilities.ConfigReader;
 import utilities.ExcelDataUtil;
 import utilities.KeywordUtil;
@@ -28,7 +27,8 @@ public class SalesForceBilling {
 
     @And("Create new product")
     public void createNewProduct() throws Exception {
-        SalesForceBillingUtil.newProduct();
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.newProduct(dataMap.get("ProductName_new"),dataMap.get("ProductCode"),dataMap.get("ProductFamily"),dataMap.get("CheckActive"));
     }
 
     @And("add price book and standard price")
@@ -50,7 +50,8 @@ public class SalesForceBilling {
 
     @And("search product in products tab")
     public void searchProductInProductsTab() {
-        SalesForceBillingUtil.searchProduct("INTP");
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.searchProduct(dataMap.get("searchProduct"));
     }
 
 
@@ -75,5 +76,91 @@ public class SalesForceBilling {
         SalesForceBillingUtil.createAnotherContactFromLinkExisting(dataMap.get("Salutation"), dataMap.get("ContactLastname1"), dataMap.get("ContactEmail1"), dataMap.get("ContactPhone1"));
         SalesForceBillingUtil.createNewContactOfContacts(dataMap.get("Salutation1"), dataMap.get("ContactLastName2"), dataMap.get("AccountName1"), dataMap.get("ContactPhone2"));
     }
+
+    @When("^Create new quote and add product in billing section$")
+    public void create_new_quote_billing() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.createNewQuote_billing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
+    @And("^Delete Quote in billing section$")
+    public void delete_quote_billing() throws Exception{
+        QuoteUtil.deleteQuote_billing("Deleted the Quote in billing section");
+    }
+
+    @And("^Search Opportunity to change status and verify the added quotes$")
+    public void search_oppo_billing() throws Exception{
+        OppurtunitiesUtil.searchOppoAndVerifyAddedProductsInQuotes_billing("Deleted the Quote in billing section");
+    }
+
+    @And("^Search quote to edit$")
+    public void search_edit_quote_billing() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.searchEditQuote_billing(dataMap.get("AccountName"), dataMap.get("OpportunityName"), dataMap.get("QuoteType"));
+    }
+
+    @And("Create an order and activate in billing section")
+    public void create_An_Order_And_Activate_billing() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        QuoteUtil.clickQuoteButton_billing("Navigated to quote");
+        QuoteUtil.goToQuoteAndChangeStatus_InReview_billing("In Review", "Quote status is changed to In Review");
+        QuoteUtil.goToQuoteAndChangeStatus_Approved_billing("Approved", "Quote status is changed to Approved");
+        QuoteUtil.goToQuoteAndCreateOrder_billing("Order generated and activated");
+        QuoteUtil.activateOrder_billing();
+       QuoteUtil.changeStatusAsDraft_billing((dataMap.get("changeStatusAsDraft")), "change order status as Draft ");
+            }
+
+    @When("^Create new contract in billing section$")
+    public void createNewContract() throws Exception{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        ContractUtil.createContract_billing(dataMap.get("AccountName"),dataMap.get("Term"));
+    }
+
+    @And("Create new case")
+    public void createNewCaseForAccount() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.createNewCase(dataMap.get("CaseOrigin"),"Case origin value selected");
+    }
+    @And("Edit new case")
+    public void editCreatedNewCaseForAccount() throws InterruptedException{
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.editCreatedNewCase(dataMap.get("EditCaseOrigin"));
+    }
+    @And("Update new case")
+    public void updateCreatedNewCaseForAccount() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        SalesForceBillingUtil.updateCreatedNewCase(dataMap.get("WebCompany"));
+    }
+    @And("Delete new case")
+    public void deleteCreatedNewCaseForAccount() throws InterruptedException {
+        SalesForceBillingUtil.deleteCreatedNewCase("Clicked on delete option");
+    }
+
+    @Then("Change Opportunity Status to Close Won")
+    public void changeOpportunityStatusToCloseWon() throws InterruptedException {
+        OppurtunitiesUtil.openOpportunity_billing("Open opportunity");
+        OppurtunitiesUtil.selectClosedStatus("Changing Opportunity status to closed won");
+    }
+
+    @Then("Generate invoice in billing section")
+    public void generate_Invoices_In_Billing() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        InvoiceUtil.openOrdersBilling("Open the order for generating invoice");
+        InvoiceUtil.generateInvoiceBilling(dataMap.get("TaxStatus"),dataMap.get("PostedStatus"),"Generate Invoice");
+    }
+
+    @Then("Payments using cards")
+    public void payments_Using_Cards() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        InvoiceUtil.paymentsBilling(dataMap.get("PaymentsAccount"),dataMap.get("Amount"),dataMap.get("PaymentType"),dataMap.get("InvoiceNumber"),"Make payments");
+
+    }
+
+    @Then("Create bundle product and add feature and Options")
+    public void create_Bundle_Features_Options() throws InterruptedException {
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        InvoiceUtil.createBundleFeaturesOptions(dataMap.get("SKU"),"Create Bundle Products, add features");
+    }
+
 }
 
