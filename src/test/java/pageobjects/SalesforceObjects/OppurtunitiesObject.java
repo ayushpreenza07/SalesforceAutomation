@@ -7,7 +7,9 @@ public class OppurtunitiesObject {
 
     public static By opportunitiesTab =By.xpath("//div[@class='slds-context-bar']//a[@title='Opportunities']");
 
-    public static By createNewOpportunities = By.xpath("//button[@name='New'] | //*[text()='New']");
+    public static By createNewOpportunities = By.xpath("//article[@aria-label=\"Opportunities\"]//button[text()='New']");
+
+    public static By newButtonInOpportunity = By.xpath("(//a[@title=\"New\"])[1]");
 
     public static By opportunityName = By.xpath("//input[@name='Name']");
 
@@ -30,7 +32,7 @@ public class OppurtunitiesObject {
 
     public static By getBackToAccount = By.xpath("(//SPAN[@lwc-47ngqe6rvah])[8]");
 
-    public static By proposalStage = By.xpath("//SPAN[@class='title slds-path__title'][text()='Proposal/Price Quote']");
+    public static By proposalStage = By.xpath("//a[@data-tab-name=\"Proposal/Price Quote\"]");
     public static By proposalStages = By.xpath("(//SPAN[@class='title slds-path__title'][text()='Proposal/Price Quote'])[3]");
 
     public static By markStage = By.xpath("(//span[@class='uiOutputText'])[2]");
