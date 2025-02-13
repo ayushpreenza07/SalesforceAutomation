@@ -30,11 +30,11 @@ public class QuoteObject {
     public static By orderedCheckbox = By.xpath("(//input[@name='SBQQ__Ordered__c'])[2]");
     public static By editLines =By.xpath("//button[@class='slds-button slds-button_neutral' and text()='Edit Lines']");
 
-    public static By joinedOpportunity = By.xpath("(//a[@class='flex-wrap-ie11'])[14]");
+    public static By joinedOpportunity = By.xpath("(//slot[text()='DemoOpportunity1'])[2]");
 
     public static By opportunityAfterQuote = By.xpath("(//a[@class='flex-wrap-ie11'])[1]");
 
-    public static By generateDocument = By.xpath("//button[@class='slds-button slds-button_neutral' and text()='Generate Document']");
+    public static By generateDocument = By.xpath("//button[text()='Generate Document']");
 
     public static By saveDocument = By.xpath("//button[@class='sbBtn'][@ng-click='onSave()']");
 
@@ -44,13 +44,13 @@ public class QuoteObject {
 
     public static By statusButton = By.xpath("//button[@class='slds-combobox__input slds-input_faux fix-slds-input_faux slds-combobox__input-value' and span[text()='Draft']]");
 
-    public static By orders = By.xpath("//span[@lwc-oj46kgc6r3=''][contains(text(),'Orders')]");
+    public static By orders = By.xpath("//span[@title='Orders'][contains(text(),'Orders')]");
 
-    public static By openOrder = By.xpath("(//a[@class='flex-wrap-ie11 slds-truncate'])[5]");
+    public static By openOrder = By.xpath("(//a[@class='slds-truncate'])");
 
     public static By activatedTab = By.xpath("//span[@class='title slds-path__title'][contains(text(),'Activated')]");
 
-    public static By markCurrentStatus = By.xpath("//span[@class='uiOutputText'][contains(text(),'Mark as Current Status')]");
+    public static By markCurrentStatus = By.xpath("//span[@class='uiOutputText'][contains(text(),'Mark')]");
 
     public static By quoteTitle=By.xpath("(//div[1]/div/div[1]/div[2]/h1/slot/lightning-formatted-text[@slot='primaryField'])[1]");
     public static By quoteNumber=By.xpath("//*[@id='brandBand_1']//div/div/table/tbody/tr[1]/th/span/a");
@@ -96,5 +96,6 @@ public class QuoteObject {
     public static By dropdownInOrdersTab_o=By.xpath("//table[@aria-label='Orders']//td[7]//span[text()='Show Actions']");
     public static By viewOrder = By.xpath("(//a[@class='flex-wrap-ie11 slds-truncate'])[3]");
     public static By editButton_o = By.xpath("(//button[@class='slds-button slds-button_neutral' and @name='Edit'])[2]");
+    public static By quoteId = By.xpath(" //lightning-formatted-text[@slot='primaryField'][contains(text(), 'Q')]");
 
 }

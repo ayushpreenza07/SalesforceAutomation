@@ -81,6 +81,7 @@ public class Hooks {
         Thread.sleep(10000);
         // close the browsers
         getDriver().quit();
+      
         RunCukesTest.extent.endTest(RunCukesTest.logger);
     }
 

@@ -342,15 +342,16 @@ public class QuoteUtil {
      * @param logStep the log
      */
     public static void clickGenerateDocument(String logStep) throws InterruptedException {
-        KeywordUtil.waitForElementPresence(QuoteObject.generateDocument);
-        KeywordUtil.click(QuoteObject.generateDocument, logStep);
+        KeywordUtil.delay(5000);
+        KeywordUtil.waitForVisible(QuoteObject.generateDocument);
+        KeywordUtil.clickJS(QuoteObject.generateDocument, logStep);
 
         try {
             KeywordUtil.waitForVisible(QuoteObject.saveDocument);
             KeywordUtil.click(QuoteObject.saveDocument, logStep);
         } catch (Exception e) {
-            WebElement iframe = CampaignObject.activeIframe;
-            GlobalUtil.getDriver().switchTo().frame(iframe);
+            GlobalUtil.getDriver().switchTo().frame(1);
+            KeywordUtil.delay(5000);
 
             WebElement saveDocument = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbDocGenPreview > div.sbPageTitle > div > div.sbPageTitleRight > div > button:nth-child(4)\")");
 
@@ -374,7 +375,7 @@ public class QuoteUtil {
         KeywordUtil.switchToIFrame(3, "Edit Quote IFrame");
         KeywordUtil.delay(Long.parseLong(ConfigReader.getValue("FiveSeconds")));
         // click on edit lines button using JS path
-        WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#pricebookDialog').shadowRoot.querySelector('#dialog > paper-button > sb-i18n')");
+        WebElement saveOnEditLines = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").shadowRoot.querySelector(\"#content > sb-line-editor\").shadowRoot.querySelector(\"#pricebookDialog\").shadowRoot.querySelector(\"#dialog > paper-button\")");
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", saveOnEditLines);
         KeywordUtil.delay(Long.parseLong(ConfigReader.getValue("TwoSeconds")));
@@ -388,13 +389,13 @@ public class QuoteUtil {
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>Adding Discount</font>"));
         //click on quick save button using JS path
-        WebElement quickSave = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(9)').shadowRoot.querySelector('#mainButton');");
+        WebElement quickSave = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").shadowRoot.querySelector(\"#content > sb-line-editor\").shadowRoot.querySelector(\"#actions > sb-custom-action:nth-child(9)\").shadowRoot.querySelector(\"#mainButton\")");
         executor.executeScript("arguments[0].click();", quickSave);
         KeywordUtil.delay(Long.parseLong(ConfigReader.getValue("TwoSeconds")));
         RunCukesTest.logger.log(LogStatus.PASS,
                 HTMLReportUtil.passStringGreenColor(" <font color='green'>Clicked on QuickSave Button</font> page"));
         //click on add product button using JS path
-        WebElement addProducts = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector('#sbPageContainer').shadowRoot.querySelector('#content > sb-line-editor').shadowRoot.querySelector('#actions > sb-custom-action:nth-child(1)').shadowRoot.querySelector('#mainButton')");
+        WebElement addProducts = KeywordUtil.excuteJavaScriptExecutorScripts("return document.querySelector(\"#sbPageContainer\").shadowRoot.querySelector(\"#content > sb-line-editor\").shadowRoot.querySelector(\"#actions > sb-custom-action:nth-child(1)\").shadowRoot.querySelector(\"#mainButton\")");
         executor.executeScript("arguments[0].click();", addProducts);
         KeywordUtil.delay(Long.parseLong(ConfigReader.getValue("TwoSeconds")));
         RunCukesTest.logger.log(LogStatus.PASS,
@@ -514,17 +515,31 @@ public class QuoteUtil {
      * @param logStep the log
      */
     public static void goToQuoteAndCreateOrder(String logStep) throws InterruptedException {
-        KeywordUtil.waitForVisible(QuoteObject.quoteConnected);
-        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.quoteConnected);
-        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", quote);
+//        KeywordUtil.waitForVisible(QuoteObject.quoteConnected);
+//        WebElement quote = KeywordUtil.getDriver().findElement(QuoteObject.quoteConnected);
+//        JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
+//        executor.executeScript("arguments[0].click();", quote);
+
+        ((JavascriptExecutor) KeywordUtil.getDriver()).executeScript("window.scrollBy(0,700)");
 
         KeywordUtil.waitForVisible(QuoteObject.orders);
         KeywordUtil.click(QuoteObject.orders, "Order button clicked");
-        KeywordUtil.waitForElementPresence(QuoteObject.openOrder);
-        KeywordUtil.waitForClickable(QuoteObject.openOrder);
-        WebElement order = KeywordUtil.getDriver().findElement(QuoteObject.openOrder);
-        executor.executeScript("arguments[0].click();", order);
+        KeywordUtil.delay(3000);
+
+        List<WebElement> elements = KeywordUtil.getDriver().findElements(QuoteObject.openOrder);
+
+        // Click the last element if the list is not empty
+        if (!elements.isEmpty()) {
+            int index = elements.size() - 1;
+            String xpath = "(//a[@class='slds-truncate'])"+"["+index+"]";
+            System.out.println(xpath);
+            System.out.println(elements.get(elements.size() - 1));
+            JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
+            executor.executeScript("arguments[0].click();", elements.get(elements.size() - 1));
+            System.out.println("Clicked the last element successfully");
+        } else {
+            System.out.println("No elements found");
+        }
     }
 
     /**
@@ -947,7 +962,9 @@ public class QuoteUtil {
         KeywordUtil.click(ServiceSupportObject.searchAccounts_quote_ss, logStep);
         KeywordUtil.inputText(ServiceSupportObject.searchAccounts_quote_ss, "TX", logStep);
 
-        String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'TX')])[3]";
+        KeywordUtil.delay(5000);
+        Thread.sleep(5000);
+        String accname = "(//lightning-base-combobox-formatted-text[contains(@title,'TX')])[1]";
 
         try {
             flag = KeywordUtil.getDriver().findElement(By.xpath(accname)).isDisplayed();
@@ -1005,6 +1022,7 @@ public class QuoteUtil {
         KeywordUtil.click(ServiceSupportObject.selectStatus_ss, logStep);
 
         String status_ss = "//lightning-base-combobox-item//span[@title='" + status + "']";
+        System.out.println(status_ss);
         try {
             size = KeywordUtil.getDriver().findElements(By.xpath(status_ss)).size();
 
@@ -1294,6 +1312,12 @@ public class QuoteUtil {
         enterDiscount_billing(map.get("NewDiscount"), map.get("NewProductName"), "Entered discount");
     }
 
+    public static String getQuote(){
+
+        KeywordUtil.waitForVisible(QuoteObject.quoteId);
+        return KeywordUtil.getElementText(QuoteObject.quoteId);
+    }
+
     /**
      * Navigate to quote and change status to In Review in billing
      *
@@ -1402,7 +1426,7 @@ public class QuoteUtil {
      *
      * @param name,opportunityName the log
      */
-    public static void createNewQuoteAccountPage(String name, String opportunityName, String type) throws Exception {
+    public static String createNewQuoteAccountPage(String name, String opportunityName, String type) throws Exception {
         AccountUtil.clickAccountsTab("Click account tab");
         openaccount_ss("Open TXTest");
         KeywordUtil.clickJS_component(ServiceSupportObject.clickQuotes_ss,"");
@@ -1412,7 +1436,10 @@ public class QuoteUtil {
         selectAccountPage(name, name + " entered account name");
         selectType_ss(type, "selected type");
         clickSaveButton("clicked save button");
+        String number = getQuote();
         addDiscountProduct();
+
+        return number;
     }
 
     /**
@@ -1434,15 +1461,25 @@ public class QuoteUtil {
      * @param status  the status
      * @param logStep the log
      */
-    public static void goToQuoteAndChangeStatus_Approved_AccountPage(String status, String logStep) throws InterruptedException {
+    public static void goToQuoteAndChangeStatus_Approved_AccountPage(String status,String quoteName, String logStep) throws InterruptedException {
         selectStatus_ss(status, "selected status");
 
-        KeywordUtil.waitForElementPresence(ServiceSupportObject.checkbox_Orders_ss);
-
-        KeywordUtil.hoverOnElement(ServiceSupportObject.checkbox_Orders_ss);
-        KeywordUtil.clickUsingAction(ServiceSupportObject.checkbox_Orders_ss, "Order button clicked");
+        KeywordUtil.delay(5000);
+        KeywordUtil.waitForVisible(ServiceSupportObject.checkbox_Orders_ss);
+        KeywordUtil.clickJS(ServiceSupportObject.checkbox_Orders_ss,logStep);
+//        KeywordUtil.hoverOnElement(ServiceSupportObject.checkbox_Orders_ss);
+//        KeywordUtil.clickUsingAction(ServiceSupportObject.checkbox_Orders_ss, "Order button clicked");
 
         clickSaveButton("clicked save button");
+//        clickQuoteButton("Navigated to quote");
+
+        String quoteXpath = "//slot[contains(text(),'"+quoteName+"')]";
+        System.out.println(quoteXpath);
+
+        KeywordUtil.delay(5000);
+
+        KeywordUtil.waitForVisible(By.xpath(quoteXpath));
+        KeywordUtil.clickJS(By.xpath(quoteXpath),"quote clicked");
     }
 
     /**

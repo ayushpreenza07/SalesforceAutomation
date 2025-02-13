@@ -89,10 +89,10 @@ public class ContactUtil {
      * @param logStep the log
      */
     public static void clickContactButton(String logStep) throws InterruptedException {
-        KeywordUtil.waitForElementPresence(ContactObject.contactButton);
-        WebElement element = KeywordUtil.getDriver().findElement(ContactObject.contactButton);
-        JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
-        executor.executeScript("arguments[0].click();", element);
+
+        KeywordUtil.delay(5000);
+        KeywordUtil.waitForVisible(ContactObject.contactButton);
+        KeywordUtil.clickJS(ContactObject.contactButton,logStep);
     }
 
     /**
