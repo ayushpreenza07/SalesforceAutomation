@@ -120,12 +120,20 @@ public class CampaignUtil {
      * @param logStep log the steps
      * @throws InterruptedException the interrupted exception
      */
-    public static void clickSaveButton(String logStep) throws InterruptedException {
+    public static void clickSaveButtonInContact(String logStep) throws InterruptedException {
 
         KeywordUtil.waitForElementPresence(CampaignObject.saveButton);
         WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.saveButton);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
+    }
+    public static void clickSaveButton(String logStep) throws InterruptedException {
+
+        KeywordUtil.waitForElementPresence(CampaignObject.saveButton);
+        WebElement element = KeywordUtil.getDriver().findElement(CampaignObject.saveButton);
+        Actions actions = new Actions(KeywordUtil.getDriver());
+        actions.doubleClick(element).perform();
+
     }
 
     /**
@@ -137,7 +145,7 @@ public class CampaignUtil {
         AccountUtil.clickNewButton("user has clicked on the new button");
         entercampaignName(campaignName, "user has succesffully entered the " + campaignName);
         clickSaveButton("user has successfully click on the  save button");
-       clickSaveButton("user has successfully click on the  save button");
+
     }
     /**
      * Clicking on the NewContactButton in after creating the new Campaign
@@ -185,16 +193,17 @@ public class CampaignUtil {
         boolean flag = false;
         KeywordUtil.waitForElementPresence(CampaignObject.SalutationButton);
         KeywordUtil.click(CampaignObject.SalutationButton, logStep);
-        String xpath = "(//a[contains(@title,'" + salutation + "')])[2]";
-
+        KeywordUtil.delay(5000);
+        String xpath = "(//a[contains(@title,'"+salutation+"')])[2]";
+        System.out.println(xpath);
         try {
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
         } catch (Exception e) {
         }
-
         if (!flag) {
             Assert.fail("No such salutation is present");
         } else {
+            KeywordUtil.delay(4000);
             KeywordUtil.click(By.xpath(xpath), "salutation selected");
         }
     }
@@ -305,7 +314,7 @@ public class CampaignUtil {
         enterLastContactName(lastname, lastname + " lastname set");
         enterEmail(email, email + " email entered");
         enterPhoneContact(phoneNumber, phoneNumber + " phone number entered");
-        clickSaveButton("save button clicked");
+        clickSaveButtonInContact("save button clicked");
     }
 
     /**
@@ -317,6 +326,7 @@ public class CampaignUtil {
     public static void editCampaignName(String campaignName,String editcampaignName) throws InterruptedException {
         clickOnShowActions(campaignName,"user successfully click on the show Actions buttons");
         clickOnShowActionsEditButton();
+        KeywordUtil.delay(5000);
         entercampaignName(editcampaignName,"enter the Campaign name");
         clickSaveButton("user has successfully click on the  save button");
         clickSaveButton("user has successfully click on the  save button");
