@@ -195,7 +195,7 @@ public class SalesForceCPQ {
     @When("^Create new contract$")
     public void create_new_contract() throws Exception{
         dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
-        ContractUtil.createContract(dataMap.get("AccountName"));
+        ContractUtil.createContract(dataMap.get("AccountName"),dataMap.get("Term"));
     }
 
     @When("navigate to setup screen")

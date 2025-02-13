@@ -14,7 +14,7 @@ public class CampaignObject {
 
     public static By parentCampaignSavebutton=By.xpath("//span[normalize-space()='Save']");
 
-    public static By newContactButton=By.xpath("//div[@title=\"New Contact\"]");
+    public static By newContactButton=By.xpath("//a[@title=\"New Contact\"]");
 
     public static By SalutationButton=By.xpath("//a[normalize-space()='--None--']");
 

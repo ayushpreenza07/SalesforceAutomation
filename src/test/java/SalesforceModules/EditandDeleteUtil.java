@@ -21,8 +21,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void clickEditButton(String logStep) throws InterruptedException {
-        KeywordUtil.delay(8000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.editButton);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.editButton);
         KeywordUtil.click(ServiceSupportObject.editButton,logStep);
     }
 
@@ -69,8 +68,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void clickOpenAccount(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.openaccount_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.openaccount_ss);
         WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.openaccount_ss);
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
@@ -82,8 +80,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void clickAccountsTab(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(AccountObject.accountsTab);
+        KeywordUtil.waitForElementPresence(AccountObject.accountsTab);
         WebElement element = KeywordUtil.getDriver().findElement(AccountObject.accountsTab);
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
@@ -150,8 +147,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void clickEditButtonforcontact(String logStep) throws InterruptedException {
-        KeywordUtil.delay(8000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.editButton_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.editButton_ss);
         KeywordUtil.click(ServiceSupportObject.editButton_ss,logStep);
     }
 
@@ -175,7 +171,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      * @param logStep the log
      */
     public static void clickDropDownButton_cnt(String logStep){
-        KeywordUtil.waitForVisible(ServiceSupportObject.dropDown_cnt);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.dropDown_cnt);
         KeywordUtil.click(ServiceSupportObject.dropDown_cnt,logStep);
     }
 
@@ -207,7 +203,6 @@ public class EditandDeleteUtil extends GlobalUtil {
      */
     public static void deleteContact(String logStep) throws InterruptedException {
         clickContactTab_cnt();
-        KeywordUtil.delay(5000);
         clickDropDownButton_cnt("Clicked dropdown button");
         selectDeleteButton_cnt("Selected delete button");
         clickDeleteButton_cnt("Clicked delete button");
@@ -285,8 +280,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      *
      */
     public static void saveFilter_cnt() throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.saveFilterButton_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.saveFilterButton_ss);
         WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.saveFilterButton_ss);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
@@ -300,10 +294,8 @@ public class EditandDeleteUtil extends GlobalUtil {
         List<WebElement> getAllelements=KeywordUtil.getListElements(ServiceSupportObject.allDropdownElementsInFieldFilter_ss,"");
         for(WebElement element:getAllelements){
             if(element.getText().equalsIgnoreCase(filedName)){
-                KeywordUtil.delay(6000);
                 JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
                 executor.executeScript("arguments[0].scrollIntoView(true);", element);
-                KeywordUtil.delay(6000);
                 element.click();
             }
         }
@@ -314,8 +306,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      *
      */
     public static void clickCloseFilter_cnt() throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.closeFilterButton_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.closeFilterButton_ss);
         WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.closeFilterButton_ss);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
@@ -326,8 +317,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      *
      */
     public static void clickContactTab_cnt() throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.contactTab_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.contactTab_ss);
         WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.contactTab_ss);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
@@ -350,8 +340,7 @@ public class EditandDeleteUtil extends GlobalUtil {
      *
      */
     public static void clickRemoveAllButton_cnt() throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.removeFiltersInContacts_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.removeFiltersInContacts_ss);
         WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.removeFiltersInContacts_ss);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);

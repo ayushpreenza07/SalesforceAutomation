@@ -56,7 +56,8 @@ public class SalesForceForecasting {
         try {
             ForecastingModule.clickAndEnterValue("Enter the value in search field", "Roles");
             ForecastingModule.selectValueFromSampleRoleHierarchies();
-            ForecastingModule.selectRolesFromHierarchy("CEO", "Assign");
+            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+            ForecastingModule.selectRolesFromHierarchy(dataMap.get("roleValue"), dataMap.get("actionValue"));
             ForecastingModule.assignRolesToUser();
         } catch (Exception e) {
             catchAssertError(e);
@@ -201,7 +202,8 @@ public class SalesForceForecasting {
             ForecastingModule.clickOnAppLauncherIconAndSearchForForecast();
             ForecastingModule.validateForecastingPageIsLoaded();
             ForecastingModule.navigateToForecastType("Automation");
-            ForecastingModule.validateUserAbleToSeeTheEditedQuota("3,000");
+            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+            ForecastingModule.validateUserAbleToSeeTheEditedQuota(dataMap.get("QuoteValue"));
             ForecastingModule.clickOnSetup("Setup page is opened");
             KeywordUtil.switchToWindow();
         }

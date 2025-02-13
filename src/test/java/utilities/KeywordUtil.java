@@ -15,6 +15,7 @@ import step_definitions.RunCukesTest;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.NoSuchElementException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -78,19 +79,6 @@ public class KeywordUtil extends GlobalUtil {
 
         // Send Mail functionality if
         LogUtil.infoLog(KeywordUtil.class, "Test process has ended");
-
-        if (GlobalUtil.getCommonSettings().getEmailOutput().equalsIgnoreCase("Y")) {
-            LogUtil.infoLog(KeywordUtil.class, "Email Flag Set To: " + GlobalUtil.getCommonSettings().getEmailOutput());
-            try {
-                sendMail.sendEmailToClient(
-                        "Hi All, \n\nPlease find the attached Execution Report.\n\n\nThanks & Regards\nTesting Xperts",
-                        true, false);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            LogUtil.infoLog(KeywordUtil.class, "Email Flag Set To: " + GlobalUtil.getCommonSettings().getEmailOutput());
-        }
 
         String htmlReportFile = System.getProperty("user.dir") + "\\" + ConfigReader.getValue("HtmlReportFullPath");
         LogUtil.infoLog(KeywordUtil.class, "cucumber path is" + htmlReportFile);
@@ -163,25 +151,6 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     /**
-     * Take mobile screenshot byte [ ].
-     *
-     * @param screenshotFilePath the screenshot file path
-     * @return the byte [ ]
-     */
-    public static byte[] takeMobileScreenshot(String screenshotFilePath) {
-        try {
-            byte[] screenshot = ((TakesScreenshot) GlobalUtil.getMDriver()).getScreenshotAs(OutputType.BYTES);
-            FileOutputStream fileOuputStream = new FileOutputStream(screenshotFilePath);
-            fileOuputStream.write(screenshot);
-            fileOuputStream.close();
-            return screenshot;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /**
      * Gets current date time.
      *
      * @return the current date time
@@ -240,21 +209,6 @@ public class KeywordUtil extends GlobalUtil {
     }
 
     /**
-     * Wait for clickable mobile web element.
-     *
-     * @param locator the locator
-     * @return the web element
-     */
-// Added by Anand
-    public static WebElement waitForClickableMobile(By locator) {
-        WebDriverWait wait = new WebDriverWait(getMDriver(), DEFAULT_WAIT_SECONDS);
-        wait.ignoring(ElementNotVisibleException.class);
-        wait.ignoring(WebDriverException.class);
-
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
-    /**
      * Wait for present web element.
      *
      * @param locator the locator
@@ -280,24 +234,6 @@ public class KeywordUtil extends GlobalUtil {
             return null;
         }
     }
-
-    /**
-     * Wait for visible mobile web element.
-     *
-     * @param locator the locator
-     * @return the web element
-     */
-// Added by Anand
-    public static WebElement waitForVisibleMobile(By locator) {
-        try {
-            WebDriverWait wait = new WebDriverWait(getMDriver(), DEFAULT_WAIT_SECONDS);
-            return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-
 
 
     /**
@@ -456,31 +392,6 @@ public class KeywordUtil extends GlobalUtil {
         }
     }
 
-    /**
-     * Click mobile boolean.
-     *
-     * @param locator the locator
-     * @param logStep the log step
-     * @return the boolean
-     */
-// Added by Anand
-    public static boolean clickMobile(By locator, String logStep) {
-        WebDriverWait wait = new WebDriverWait(getMDriver(), 30);
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).isDisplayed();
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).isEnabled();
-
-        KeywordUtil.lastAction = "Click: " + locator.toString();
-        LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
-        WebElement elm = waitForClickableMobile(locator);
-        if (elm == null) {
-            return false;
-        } else {
-            elm.click();
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
-
-            return true;
-        }
-    }
 
     /**
      * Click cart boolean.
@@ -624,26 +535,6 @@ public class KeywordUtil extends GlobalUtil {
 
     }
 
-    /**
-     * Is mobile element visible boolean.
-     *
-     * @param locator the locator
-     * @param logStep the log step
-     * @return the boolean
-     */
-    public static boolean isMobileElementVisible(By locator, String logStep) {
-        try {
-            KeywordUtil.lastAction = "Check Element visible: " + locator.toString();
-            LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
-            WebElement elm = waitForVisibleMobile(locator);
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
-
-            return elm.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
 
     /**
      * Is web element enable boolean.
@@ -760,26 +651,6 @@ public class KeywordUtil extends GlobalUtil {
         }
     }
 
-    /**
-     * Input text mobile boolean.
-     *
-     * @param locator the locator
-     * @param data    the data
-     * @param logStep the log step
-     * @return the boolean
-     */
-    public static boolean inputTextMobile(By locator, String data, String logStep) {
-        KeywordUtil.lastAction = "Input Text: " + data + " - " + locator.toString();
-        LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
-        WebElement elm = waitForVisibleMobile(locator);
-        if (elm == null) {
-            return false;
-        } else {
-            elm.sendKeys(data);
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
-            return true;
-        }
-    }
 
     /**
      * Press tab key.
@@ -990,30 +861,6 @@ public class KeywordUtil extends GlobalUtil {
         return element.getText().equalsIgnoreCase(data);
     }
 
-    /**
-     * Verify text mobile boolean.
-     *
-     * @param locator the locator
-     * @param data    the data
-     * @param logStep the log step
-     * @return the boolean
-     * @throws Exception the exception
-     */
-// Added by Anand
-    public static boolean verifyTextMobile(By locator, String data, String logStep) throws Exception {
-        try {
-            KeywordUtil.lastAction = "Verify Expected Text: " + data + " - " + locator.toString();
-            LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
-            WebElement element = waitForVisibleMobile(locator);
-            String message = String.format("Verified text expected \"%s\" actual \"%s\" ", data, element.getText());
-            LogUtil.infoLog(KeywordUtil.class, message);
-            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor(logStep));
-
-            return element.getText().equalsIgnoreCase(data);
-        } catch (Throwable e) {
-            return false;
-        }
-    }
 
     /**
      * Verify text contains boolean.
@@ -1288,6 +1135,18 @@ public class KeywordUtil extends GlobalUtil {
         Thread.sleep(time);
     }
 
+    public static void waitForElementPresence(By locator) {
+        try {
+
+            WebDriverWait wait = new WebDriverWait(getDriver(),Long.valueOf(ConfigReader.getValue("explicitWaitTime")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
+        } catch (Throwable e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void scrollup(By converted) {
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
         js.executeScript("window.scrollBy(10,0);", converted);
@@ -1532,46 +1391,6 @@ public class KeywordUtil extends GlobalUtil {
         }
     }
 
-    /**
-     * Gets element by img.
-     *
-     * @param img the img
-     * @return the element by img
-     */
-    public static WebElement getElementByImg(String img) {
-        return GlobalUtil.mdriver.findElement(MobileBy.image(DriverUtil.getImgRef(img)));
-    }
-
-    /**
-     * Gets attribute value mobile.
-     *
-     * @param locator the locator
-     * @param attName the att name
-     * @return the attribute value mobile
-     */
-// Added by Anand
-    public static String getAttributeValueMobile(By locator, String attName) {
-        WebDriverWait wait = new WebDriverWait(getMDriver(), 30);
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).isDisplayed();
-        wait.until(ExpectedConditions.elementToBeClickable(locator)).isEnabled();
-
-        KeywordUtil.lastAction = "Click: " + locator.toString();
-        LogUtil.infoLog(KeywordUtil.class, KeywordUtil.lastAction);
-        WebElement elm = waitForClickableMobile(locator);
-        if (elm == null) {
-            return null;
-        } else {
-            return elm.getAttribute(attName);
-        }
-    }
-
-    public static void markTestAsPassedInBrowserStackMobile(String testStatus) {
-        JavascriptExecutor jse = GlobalUtil.getMDriver();
-        jse.executeScript(String.format(
-                "browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"%s\", \"reason\": \"<reason>\"}}",
-                testStatus));
-
-    }
 
     public static String generateRandomString(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

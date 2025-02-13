@@ -20,8 +20,7 @@ public class ContactUtil {
      * @param logStep the log
      */
     public static void newButtonContact(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ContactObject.newContactButton);
+        KeywordUtil.waitForElementPresence(ContactObject.newContactButton);
         KeywordUtil.click(ContactObject.newContactButton,logStep);
     }
 
@@ -90,6 +89,7 @@ public class ContactUtil {
      * @param logStep the log
      */
     public static void clickContactButton(String logStep) throws InterruptedException {
+
         KeywordUtil.delay(5000);
         KeywordUtil.waitForVisible(ContactObject.contactButton);
         KeywordUtil.clickJS(ContactObject.contactButton,logStep);
@@ -102,12 +102,10 @@ public class ContactUtil {
      */
     public static void backToAccount(String logStep) throws InterruptedException {
         try {
-            KeywordUtil.delay(5000);
-            KeywordUtil.waitForVisible(ContactObject.backToAccount);
+            KeywordUtil.waitForElementPresence(ContactObject.backToAccount);
             KeywordUtil.click(ContactObject.backToAccount, logStep);
         }catch(Throwable e) {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(ContactObject.backToAccount);
+            KeywordUtil.waitForElementPresence(ContactObject.backToAccount);
             WebElement element = KeywordUtil.getDriver().findElement(ContactObject.backToAccount);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
@@ -122,11 +120,10 @@ public class ContactUtil {
      */
     public static void setSalutation(String salutation, String logStep) throws InterruptedException {
         boolean flag = false;
-        KeywordUtil.waitForVisible(ContactObject.salutationButton);
+        KeywordUtil.waitForElementPresence(ContactObject.salutationButton);
         KeywordUtil.click(ContactObject.salutationButton,logStep);
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+salutation+"')]";
-        KeywordUtil.delay(2000);
-        System.out.println(xpath);
+
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
         }catch (Exception e){}
@@ -162,8 +159,7 @@ public class ContactUtil {
      * @param logStep the log
      */
     public static void clickContactTab_cnt(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ContactObject.contactButton);
+        KeywordUtil.waitForElementPresence(ContactObject.contactButton);
         WebElement element = KeywordUtil.getDriver().findElement(ContactObject.contactButton);
         JavascriptExecutor executor = (JavascriptExecutor)KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
@@ -175,8 +171,7 @@ public class ContactUtil {
      * @param logStep the log
      */
     public static void newButtonContact_ss(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.newContactButton_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.newContactButton_ss);
         KeywordUtil.click(ServiceSupportObject.newContactButton_ss,logStep);
     }
 
