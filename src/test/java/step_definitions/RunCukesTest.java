@@ -18,7 +18,7 @@ import java.util.Date;
 
 @CucumberOptions(features = "classpath:features", plugin = {"pretty", "html:target/cucumber-html-report.html",
 
-		"json:target/cucumber.json"}, tags = "@salesforceCPQ", monochrome = true
+		"json:target/cucumber.json"}, tags = "@MarketingCRM_01", monochrome = true
 
 
 

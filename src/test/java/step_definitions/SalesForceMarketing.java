@@ -90,6 +90,7 @@ public class SalesForceMarketing {
 
     @Then("User selects the edit button")
     public void campaignEdit() throws InterruptedException {
+        KeywordUtil.delay(5000);
         CampaignUtil.editCampaignName(dataMap.get("CampaignName"), dataMap.get("EditCampaignName"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
