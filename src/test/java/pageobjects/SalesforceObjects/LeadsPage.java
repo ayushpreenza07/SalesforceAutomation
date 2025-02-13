@@ -6,7 +6,7 @@ public class LeadsPage {
     public static By hamburgerMenu=By.xpath("//div[@class='appLauncher slds-context-bar__icon-action']//button");
     public static By searchText= By.xpath("//input[@class='slds-input']");
     public static By leadsPageTitle=By.xpath("//div[@class='slds-media__body']//p");
-    public static By leadesNewButton=By.xpath("//div//button[contains(@class,'slds-button slds-button_neutral middle')]");
+    public static By leadesNewButton=By.xpath("(//button[@name=\"New\"])[3]");
     public static By lastName=By.xpath("//input[@class='slds-input' and @name='lastName']");
     public static By companyName=By.xpath("//input[@class='slds-input' and @name='Company']");
     public static By saveButton=By.xpath("//button[@name='SaveEdit']");

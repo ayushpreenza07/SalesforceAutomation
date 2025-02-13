@@ -41,6 +41,13 @@ public class OppurtunitiesUtil extends GlobalUtil {
         KeywordUtil.click(OppurtunitiesObject.createNewOpportunities,logStep);
     }
 
+    public static void newButtonOppurtunityinOpportunity(String logStep){
+        KeywordUtil.waitForVisible(OppurtunitiesObject.newButtonInOpportunity);
+        KeywordUtil.click(OppurtunitiesObject.newButtonInOpportunity,logStep);
+    }
+
+
+
     /**
      * Set year
      *
@@ -724,7 +731,8 @@ public class OppurtunitiesUtil extends GlobalUtil {
      * @param stage  the stage
      */
     public static void createOpportunityFromOpportunityTab(String name, String amount, String stage) throws InterruptedException {
-        newButtonOppurtunity("clicked new button for Opportunity");
+        KeywordUtil.delay(6000);
+        newButtonOppurtunityinOpportunity("clicked new button for Opportunity");
         enterOppurtunityName(name, name + " entered in Opportunity");
         enterCloseDate(2024, 1, 2, "Close date entered");
         enterAmount(amount, "Amount entered " + amount);

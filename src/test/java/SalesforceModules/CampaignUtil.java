@@ -73,7 +73,7 @@ public class CampaignUtil {
 
         List<WebElement> campaignNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the parent Campaigns list");
         for (WebElement campaign : campaignNames) {
-            if (campaign.getText().equalsIgnoreCase(campaignName)) {
+            if (campaign.getText().contains(campaignName)) {
 
                 campaign.click();
                 break;
@@ -144,7 +144,7 @@ public class CampaignUtil {
      */
 
     public static void clickNewContact() {
-        KeywordUtil.waitForVisible(CampaignObject.newContactButton);
+       KeywordUtil.waitForVisible(CampaignObject.newContactButton);
         KeywordUtil.click(CampaignObject.newContactButton, "click on the new contact button");
     }
 
@@ -390,12 +390,13 @@ public class CampaignUtil {
      * @throws InterruptedException
      */
     public static void selectLead(String leadName) throws InterruptedException {
-        KeywordUtil.waitForElementPresence(CampaignObject.searchLeads);
+        KeywordUtil.delay(5000);
         KeywordUtil.inputText(CampaignObject.searchLeads,leadName,"enter the leadName in the search box");
-
+        KeywordUtil.delay(6000);
+        KeywordUtil.click(CampaignObject.searchLeads,"click on search leads");
+        KeywordUtil.delay(6000);
         List<WebElement> LeadNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Lead members list");
         for (WebElement Lead : LeadNames) {
-
             if (Lead.getText().contains(leadName)) {
                 Thread.sleep(8000);
                 Lead.click();
@@ -748,7 +749,7 @@ public class CampaignUtil {
 
         List<WebElement> camapignName=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Campaign list");
         for (WebElement campaign : camapignName) {
-            if (campaign.getText().equals(campaignName)) {
+            if (campaign.getText().contains(campaignName)) {
                 campaign.click();
                 break;
             }
@@ -805,7 +806,9 @@ public class CampaignUtil {
             KeywordUtil.click(CampaignObject.allActiveCampaignsOption,"click on all active campaigns");
             KeywordUtil.waitForElementPresence(CampaignObject.searchListInputField);
             KeywordUtil.clearInput(CampaignObject.searchListInputField);
+            KeywordUtil.delay(5000);
             KeywordUtil.inputText(CampaignObject.searchListInputField,campaignName,"searching for campaign");
+            KeywordUtil.delay(6000);
             KeywordUtil.pressEnter(CampaignObject.searchListInputField);
             KeywordUtil.waitForElementPresence(CampaignObject.clickCampaign(campaignName));
             KeywordUtil.click(CampaignObject.clickCampaign(campaignName), "click on campaign");

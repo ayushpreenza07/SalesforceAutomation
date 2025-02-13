@@ -54,7 +54,8 @@ public class SalesForceMarketing {
     }
 
     @Then("User create new Campaign")
-    public void createNewCampaign() {
+    public void createNewCampaign() throws InterruptedException {
+        KeywordUtil.delay(5000);
         try {
             CampaignUtil.createCampaign(dataMap.get("CampaignName"));
             CampaignUtil.verificationMessage();
@@ -64,6 +65,19 @@ public class SalesForceMarketing {
         }
 
     }
+
+    @Then("User create new ParentCampaign")
+    public void createNewparentCampaign() {
+        try {
+            CampaignUtil.createCampaign(dataMap.get("ParentCampaign"));
+            CampaignUtil.verificationMessage();
+            KeywordUtil.takeScreenshotAndAttachInReport();
+        } catch (Exception e) {
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.passStringGreenColor("User has got the message  : " + e.getMessage()));
+        }
+
+    }
+
 
     @And("User selects the parent Campaign")
     public void SelectParentCampaign() throws InterruptedException {
@@ -103,6 +117,7 @@ public class SalesForceMarketing {
 
     @Then("User create contact in Campaign")
     public void createContact() throws InterruptedException {
+        KeywordUtil.delay(6000);
         CampaignUtil.addContactInCampaign(dataMap.get("Salutation"), dataMap.get("ContactLastName"), KeywordUtil.generateRandomString(4) + "@gmail.com", dataMap.get("Phone"));
         CampaignUtil.verificationMessage();
         KeywordUtil.takeScreenshotAndAttachInReport();
@@ -235,8 +250,8 @@ public class SalesForceMarketing {
 
     @Then("User create new Opportunity")
     public void userCreateNewOpportunity() throws InterruptedException {
-        opportunityName=dataMap.get("OpportunityName")+KeywordUtil.generateRandomString(4);
-        OppurtunitiesUtil.createOpportunityFromOpportunityTab(opportunityName,dataMap.get("Amount"), dataMap.get("Stage"));
+        dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        OppurtunitiesUtil.createOpportunityFromOpportunityTab(dataMap.get("OpportunityName"),dataMap.get("Amount"), dataMap.get("Stage"));
     }
 
     @And("User edit new Opportunity")
@@ -253,8 +268,6 @@ public class SalesForceMarketing {
 
     @And("Change Opportunity Status")
     public void changeOpportunityStatus() throws InterruptedException{
-        OppurtunitiesUtil.clickOpportunityTab("clicks on Opportunities Tab");
-        OppurtunitiesUtil.createOpportunityFromOpportunityTab(opportunityName,dataMap.get("Amount"), dataMap.get("Stage"));
         OppurtunitiesUtil.selectStageProposalQuote("proposal stage selected");
         KeywordUtil.takeScreenshotAndAttachInReport();
         OppurtunitiesUtil.setMarkAsCurrentStages("stage marked");
@@ -271,7 +284,8 @@ public class SalesForceMarketing {
     @And("Add Lead To Campaign")
     public static void addLeadToCampaign() {
         try {
-            CampaignUtil.addLeadToCampaign(dataMap.get("ParentCampaign"), leadName, leadCompanyName);
+            dataMap = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+            CampaignUtil.addLeadToCampaign(dataMap.get("CampaignName"), leadName, leadCompanyName);
         } catch (Exception e) {
             CampaignUtil.verificationMessage();
         }
