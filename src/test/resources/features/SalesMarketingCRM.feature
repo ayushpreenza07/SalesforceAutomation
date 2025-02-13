@@ -32,7 +32,7 @@ Feature: Salesforce Marketing CRM
    And User clicks on Campaigns Tab
    And User clicks on Opportunities Tab
     Then User create new Opportunity
-    And Change Opportunity Status
+    And  Change Opportunity Status
 
     Examples:
       | TestData  | SheetName  |
