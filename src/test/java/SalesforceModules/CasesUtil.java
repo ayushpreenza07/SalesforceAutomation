@@ -1,18 +1,25 @@
 package SalesforceModules;
 
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pageobjects.SalesforceObjects.*;
+import utilities.ExcelDataUtil;
+import utilities.HTMLReportUtil;
 import utilities.KeywordUtil;
+import step_definitions.RunCukesTest;
 
 import java.security.Key;
+import java.util.HashMap;
 
 import static pageobjects.SalesforceObjects.ServiceSupportObject.origin;
 import static utilities.KeywordUtil.catchAssertError;
 
 public class CasesUtil {
+
+    static HashMap<String, String> map = new HashMap<>();
 
     /**
      * click cases tab for Cases section.
@@ -20,8 +27,7 @@ public class CasesUtil {
      * @param logStep the log
      */
     public static void clickCasesTab(String logStep) throws InterruptedException {
-        KeywordUtil.delay(3000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.CasesTab);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.CasesTab);
         WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.CasesTab);
         JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
         executor.executeScript("arguments[0].click();", element);
@@ -35,13 +41,12 @@ public class CasesUtil {
     public static void clickNewButton(String logStep) throws InterruptedException {
 
         try {
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(ServiceSupportObject.newTab);
+            KeywordUtil.waitForElementPresence(ServiceSupportObject.newTab);
             WebElement element = KeywordUtil.getDriver().findElement(ServiceSupportObject.newTab);
             JavascriptExecutor executor = (JavascriptExecutor) KeywordUtil.getDriver();
             executor.executeScript("arguments[0].click();", element);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            RunCukesTest.logger.log(LogStatus.PASS, HTMLReportUtil.failStringRedColor(e.getMessage()));
         }
     }
 
@@ -64,7 +69,7 @@ public class CasesUtil {
      */
     public static void setCaseOrigin(String origin, String logStep){
         boolean flag = false;
-        KeywordUtil.waitForVisible(ServiceSupportObject.origin);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.origin);
         KeywordUtil.click(ServiceSupportObject.origin,logStep);
         String xpath = "//lightning-base-combobox-item[contains(@data-value,'"+origin+"')]";
         try{
@@ -121,9 +126,8 @@ public class CasesUtil {
      */
     public static void selectAccount_ss(String account, String logStep) throws InterruptedException {
         boolean flag = false;
-        KeywordUtil.waitForVisible(ServiceSupportObject.searchAccounts_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.searchAccounts_ss);
         KeywordUtil.inputText(ServiceSupportObject.searchAccounts_ss,account,logStep);
-        KeywordUtil.delay(3000);
         String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+account+"')]";
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
@@ -131,7 +135,7 @@ public class CasesUtil {
         }catch (Exception e){}
 
         if(!flag){
-            System.out.println("no such account present");
+           Assert.fail("no such account present");
         }else {
             KeywordUtil.click(By.xpath(xpath), "account selected");
         }
@@ -145,9 +149,8 @@ public class CasesUtil {
      */
     public static void selectContact_ss(String contact, String logStep) throws InterruptedException {
         boolean flag = false;
-        KeywordUtil.waitForVisible(ServiceSupportObject.searchContacts_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.searchContacts_ss);
         KeywordUtil.inputText(ServiceSupportObject.searchContacts_ss,contact,logStep);
-        KeywordUtil.delay(3000);
         String xpath = "//lightning-base-combobox-formatted-text[contains(@title,'"+contact+"')]";
         try{
             flag = KeywordUtil.getDriver().findElement(By.xpath(xpath)).isDisplayed();
@@ -155,7 +158,7 @@ public class CasesUtil {
         }catch (Exception e){}
 
         if(!flag){
-            System.out.println("no such contact present");
+           Assert.fail("no such contact present");
         }else {
             KeywordUtil.click(By.xpath(xpath), "contact selected");
         }
@@ -192,8 +195,7 @@ public class CasesUtil {
      * @param logStep the log
      */
     public static void clickEditButton(String logStep) throws InterruptedException {
-        KeywordUtil.delay(8000);
-        KeywordUtil.waitForVisible(ServiceSupportObject.editbutton_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.editbutton_ss);
         KeywordUtil.click(ServiceSupportObject.editbutton_ss,logStep);
     }
 
@@ -231,8 +233,7 @@ public class CasesUtil {
      * @param logStep the log
      */
     public static void selectDeleteButton_case(String logStep) throws InterruptedException {
-        KeywordUtil.waitForVisible(ServiceSupportObject.deletebutton_case);
-        KeywordUtil.delay(2000);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.deletebutton_case);
         KeywordUtil.click(ServiceSupportObject.deletebutton_case,logStep);
     }
 
@@ -264,11 +265,11 @@ public class CasesUtil {
      * @param logStep the log
      */
     public static void clickSearch_case(String logStep) throws InterruptedException {
-        KeywordUtil.waitForVisible(ServiceSupportObject.searchbutton_case);
-        KeywordUtil.delay(3000);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.searchbutton_case);
         KeywordUtil.click(ServiceSupportObject.searchbutton_case,logStep);
-        KeywordUtil.delay(3000);
-        KeywordUtil.inputText(ServiceSupportObject.searchbutton_case, "00001058", logStep);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.searchbutton_case);
+        map = ExcelDataUtil.getTestDataWithTestCaseID("Salesforce", "TestData1");
+        KeywordUtil.inputText(ServiceSupportObject.searchbutton_case, map.get("CaseNumber"), logStep);
 
     }
 
@@ -279,7 +280,6 @@ public class CasesUtil {
      *  @param logStep the log
      */
     public static void searchCase(String logStep) throws InterruptedException {
-        KeywordUtil.delay(2000);
         clickCasesTab("Click on case Tab");
         clickSearch_case("Clicked search button");
 
@@ -303,7 +303,7 @@ public class CasesUtil {
      * @param name the account name
      */
     public static void enterAccountNameForServiceSupport(String name, String logStep){
-        KeywordUtil.waitForVisible(ServiceSupportObject.accountName_ss);
+        KeywordUtil.waitForElementPresence(ServiceSupportObject.accountName_ss);
         KeywordUtil.inputText(ServiceSupportObject.accountName_ss, name,logStep);
     }
 
@@ -341,8 +341,7 @@ public class CasesUtil {
             clickNewButton("Clicked on New Button for Cases");
             KeywordUtil.waitForVisible(ServiceSupportObject.searchAccountsForAccountName);
             KeywordUtil.click(ServiceSupportObject.searchAccountsForAccountName, "Click on search accounts");
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(ServiceSupportObject.newAccountOption);
+            KeywordUtil.waitForElementPresence(ServiceSupportObject.newAccountOption);
             KeywordUtil.click(ServiceSupportObject.newAccountOption, "Click on New Account option");
             enterAccountNameForServiceSupport(accountName_ss, "Entered Account Name");
             enterPhoneNumberForServiceSupport(phoneNumber_ss, "Entered Phone Number");
@@ -368,8 +367,7 @@ public class CasesUtil {
             CasesUtil.clickNewButton("Clicked on New Button for Cases");
             KeywordUtil.waitForVisible(ServiceSupportObject.searchContacts);
             KeywordUtil.click(ServiceSupportObject.searchContacts, "Click on search contacts");
-            KeywordUtil.delay(3000);
-            KeywordUtil.waitForVisible(ServiceSupportObject.newContactOption);
+            KeywordUtil.waitForElementPresence(ServiceSupportObject.newContactOption);
             KeywordUtil.click(ServiceSupportObject.newContactOption, "Click on New Contact option");
             KeywordUtil.inputText(ServiceSupportObject.firstNameFieldForNewContact, firstname,logStep);
             KeywordUtil.inputText(ServiceSupportObject.lastNameFieldForNewContact, lastname,logStep);
