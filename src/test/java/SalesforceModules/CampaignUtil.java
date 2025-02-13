@@ -403,7 +403,6 @@ public class CampaignUtil {
         KeywordUtil.delay(6000);
         List<WebElement> LeadNames=KeywordUtil.getListElements(CampaignObject.listOfParentCampaignItems,"getting the Lead members list");
         for (WebElement Lead : LeadNames) {
-
             if (Lead.getText().contains(leadName)) {
                 Thread.sleep(8000);
                 Lead.click();
